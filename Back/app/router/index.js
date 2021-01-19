@@ -1,12 +1,12 @@
 const express = require('express');
 
-const mainRouter = require('./mainRouter');
+const tripRouter = require('./tripRouter');
 
 const errorController = require('../controller/errorController');
 
 const router = express.Router();
 
-router.use('/home', mainRouter);
+router.use('/trip', tripRouter);
 
 router.use(errorController.error404);
 
