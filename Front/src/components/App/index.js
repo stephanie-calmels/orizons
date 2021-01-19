@@ -21,9 +21,8 @@ import Legals from 'src/components/Legals';
 
 // == Composant
 const App = () => {
-  return <div className="app">
+  return <div>
     <Header isLogged={false} />
-    
     <Page>
     <Switch>
       <Route exact path="/">

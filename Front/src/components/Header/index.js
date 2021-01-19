@@ -7,7 +7,7 @@ import './header.scss';
 
 const Header = ({ isLogged }) => {
   return (
-    <Navbar sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar className="Navbar" sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
     <LinkContainer to="/">
       <Navbar.Brand >O'rizons</Navbar.Brand>
     </LinkContainer>
