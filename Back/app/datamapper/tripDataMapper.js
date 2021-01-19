@@ -18,7 +18,7 @@ const tripDataMapper = {
     async createTrip() {
         const result = await client.query("INSERT INTO trip() VALUES RETURNING *", []);
         return result.rows[0];
-    };
+    },
 
     async updateAllTrip() {
         const result = await client.query("");
