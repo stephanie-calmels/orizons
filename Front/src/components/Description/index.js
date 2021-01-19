@@ -1,11 +1,11 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, Card, Button} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 
 import './styles.scss'
 
 const Description = ({trip})=>{
-  console.log(trip)
+  console.log(trip.steps)
   return <div>
   <Container>
     <Row>
@@ -34,16 +34,29 @@ const Description = ({trip})=>{
     </Row>
     <Row>
     <Col>
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+    {/*On crée la map et on la centre sur la position de la première étape */}
+    <MapContainer center={[trip.steps[0].latitude, trip.steps[0].longitude]} zoom={11} scrollWheelZoom={true}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  <Marker position={[51.505, -0.09]}>
-    <Popup>
-      A pretty CSS3 popup. <br /> Easily customizable.
-    </Popup>
-  </Marker>
+  {/*Ajout d'un marqueur pour chaque étape du trip  TODO: CSS dans le popup pour gérer sa taille et celle de l'image*/}
+  {trip.steps.map(step =>{
+    return <Marker key={step.id} position={[step.latitude, step.longitude]}>
+      <Popup>
+        <Card >
+          <Card.Img src={step.photos[0].url} style={{height:'10vh'}}/>
+          <Card.Body>
+            <Card.Title> {step.title}</Card.Title>
+            <Card.Subtitle>{step.date}</Card.Subtitle>
+            <Card.Text>{step.content}</Card.Text>
+            <Button variant="link" href=""> Voir le détail</Button>
+          </Card.Body>
+        </Card>
+      </Popup>
+    </Marker>
+  })}
+  
 </MapContainer>
     </Col>
     
