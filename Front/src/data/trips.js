@@ -354,6 +354,7 @@ export default [
       id: 3,
       first_name: 'Arthur',
       last_name: 'Pendragon',
+      nickname: 'Arthur',
       email: 'kingarthur@google.com',
       password: 'sjgoaZvkA2xk',
       profile_photo: {
