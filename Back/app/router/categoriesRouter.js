@@ -12,4 +12,5 @@ router.patch('/:id', categoryController.updateOneCategory);
 router.delete('/', categoryController.deleteAllCategory);
 router.delete('/:id', categoryController.deleteOneCategory);
 
+
 module.exports = router;
