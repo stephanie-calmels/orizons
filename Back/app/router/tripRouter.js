@@ -1,8 +1,3 @@
-const {
-    Router
-} = require("express");
-const router = require(".");
-
 const express = require('express');
 
 const tripController = require('../controllers/tripController');
