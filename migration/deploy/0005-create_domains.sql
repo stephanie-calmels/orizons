@@ -1,4 +1,4 @@
--- Deploy projet-orizons:0005-create_domains to pg
+-- Deploy orizons:0005-create_domains to pg
 
 BEGIN;
 

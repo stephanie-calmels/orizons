@@ -1,5 +1,0 @@
-%syntax-version=1.0.0
-%project=projet-orizons
-
-0000-init 2021-01-18T10:29:23Z "Etudiant O'clock",,, <etudiant@teleporteur> # Database init
-0005-create_domains 2021-01-18T10:41:02Z "Etudiant O'clock",,, <etudiant@teleporteur> # Create domains for text only, color, mail

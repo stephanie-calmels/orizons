@@ -1,4 +1,4 @@
--- Verify projet-orizons:0000-init on pg
+-- Verify orizons:0005-create_domains on pg
 
 BEGIN;
 

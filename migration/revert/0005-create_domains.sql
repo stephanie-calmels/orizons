@@ -1,4 +1,4 @@
--- Revert projet-orizons:0005-create_domains from pg
+-- Revert orizons:0005-create_domains from pg
 
 BEGIN;
 
@@ -18,6 +18,9 @@ ALTER TABLE "category"
 DROP DOMAIN TEXT_ONLY;
 DROP DOMAIN TEXT_COLOR;
 DROP DOMAIN TEXT_MAIL;
+
+
+
 
 
 COMMIT;

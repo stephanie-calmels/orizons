@@ -1,4 +1,4 @@
--- Revert projet-orizons:0000-init from pg
+-- Revert orizons:0000-init from pg
 
 BEGIN;
 

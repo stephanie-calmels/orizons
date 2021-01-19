@@ -1,4 +1,4 @@
--- Deploy projet-orizons:0000-init to pg
+-- Deploy orizons:0000-init to pg
 
 BEGIN;
 
