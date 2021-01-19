@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 import './footer.scss';
 
@@ -7,13 +8,19 @@ const Footer = () => {
   return (
     <Nav className="justify-content-center">
       <Nav.Item>
-        <Nav.Link eventKey="link-1">Mentions légales</Nav.Link>
+        <LinkContainer to="/mentions-legales">
+          <Nav.Link eventKey="link-1">Mentions légales</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2">A propos</Nav.Link>
+        <LinkContainer to="/a-propos">
+          <Nav.Link eventKey="link-2">A propos</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-3">Contact</Nav.Link>
+        <LinkContainer to="/contact">
+          <Nav.Link eventKey="link-3">Contact</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item className="flex-row">
         <Nav.Link eventKey="link-4"><i className="fab fa-instagram"></i></Nav.Link>
