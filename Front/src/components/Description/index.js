@@ -9,7 +9,8 @@ const Description = ({trip})=>{
   return <div>
   <Container>
     <Row>
-        <Col sm={true}>Statistiques
+        <Col md={6}>Statistiques
+        {/* Changer le container en div
         <Container>
           <Row>
             <Col>Durée</Col>
@@ -24,17 +25,16 @@ const Description = ({trip})=>{
               return <Col key={category.id}>{category.entitled}</Col>
             })}
           </Row>
-        </Container>
+        </Container> */}
         </Col>
-        <Col sm={true}>
+        <Col md={6}>
         Description du voyage
         <p>{trip.summary}</p>
         </Col>
     </Row>
-  </Container>
-
-
-<MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+    <Row>
+    <Col>
+    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -45,6 +45,13 @@ const Description = ({trip})=>{
     </Popup>
   </Marker>
 </MapContainer>
+    </Col>
+    
+    </Row>
+  </Container>
+
+
+
 
   
   </div>
