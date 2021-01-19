@@ -1,8 +1,3 @@
-const {
-    createTrip,
-    updateAllTrip,
-    deleteAllTrip
-} = require('../controller/tripController');
 const client = require('./client');
 
 const tripDataMapper = {
@@ -29,7 +24,7 @@ const tripDataMapper = {
         const result = await client.query("");
     },
 
-    async updateTripById(idTrip) {
+    async updateOneTrip(idTrip) {
         const result = await client.query("");
     },
 
@@ -37,7 +32,7 @@ const tripDataMapper = {
         const result = await client.query("");
     },
 
-    async deleteTripById() {
+    async deleteOneTrip() {
         const result = await client.query("");
     }
 
