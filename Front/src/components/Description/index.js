@@ -2,6 +2,8 @@ import React from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 
+import slugify from 'slugify'
+
 import './styles.scss'
 
 const Description = ({trip})=>{
@@ -42,6 +44,9 @@ const Description = ({trip})=>{
   />
   {/*Ajout d'un marqueur pour chaque étape du trip  TODO: CSS dans le popup pour gérer sa taille et celle de l'image*/}
   {trip.steps.map(step =>{
+    // Je prépare de quoi faire un lien vers une ancre de la page (format: #id)
+    const sluggedTitleAsAnchor = '#' + slugify(step.title, {lower:true});
+
     return <Marker key={step.id} position={[step.latitude, step.longitude]}>
       <Popup>
         <Card >
@@ -50,7 +55,7 @@ const Description = ({trip})=>{
             <Card.Title> {step.title}</Card.Title>
             <Card.Subtitle>{step.date}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
-            <Button variant="link" href=""> Voir le détail</Button>
+            <Button variant="link" href={sluggedTitleAsAnchor}> Voir le détail</Button>
           </Card.Body>
         </Card>
       </Popup>
