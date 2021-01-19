@@ -3,12 +3,14 @@ import React from 'react';
 
 // == Import
 import './styles.scss';
-import Page from 'src/components/Page'
+import Trip from 'src/components/Trip'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // == Composant
 const App = () => {
   return <div className="app">
-  <Page />
+  <Trip />
   </div>
 };
 
