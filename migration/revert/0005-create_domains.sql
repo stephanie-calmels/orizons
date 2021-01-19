@@ -6,7 +6,7 @@ ALTER TABLE "localisation"
     ALTER COLUMN "country" TYPE TEXT,
     ALTER COLUMN "city" TYPE TEXT;
 
-ALTER TABLE "user"
+ALTER TABLE "member"
     ALTER COLUMN "first_name" TYPE TEXT,
     ALTER COLUMN "last_name" TYPE TEXT,
     ALTER COLUMN  "email" TYPE TEXT;
