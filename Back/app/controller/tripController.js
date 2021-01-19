@@ -12,7 +12,10 @@ const tripController = {
     },
     async getOneTrip(request, response, next) {
         try {
-            const trip = await tripDataMapper.getTripById();
+            const {
+                tripId
+            } = request.params
+            const trip = await tripDataMapper.getTripById(tripId);
             response.json({
                 data: trip
             })
@@ -22,6 +25,7 @@ const tripController = {
     },
     async createTrip(request, response, next) {
         try {
+
             const trip = await tripDataMapper.createTrip();
             response.json({
                 data: trip
@@ -42,7 +46,10 @@ const tripController = {
     },
     async updateOneTrip(request, response, next) {
         try {
-            const trip = await tripDataMapper.updateOneTrip();
+            const {
+                tripId
+            } = request.params
+            const trip = await tripDataMapper.updateOneTrip(tripId);
             response.json({
                 data: trip
             })
@@ -62,7 +69,10 @@ const tripController = {
     },
     async deleteOneTrip(request, response, next) {
         try {
-            const trip = await tripDataMapper.deleteOneTrip();
+            const {
+                tripId
+            } = request.params
+            const trip = await tripDataMapper.deleteOneTrip(tripId);
             response.json({
                 data: trip
             })
