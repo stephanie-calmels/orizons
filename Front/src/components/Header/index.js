@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, DropdownButton, Dropdown, Form, Button, FormControl, InputGroup, Image } from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 
 
 import './header.scss';
@@ -7,12 +8,18 @@ import './header.scss';
 const Header = ({ isLogged }) => {
   return (
     <Navbar sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
-      <Navbar.Brand href="#home">O'rizons</Navbar.Brand>
+    <LinkContainer to="/">
+      <Navbar.Brand >O'rizons</Navbar.Brand>
+    </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#publier">Publier son carnet de voyage</Nav.Link>
-          <Nav.Link href="#explorer">Explorer les carnets de voyage</Nav.Link>
+        <LinkContainer to="/ajouter-carnet">
+          <Nav.Link>Publier son carnet de voyage</Nav.Link>
+        </LinkContainer>
+        <LinkContainer to="/exploration">
+          <Nav.Link>Explorer les carnets de voyage</Nav.Link>
+        </LinkContainer>
         </Nav>
         <Form inline>
           <InputGroup>
@@ -32,16 +39,26 @@ const Header = ({ isLogged }) => {
               id="dropdown-menu-align-right"
               menuAlign="right"
               >
-              <Dropdown.Item eventKey="1">Mon profil</Dropdown.Item>
-              <Dropdown.Item eventKey="2">Paramètres du compte</Dropdown.Item>
+              <LinkContainer to='/profile/:pseudo'>
+                <Nav.Link>Mon profil</Nav.Link>
+              </LinkContainer>
+              
+              <LinkContainer to='/compte'>
+                <Nav.Link>Paramètres du compte</Nav.Link>
+              </LinkContainer>
+
               <Dropdown.Divider />
               <Dropdown.Item eventKey="3">Se déconnecter</Dropdown.Item>
             </DropdownButton>
           </>
           : 
           <>
-            <Nav.Link href="#connexion">Se connecter</Nav.Link>
-            <Nav.Link eventKey={1} href="#inscription">S'inscrire</Nav.Link>
+            <LinkContainer to='/connexion'>
+              <Nav.Link >Se connecter</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to='/inscription'>
+              <Nav.Link eventKey={1}>S'inscrire</Nav.Link>
+            </LinkContainer>
           </>}
         </Nav>
       </Navbar.Collapse>
