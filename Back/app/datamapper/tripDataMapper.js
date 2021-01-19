@@ -1,8 +1,3 @@
-const {
-    createTrip,
-    updateAllTrip,
-    deleteAllTrip
-} = require('../controller/tripController');
 const client = require('./client');
 
 const tripDataMapper = {
