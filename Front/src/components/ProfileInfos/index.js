@@ -3,10 +3,11 @@ import {Container, Col, Row} from 'react-bootstrap';
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import './profileInfos.scss'
 
+import ProfileTrips from './ProfileTrips'
 
 // La map est temporaire, je vais essayer d'en mettre une plus graphique sur laquelle on pourrait colorer les pays visités
 
-const ProfileInfos = ({member})=>{
+const ProfileInfos = ({member, trips})=>{
   return <Container className="profile-infos-container">
     <Row>
       <Col md={6}>
@@ -31,6 +32,11 @@ const ProfileInfos = ({member})=>{
   />
  
   </MapContainer>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <ProfileTrips trips={trips} />
       </Col>
     </Row>
   </Container>
