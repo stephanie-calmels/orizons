@@ -28,7 +28,7 @@ import Trip from 'src/components/Trip'
 const App = () => {
   return <div className="app">
 
-    <Header isLogged={false} />
+    <Header isLogged={true} />
     
     <Page>
     <Switch>
