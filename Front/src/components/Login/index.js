@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 import './login.scss';
 
@@ -23,6 +24,28 @@ const Login = () => {
           // on récupère un objet avec toutes les données. Envoyées seulement si correctes
           // eslint-disable-next-line no-console
             console.log('formData', formData);
+            // on envoie l'objet au server
+            const config = {
+              method: 'post',
+              url: 'https://orizons.herokuapp.com/login',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+              }),
+            };
+
+            axios(config) // on lance la requête
+              .then((response) => {
+                // en cas de succès on doit récupérer les infos (nickname, webtoken, isLogged)
+                // eslint-disable-next-line no-console
+                console.log('success', response.data);
+              }).catch((error) => {
+                // eslint-disable-next-line no-console
+                console.error(error);
+              });
           })}
         >
           <Form.Group size="lg" controlId="email">
