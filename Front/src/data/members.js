@@ -19,7 +19,8 @@ export default [
       url: 'https://images.pexels.com/photos/547115/pexels-photo-547115.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       member_id: 1
     },
-    localisation: 'Belgique'
+    localisation: 'Belgique',
+    biography: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in mattis erat, pharetra vulputate dolor. Nulla quis enim non ante tristique lacinia. Vivamus mollis elit velit, at mollis lectus luctus ac. Quisque rhoncus, dolor sed efficitur sodales sed.'
   },
   {
     id: 2,
