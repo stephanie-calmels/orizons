@@ -48,9 +48,9 @@ export default [
     steps: [
       {
         id: 1,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 1',
+        longitude: '6.865175',
+        latitude: '45.832622',
+        title: 'Jour 1 - Mont Blanc',
         date: '12-08-2017',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
         photos: [
@@ -59,14 +59,26 @@ export default [
             title: 'photo 1',
             url: 'https://images.pexels.com/photos/1482927/pexels-photo-1482927.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
             member_id: 1
+          },
+          {
+            id: 1001,
+            title: 'photo 1001',
+            url : 'https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            member_id: 1
+          },
+          {
+            id: 1002,
+            title: 'photo 1002',
+            url : 'https://images.pexels.com/photos/290452/pexels-photo-290452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            member_id: 1
           }
         ]
       },
       {
         id: 2,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 2',
+        longitude: '6.855572',
+        latitude: '45.835346',
+        title: 'Jour 2 - Petite Bosse',
         date: '13-08-2017',
         content: 'Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex. Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis.',
         photos: [
@@ -80,9 +92,9 @@ export default [
       },
       {
         id: 3,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 3',
+        longitude: '6.888043',
+        latitude: '45.878658',
+        title: 'Jour 3 - Aiguille du Midi',
         date: '14-08-2017',
         content: 'Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. ',
         photos: [
@@ -96,9 +108,9 @@ export default [
       },
       {
         id: 4,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 4',
+        longitude: '6.88799',
+        latitude: '45.84510',
+        title: 'Jour 4 - Dent du géant',
         date: '15-08-2017',
         content: 'Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. Morbi lacinia turpis felis, et pulvinar urna suscipit sed.',
         photos: [
@@ -112,9 +124,9 @@ export default [
       },
       {
         id: 5,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 5',
+        longitude: '6.98529',
+        latitude: '45.8689',
+        title: 'Jour 5 - Grande Jorasse',
         date: '16-08-2017',
         content: 'tiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex.',
         photos: [
@@ -128,9 +140,9 @@ export default [
       },
       {
         id: 6,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 6',
+        longitude: '7.0457',
+        latitude: '45.9223',
+        title: 'Jour 6 - Mont Dolent',
         date: '17-08-2017',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. ',
         photos: [
@@ -144,9 +156,9 @@ export default [
       },
       {
         id: 7,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 7',
+        longitude: '6.97006',
+        latitude: '45.934734',
+        title: 'Jour 7 - Aiguille Verte',
         date: '18-08-2017',
         content: 'Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis. Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.',
         photos: [
