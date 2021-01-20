@@ -7,7 +7,7 @@ const errorController = require('../controllers/errorController');
 
 const router = express.Router();
 
-router.use('/trip', tripRouter);
+router.use('/trips', tripRouter);
 router.use('/categories', categoriesRouter);
 
 //router.use(errorController.error404);

@@ -3,6 +3,7 @@ const categoriesController = {
     async getAllCategory(request, response, next) {
         try {
             const categories = await categoryDataMapper.getAllCategory();
+            console.log("toto");
             response.json({
                 data: categories
             })
