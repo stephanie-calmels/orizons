@@ -1,11 +1,32 @@
 import React from 'react';
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
 
+import Tag from 'src/components/Tag';
+
+
 import './trips.scss';
 
-const Trips = ({ trips, showMoreResults }) => (
+const Trips = ({ trips, categories, showMoreResults }) => (
     <Container>
         <h1 className="main-title">Explorer les carnets de voyage publiés par la communauté</h1>
+
+        {/* <Row>
+          {categories.map(category => (
+              <Col xs={6} md={3} lg={2} className="pretty_tag" style={{backgroundImage: `url(${category.image})`}}>
+                <Badge key={category.id} className="pretty_tag-text">
+                  {category.entitled}
+                </Badge>
+              </Col>
+            ))}
+        </Row> */}
+        <CardDeck> 
+          <Row>
+            {categories.map(category => (
+              <Tag category={category} />
+            ))}
+          </Row>
+        </CardDeck>
+
         <CardDeck>
           <Row>
             {trips.map(trip => (

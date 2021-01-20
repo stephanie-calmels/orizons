@@ -181,7 +181,7 @@ export default [
       {
         id: 2,
         entitled: 'Farniente',
-        color: '#FEFA85'
+        color: '#F1C40F'
       }
     ],
     author: {
