@@ -8,7 +8,7 @@ import './description.scss'
 import Steps from './Steps'
 
 const Description = ({trip})=>{
-  console.log(trip.steps)
+
   return <div>
   <Container>
     <Row className="infos-container">
