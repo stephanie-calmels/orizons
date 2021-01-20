@@ -4,6 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Page from 'src/components/Page';
@@ -17,11 +20,14 @@ import Connect from 'src/components/Connect';
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
+import Trip from 'src/components/Trip'
+
 
 
 // == Composant
 const App = () => {
   return <div className="app">
+
     <Header isLogged={false} />
     
     <Page>
@@ -32,9 +38,9 @@ const App = () => {
         <Route exact path="/exploration">
           <Trips />
         </Route>
-        {/* <Route exact path="/exploration/:slug">
+        <Route exact path="/exploration/:slug">
           <Trip />
-        </Route> */}
+        </Route>
         <Route exact path="/ajouter-carnet">
           <AddTrip />
         </Route>
@@ -68,6 +74,7 @@ const App = () => {
     </Page>
    
     <Footer /> 
+
   </div>
 
 };
