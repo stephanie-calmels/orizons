@@ -424,5 +424,109 @@ export default [
         ]
       }
     ]
+  },
+  {
+    id: 3,
+    title: 'Stonehenge',
+    summary: 'Petit week-end romantique avec Guenièvre',
+    departure_date: '01-07-2005',
+    arrival_date: '02-07-2005',
+    duration: 2,
+    score: 10,
+    cover_photo: {
+      id: 130,
+      title: 'photo 130',
+      url: 'https://images.pexels.com/photos/1448136/pexels-photo-1448136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+      member_id: 3
+    },
+    localisation: [
+      'Angleterre'
+    ],
+    categories: [
+      {
+        id: 1,
+        entitled: 'Randonnée',
+        color: '#59F19C'
+      },
+      {
+        id: 3,
+        entitled: 'Week-end',
+        color: '#FA85FE'
+      }
+    ],
+    author: {
+      id: 3,
+      first_name: 'Arthur',
+      last_name: 'Pendragon',
+      nickname: 'Arthur',
+      email: 'kingarthur@google.com',
+      password: 'sjgoaZvkA2xk',
+      profile_photo: {
+        id: 131,
+        title: 'photo 131',
+        url: 'https://images.pexels.com/photos/6110534/pexels-photo-6110534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        member_id: 3
+      },
+      registration_date: '17-03-2002',
+      cover_photo: {
+        id: 132,
+        title: 'photo 132',
+        url: '',
+        member_id: 3
+      },
+      localisation: 'Angleterre'
+    },
+    steps: [
+      {
+        id: 80,
+        longitude: '',
+        latitude: '',
+        title: 'Jour 1',
+        date: '01-07-500',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
+        photos: [
+          {
+            id: 80,
+            title: 'photo 1',
+            url: 'https://images.pexels.com/photos/3233007/pexels-photo-3233007.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 81,
+            title: 'photo 2',
+            url: 'https://images.pexels.com/photos/162056/pexels-photo-162056.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          }
+        ]
+      },
+      {
+        id: 90,
+        longitude: '',
+        latitude: '',
+        title: 'Jour 2',
+        date: '02-07-500',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
+        photos: [
+          {
+            id: 82,
+            title: 'photo 3',
+            url: 'https://images.pexels.com/photos/1590511/pexels-photo-1590511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 83,
+            title: 'photo 4',
+            url: 'https://images.pexels.com/photos/941229/pexels-photo-941229.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 84,
+            title: 'photo 5',
+            url: 'https://images.pexels.com/photos/1756325/pexels-photo-1756325.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          }
+        ]
+      }
+    ]
   }
 ];
