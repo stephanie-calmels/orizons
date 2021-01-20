@@ -23,7 +23,7 @@ import trips from 'src/data/trips';
 // == Composant
 const App = () => {
   return <div className="app">
-    <Header isLogged={false} />
+    <Header isLogged={true} />
     
     <Page>
     <Switch>
