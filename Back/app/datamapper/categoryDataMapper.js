@@ -1,6 +1,3 @@
-const {
-    getAllCategory
-} = require('../controller/categoryController');
 const client = require('./client');
 
 const categoryDataMapper = {

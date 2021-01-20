@@ -1,8 +1,3 @@
-const {
-    Router
-} = require("express");
-const router = require(".");
-
 const express = require('express');
 
 const categoryController = require('../controllers/categoryController');
@@ -16,5 +11,6 @@ router.patch('/', categoryController.updateAllCategory);
 router.patch('/:id', categoryController.updateOneCategory);
 router.delete('/', categoryController.deleteAllCategory);
 router.delete('/:id', categoryController.deleteOneCategory);
+
 
 module.exports = router;

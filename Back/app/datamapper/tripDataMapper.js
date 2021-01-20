@@ -2,12 +2,13 @@ const client = require('./client');
 
 const tripDataMapper = {
     async getAllTrips() {
-        const result = await query("SELECT * FROM trip");
+        const result = await client.query("SELECT * FROM trip");
+        console.log('doudou', result.rows);
         return result.rows;
     },
 
     async getTripById(idTrip) {
-        const result = await client.query("SELECT * FROM trip WHERE id = $1", [idTrip]);
+        const result = await client.query("SELECT * FROM 'trip' JOIN 'step' ON 'step'.'trip_id' = 'trip'.'id' WHERE 'trip'.'id' = $1", [idTrip]);
 
         if (result.rowCount == 0) {
             return null;
@@ -18,13 +19,13 @@ const tripDataMapper = {
     async createTrip() {
         const result = await client.query("INSERT INTO trip() VALUES RETURNING *", []);
         return result.rows[0];
-    };
+    },
 
     async updateAllTrip() {
         const result = await client.query("");
     },
 
-    async updateTripById(idTrip) {
+    async updateOneTrip(idTrip) {
         const result = await client.query("");
     },
 
@@ -32,7 +33,7 @@ const tripDataMapper = {
         const result = await client.query("");
     },
 
-    async deleteTripById() {
+    async deleteOneTrip() {
         const result = await client.query("");
     }
 

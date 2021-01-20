@@ -1,8 +1,9 @@
-const categoryDataMapper = require('../datamapper/categoriesDataMapper');
+const categoryDataMapper = require('../datamapper/categoryDataMapper');
 const categoriesController = {
     async getAllCategory(request, response, next) {
         try {
-            const categories = await categoryDataMapper.getAllCategories();
+            const categories = await categoryDataMapper.getAllCategory();
+            console.log("toto");
             response.json({
                 data: categories
             })
