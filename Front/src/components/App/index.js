@@ -20,8 +20,7 @@ import Login from 'src/components/Login';
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
-import Trip from 'src/components/Trip'
-
+import Trip from 'src/components/Trip';
 
 // == Composant
 
