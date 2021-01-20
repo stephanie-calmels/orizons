@@ -33,7 +33,7 @@ export default [
       profile_photo: {
         id: 101,
         title: 'photo 101',
-        url: '',
+        url: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         member_id: 1
       },
       registration_date: '04-07-2016',

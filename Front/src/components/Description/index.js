@@ -4,15 +4,15 @@ import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 
 import slugify from 'slugify'
 
-import './styles.scss'
+import './description.scss'
+import Steps from './Steps'
 
 const Description = ({trip})=>{
   console.log(trip.steps)
   return <div>
   <Container>
-    <Row>
-        <Col md={6}>Statistiques
-        {/* Changer le container en div
+    <Row className="infos-container">
+        <Col md={6} className="stats-container">Statistiques
         <Container>
           <Row>
             <Col>Durée</Col>
@@ -27,14 +27,15 @@ const Description = ({trip})=>{
               return <Col key={category.id}>{category.entitled}</Col>
             })}
           </Row>
-        </Container> */}
+        </Container> 
         </Col>
-        <Col md={6}>
+
+        <Col md={6} className="resume-container">
         Description du voyage
         <p>{trip.summary}</p>
         </Col>
     </Row>
-    <Row>
+    <Row >
     <Col>
     {/*On crée la map et on la centre sur la position de la première étape */}
     <MapContainer center={[trip.steps[0].latitude, trip.steps[0].longitude]} zoom={11} scrollWheelZoom={true}>
@@ -54,17 +55,17 @@ const Description = ({trip})=>{
           <Card.Body>
             <Card.Title> {step.title}</Card.Title>
             <Card.Subtitle>{step.date}</Card.Subtitle>
-            <Card.Text>{step.content}</Card.Text>
             <Button variant="link" href={sluggedTitleAsAnchor}> Voir le détail</Button>
           </Card.Body>
         </Card>
       </Popup>
     </Marker>
   })}
-  
-</MapContainer>
+  </MapContainer>
     </Col>
-    
+    </Row>
+    <Row>
+      <Steps steps= {trip.steps}/>
     </Row>
   </Container>
 
