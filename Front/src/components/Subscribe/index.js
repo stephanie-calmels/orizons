@@ -21,14 +21,14 @@ const Subscribe = () => {
     register, handleSubmit, errors,
   } = useForm({
     // valeurs par défaut pour éviter de remplir à chaque fois...
-    defaultValues: {
-      nickname: 'Kamilou',
-      lastname: 'Duvert',
-      firstname: 'Kamil',
-      email: 'iamkamil@email.com',
-      password: 'P@ssw0rd',
-      passwordRepeat: 'P@ssw0rd',
-    },
+    // defaultValues: {
+    //   nickname: 'Kamilou',
+    //   lastname: 'Duvert',
+    //   firstname: 'Kamil',
+    //   email: 'iamkamil@email.com',
+    //   password: 'P@ssw0rd',
+    //   passwordRepeat: 'P@ssw0rd',
+    // },
   });
   // on cherche à voir si le serveur a bien reçu les infos
   const [submitting, setSubmitting] = useState(false);

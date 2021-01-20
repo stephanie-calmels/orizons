@@ -13,7 +13,7 @@ import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
 import Account from 'src/components/Account';
 import Subscribe from 'src/components/Subscribe';
-import Connect from 'src/components/Connect';
+import Login from 'src/components/Login';
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
@@ -44,7 +44,7 @@ const App = () => (
           <Subscribe />
         </Route>
         <Route exact path="/connexion">
-          <Connect />
+          <Login />
         </Route>
         <Route exact path="/contact">
           <ContactForm />
