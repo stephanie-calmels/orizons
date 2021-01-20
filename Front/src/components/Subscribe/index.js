@@ -8,28 +8,26 @@ import { useForm } from 'react-hook-form';
 import './subscribe.scss';
 
 const Subscribe = () => {
-  const [nickname, setNickname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [firstname, setFirstname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [inputs, setInputs] = useState({
+    nickname: '',
+    lastname: '',
+    firstname: '',
+    email: '',
+    password: '',
+    passwordRepeat: '',
+  });
+
+  const {
+    nickname, lastname, firstname, email, password, passwordRepeat,
+  } = inputs;
+
+  const handleChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
 
   // Hook qui vient de React Hook Form
   // https://react-hook-form.com/get-started
   const {
     register, handleSubmit, errors,
-  } = useForm({
-    // valeurs par défaut pour éviter de remplir à chaque fois...
-    // defaultValues: {
-    //   nickname: 'Kamilou',
-    //   lastname: 'Duvert',
-    //   firstname: 'Kamil',
-    //   email: 'iamkamil@email.com',
-    //   password: 'P@ssw0rd',
-    //   passwordRepeat: 'P@ssw0rd',
-    // },
-  });
+  } = useForm({});
   // on cherche à voir si le serveur a bien reçu les infos
   const [submitting, setSubmitting] = useState(false);
 
@@ -56,7 +54,7 @@ const Subscribe = () => {
               name="nickname"
               type="text"
               defaultValue={nickname}
-              onChange={(e) => setNickname(e.target.value)}
+              onChange={(e) => handleChange(e)}
               // on attache notre input au React Hook Form pour les critères de validation
               ref={register({
                 // si le champ n'est pas rempli lors de la soumission, le champ se met en focus
@@ -72,7 +70,7 @@ const Subscribe = () => {
               name="lastname"
               type="text"
               defaultValue={lastname}
-              onChange={(e) => setLastname(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
@@ -86,7 +84,7 @@ const Subscribe = () => {
               name="firstname"
               type="text"
               defaultValue={firstname}
-              onChange={(e) => setFirstname(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
@@ -100,7 +98,7 @@ const Subscribe = () => {
               name="email"
               type="email"
               defaultValue={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
@@ -114,15 +112,15 @@ const Subscribe = () => {
               name="password"
               type="password"
               defaultValue={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
                 minLength: {
                   value: 8,
-                  message: 'Le champ doit contenir au moins 8 caractères',
+                  message: 'Ce champ doit contenir au moins 8 caractères',
                 },
                 validate: (value) => (
-                  [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) || 'Le champ doit contenir au moins une majuscule, minuscule et un caractère spécial'
+                  [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) || 'Ce champ doit contenir au moins une majuscule, une minuscule et un caractère spécial'
                 ),
               })}
             />
@@ -135,7 +133,7 @@ const Subscribe = () => {
               name="passwordRepeat"
               type="password"
               defaultValue={passwordRepeat}
-              onChange={(e) => setPasswordRepeat(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
                 validate: (value) => value === password || 'Veuillez entrer le même mot de passe',
