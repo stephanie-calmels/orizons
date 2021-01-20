@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Container, Form, Button,
+  Container, Form, Button, Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -10,9 +10,11 @@ import './login.scss';
 
 const Login = () => {
   const { register, handleSubmit, errors } = useForm();
+  const [submitting, setSubmitting] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [serverError, setServerError] = useState(false);
 
   return (
     <>
@@ -22,19 +24,20 @@ const Login = () => {
           className="form"
           onSubmit={handleSubmit((formData) => {
           // on récupère un objet avec toutes les données. Envoyées seulement si correctes
-          // eslint-disable-next-line no-console
-            console.log('formData', formData);
-            // on envoie l'objet au server
+            // on l'envoie au server
+            setSubmitting(true);
+            setServerError(false);
             const config = {
               method: 'post',
-              url: 'https://orizons.herokuapp.com/login',
+              // test avec le serveur de 'Recipes'
+              url: 'http://localhost:3001/login',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({
+              data: {
                 email: formData.email,
                 password: formData.password,
-              }),
+              },
             };
 
             axios(config) // on lance la requête
@@ -44,10 +47,14 @@ const Login = () => {
                 console.log('success', response.data);
               }).catch((error) => {
                 // eslint-disable-next-line no-console
-                console.error(error);
+                console.error('error', error);
+                setServerError('problème d\'identifiants');
+              }).finally(() => {
+                setSubmitting(false);
               });
           })}
         >
+          {serverError && <Alert variant="danger">Adresse email ou mot de passe invalide !</Alert>}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control
@@ -85,7 +92,7 @@ const Login = () => {
           </Form.Group>
 
           {/* A la soumission du form, en attente de la réponse serveur le bouton est désactivé */}
-          <Button block size="lg" className="mt-3" type="submit">
+          <Button block size="lg" className="mt-3" type="submit" disabled={submitting}>
             Valider
           </Button>
         </Form>

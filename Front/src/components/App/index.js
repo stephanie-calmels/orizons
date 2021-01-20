@@ -26,7 +26,7 @@ import Trip from 'src/components/Trip';
 
 const App = () => (
   <div>
-    <Header isLogged={true} />
+    <Header isLogged={false} />
     <Page>
       <Switch>
         <Route exact path="/">
