@@ -18,14 +18,13 @@ import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 
-
 // == Composant
-const App = () => {
-  return <div>
+const App = () => (
+  <div>
     <Header isLogged={false} />
     <Page>
-    <Switch>
-      <Route exact path="/">
+      <Switch>
+        <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/exploration">
@@ -62,14 +61,13 @@ const App = () => {
         <Route exact path="/profile/:pseudo">
           <Profile />
         </Route>
-    </Switch>
-      
-    </Page>
-   
-    <Footer /> 
-  </div>
+      </Switch>
 
-};
+    </Page>
+
+    <Footer />
+  </div>
+);
 
 // == Export
 export default App;
