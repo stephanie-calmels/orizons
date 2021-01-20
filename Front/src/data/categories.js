@@ -49,13 +49,13 @@ export default [
   },
   {
     id: 10,
-    entitled: 'Voyage Sportif',
+    entitled: 'Sportif',
     color: '#7E4BCE',
     image: 'https://images.pexels.com/photos/163407/cyclists-trail-bike-clouds-163407.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   },
   {
     id: 11,
-    entitled: 'Voyage de Noces',
+    entitled: 'Noces',
     color: '#D7BDE2',
     image: 'https://images.pexels.com/photos/70737/pexels-photo-70737.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
   },
