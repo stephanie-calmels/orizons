@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Container, Form, Button, Alert,
+  Container, Form, Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -14,7 +14,9 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [serverError, setServerError] = useState(false);
+
+  const storedJwt = localStorage.getItem('token');
+  const [jwt, setJwt] = useState(storedJwt || null);
 
   return (
     <>
@@ -24,13 +26,14 @@ const Login = () => {
           className="form"
           onSubmit={handleSubmit((formData) => {
           // on récupère un objet avec toutes les données. Envoyées seulement si correctes
-            // on l'envoie au server
-            setSubmitting(true);
-            setServerError(false);
+            // on envoie au server via une requête axios
+            setSubmitting(true); // desactivation du bouton pendant la requête
+            // setServerError([]); // réinitialisation des erreurs
+
             const config = {
               method: 'post',
               // test avec le serveur de 'Recipes'
-              url: 'http://localhost:3001/login',
+              url: 'https://orizons.herokuapp.com/members/login',
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -42,19 +45,25 @@ const Login = () => {
 
             axios(config) // on lance la requête
               .then((response) => {
-                // en cas de succès on doit récupérer les infos (nickname, webtoken, isLogged)
+                // en cas de succès on récupére les infos (nickname, accessToken, isLogged)
                 // eslint-disable-next-line no-console
                 console.log('success', response.data);
+                // On extrait le JWT de la réponse
+                const { token } = response.data;
+                // pour le stocker dans le LocalStorage
+                localStorage.setItem('token', token);
+                // et dans le state
+                setJwt(token);
               }).catch((error) => {
                 // eslint-disable-next-line no-console
                 console.error('error', error);
-                setServerError('problème d\'identifiants');
+                // setServerError(error); // en cas d'erreur on l'enregistre
               }).finally(() => {
-                setSubmitting(false);
+                setSubmitting(false); // dans tous les cas on réactive le bouton
               });
           })}
         >
-          {serverError && <Alert variant="danger">Adresse email ou mot de passe invalide !</Alert>}
+          {/* {serverError && <Alert variant="danger">{serverError}</Alert>} */}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control

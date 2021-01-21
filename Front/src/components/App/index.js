@@ -24,55 +24,59 @@ import Trip from 'src/components/Trip';
 
 // == Composant
 
-const App = () => (
-  <div>
-    <Header isLogged={false} />
-    <Page>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/exploration">
-          <Trips />
-        </Route>
-        <Route exact path="/exploration/:slug">
-          <Trip />
-        </Route>
-        <Route exact path="/ajouter-carnet">
-          <AddTrip />
-        </Route>
-        {/* <Route exact path="/ajouter-etape">
+const App = () => {
+  const jwt = localStorage.getItem('token');
+
+  return (
+    <div>
+      <Header isLogged={!!jwt} />
+      <Page>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/exploration">
+            <Trips />
+          </Route>
+          <Route exact path="/exploration/:slug">
+            <Trip />
+          </Route>
+          <Route exact path="/ajouter-carnet">
+            <AddTrip />
+          </Route>
+          {/* <Route exact path="/ajouter-etape">
           <AddStep />
         </Route> */}
 
-        <Route exact path="/inscription">
-          <Subscribe />
-        </Route>
-        <Route exact path="/connexion">
-          <Login />
-        </Route>
-        <Route exact path="/contact">
-          <ContactForm />
-        </Route>
-        <Route exact path="/a-propos">
-          <About />
-        </Route>
-        <Route exact path="/compte">
-          <Account />
-        </Route>
-        <Route exact path="/mentions-legales">
-          <Legals />
-        </Route>
-        <Route exact path="/profile/:pseudo">
-          <Profile />
-        </Route>
-      </Switch>
+          <Route exact path="/inscription">
+            <Subscribe />
+          </Route>
+          <Route exact path="/connexion">
+            <Login />
+          </Route>
+          <Route exact path="/contact">
+            <ContactForm />
+          </Route>
+          <Route exact path="/a-propos">
+            <About />
+          </Route>
+          <Route exact path="/compte">
+            <Account />
+          </Route>
+          <Route exact path="/mentions-legales">
+            <Legals />
+          </Route>
+          <Route exact path="/profile/:pseudo">
+            <Profile />
+          </Route>
+        </Switch>
 
-    </Page>
+      </Page>
 
-    <Footer />
-  </div>
-);
+      <Footer />
+    </div>
+  );
+};
 
 // == Export
 export default App;

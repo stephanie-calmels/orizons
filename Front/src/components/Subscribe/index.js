@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import './subscribe.scss';
+import axios from 'axios';
 
 const Subscribe = () => {
   const [inputs, setInputs] = useState({
@@ -30,6 +31,8 @@ const Subscribe = () => {
   } = useForm({});
   // on cherche à voir si le serveur a bien reçu les infos
   const [submitting, setSubmitting] = useState(false);
+  // gérer la réponse du serveur
+  const [message, setMessage] = useState('');
 
   return (
     <>
@@ -42,11 +45,35 @@ const Subscribe = () => {
             setSubmitting(true);
             // eslint-disable-next-line no-console
             console.log('formData', formData);
-            // TODO: requête AXIOS pour envoyer les infos au serveur
-
-            setSubmitting(false);
+            const config = {
+              method: 'post',
+              // test avec le serveur de 'Recipes'
+              url: 'https://orizons.herokuapp.com/members',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              data: {
+                first_name: formData.firstname,
+                last_name: formData.lastname,
+                password: formData.password,
+                nickname: formData.nickname,
+                email: formData.email,
+              },
+            };
+            axios(config)
+              .then((response) => {
+                console.log(response.data);
+                setMessage(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+              .finally(() => {
+                setSubmitting(true);
+              });
           })}
         >
+          {message && <div className="text-success">Inscription réussie ! Bienvenue :)</div>}
           <Form.Group size="lg" controlId="nickname">
             <Form.Label>Pseudonyme</Form.Label>
             <Form.Control
@@ -61,7 +88,7 @@ const Subscribe = () => {
                 required: 'Veuillez remplir ce champ !',
               })}
             />
-            {errors.nickname && <div className="text-danger">{errors.nickname.message}</div>}
+            {errors.nickname && <div className="text-danger mb-2">{errors.nickname.message}</div>}
           </Form.Group>
           <Form.Group size="lg" controlId="lastname">
             <Form.Label>Nom</Form.Label>
@@ -77,7 +104,7 @@ const Subscribe = () => {
             />
             {errors.lastname && <div className="text-danger">{errors.lastname.message}</div>}
           </Form.Group>
-          <Form.Group size="lg" controlId="firstname">
+          <Form.Group size="lg" controlId="first_name">
             <Form.Label>Prénom</Form.Label>
             <Form.Control
               autoFocus
