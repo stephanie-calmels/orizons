@@ -1,4 +1,4 @@
--- Verify orizons:0000-init on pg
+-- Verify orizons:0010-members_functions on pg
 
 BEGIN;
 

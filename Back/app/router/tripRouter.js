@@ -5,11 +5,11 @@ const tripController = require('../controllers/tripController');
 const router = express.Router();
 
 router.get('/', tripController.getAllTrip);
-router.get('/:id', tripController.getOneTrip);
+router.get('/:tripId', tripController.getOneTrip);
 router.post('/', tripController.createTrip);
 router.patch('/', tripController.updateAllTrip);
-router.patch('/:id', tripController.updateOneTrip);
+router.patch('/:tripId', tripController.updateOneTrip);
 router.delete('/', tripController.deleteAllTrip);
-router.delete('/:id', tripController.deleteOneTrip);
+router.delete('/:tripId', tripController.deleteOneTrip);
 
 module.exports = router;
