@@ -1,4 +1,6 @@
 const memberDataMapper = require('../datamapper/memberDataMapper');
+
+
 const memberController = {
     async getAllMember(_, response, next) {
         try {
@@ -21,16 +23,20 @@ const memberController = {
             console.log(request.params);
             const member = await memberDataMapper.getMemberById(memberId);
             response.json({
-                data: member
+                data: membercreateMember
             })
         } catch (error) {
-            next(error)
+
         }
+
+
     },
+
     async createMember(request, response, next) {
         try {
-            // A voir
-            const member = await memberDataMapper.createMember();
+            const newMember = request.body
+            console.log('1', newMember)
+            const member = await memberDataMapper.createMember(newMember);
             response.json({
                 data: member
             })
@@ -42,7 +48,7 @@ const memberController = {
         try {
             const members = await memberDataMapper.updateAllMember();
             response.json({
-                data: categories
+                data: members
             })
         } catch (error) {
             next(error)

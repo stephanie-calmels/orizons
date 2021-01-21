@@ -13,6 +13,18 @@ const memberDataMapper = {
             return null;
         }
         return result.rows[0];
+    },
+
+    async createMember(newMember) {
+        console.log('2', newMember);
+        const result = await client.query("INSERT INTO member(first_name, last_name, nickname, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *", [
+            newMember.first_name,
+            newMember.last_name,
+            newMember.nickname,
+            newMember.email,
+            newMember.password
+        ])
+        return result.rows[0]
     }
 };
 

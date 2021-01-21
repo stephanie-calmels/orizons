@@ -5,11 +5,11 @@ const memberController = require('../controllers/memberController');
 const router = express.Router();
 
 router.get('/', memberController.getAllMember);
-router.get('/:id', memberController.getOneMember);
+router.get('/:memberId', memberController.getOneMember);
 router.post('/', memberController.createMember);
 router.patch('/', memberController.updateAllMember);
-router.patch('/:id', memberController.updateOneMember);
+router.patch('/:memberId', memberController.updateOneMember);
 router.delete('/', memberController.deleteAllMember);
-router.delete('/:id', memberController.deleteOneMember);
+router.delete('/:memberId', memberController.deleteOneMember);
 
 module.exports = router;
