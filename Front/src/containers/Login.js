@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import Login from 'src/components/Login';
 import {
-  changeEmail, changePassword, login, logout,
+  changeAuthField, login, logout,
 } from '../actions/auth';
 
 const mapStateToProps = (state) => ({
@@ -16,11 +16,8 @@ const mapStateToProps = (state) => ({
 
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
-  changeEmailField: (value) => {
-    dispatch(changeEmail(value));
-  },
-  changePasswordField: (value) => {
-    dispatch(changePassword(value));
+  changeField: (name, value) => {
+    dispatch(changeAuthField(name, value));
   },
   handleLogin: () => {
     dispatch(login());

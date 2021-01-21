@@ -8,13 +8,14 @@ import { useForm } from 'react-hook-form';
 import './login.scss';
 
 const Login = ({
-  email, password, changeEmailField, changePasswordField, isLoading, message, isSuccessful, handleLogin,
+  email, password, changeField, isLoading, message, isSuccessful, handleLogin,
 }) => {
   // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm();
 
-  const handleChangeEmail = (e) => changeEmailField(e.target.value);
-  const handleChangePassword = (e) => changePasswordField(e.target.value);
+  // const handleChangeEmail = (e) => changeEmailField(e.target.value);
+  // const handleChangePassword = (e) => changePasswordField(e.target.value);
+  const handleChange = (e) => changeField([e.target.name], e.target.value);
   const onSubmit = () => {
     handleLogin();
   };
@@ -42,7 +43,7 @@ const Login = ({
               name="email"
               type="email"
               defaultValue={email}
-              onChange={(e) => handleChangeEmail(e)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
@@ -56,7 +57,7 @@ const Login = ({
               name="password"
               type="password"
               defaultValue={password}
-              onChange={(e) => handleChangePassword(e)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
                 minLength: {

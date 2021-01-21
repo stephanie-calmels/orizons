@@ -20,8 +20,7 @@ const api = (store) => (next) => (action) => {
 
       axios(config)
         .then((response) => {
-          const { isLogged, nickname, role, token } = response.data;
-          store.dispatch(loginSuccess(isLogged, nickname, role, token));
+          store.dispatch(loginSuccess(response.data));
           // eslint-disable-next-line no-console
           console.log('Je suis dans la réponse, et response.data vaut : ', response.data);
         })

@@ -1,5 +1,5 @@
 import {
-  CHANGE_PASSWORD_FIELD, CHANGE_EMAIL_FIELD, LOGIN_SUCCESS,
+  CHANGE_AUTH_FIELD, LOGIN_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -16,15 +16,10 @@ const initialState = {
 
 const reducer = (oldState = initialState, action) => {
   switch (action.type) {
-    case CHANGE_EMAIL_FIELD:
+    case CHANGE_AUTH_FIELD:
       return {
         ...oldState,
-        email: action.value,
-      };
-    case CHANGE_PASSWORD_FIELD:
-      return {
-        ...oldState,
-        password: action.value,
+        [action.name]: action.value,
       };
     case LOGIN_SUCCESS:
       return {
@@ -35,7 +30,7 @@ const reducer = (oldState = initialState, action) => {
         message: `Connexion réussie ${action.nickname} !`,
         isLoggedIn: action.isLogged,
         isSuccessful: true,
-      }
+      };
     default:
       return oldState;
   }
