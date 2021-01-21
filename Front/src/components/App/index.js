@@ -16,27 +16,32 @@ import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
 import Account from 'src/components/Account';
 import Subscribe from 'src/components/Subscribe';
-import Connect from 'src/components/Connect';
+import Login from 'src/components/Login';
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
-import Trip from 'src/components/Trip'
+import Trip from 'src/components/Trip';
 
-
+import trips from 'src/data/trips';
+import categories from 'src/data/categories';
 
 // == Composant
-const App = () => {
-  return <div className="app">
 
-    <Header isLogged={true} />
+
+   
     
+
+const App = () => (
+  <div>
+    <Header isLogged={false} />
+
     <Page>
-    <Switch>
-      <Route exact path="/">
+      <Switch>
+        <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/exploration">
-          <Trips />
+          <Trips trips={trips} categories={categories}/>
         </Route>
         <Route exact path="/exploration/:slug">
           <Trip />
@@ -52,7 +57,7 @@ const App = () => {
           <Subscribe />
         </Route>
         <Route exact path="/connexion">
-          <Connect />
+          <Login />
         </Route>
         <Route exact path="/contact">
           <ContactForm />
@@ -69,15 +74,13 @@ const App = () => {
         <Route exact path="/profile/:pseudo">
           <Profile />
         </Route>
-    </Switch>
-      
+      </Switch>
+
     </Page>
-   
-    <Footer /> 
 
+    <Footer />
   </div>
-
-};
+);
 
 // == Export
 export default App;
