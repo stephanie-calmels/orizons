@@ -10,15 +10,6 @@ const Trips = ({ trips, categories, showMoreResults }) => (
     <Container>
         <h1 className="main-title">Explorer les carnets de voyage publiés par la communauté</h1>
 
-        {/* <Row>
-          {categories.map(category => (
-              <Col xs={6} md={3} lg={2} className="pretty_tag" style={{backgroundImage: `url(${category.image})`}}>
-                <Badge key={category.id} className="pretty_tag-text">
-                  {category.entitled}
-                </Badge>
-              </Col>
-            ))}
-        </Row> */}
         <CardDeck> 
           <Row>
             {categories.map(category => (
@@ -30,15 +21,15 @@ const Trips = ({ trips, categories, showMoreResults }) => (
         <CardDeck>
           <Row>
             {trips.map(trip => (
-              <Col md={6} lg={4} xl={3}>
-                <Card key={trip.id}>
-                  <Card.Img variant="top" src={trip.cover_photo.url} />
-                  <Card.Body>
-                  <Card.Title>{trip.title}</Card.Title>
-                  <Card.Text>
+              <Col md={6} lg={4} xl={3} key={trip.id}>
+                <Card className="card_trips">
+                  <Card.Img className="card_trips-img-top" variant="top" src={trip.cover_photo.url} />
+                  <Card.Body className="card_trips-body">
+                  <Card.Title className="card_trips-title">{trip.title}</Card.Title>
+                  <Card.Text className="card_trips-text">
                       {trip.summary}
                   </Card.Text>
-                  <Card.Text>
+                  <Card.Text className="card_trips-text">
                     {trip.categories.map(category => (
                       
                         <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
@@ -47,7 +38,7 @@ const Trips = ({ trips, categories, showMoreResults }) => (
                     ))}
                   </Card.Text>
                   </Card.Body>
-                  <Card.Footer>
+                  <Card.Footer className="card_trips-footer">
                   <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
                   <small className="text-muted">{trip.author.nickname}</small>
                   </Card.Footer>
