@@ -1,3 +1,7 @@
+const {
+    deleteAllMember
+} = require('../controllers/memberController');
+const router = require('../router/tripRouter');
 const client = require('./client');
 
 const memberDataMapper = {
@@ -35,7 +39,17 @@ const memberDataMapper = {
             newMember.password
         ])
         return 'Inscription réussie'
-    }
+    },
+
+    async updateAllMember() {
+        // EST-CE VRAIMENT UTILE ?????
+    },
+
+    async deleteAllMember() {
+        //function sql pour supprimer les données des tables
+        const result = await client.query("");
+    },
+
 };
 
 module.exports = memberDataMapper;

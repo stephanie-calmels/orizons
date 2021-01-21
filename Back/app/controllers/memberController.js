@@ -71,7 +71,7 @@ const memberController = {
             console.log(request.params);
             const member = await memberDataMapper.getMemberById(memberId);
             response.json({
-                data: membercreateMember
+                data: member
             })
         } catch (error) {
             next(error)

@@ -4,3 +4,4 @@
 0000-init 2021-01-19T16:59:33Z "Etudiant O'clock",,, <etudiant@teleporteur> # Database init
 0005-create_domains 2021-01-19T17:00:17Z "Etudiant O'clock",,, <etudiant@teleporteur> # Create domains for text only, color, mail
 0010-add_role 2021-01-21T09:18:21Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add Role to the member
+0015-member_constraint 2021-01-21T12:53:38Z "Etudiant O'clock",,, <etudiant@teleporteur> # Drop member registration date constraint
