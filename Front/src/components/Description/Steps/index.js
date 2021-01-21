@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Container, Row, Col, Nav} from 'react-bootstrap';
+import {Card, Container, Row, Col, Nav, CardColumns} from 'react-bootstrap';
 import slugify from 'slugify'
 import './steps.scss'
 
@@ -31,13 +31,13 @@ const Steps = ({steps})=>{
     // pour plus tard TODO: refactorisation, mettre ça ailleurs puisque je le fais aussi dans Description, pour ajouter les liens sur la carte
     const sluggedTitle = slugify(step.title, {lower:true});
     
-    return <Card key={step.id} id={sluggedTitle} >
+    return <Card key={step.id} id={sluggedTitle} className="card-steps">
     {/* On ajoute les photos dans chaque étape TODO: améliorer la disposition des photos, peut être penser à ne pas toutes les afficher s'il y en a trop */}
-      <div className="card-images-container">
-      {step.photos.map(photo=>{
-        return <Card.Img src={photo.url} key={photo.id} />
-      })}
-      </div>    
+      <CardColumns className="card-images-container">
+          {step.photos.map(photo=>{
+            return <Card className="image-card" key={photo.id}><Card.Img src={photo.url}  className="card-steps-image"/></Card>
+          })}
+      </CardColumns>    
           <Card.Body>
             <Card.Title> {step.title}</Card.Title>
             <Card.Subtitle>{step.date}</Card.Subtitle>
