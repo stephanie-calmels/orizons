@@ -3,3 +3,4 @@
 
 0000-init 2021-01-19T16:59:33Z "Etudiant O'clock",,, <etudiant@teleporteur> # Database init
 0005-create_domains 2021-01-19T17:00:17Z "Etudiant O'clock",,, <etudiant@teleporteur> # Create domains for text only, color, mail
+0010-members_functions 2021-01-20T19:56:07Z "Etudiant O'clock",,, <etudiant@teleporteur> # 10 - Member's functions

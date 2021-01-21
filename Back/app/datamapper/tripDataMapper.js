@@ -8,7 +8,7 @@ const tripDataMapper = {
     },
 
     async getTripById(idTrip) {
-        const result = await client.query("SELECT * FROM 'trip' JOIN 'step' ON 'step'.'trip_id' = 'trip'.'id' WHERE 'trip'.'id' = $1", [idTrip]);
+        const result = await client.query("SELECT * FROM 'trip' WHERE 'trip'.'id' = $1", [idTrip]);
 
         if (result.rowCount == 0) {
             return null;
