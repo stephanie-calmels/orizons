@@ -1,7 +1,10 @@
 // == Import : npm
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+
+import store from 'src/store';
 
 // == Import : local
 // Composants
@@ -15,7 +18,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //    => crée une structure d'objets imbriqués (DOM virtuel)
 const rootReactElement = (
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 // 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)
