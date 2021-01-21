@@ -3,14 +3,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-
 // == Import : local
 // Composants
 import App from 'src/components/App';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)

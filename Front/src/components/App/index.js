@@ -33,6 +33,7 @@ import categories from 'src/data/categories';
 
 const App = () => (
   <div>
+
     <Header isLogged={false} />
 
     <Page>
@@ -51,14 +52,10 @@ const App = () => (
         </Route>
         {/* <Route exact path="/ajouter-etape">
           <AddStep />
-        </Route> */}
+          </Route> */}
 
-        <Route exact path="/inscription">
-          <Subscribe />
-        </Route>
-        <Route exact path="/connexion">
-          <Login />
-        </Route>
+        <Route exact path="/inscription" component={Subscribe} />
+        <Route exact path="/connexion" component={Login} />
         <Route exact path="/contact">
           <ContactForm />
         </Route>
@@ -75,9 +72,7 @@ const App = () => (
           <Profile />
         </Route>
       </Switch>
-
     </Page>
-
     <Footer />
   </div>
 );
