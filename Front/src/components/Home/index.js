@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Carousel } from 'react-bootstrap';
 import { LinkContainer} from 'react-router-bootstrap';
 import { useLayoutEffect, useState } from "react";
 
@@ -26,7 +26,6 @@ const Home = ({ isLogged }) => {
   return width > 769 ? (
     <Container fluid>
       <Row>
-        <Col>
           <Card className="text-white home_banner">
             <Card.Img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
             <Card.ImgOverlay className="home_banner-overlay">
@@ -54,7 +53,6 @@ const Home = ({ isLogged }) => {
               </Card>
             </Card.ImgOverlay>
           </Card>
-        </Col>
       </Row>
 
       <Row>
@@ -68,7 +66,6 @@ const Home = ({ isLogged }) => {
   ) : (
     <Container fluid>
       <Row>
-        <Col>
           <Card className="text-white home_banner">
             <Card.Img src="https://images.pexels.com/photos/3464632/pexels-photo-3464632.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
               <Card.ImgOverlay className="home_banner-overlay">
@@ -91,13 +88,46 @@ const Home = ({ isLogged }) => {
               </Card.ImgOverlay>
               
           </Card>
-        </Col>
       </Row>
 
       <Row>
-        <Col>
-          
-        </Col>
+          <Carousel touch='true'>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="https://images.pexels.com/photos/1646981/pexels-photo-1646981.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                alt="First slide"
+              />
+              <Carousel.Caption className="carousel-caption-text" >
+                <h3>Des carnets de voyage à votre image</h3>
+                <p>Organisez votre carnet grâce à des outils faciles d'utilisation</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                alt="Second slide"
+              />
+
+              <Carousel.Caption className="carousel-caption-text">
+                <h3>Une carte interactive</h3>
+                <p>qui évolue au fil de vos pérégrinations</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                alt="Third slide"
+              />
+
+              <Carousel.Caption className="carousel-caption-text">
+                <h3>Une communauté de voyageurs</h3>
+                <p>Suivez les aventures de vos voyaheurs favoris !</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
       </Row>
       
 
