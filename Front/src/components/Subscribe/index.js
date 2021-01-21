@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import './subscribe.scss';
 import axios from 'axios';
 
-const Subscribe = () => {
+const Subscribe = ({ history }) => {
   const [inputs, setInputs] = useState({
     nickname: '',
     lastname: '',
@@ -68,6 +68,7 @@ const Subscribe = () => {
                 console.log(response.data);
                 setMessage(response.data.data);
                 setSuccessful(true);
+                history.push('/connexion');
               })
               .catch((error) => {
                 const resMessage = (error.response

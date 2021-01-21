@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import './login.scss';
 
-const Login = () => {
+const Login = ({ history }) => {
   // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm();
 
@@ -45,7 +45,7 @@ const Login = () => {
 
             axios(config)
               .then((response) => {
-                const { token } = response.data;
+                const { token, nickname } = response.data;
                 if (token) {
                   localStorage.setItem('token', JSON.stringify(token));
                 }
@@ -53,6 +53,8 @@ const Login = () => {
                 setSuccessful(true);
                 //TODO: mettre ce message dans le serveur
                 setMessage('Connexion réussie !');
+                history.push(`/${nickname}`);
+
               }).catch((error) => {
                 const resMessage = (error.response
                     && error.response.data

@@ -45,12 +45,8 @@ const App = () => (
           <AddStep />
           </Route> */}
 
-        <Route exact path="/inscription">
-          <Subscribe />
-        </Route>
-        <Route exact path="/connexion">
-          <Login />
-        </Route>
+        <Route exact path="/inscription" component={Subscribe} />
+        <Route exact path="/connexion" component={Login} />
         <Route exact path="/contact">
           <ContactForm />
         </Route>
