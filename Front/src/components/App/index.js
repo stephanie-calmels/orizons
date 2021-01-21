@@ -27,9 +27,14 @@ import categories from 'src/data/categories';
 
 // == Composant
 
+
+   
+    
+
 const App = () => (
   <div>
     <Header isLogged={false} />
+
     <Page>
       <Switch>
         <Route exact path="/">
