@@ -8,7 +8,7 @@ const tripDataMapper = {
     },
 
     async getTripById(idTrip) {
-        const result = await client.query("SELECT * FROM 'trip' WHERE 'trip'.'id' = $1", [idTrip]);
+        const result = await client.query("SELECT * FROM trip WHERE trip.id = $1", [idTrip]);
 
         if (result.rowCount == 0) {
             return null;
@@ -16,8 +16,15 @@ const tripDataMapper = {
         return result.rows[0];
     },
 
-    async createTrip() {
-        const result = await client.query("INSERT INTO trip() VALUES RETURNING *", []);
+    async createTrip(newTrip) {
+        const result = await client.query("INSERT INTO trip(title, summary, departure_date, arrival_date, member_id) VALUES ($1, $2, $3, $4, $5)RETURNING *",
+            [
+                newTrip.title,
+                newTrip.summary,
+                newTrip.departure_date,
+                newTrip.arrival_date,
+                newTrip.member_id
+            ]);
         return result.rows[0];
     },
 
