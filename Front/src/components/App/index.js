@@ -38,7 +38,7 @@ const App = () => (
     <Page>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home isLogged={false}/>
         </Route>
         <Route exact path="/exploration">
           <Trips trips={trips} categories={categories}/>
