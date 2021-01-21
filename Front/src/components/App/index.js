@@ -22,18 +22,27 @@ import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 import Trip from 'src/components/Trip';
 
+import trips from 'src/data/trips';
+import categories from 'src/data/categories';
+
 // == Composant
+
+
+   
+    
 
 const App = () => (
   <div>
-    <Header />
+
+    <Header isLogged={false} />
+
     <Page>
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/exploration">
-          <Trips />
+          <Trips trips={trips} categories={categories}/>
         </Route>
         <Route exact path="/exploration/:slug">
           <Trip />

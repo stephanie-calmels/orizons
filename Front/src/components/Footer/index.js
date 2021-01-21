@@ -4,8 +4,10 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 import './footer.scss';
 
+
 const Footer = () => (
   <footer className="footer">
+
     <Nav className="justify-content-center">
       <Nav.Item>
         <LinkContainer to="/mentions-legales">
@@ -28,7 +30,8 @@ const Footer = () => (
         <Nav.Link eventKey="link-6"><i className="fab fa-twitter"></i></Nav.Link>
       </Nav.Item>
     </Nav>
-  </footer>
-);
 
+  </footer>
+
+);
 export default Footer;
