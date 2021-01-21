@@ -9,27 +9,27 @@ import axios from 'axios';
 import './login.scss';
 
 const Login = () => {
+  // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm();
-  const [submitting, setSubmitting] = useState(false);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const storedJwt = localStorage.getItem('token');
-  const [jwt, setJwt] = useState(storedJwt || null);
+  const [submitting, setSubmitting] = useState(false);
+  // réussite de la requête
+  const [successful, setSuccessful] = useState(false);
+  // message envoyé à l'utilisateur
+  const [message, setMessage] = useState('');
 
   return (
     <>
-      <h1 className="text-center p-4 font-weight-bold">Bon retour parmi nous !</h1>
+      <h1 className="text-center p-4 font-weight-bold">Connecte-toi pour partager tes aventures !</h1>
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
           onSubmit={handleSubmit((formData) => {
           // on récupère un objet avec toutes les données. Envoyées seulement si correctes
             // on envoie au server via une requête axios
-            setSubmitting(true); // desactivation du bouton pendant la requête
-            // setServerError([]); // réinitialisation des erreurs
-
+            setSubmitting(true);
             const config = {
               method: 'post',
               // test avec le serveur de 'Recipes'
@@ -43,27 +43,37 @@ const Login = () => {
               },
             };
 
-            axios(config) // on lance la requête
+            axios(config)
               .then((response) => {
-                // en cas de succès on récupére les infos (nickname, accessToken, isLogged)
-                // eslint-disable-next-line no-console
-                console.log('success', response.data);
-                // On extrait le JWT de la réponse
                 const { token } = response.data;
-                // pour le stocker dans le LocalStorage
-                localStorage.setItem('token', token);
-                // et dans le state
-                setJwt(token);
+                if (token) {
+                  localStorage.setItem('token', JSON.stringify(token));
+                }
+                console.log(response.data);
+                setSuccessful(true);
+                //TODO: mettre ce message dans le serveur
+                setMessage('Connexion réussie !');
               }).catch((error) => {
-                // eslint-disable-next-line no-console
-                console.error('error', error);
-                // setServerError(error); // en cas d'erreur on l'enregistre
+                const resMessage = (error.response
+                    && error.response.data
+                    && error.response.data.message)
+                  || error.message
+                  || error.toString();
+                setMessage(resMessage);
+                setSuccessful(false);
               }).finally(() => {
                 setSubmitting(false); // dans tous les cas on réactive le bouton
               });
           })}
         >
-          {/* {serverError && <Alert variant="danger">{serverError}</Alert>} */}
+          {message && (
+          <div
+            className={successful ? 'alert alert-success' : 'alert alert-danger'}
+            role="alert"
+          >
+            {message}
+          </div>
+          )}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control

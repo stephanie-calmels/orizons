@@ -31,7 +31,9 @@ const Subscribe = () => {
   } = useForm({});
   // on cherche à voir si le serveur a bien reçu les infos
   const [submitting, setSubmitting] = useState(false);
-  // gérer la réponse du serveur
+  // réussite de la requête
+  const [successful, setSuccessful] = useState(false);
+  // message envoyé à l'utilisateur
   const [message, setMessage] = useState('');
 
   return (
@@ -62,18 +64,33 @@ const Subscribe = () => {
             };
             axios(config)
               .then((response) => {
+                // eslint-disable-next-line no-console
                 console.log(response.data);
-                setMessage(response.data);
+                setMessage(response.data.data);
+                setSuccessful(true);
               })
               .catch((error) => {
-                console.log(error);
+                const resMessage = (error.response
+                    && error.response.data
+                    && error.response.data.message)
+                  || error.message
+                  || error.toString();
+                setMessage(resMessage);
+                setSuccessful(false);
               })
               .finally(() => {
-                setSubmitting(true);
+                setSubmitting(false);
               });
           })}
         >
-          {message && <div className="text-success">Inscription réussie ! Bienvenue :)</div>}
+          {message && (
+          <div
+            className={successful ? 'alert alert-success' : 'alert alert-danger'}
+            role="alert"
+          >
+            {message}
+          </div>
+          )}
           <Form.Group size="lg" controlId="nickname">
             <Form.Label>Pseudonyme</Form.Label>
             <Form.Control
