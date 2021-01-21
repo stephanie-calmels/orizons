@@ -15,16 +15,26 @@ const memberDataMapper = {
         return result.rows[0];
     },
 
+    async getMemberLogin(email, password) {
+        console.log(email, password);
+        //requêtes en étages
+        const result = await client.query("SELECT member.id, member.nickname, member.password, docket.role_name FROM member JOIN docket on docket.id = member.docket_id WHERE email = $1", [email]);
+        if (result.rowCount == 0) {
+            return null; //adresse mail n'existe pas
+        };
+        return result.rows[0];
+    },
+
     async createMember(newMember) {
         console.log('2', newMember);
-        const result = await client.query("INSERT INTO member(first_name, last_name, nickname, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *", [
+        const result = await client.query("INSERT INTO member(first_name, last_name, nickname, email, password) VALUES ($1, $2, $3, $4, $5)", [
             newMember.first_name,
             newMember.last_name,
             newMember.nickname,
             newMember.email,
             newMember.password
         ])
-        return result.rows[0]
+        return 'Inscription réussie'
     }
 };
 
