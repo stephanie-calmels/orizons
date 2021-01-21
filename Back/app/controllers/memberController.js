@@ -1,4 +1,6 @@
 const memberDataMapper = require('../datamapper/memberDataMapper');
+const jsonwebtoken = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 
 const memberController = {
@@ -15,6 +17,52 @@ const memberController = {
 
     },
 
+    async loginMember(request, response, next) {
+        try {
+            const {
+                email,
+                password
+            } = request.body;
+            const member = await memberDataMapper.getMemberLogin(email);
+            if (!member) {
+                return response.status(404).send({
+                    token: null,
+                    message: "L\'adresse email n\'existe pas !"
+                })
+            }
+
+            const isPasswordValid = bcrypt.compareSync(
+                password,
+                member.password
+            );
+
+            if (!isPasswordValid) {
+                // gestion des erreurs
+                return response.status(401).send({
+                    token: null,
+                    message: 'Mot de passe incorrect'
+                });
+            }
+
+            // on crée le Jwt
+            const jwtContent = {
+                memberId: member.id
+            };
+            const jwtOptions = {
+                algorithm: 'HS256',
+                expiresIn: '3h'
+            };
+            response.json({
+                isLogged: true,
+                nickname: member.nickname,
+                role: member.role_name,
+                token: jsonwebtoken.sign(jwtContent, process.env.SECRET, jwtOptions)
+            });
+        } catch (error) {
+            next(error)
+        }
+    },
+
     async getOneMember(request, response, next) {
         try {
             const {
@@ -26,17 +74,24 @@ const memberController = {
                 data: membercreateMember
             })
         } catch (error) {
-
+            next(error)
         }
-
 
     },
 
     async createMember(request, response, next) {
         try {
             const newMember = request.body
+            const saltRounds = 10;
+            const hashedPassword = bcrypt.hashSync(newMember.password, saltRounds);
             console.log('1', newMember)
-            const member = await memberDataMapper.createMember(newMember);
+            const member = await memberDataMapper.createMember({
+                first_name: newMember.first_name,
+                last_name: newMember.last_name,
+                nickname: newMember.nickname,
+                email: newMember.email,
+                password: hashedPassword
+            });
             response.json({
                 data: member
             })
