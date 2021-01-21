@@ -1,4 +1,4 @@
--- Verify orizons:0010-members_functions on pg
+-- Verify orizons:0010-add_role on pg
 
 BEGIN;
 
