@@ -81,7 +81,7 @@ const memberController = {
 
     async createMember(request, response, next) {
         try {
-            const newMember = request.body
+            const newMember = request.body;
             const saltRounds = 10;
             const hashedPassword = bcrypt.hashSync(newMember.password, saltRounds);
             console.log('1', newMember)

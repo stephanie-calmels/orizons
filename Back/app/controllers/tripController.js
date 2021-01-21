@@ -25,11 +25,11 @@ const tripController = {
     },
     async createTrip(request, response, next) {
         try {
-            console.log('BONJOUR');
-            //const trip = await tripDataMapper.createTrip();
-            // response.json({
-            //     data: trip
-            // })
+            const newTrip = request.body;
+            const trip = await tripDataMapper.createTrip(newTrip);
+            response.json({
+                data: trip
+            })
         } catch (error) {
             next(error)
         }
