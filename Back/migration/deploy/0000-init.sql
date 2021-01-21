@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS "member"(
 "email" TEXT NOT NULL UNIQUE,
 "password" TEXT NOT NULL,
 "profile_photo" TEXT, -- NOT NULL ? default picture ?
-"registration_date" TIMESTAMPTZ NOT NULL DEFAULT NOW() CHECK("registration_date" >= NOW()),
+"registration_date" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 "localisation_id" INT REFERENCES "localisation"("id"),
 "photo_id" INT REFERENCES "photo"("id") --bannière NOT NULL default picture
 );

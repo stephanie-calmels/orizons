@@ -93,7 +93,7 @@ const memberController = {
                 password: hashedPassword
             });
             response.json({
-                data: member
+                message: member
             })
         } catch (error) {
             next(error)
