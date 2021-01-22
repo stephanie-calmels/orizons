@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  Container, Row, Card, Button, Carousel,
+  Container, Row, Card, Button, Carousel, CardDeck, Col, Image,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
+import anonyme from 'src/assets/user-icon-2098873_640.png';
 
 import './homeMobile.scss';
 
@@ -102,23 +104,65 @@ const HomeMobile = ({ isLogged, trips }) => (
     </Row>
 
     <Row>
-      <h4 className="carousel-title">O'rizons, ce sont nos voyageurs qui en parlent le mieux</h4>
-      <Carousel touch>
-        {
-            trips.map((trip) => (
-              <Carousel.Item key={trip.id}>
-                <img
-                  className="d-block w-100"
-                  src={trip.cover_photo.url}
-                  alt={trip.title}
-                />
-                <Carousel.Caption className="carousel-caption-text">
-                  <h3>{trip.title}</h3>
-                  <p>by {trip.author.nickname}</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))
-          }
+      <h4 className="carousel-title">O'rizons, ce sont nos voyageurs qui en parlent le mieux !</h4>
+      <Carousel className="comments_carousel" touch>
+
+        <Carousel.Item>
+          <Card className="card_comment-mobile">
+            <Card.Header>
+              <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+              <small className="text-muted">Kamil</small>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text>
+                C'est trop cool !
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <Card className="card_comment-mobile">
+            <Card.Header>
+              <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+              <small className="text-muted">Paul</small>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text>
+                J'adore partager mes voyages, et O'rizons est le meilleur site que je connaisse pour le faire !
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <Card className="card_comment-mobile">
+            <Card.Header>
+              <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+              <small className="text-muted">Juliette</small>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text>
+                Super design, pratique à utiliser. C'est top !
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <Card className="card_comment-mobile">
+            <Card.Header>
+              <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+              <small className="text-muted">Armandine</small>
+            </Card.Header>
+            <Card.Body>
+              <Card.Text>
+                La version mobile est super pratique pour partager ses aventures au jour le jour.
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Carousel.Item>
+
       </Carousel>
     </Row>
 

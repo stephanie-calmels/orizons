@@ -178,52 +178,52 @@ const HomeDesktop = ({
           <Carousel.Item>
             <CardDeck>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Kamil</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       C'est trop cool !
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Paul</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       J'adore partager mes voyages, et O'rizons est le meilleur site que je connaisse pour le faire !
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Juliette</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       Super design, pratique à utiliser. C'est top !
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Armandine</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       La version mobile est super pratique pour partager ses aventures au jour le jour.
                     </Card.Text>
                   </Card.Body>
@@ -236,52 +236,52 @@ const HomeDesktop = ({
           <Carousel.Item>
             <CardDeck>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Charles</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       J'adore !
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Chris</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       Le meilleur site de carnet de voyage que je connaisse !
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">Nono</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       Ca donne envie de voyager xD
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
               <Col md={3}>
-                <Card className="card_comment">
-                  <Card.Header className="card_comment-header">
+                <Card>
+                  <Card.Header>
                     <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                     <small className="text-muted">JD</small>
                   </Card.Header>
-                  <Card.Body className="card_comment-body">
-                    <Card.Text className="card_comment-text">
+                  <Card.Body>
+                    <Card.Text>
                       Super site !
                     </Card.Text>
                   </Card.Body>
