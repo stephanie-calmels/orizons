@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from 'src/containers/Header'; // REDUX
 import Footer from 'src/components/Footer';
 import Page from 'src/components/Page';
-import HomeDesktop from 'src/components/HomeDesktop';
+import HomeDesktop from 'src/containers/HomeDesktop';
 import HomeMobile from 'src/components/HomeMobile';
 import Trips from 'src/components/Trips';
 import AddTrip from 'src/components/AddTrip';
@@ -50,14 +50,14 @@ const App = () => {
   const [width] = useMediaQuery();
   return (
     <div>
-      <Header isLogged={false} />
+      <Header />
 
       <Page>
         <Switch>
           <Route exact path="/">
             {
               width > 769 ?
-              <HomeDesktop isLogged={false} trips={trips} categories={categories}/>
+              <HomeDesktop />
               :
               <HomeMobile isLogged={false} trips={trips}/>
             }

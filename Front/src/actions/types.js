@@ -5,3 +5,6 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_MESSAGE = 'SET_MESSAGE';
 export const CHANGE_AUTH_FIELD = 'CHANGE_AUTH_FIELD';
+
+// --- TRIPS
+export const RANDOM_SEARCH = 'RANDOM_SEARCH';

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { loginSuccess, setMessage } from '../actions/auth';
 import { LOGIN } from '../actions/types';
+import { RANDOM_SEARCH } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -33,7 +34,11 @@ const api = (store) => (next) => (action) => {
           store.dispatch(setMessage(resMessage));
         });
       break;
-    }
+    };
+    case RANDOM_SEARCH: {
+      console.log('random search');
+      break;
+    };
     default:
       next(action);
   }
