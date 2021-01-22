@@ -1,5 +1,5 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN_SUCCESS,
+  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT,
 } from '../actions/types';
 
 const initialState = {
@@ -30,6 +30,19 @@ const reducer = (oldState = initialState, action) => {
         message: `Connexion réussie ${action.nickname} !`,
         isLoggedIn: action.isLogged,
         isSuccessful: true,
+      };
+    case LOGOUT:
+      return {
+        ...oldState,
+        nickname: '',
+        token: '',
+        email: '',
+        password: '',
+        isLoggedIn: false,
+        isLoading: false,
+        message: '',
+        role: '',
+        isSuccessful: false,
       };
     default:
       return oldState;

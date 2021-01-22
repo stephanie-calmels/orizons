@@ -7,7 +7,7 @@ import './styles.scss';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from 'src/components/Header';
+import Header from 'src/containers/Header'; // REDUX
 import Footer from 'src/components/Footer';
 import Page from 'src/components/Page';
 import Home from 'src/components/Home';
@@ -16,7 +16,7 @@ import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
 import Account from 'src/components/Account';
 import Subscribe from 'src/components/Subscribe';
-import Login from 'src/containers/Login'; // redux
+import Login from 'src/containers/Login'; // REDUX
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
@@ -26,10 +26,6 @@ import trips from 'src/data/trips';
 import categories from 'src/data/categories';
 
 // == Composant
-
-
-   
-    
 
 const App = () => (
   <div>
