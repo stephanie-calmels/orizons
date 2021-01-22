@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Container, Form, Button,
+  Container, Form, Button, Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -16,9 +16,6 @@ const Login = ({
   // const handleChangeEmail = (e) => changeEmailField(e.target.value);
   // const handleChangePassword = (e) => changePasswordField(e.target.value);
   const handleChange = (e) => changeField([e.target.name], e.target.value);
-  const onSubmit = () => {
-    handleLogin();
-  };
 
   return (
     <>
@@ -26,15 +23,14 @@ const Login = ({
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleLogin)}
         >
           {message && (
-          <div
+          <Alert
             className={isSuccessful ? 'alert alert-success' : 'alert alert-danger'}
-            role="alert"
           >
             {message}
-          </div>
+          </Alert>
           )}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
