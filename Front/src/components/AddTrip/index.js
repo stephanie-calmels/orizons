@@ -18,7 +18,7 @@ const AddTrip = () => {
     categories: [],
     departure: '',
     returndate: '',
-    coverpicture
+    coverpicture: null
   });
 
   const {
@@ -166,10 +166,6 @@ const AddTrip = () => {
                 defaultValue={returndate}
                 onChange={(e) => handleChange(e)}
                 ref={register({
-                  // tentative de vérification de la date de retour après le départ mais ça fonctionne pas
-                  // TODO: corriger cette vérif
-                  validate: value => new Date(value).getTime() < new Date(departure).getTime()
-                    
                 })}
               />
               {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
