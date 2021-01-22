@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Container, Row, Col, Card, Button, Carousel,
+  Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -90,6 +90,43 @@ const HomeDesktop = ({ isLogged, trips }) => (
     <Row>
       <h4 className="row-title">En manque d'inspiration ?</h4>
     </Row>
+
+    <Row>
+      <Col md={6}>
+        <CardDeck>
+          {trips.map((trip) => (
+            <Col md={6} xl={4} key={trip.id}>
+              <Card className="card_home">
+                <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
+                <Card.Body className="card_home-body">
+                  <Card.Title className="card_home-title">{trip.title}</Card.Title>
+                  <Card.Text className="card_home-text">
+                    {trip.summary}
+                  </Card.Text>
+                  <Card.Text className="card_home-text">
+                    {trip.categories.map((category) => (
+
+                      <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
+                        {category.entitled}
+                      </Badge>
+                    ))}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer className="card_home-footer">
+                  <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
+                  <small className="text-muted">{trip.author.nickname}</small>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        </CardDeck>
+      </Col>
+
+      <Col md={6}>
+        <p>truc</p>
+      </Col>
+    </Row>
+
   </Container>
 );
 
