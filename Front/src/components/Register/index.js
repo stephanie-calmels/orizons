@@ -1,40 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Container, Form, Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import './subscribe.scss';
-import axios from 'axios';
+import './register.scss';
 
-const Subscribe = ({ history }) => {
-  const [inputs, setInputs] = useState({
-    nickname: '',
-    lastname: '',
-    firstname: '',
-    email: '',
-    password: '',
-    passwordRepeat: '',
-  });
+import history from '../../history';
 
-  const {
-    nickname, lastname, firstname, email, password, passwordRepeat,
-  } = inputs;
-
-  const handleChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
+const Register = ({
+  nickname,
+  lastname,
+  firstname,
+  email,
+  password,
+  passwordRepeat,
+  changeField,
+  message,
+  isSuccessful,
+  handleRegister,
+}) => {
 
   // Hook qui vient de React Hook Form
-  // https://react-hook-form.com/get-started
-  const {
-    register, handleSubmit, errors,
-  } = useForm({});
-  // on cherche à voir si le serveur a bien reçu les infos
-  const [submitting, setSubmitting] = useState(false);
-  // réussite de la requête
-  const [successful, setSuccessful] = useState(false);
-  // message envoyé à l'utilisateur
-  const [message, setMessage] = useState('');
+  const {register, handleSubmit, errors} = useForm({});
+  // Modification des champs
+  const handleChange = (e) => changeField([e.target.name], e.target.value);
+
+  useEffect(()=> {
+    if (isSuccessful) {
+      toast.success(message);
+      history.push('/connexion');
+    }
+  }, [isSuccessful])
 
   return (
     <>
@@ -42,56 +41,8 @@ const Subscribe = ({ history }) => {
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
-          onSubmit={handleSubmit((formData) => {
-            // on récupère un objet avec toutes les données. Envoyées seulement si correctes
-            setSubmitting(true);
-            // eslint-disable-next-line no-console
-            console.log('formData', formData);
-            const config = {
-              method: 'post',
-              // test avec le serveur de 'Recipes'
-              url: 'https://orizons.herokuapp.com/members',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              data: {
-                first_name: formData.firstname,
-                last_name: formData.lastname,
-                password: formData.password,
-                nickname: formData.nickname,
-                email: formData.email,
-              },
-            };
-            axios(config)
-              .then((response) => {
-                // eslint-disable-next-line no-console
-                console.log(response.data);
-                setMessage(response.data.data);
-                setSuccessful(true);
-                history.push('/connexion');
-              })
-              .catch((error) => {
-                const resMessage = (error.response
-                    && error.response.data
-                    && error.response.data.message)
-                  || error.message
-                  || error.toString();
-                setMessage(resMessage);
-                setSuccessful(false);
-              })
-              .finally(() => {
-                setSubmitting(false);
-              });
-          })}
+          onSubmit={handleSubmit(handleRegister)}
         >
-          {message && (
-          <div
-            className={successful ? 'alert alert-success' : 'alert alert-danger'}
-            role="alert"
-          >
-            {message}
-          </div>
-          )}
           <Form.Group size="lg" controlId="nickname">
             <Form.Label>Pseudonyme</Form.Label>
             <Form.Control
@@ -111,7 +62,6 @@ const Subscribe = ({ history }) => {
           <Form.Group size="lg" controlId="lastname">
             <Form.Label>Nom</Form.Label>
             <Form.Control
-              autoFocus
               name="lastname"
               type="text"
               defaultValue={lastname}
@@ -125,7 +75,6 @@ const Subscribe = ({ history }) => {
           <Form.Group size="lg" controlId="first_name">
             <Form.Label>Prénom</Form.Label>
             <Form.Control
-              autoFocus
               name="firstname"
               type="text"
               defaultValue={firstname}
@@ -139,7 +88,6 @@ const Subscribe = ({ history }) => {
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control
-              autoFocus
               name="email"
               type="email"
               defaultValue={email}
@@ -153,7 +101,6 @@ const Subscribe = ({ history }) => {
           <Form.Group size="lg" controlId="password">
             <Form.Label>Mot de passe</Form.Label>
             <Form.Control
-              autoFocus
               name="password"
               type="password"
               defaultValue={password}
@@ -174,7 +121,6 @@ const Subscribe = ({ history }) => {
           <Form.Group size="lg" controlId="password-repeat">
             <Form.Label>Confirmation du mot de passe</Form.Label>
             <Form.Control
-              autoFocus
               name="passwordRepeat"
               type="password"
               defaultValue={passwordRepeat}
@@ -186,8 +132,7 @@ const Subscribe = ({ history }) => {
             />
             {errors.passwordRepeat && <div className="text-danger">{errors.passwordRepeat.message}</div>}
           </Form.Group>
-          {/* A la soumission du form, en attente de la réponse serveur le bouton est désactivé */}
-          <Button block size="lg" className="mt-3" type="submit" disabled={submitting}>
+          <Button block size="lg" className="mt-3" type="submit">
             Valider
           </Button>
         </Form>
@@ -197,4 +142,4 @@ const Subscribe = ({ history }) => {
   );
 };
 
-export default Subscribe;
+export default Register;

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import Login from 'src/components/Login';
+
 import {
   changeAuthField, login,
 } from '../actions/auth';
@@ -21,9 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleLogin: () => {
     dispatch(login());
-  },
-  setLoader: () => {
-    dispatch(setLoader());
   },
 });
 

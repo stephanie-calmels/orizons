@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container, Form, Button, Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import './login.scss';
+import history from '../../history';
 
 const Login = ({
-  email, password, changeField, message, isSuccessful, handleLogin
+  email,
+  password,
+  changeField,
+  message,
+  isSuccessful,
+  handleLogin
 }) => {
-  // Hook qui vient de React Hook Form
-  const { register, handleSubmit, errors } = useForm();
 
+  // Gestion de validation du formulaire (React Hook Form)
+  const { register, handleSubmit, errors } = useForm();
+  // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
+
+  useEffect(()=> {
+    if (isSuccessful) {
+      toast.success("Bon retour parmi nous !");
+      history.push('/ajouter-carnet');
+    }
+  }, [isSuccessful])
 
   return (
     <>
@@ -23,17 +38,17 @@ const Login = ({
           className="form"
           onSubmit={handleSubmit(handleLogin)}
         >
-          {message && (
+          {/* {message && (
           <Alert
             className={isSuccessful ? 'alert alert-success' : 'alert alert-danger'}
           >
             {message}
           </Alert>
-          )}
+          )} */}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control
-              autoFocus
+              autofocus
               name="email"
               type="email"
               defaultValue={email}
@@ -47,7 +62,6 @@ const Login = ({
           <Form.Group size="lg" controlId="password">
             <Form.Label>Mot de passe</Form.Label>
             <Form.Control
-              autoFocus
               name="password"
               type="password"
               defaultValue={password}
@@ -65,7 +79,7 @@ const Login = ({
             />
             {errors.password && <div className="text-danger">{errors.password.message}</div>}
           </Form.Group>
-          <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
+          <Button block size="lg" className="mt-3" type="submit">Valider</Button>
         </Form>
       </Container>
       <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>

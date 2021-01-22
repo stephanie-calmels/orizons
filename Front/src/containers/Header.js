@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+import history from '../history';
+
 import Header from 'src/components/Header';
 import {
   logout,
@@ -13,6 +15,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleLogout: () => {
     dispatch(logout());
+    localStorage.removeItem('token');
+    localStorage.removeItem('nickname');
+    localStorage.removeItem('role');
+    history.push('/');
   },
 });
 

@@ -1,15 +1,15 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT,
+  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
-  nickname: localStorage.getItem('nickname') || 'Anonyme',
-  token: localStorage.getItem('token'),
+  nickname:localStorage.getItem('nickname') || '',
+  token: localStorage.getItem('token') || '',
   email: '',
   password: '',
   isLoggedIn: !!localStorage.getItem('token'),
   message: '',
-  role: '',
+  role: localStorage.getItem('role') || '',
   isSuccessful: false,
 };
 
@@ -21,9 +21,6 @@ const reducer = (oldState = initialState, action) => {
         [action.name]: action.value,
       };
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.token);
-      localStorage.setItem('nickname', action.nickname);
-      localStorage.setItem('role', action.role);
       return {
         ...oldState,
         role: action.role,
@@ -34,18 +31,22 @@ const reducer = (oldState = initialState, action) => {
         isSuccessful: true,
       };
     case LOGOUT:
-      !!localStorage.removeItem('token')
       return {
         ...oldState,
         nickname: '',
         token: '',
         email: '',
         password: '',
-        isLoggedIn: !!localStorage.getItem('token'),
+        isLoggedIn: false,
         message: '',
         role: '',
         isSuccessful: false,
       };
+    case REGISTER_SUCCESS:
+      return {
+        ...oldState,
+        isLoggedIn: false,
+      }
     default:
       return oldState;
   }
