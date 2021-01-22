@@ -40,6 +40,15 @@ const AddTrip = () => {
     setInputs({...inputs, [e.target.name]: [...categories, clickedCategory]})
   }
   
+  const handleImage =(e)=>{
+    // creating a blob in order to add the image to the trip preview
+    let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
+    let blobLink = URL.createObjectURL(imageBlob)
+  setInputs({...inputs, [e.target.name]: blobLink})
+    
+    
+  }
+
   const {
     register, handleSubmit, errors,
   } = useForm({});
@@ -109,7 +118,7 @@ const AddTrip = () => {
                 name="coverpicture"
                 type="file"
                 defaultValue={coverpicture}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleImage(e)}
                 ref={register({
                   required: 'Veuillez sélectionner une photo',
                 })}

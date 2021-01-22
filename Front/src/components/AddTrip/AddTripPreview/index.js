@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Badge} from 'react-bootstrap';
 
 const AddTripPreview =({inputs})=>{
-  console.log(inputs)
+  
   return <div>
     <Card className="card_trips">
                   <Card.Img className="card_trips-img-top" variant="top" src={inputs.coverpicture} />
