@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Container, Form, Button, Row, Col
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import categoriesList from 'src/data/categories';
@@ -48,7 +47,7 @@ const AddTrip = () => {
 
 
   return <div>
-    <h1>Créer un nouveau carnet</h1>
+    <h1 className="text-center p4 font-weight-bold">Créer un nouveau carnet</h1>
     <Container>
       
         <Form
@@ -169,7 +168,6 @@ const AddTrip = () => {
             </Form.Group>
           </Col>
           <Col lg={4} className="trip-preview-container"><AddTripPreview inputs={inputs}/></Col>
-            {/* A la soumission du form, en attente de la réponse serveur le bouton est désactivé */}
             <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
               Valider
             </Button>  
