@@ -38,7 +38,7 @@ const Subscribe = ({ history }) => {
 
   return (
     <>
-      <h1 className="text-center p-4 font-weight-bold">Inscris-toi pour créer ton premier carnet !</h1>
+      <h1 className="text-center p-4 font-weight-bold">Inscrivez-vous pour créer votre premier carnet !</h1>
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"

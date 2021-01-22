@@ -8,7 +8,7 @@ import store from 'src/store';
 
 // == Import : local
 // Composants
-import App from 'src/components/App';
+import App from 'src/containers/App';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';

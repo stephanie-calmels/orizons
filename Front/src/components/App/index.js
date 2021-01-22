@@ -1,6 +1,6 @@
 // == Import npm
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -22,20 +22,36 @@ import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 import Trip from 'src/components/Trip';
 
+// == Import 'Fake data'
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
 
 // == Composant
 
-const App = () => (
+const App = ({ isLoggedIn, role, nickname }) => (
   <div>
 
-    <Header isLogged={false} />
+    <Header isLoggedIn={isLoggedIn} />
 
     <Page>
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/inscription">
+        { isLoggedIn ? <Redirect to={`profil/${nickname}`}/> : <Subscribe /> }
+        </Route>
+        <Route exact path="/connexion">
+          { isLoggedIn ? <Redirect to={`profil/${nickname}`}/> : <Login /> }
+        </Route>
+        <Route exact path="/contact">
+          <ContactForm />
+        </Route>
+        <Route exact path="/a-propos">
+          <About />
+        </Route>
+        <Route exact path="/mentions-legales">
+          <Legals />
         </Route>
         <Route exact path="/exploration">
           <Trips trips={trips} categories={categories}/>
@@ -43,29 +59,20 @@ const App = () => (
         <Route exact path="/exploration/:slug">
           <Trip />
         </Route>
+        <Route exact path="/profil/:pseudo">
+          <Profile />
+        </Route>
         <Route exact path="/ajouter-carnet">
-          <AddTrip />
+          { isLoggedIn ? <AddTrip /> : <Redirect to="/connexion" />}
         </Route>
         {/* <Route exact path="/ajouter-etape">
           <AddStep />
           </Route> */}
-
-        <Route exact path="/inscription" component={Subscribe} />
-        <Route exact path="/connexion" component={Login} />
-        <Route exact path="/contact">
-          <ContactForm />
-        </Route>
-        <Route exact path="/a-propos">
-          <About />
-        </Route>
+        
+        {/* PAGES ACCESSIBLES PAR L'UTILISATEUR IDENTIFIE */}
+        // TODO: comment on fait ça ???
         <Route exact path="/compte">
-          <Account />
-        </Route>
-        <Route exact path="/mentions-legales">
-          <Legals />
-        </Route>
-        <Route exact path="/profile/:pseudo">
-          <Profile />
+        { isLoggedIn ? <Account /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Page>

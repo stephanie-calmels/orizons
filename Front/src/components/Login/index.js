@@ -8,18 +8,16 @@ import { useForm } from 'react-hook-form';
 import './login.scss';
 
 const Login = ({
-  email, password, changeField, isLoading, message, isSuccessful, handleLogin,
+  email, password, changeField, message, isSuccessful, handleLogin
 }) => {
   // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm();
 
-  // const handleChangeEmail = (e) => changeEmailField(e.target.value);
-  // const handleChangePassword = (e) => changePasswordField(e.target.value);
   const handleChange = (e) => changeField([e.target.name], e.target.value);
 
   return (
     <>
-      <h1 className="text-center p-4 font-weight-bold">Connecte-toi pour partager tes aventures !</h1>
+      <h1 className="text-center p-4 font-weight-bold">Connectez-vous pour partager vos aventures !</h1>
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
@@ -67,11 +65,7 @@ const Login = ({
             />
             {errors.password && <div className="text-danger">{errors.password.message}</div>}
           </Form.Group>
-
-          {/* A la soumission du form, en attente de la réponse serveur le bouton est désactivé */}
-          <Button block size="lg" className="mt-3" type="submit" disabled={isLoading}>
-            Valider
-          </Button>
+          <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
         </Form>
       </Container>
       <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>

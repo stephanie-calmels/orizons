@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
   handleLogin: () => {
     dispatch(login());
   },
+  setLoader: () => {
+    dispatch(setLoader());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Home = () => (
-    <h1>Je suis dans la HOME</h1>
+  <img src="https://www.bonplan-vacances.com/wp-content/uploads/2019/06/cadeau-voyage.jpg"/>
 );
 
 export default Home;

@@ -3,12 +3,11 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  nickname: '',
-  token: '',
+  nickname: localStorage.getItem('nickname') || 'Anonyme',
+  token: localStorage.getItem('token'),
   email: '',
   password: '',
-  isLoggedIn: false,
-  isLoading: false,
+  isLoggedIn: !!localStorage.getItem('token'),
   message: '',
   role: '',
   isSuccessful: false,
@@ -22,6 +21,9 @@ const reducer = (oldState = initialState, action) => {
         [action.name]: action.value,
       };
     case LOGIN_SUCCESS:
+      localStorage.setItem('token', action.token);
+      localStorage.setItem('nickname', action.nickname);
+      localStorage.setItem('role', action.role);
       return {
         ...oldState,
         role: action.role,
@@ -32,14 +34,14 @@ const reducer = (oldState = initialState, action) => {
         isSuccessful: true,
       };
     case LOGOUT:
+      !!localStorage.removeItem('token')
       return {
         ...oldState,
         nickname: '',
         token: '',
         email: '',
         password: '',
-        isLoggedIn: false,
-        isLoading: false,
+        isLoggedIn: !!localStorage.getItem('token'),
         message: '',
         role: '',
         isSuccessful: false,
