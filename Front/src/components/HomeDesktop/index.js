@@ -1,18 +1,23 @@
 import React from 'react';
 import {
-  Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image,
+  Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import anonyme from 'src/assets/user-icon-2098873_640.png';
+
 import './homeDesktop.scss';
 
-const HomeDesktop = ({ isLogged, trips }) => (
+const HomeDesktop = ({
+  isLogged, trips, categories, randomSearch,
+}) => (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
         <Card.Img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
-          <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur" - Ibn Battuta
+          <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
+            Ibn Battuta
           </Card.Title>
           <Card className="home_banner-card">
             <Card.Text>
@@ -93,9 +98,10 @@ const HomeDesktop = ({ isLogged, trips }) => (
 
     <Row>
       <Col md={6}>
+        <h5 className="col-title">Découvrez notre sélection de carnets publiés par la communauté O'rizons</h5>
         <CardDeck>
           {trips.map((trip) => (
-            <Col md={6} xl={4} key={trip.id}>
+            <Col md={6} key={trip.id}>
               <Card className="card_home">
                 <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
                 <Card.Body className="card_home-body">
@@ -122,8 +128,169 @@ const HomeDesktop = ({ isLogged, trips }) => (
         </CardDeck>
       </Col>
 
-      <Col md={6}>
-        <p>truc</p>
+      <Col className="search_box" md={6}>
+        <h5 className="col-title">Vous recherchez quelque chose en particulier ? Parcourez les carnets de voyage publiés sur O'rizons, triés par pays, ville ou catégorie.</h5>
+        <Form className="form_search">
+          <Form.Group as={Row} controlId="formGroupCountry">
+            <Form.Label column sm={4}>Pays</Form.Label>
+            <Col sm={6}>
+              <Form.Control type="country" placeholder="Rechercher par pays" />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formGroupCity">
+            <Form.Label column sm={4}>Ville</Form.Label>
+            <Col sm={6}>
+              <Form.Control type="city" placeholder="Rechercher par ville" />
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row} controlId="formGroupCategory">
+            <Form.Label column sm={4}>Type de voyage</Form.Label>
+            <Col sm={6}>
+              <Form.Control as="select">
+                {
+                  categories.map((category) => (
+                    <option>{category.entitled}</option>
+                  ))
+                }
+              </Form.Control>
+            </Col>
+          </Form.Group>
+        </Form>
+
+        <h5 className="col-title">Vous préférez vous faire surprendre ?</h5>
+        <Button className="random_search-button" onClick={randomSearch}>Voir un carnet de voyage au hasard</Button>
+
+        <blockquote className="blockquote">"Le plus beau moment de la vie humaine est un départ vers des terres inconnues." <br />
+          Sir Richard Burton
+        </blockquote>
+
+      </Col>
+    </Row>
+
+    <Row>
+      <h4 className="row-title">O'rizons, ce sont nos voyageurs qui en parlent le mieux !</h4>
+    </Row>
+
+    <Row>
+      <Col>
+        <Carousel touch>
+
+          <Carousel.Item>
+            <CardDeck>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Kamil</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      C'est trop cool !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Paul</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      J'adore partager mes voyages, et O'rizons est le meilleur site que je connaisse pour le faire !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Juliette</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      Super design, pratique à utiliser. C'est top !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Armandine</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      La version mobile est super pratique pour partager ses aventures au jour le jour.
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </CardDeck>
+
+          </Carousel.Item>
+
+          <Carousel.Item>
+            <CardDeck>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Charles</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      J'adore !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Chris</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      Le meilleur site de carnet de voyage que je connaisse !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">Nono</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      Ca donne envie de voyager xD
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={3}>
+                <Card className="card_comment">
+                  <Card.Header className="card_comment-header">
+                    <Image className="profile_photo m-2" src={anonyme} roundedCircle />
+                    <small className="text-muted">JD</small>
+                  </Card.Header>
+                  <Card.Body className="card_comment-body">
+                    <Card.Text className="card_comment-text">
+                      Super site !
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </CardDeck>
+          </Carousel.Item>
+
+        </Carousel>
       </Col>
     </Row>
 

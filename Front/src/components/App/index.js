@@ -60,7 +60,7 @@ const App = () => {
           <Route exact path="/">
             {
               width > 769 ?
-              <HomeDesktop isLogged={false} trips={trips}/>
+              <HomeDesktop isLogged={false} trips={trips} categories={categories}/>
               :
               <HomeMobile isLogged={false} trips={trips}/>
             }
