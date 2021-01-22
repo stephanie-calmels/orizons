@@ -84,7 +84,6 @@ const memberController = {
             const newMember = request.body;
             const saltRounds = 10;
             const hashedPassword = bcrypt.hashSync(newMember.password, saltRounds);
-            console.log('1', newMember)
             const member = await memberDataMapper.createMember({
                 first_name: newMember.first_name,
                 last_name: newMember.last_name,
