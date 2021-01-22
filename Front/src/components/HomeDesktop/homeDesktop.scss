@@ -5,7 +5,7 @@
     font-style: italic;
     font-size: 1.5rem;
     text-align: center;
-    text-shadow: 0px 0px 3px #000000, 0px 2px 0px #000000, 2px 0px 0px #000000;
+    text-shadow: 2px 0px 0px #000000, -2px 0px 0px #000000, 0px 2px 0px #000000, 0px -2px 0px #000000;
 
   }
 
@@ -35,6 +35,70 @@
 
 }
 
-.carousel-caption-text {
-  text-shadow: 0px 0px 3px rgb(12, 12, 12);
+.row-title {
+  text-align: center;
+  margin: 1rem auto !important;
+  font-style: italic;
+}
+
+
+.card_benefits {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 2rem 2rem 2rem;
+  position: relative;
+  border: none;
+  background-color: #bee5d3;
+
+  
+  &-image {
+    max-width: 35%;
+
+  }
+
+  &-body {
+    position: absolute;
+    left: 150px;
+    right: 50px;
+    background-color:  rgba(214, 176, 177, 0.8);
+    text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size: 0.8rem;
+
+  }
+
+  
+}
+
+.card_benefits-revert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 2rem 2rem 2rem;
+  position: relative;
+  border: none;
+  flex-direction: row-reverse;
+  text-align: right;
+  background-color: #bee5d3;
+
+  &-body {
+    position: absolute;
+    left: 50px;
+    right: 150px;
+    background-color:  rgba(214, 176, 177, 0.8);
+    text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size: 0.8rem;
+
+  }
+}
+
+// .carousel-caption-text {
+//   text-shadow: 0px 0px 3px rgb(12, 12, 12);
+// }
+
+.row {
+  background-color: #bee5d3;
+
 }
