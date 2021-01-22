@@ -3,12 +3,11 @@ const client = require('./client');
 const tripDataMapper = {
     async getAllTrips() {
         const result = await client.query("SELECT * FROM trip");
-        console.log('doudou', result.rows);
         return result.rows;
     },
 
     async getTripById(idTrip) {
-        const result = await client.query("SELECT * FROM trip WHERE trip.id = $1", [idTrip]);
+        const result = await client.query("SELECT * FROM trip_step WHERE id=($1)", [idTrip]);
 
         if (result.rowCount == 0) {
             return null;
