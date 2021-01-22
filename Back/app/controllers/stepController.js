@@ -20,6 +20,20 @@ const stepController = {
         } catch (error) {
             next(error)
         }
+    },
+
+    async deleteOneStep(request, response, next) {
+        try {
+            const {
+                stepId
+            } = request.params
+            await stepDataMapper.deleteOneStep(stepId)
+            response.json({
+                message: "La suppression s'est bien déroulée"
+            });
+        } catch (error) {
+            next(error)
+        }
     }
 };
 
