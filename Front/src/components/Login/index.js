@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Container, Form, Button,
+  Container, Form, Button, Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import './login.scss';
 
-const Login = () => {
+const Login = ({
+  email, password, changeField, isLoading, message, isSuccessful, handleLogin,
+}) => {
+  // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const handleChangeEmail = (e) => changeEmailField(e.target.value);
+  // const handleChangePassword = (e) => changePasswordField(e.target.value);
+  const handleChange = (e) => changeField([e.target.name], e.target.value);
 
   return (
     <>
-      <h1 className="text-center p-4 font-weight-bold">Bon retour parmi nous !</h1>
+      <h1 className="text-center p-4 font-weight-bold">Connecte-toi pour partager tes aventures !</h1>
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
-          onSubmit={handleSubmit((formData) => {
-          // on récupère un objet avec toutes les données. Envoyées seulement si correctes
-          // eslint-disable-next-line no-console
-            console.log('formData', formData);
-          })}
+          onSubmit={handleSubmit(handleLogin)}
         >
+          {message && (
+          <Alert
+            className={isSuccessful ? 'alert alert-success' : 'alert alert-danger'}
+          >
+            {message}
+          </Alert>
+          )}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control
@@ -32,7 +39,7 @@ const Login = () => {
               name="email"
               type="email"
               defaultValue={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
@@ -46,7 +53,7 @@ const Login = () => {
               name="password"
               type="password"
               defaultValue={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
                 minLength: {
@@ -62,7 +69,7 @@ const Login = () => {
           </Form.Group>
 
           {/* A la soumission du form, en attente de la réponse serveur le bouton est désactivé */}
-          <Button block size="lg" className="mt-3" type="submit">
+          <Button block size="lg" className="mt-3" type="submit" disabled={isLoading}>
             Valider
           </Button>
         </Form>

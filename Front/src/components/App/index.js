@@ -8,7 +8,7 @@ import './styles.scss';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from 'src/components/Header';
+import Header from 'src/containers/Header'; // REDUX
 import Footer from 'src/components/Footer';
 import Page from 'src/components/Page';
 import HomeDesktop from 'src/components/HomeDesktop';
@@ -18,7 +18,7 @@ import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
 import Account from 'src/components/Account';
 import Subscribe from 'src/components/Subscribe';
-import Login from 'src/components/Login';
+import Login from 'src/containers/Login'; // REDUX
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
@@ -45,9 +45,6 @@ function useMediaQuery() {
 
 // == Composant
 
-
-   
-    
 
 const App = () => {
   const [width] = useMediaQuery();
@@ -106,6 +103,7 @@ const App = () => {
       <Footer />
     </div>
 )};
+
 
 // == Export
 export default App;

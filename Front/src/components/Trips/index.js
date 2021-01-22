@@ -8,7 +8,7 @@ import './trips.scss';
 
 const Trips = ({ trips, categories, showMoreResults }) => (
     <Container>
-        <h1 className="main-title">Explorer les carnets de voyage publiés par la communauté</h1>
+        <h1 className="text-center p4 font-weight-bold">Explorer les carnets de voyage publiés par la communauté</h1>
 
         <CardDeck> 
           <Row>

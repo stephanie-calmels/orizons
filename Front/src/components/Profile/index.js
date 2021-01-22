@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import ProfileBanner from 'src/components/ProfileBanner';
 import ProfileInfos from 'src/components/ProfileInfos';
 
@@ -12,6 +11,7 @@ const Profile = () => {
     <ProfileBanner member={member}/>
     <ProfileInfos member={member} trips={trips} />
     </div>
+
 };
 
 export default Profile;
