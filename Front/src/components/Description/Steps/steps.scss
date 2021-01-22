@@ -1,0 +1,17 @@
+.card-steps{
+ margin: 1rem;
+
+  &-image {
+    height: 100%;
+    width: 100%;
+    margin: auto !important;
+  }
+}
+
+
+.nav-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
