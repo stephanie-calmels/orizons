@@ -44,9 +44,7 @@ const AddTrip = () => {
     // creating a blob in order to add the image to the trip preview
     let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
     let blobLink = URL.createObjectURL(imageBlob)
-  setInputs({...inputs, [e.target.name]: blobLink})
-    
-    
+    setInputs({...inputs, [e.target.name]: blobLink})
   }
 
   const {
@@ -164,6 +162,7 @@ const AddTrip = () => {
               <Form.Control
                 name="returndate"
                 type="date"
+                min={departure}
                 defaultValue={returndate}
                 onChange={(e) => handleChange(e)}
                 ref={register({
