@@ -2,6 +2,7 @@
 
 BEGIN;
 
-DROP VIEW "trip_step";
+DROP VIEW "trip_with_duration_status";
+DROP VIEW "step_author";
 
 COMMIT;

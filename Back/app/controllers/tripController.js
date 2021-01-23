@@ -1,4 +1,6 @@
+const memberDataMapper = require('../datamapper/memberDataMapper');
 const tripDataMapper = require('../datamapper/tripDataMapper');
+const stepDataMapper = require('../datamapper/stepDataMapper');
 const tripController = {
     async getAllTrip(request, response, next) {
         try {
@@ -15,9 +17,19 @@ const tripController = {
             const {
                 tripId
             } = request.params
+
+            // 1 - les informations de 1 vopyage
             const trip = await tripDataMapper.getTripById(tripId);
+            console.log(trip.member_id)
+            // 2 - Les informations du member
+            //const author = await memberDataMapper.getMemberById(trip.member_id)
+            const steps = await stepDataMapper.getStepByTripId(tripId)
+
             response.json({
-                data: trip
+                data: [{
+                    trip,
+                    author: steps
+                }]
             })
         } catch (error) {
             next(error)

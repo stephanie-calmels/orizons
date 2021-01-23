@@ -20,6 +20,11 @@ const stepDataMapper = {
             ]);
         return result.rows[0]
 
+    },
+
+    async getStepByTripId(tripId) {
+        const result = await client.query('SELECT * FROM step_author WHERE trip_id = $1', [tripId]);
+        return result.rows;
     }
 };
 

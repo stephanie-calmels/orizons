@@ -9,7 +9,7 @@ const memberController = {
 
             const members = await memberDataMapper.getAllMembers();
             response.json({
-                data: members
+                data: members,
             });
         } catch (error) {
             next(error)
@@ -82,8 +82,10 @@ const memberController = {
     async createMember(request, response, next) {
         try {
             const newMember = request.body;
+
             const saltRounds = 10;
             const hashedPassword = bcrypt.hashSync(newMember.password, saltRounds);
+
             const member = await memberDataMapper.createMember({
                 first_name: newMember.first_name,
                 last_name: newMember.last_name,
