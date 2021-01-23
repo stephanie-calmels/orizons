@@ -13,22 +13,21 @@ const Login = ({
   email,
   password,
   changeField,
-  message,
+  errorMessage,
   isSuccessful,
-  handleLogin
+  handleLogin,
 }) => {
-
   // Gestion de validation du formulaire (React Hook Form)
   const { register, handleSubmit, errors } = useForm();
   // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (isSuccessful) {
-      toast.success("Bon retour parmi nous !");
-      history.push('/ajouter-carnet');
+      toast.success('Connexion réussie !');
+      history.replace('/ajouter-carnet');
     }
-  }, [isSuccessful])
+  }, [isSuccessful]);
 
   return (
     <>
@@ -38,17 +37,12 @@ const Login = ({
           className="form"
           onSubmit={handleSubmit(handleLogin)}
         >
-          {/* {message && (
-          <Alert
-            className={isSuccessful ? 'alert alert-success' : 'alert alert-danger'}
-          >
-            {message}
-          </Alert>
-          )} */}
+          {errorMessage && (
+          <Alert variant="danger">{errorMessage}</Alert>)}
           <Form.Group size="lg" controlId="email">
             <Form.Label>Adresse email</Form.Label>
             <Form.Control
-              autofocus
+              autoFocus
               name="email"
               type="email"
               defaultValue={email}

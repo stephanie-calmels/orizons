@@ -1,5 +1,5 @@
 import {
-  CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER,
+  CHANGE_REGISTER_FIELD, REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
 } from './types';
 
 export const changeRegisterField = (name, value) => ({
@@ -14,5 +14,10 @@ export const register = () => ({
 
 export const registerSuccess = (message) => ({
   type: REGISTER_SUCCESS,
-  message
+  message,
+});
+
+export const registerFail = (message) => ({
+  type: REGISTER_FAIL,
+  message,
 });

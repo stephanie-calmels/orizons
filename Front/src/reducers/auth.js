@@ -1,14 +1,14 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT, REGISTER_SUCCESS,
+  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
 } from '../actions/types';
 
 const initialState = {
-  nickname:localStorage.getItem('nickname') || '',
+  nickname: localStorage.getItem('nickname') || '',
   token: localStorage.getItem('token') || '',
   email: '',
   password: '',
   isLoggedIn: !!localStorage.getItem('token'),
-  message: '',
+  errorMessage: '',
   role: localStorage.getItem('role') || '',
   isSuccessful: false,
 };
@@ -26,27 +26,17 @@ const reducer = (oldState = initialState, action) => {
         role: action.role,
         token: action.token,
         nickname: action.nickname,
-        message: `Connexion réussie ${action.nickname} !`,
         isLoggedIn: action.isLogged,
         isSuccessful: true,
       };
     case LOGOUT:
+      window.location.replace('/');// refresh pour vider tout l'historique du state
+      return oldState;
+    case LOGIN_FAIL:
       return {
         ...oldState,
-        nickname: '',
-        token: '',
-        email: '',
-        password: '',
-        isLoggedIn: false,
-        message: '',
-        role: '',
-        isSuccessful: false,
+        errorMessage: action.message,
       };
-    case REGISTER_SUCCESS:
-      return {
-        ...oldState,
-        isLoggedIn: false,
-      }
     default:
       return oldState;
   }

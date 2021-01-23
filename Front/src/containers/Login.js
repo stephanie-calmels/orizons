@@ -10,9 +10,8 @@ const mapStateToProps = (state) => ({
   email: state.auth.email,
   password: state.auth.password,
   isLoggedIn: state.auth.isLoggedIn,
-  isLoading: state.auth.isLoading,
   isSuccessful: state.auth.isSuccessful,
-  message: state.auth.message,
+  errorMessage: state.auth.errorMessage,
 });
 
 // cablage des actions

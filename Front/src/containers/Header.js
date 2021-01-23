@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import history from '../history';
-
 import Header from 'src/components/Header';
 import {
   logout,
 } from '../actions/auth';
+
+import history from '../history';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,

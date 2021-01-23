@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Container, Form, Button,
+  Container, Form, Button, Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -18,22 +18,21 @@ const Register = ({
   password,
   passwordRepeat,
   changeField,
-  message,
+  errorMessage,
   isSuccessful,
   handleRegister,
 }) => {
-
   // Hook qui vient de React Hook Form
-  const {register, handleSubmit, errors} = useForm({});
+  const { register, handleSubmit, errors } = useForm({});
   // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (isSuccessful) {
-      toast.success(message);
-      history.push('/connexion');
+      toast.success('Inscription réussie !');
+      history.replace('/connexion');
     }
-  }, [isSuccessful])
+  }, [isSuccessful]);
 
   return (
     <>
@@ -43,6 +42,8 @@ const Register = ({
           className="form"
           onSubmit={handleSubmit(handleRegister)}
         >
+          {errorMessage && (
+          <Alert variant="danger">{errorMessage}</Alert>)}
           <Form.Group size="lg" controlId="nickname">
             <Form.Label>Pseudonyme</Form.Label>
             <Form.Control

@@ -1,5 +1,5 @@
 import {
-  CHANGE_REGISTER_FIELD, REGISTER_SUCCESS,
+  CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -9,8 +9,8 @@ const initialState = {
   email: '',
   password: '',
   passwordRepeat: '',
-  message: '',
-  isSuccessful: false
+  errorMessage: '',
+  isSuccessful: false,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -29,9 +29,13 @@ const reducer = (oldState = initialState, action) => {
         email: '',
         password: '',
         passwordRepeat: '',
-        message: action.message,
         isSuccessful: true,
-      }
+      };
+    case REGISTER_FAIL:
+      return {
+        ...oldState,
+        errorMessage: action.message,
+      };
     default:
       return oldState;
   }

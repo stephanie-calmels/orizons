@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
   password: state.register.password,
   passwordRepeat: state.register.passwordRepeat,
   isSuccessful: state.register.isSuccessful,
-  message: state.register.message,
+  errorMessage: state.register.errorMessage,
 });
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleRegister: () => {
     dispatch(register());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

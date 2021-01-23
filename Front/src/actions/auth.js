@@ -1,5 +1,5 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN, LOGIN_SUCCESS, LOGOUT, SET_MESSAGE,
+  CHANGE_AUTH_FIELD, LOGIN, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
 } from './types';
 
 export const changeAuthField = (name, value) => ({
@@ -26,7 +26,7 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const setMessage = (message) => ({
-  type: SET_MESSAGE,
-  payload: message,
+export const loginFail = (message) => ({
+  type: LOGIN_FAIL,
+  message,
 });
