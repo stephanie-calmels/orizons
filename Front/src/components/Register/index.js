@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Form, Button, Alert,
+  Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -22,6 +22,7 @@ const Register = ({
   errorMessage,
   isSuccessful,
   handleRegister,
+  isLoading,
 }) => {
   // Hook qui vient de React Hook Form
   const { register, handleSubmit, errors } = useForm({});
@@ -134,9 +135,18 @@ const Register = ({
             />
             {errors.passwordRepeat && <div className="text-danger">{errors.passwordRepeat.message}</div>}
           </Form.Group>
-          <Button block size="lg" className="mt-3" type="submit">
-            Valider
-          </Button>
+          {isLoading ? (
+            <Button variant="primary" disabled>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              <span className="sr-only">Loading...</span>
+            </Button>
+          ) : <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
         </Form>
       </Container>
       <p className="text-center m-3">Vous êtes déjà inscrit ? <Link to="/connexion">Connectez-vous !</Link></p>
@@ -155,6 +165,7 @@ Register.propTypes = {
   errorMessage: PropTypes.string.isRequired,
   isSuccessful: PropTypes.bool.isRequired,
   handleRegister: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Register;

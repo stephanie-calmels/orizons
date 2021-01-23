@@ -1,5 +1,6 @@
 import {
   CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
+  SET_LOADER_LOGIN,
 } from '../actions/types';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   errorMessage: '',
   role: localStorage.getItem('role') || '',
   isSuccessful: false,
+  isLoading: false,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -28,6 +30,7 @@ const reducer = (oldState = initialState, action) => {
         nickname: action.nickname,
         isLoggedIn: action.isLogged,
         isSuccessful: true,
+        isLoading: false,
       };
     case LOGOUT:
       window.location.replace('/');// refresh pour vider tout l'historique du state
@@ -36,6 +39,12 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         errorMessage: action.message,
+        isLoading: false,
+      };
+    case SET_LOADER_LOGIN:
+      return {
+        ...oldState,
+        isLoading: true,
       };
     default:
       return oldState;

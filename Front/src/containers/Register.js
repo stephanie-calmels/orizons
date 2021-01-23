@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Register from 'src/components/Register';
 
 import {
-  changeRegisterField, register,
+  changeRegisterField, register, activateLoader,
 } from '../actions/register';
 
 const mapStateToProps = (state) => ({
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
   passwordRepeat: state.register.passwordRepeat,
   isSuccessful: state.register.isSuccessful,
   errorMessage: state.register.errorMessage,
+  isLoading: state.register.isLoading,
 });
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleRegister: () => {
     dispatch(register());
+    dispatch(activateLoader());
   },
 });
 

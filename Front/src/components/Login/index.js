@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Form, Button, Alert,
+  Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -17,6 +17,7 @@ const Login = ({
   errorMessage,
   isSuccessful,
   handleLogin,
+  isLoading,
 }) => {
   // Gestion de validation du formulaire (React Hook Form)
   const { register, handleSubmit, errors } = useForm();
@@ -74,7 +75,18 @@ const Login = ({
             />
             {errors.password && <div className="text-danger">{errors.password.message}</div>}
           </Form.Group>
-          <Button block size="lg" className="mt-3" type="submit">Valider</Button>
+          {isLoading ? (
+            <Button variant="primary" disabled>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              <span className="sr-only">Loading...</span>
+            </Button>
+          ) : <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
         </Form>
       </Container>
       <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>
@@ -89,6 +101,7 @@ Login.propTypes = {
   errorMessage: PropTypes.string.isRequired,
   isSuccessful: PropTypes.bool.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default Login;

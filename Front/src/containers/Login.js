@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Login from 'src/components/Login';
 
 import {
-  changeAuthField, login,
+  changeAuthField, login, activateLoader,
 } from '../actions/auth';
 
 const mapStateToProps = (state) => ({
@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
   isSuccessful: state.auth.isSuccessful,
   errorMessage: state.auth.errorMessage,
+  isLoading: state.auth.isLoading,
 });
 
 // cablage des actions
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleLogin: () => {
     dispatch(login());
+    dispatch(activateLoader());
   },
 });
 

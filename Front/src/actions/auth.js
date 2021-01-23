@@ -1,5 +1,6 @@
 import {
   CHANGE_AUTH_FIELD, LOGIN, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
+  SET_LOADER_LOGIN,
 } from './types';
 
 export const changeAuthField = (name, value) => ({
@@ -29,4 +30,8 @@ export const logout = () => ({
 export const loginFail = (message) => ({
   type: LOGIN_FAIL,
   message,
+});
+
+export const activateLoader = () => ({
+  type: SET_LOADER_LOGIN,
 });

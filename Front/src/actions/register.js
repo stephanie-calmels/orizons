@@ -1,5 +1,6 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
+  SET_LOADER_REGISTER,
 } from './types';
 
 export const changeRegisterField = (name, value) => ({
@@ -20,4 +21,8 @@ export const registerSuccess = (message) => ({
 export const registerFail = (message) => ({
   type: REGISTER_FAIL,
   message,
+});
+
+export const activateLoader = () => ({
+  type: SET_LOADER_REGISTER,
 });
