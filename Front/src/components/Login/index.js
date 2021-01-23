@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Container, Form, Button, Alert,
 } from 'react-bootstrap';
@@ -79,6 +80,15 @@ const Login = ({
       <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>
     </>
   );
+};
+
+Login.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  isSuccessful: PropTypes.bool.isRequired,
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default Login;

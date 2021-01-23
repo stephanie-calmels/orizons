@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Container, Form, Button, Alert,
 } from 'react-bootstrap';
@@ -141,6 +142,19 @@ const Register = ({
       <p className="text-center m-3">Vous êtes déjà inscrit ? <Link to="/connexion">Connectez-vous !</Link></p>
     </>
   );
+};
+
+Register.propTypes = {
+  nickname: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  passwordRepeat: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
+  isSuccessful: PropTypes.bool.isRequired,
+  handleRegister: PropTypes.func.isRequired,
 };
 
 export default Register;
