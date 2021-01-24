@@ -12,7 +12,7 @@ import Header from 'src/containers/Header'; // REDUX
 import Footer from 'src/components/Footer';
 import Page from 'src/components/Page';
 import HomeDesktop from 'src/containers/HomeDesktop';
-import HomeMobile from 'src/components/HomeMobile';
+import HomeMobile from 'src/containers/HomeMobile';
 import Trips from 'src/components/Trips';
 import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
