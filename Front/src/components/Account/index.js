@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Card, ListGroup, ListGroupItem, Button, Modal, ButtonGroup,
+  Container, Card, ListGroup, ListGroupItem, Button, Modal,
 } from 'react-bootstrap';
 
 import Title from '../PageTitle/index';
 import RegisterForm from '../Register/RegisterForm';
 
-const Account = ({
-  nickname,
-  email,
-  firstname,
-  lastname,
-  registration_date,
+const Account = ({ 
+    first_name,
+    last_name,
+    nickname,
+    email,
+    password,
+    passwordRepeat,
+    isSuccessful,
+    errorMessage,
+    isLoading,
+    changeField,
+    handleRegister,
 }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -27,35 +33,32 @@ const Account = ({
     <>
       <Title texte="Mon compte" />
       <Container>
-        <div>
-          <Card style={{ width: '25em' }} className="flex-row">
-            <Card.Img style={{ width: '400px', height:'400px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrm42nsUpuTWs0XsEqedLlgReL51sG7Ljsw&usqp=CAU" />
+          <Card>
+            <Card.Img style={{ maxWidth: '300px', height:'300px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrm42nsUpuTWs0XsEqedLlgReL51sG7Ljsw&usqp=CAU" />
             <Card.Body>
-              <Card.Title>Paramètres de connexion</Card.Title>
+              <Card.Title>Paramètres du compte</Card.Title>
               <Card.Text>
-                <p>Membre depuis le {registration_date}</p>
+                Membre depuis le
               </Card.Text>
               <ListGroup className="list-group-flush">
                 <ListGroupItem className="d-flex justify-content-between align-items-center">
-                  <div>Nom : <span className="font-weight-bold">{`${lastname}`}</span></div>
+                  <div>Nom : <span className="font-weight-bold">{last_name}</span></div>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between align-items-center">
-                  <div>Prénom : <span className="font-weight-bold">{`${firstname}`}</span></div>
+                  <div>Prénom : <span className="font-weight-bold">{first_name}</span></div>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between align-items-center">
-                  <div>Pseudonyme : <p>www.orizons.com/<span className="font-weight-bold">{`${nickname}`}</span></p></div>
+                  <div>Pseudonyme : <p>www.orizons.com/<span className="font-weight-bold">{nickname.toLowerCase()}</span></p></div>
                 </ListGroupItem>
                 <ListGroupItem className="d-flex justify-content-between align-items-center">
-                  <div>Adresse email : {email}</div>
+                  <div>Adresse email : <span className="font-weight-bold">{email}</span></div>
                 </ListGroupItem>
               </ListGroup>
             </Card.Body>
           </Card>
-        </div>
-
         <div className="text-center">
           <Button
-            className="m-3"
+            className="m-2"
             onClick={() => {
               handleUpdateModal();
             }}
@@ -64,7 +67,7 @@ const Account = ({
             <i className="far fa-edit" />
           </Button>
           <Button
-            className="m-3"
+            className="m-2"
             onClick={() => {
               handleDeleteModal();
             }}
@@ -79,9 +82,17 @@ const Account = ({
           <Modal.Body>
             <RegisterForm
               nickname={nickname}
-              lastname={lastname}
-              firstname={firstname}
+              lastname={last_name}
+              firstname={first_name}
               email={email}
+              nickname={nickname}
+              password={password}
+              passwordRepeat={passwordRepeat}
+              isSuccessful={isSuccessful}
+              errorMessage={errorMessage}
+              isLoading={isLoading}
+              changeField={changeField}
+              handleRegister={handleRegister}
             />
           </Modal.Body>
           <Modal.Footer>
@@ -115,12 +126,13 @@ const Account = ({
 };
 
 Account.propTypes = {
-  nickname: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
-  registration_date: PropTypes.string.isRequired,
+  member: PropTypes.shape({
+    nickname: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string.isRequired,
+    registration_date: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Account;

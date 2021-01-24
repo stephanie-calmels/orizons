@@ -66,13 +66,6 @@ const Login = ({
               onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
-                minLength: {
-                  value: 8,
-                  message: 'Le champ doit contenir au moins 8 caractères',
-                },
-                validate: (value) => (
-                  [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) || 'Le champ doit contenir au moins une majuscule, minuscule et un caractère spécial'
-                ),
               })}
             />
             {errors.password && <div className="text-danger">{errors.password.message}</div>}

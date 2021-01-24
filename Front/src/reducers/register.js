@@ -5,8 +5,8 @@ import {
 
 const initialState = {
   nickname: '',
-  firstname: '',
-  lastname: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: '',
   passwordRepeat: '',
@@ -26,8 +26,8 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         nickname: '',
-        firstname: '',
-        lastname: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         passwordRepeat: '',

@@ -14,12 +14,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from 'src/containers/Header'; // REDUX
 import Login from 'src/containers/Login'; // REDUX
 import Register from 'src/containers/Register'; // REDUX
+import Account from 'src/containers/Account'; // REDUX
 import Page from 'src/components/Page';
 import Home from 'src/components/Home';
 import Trips from 'src/components/Trips';
 import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
-import Account from 'src/components/Account';
 
 import Trip from 'src/components/Trip';
 
@@ -32,6 +32,7 @@ import ContactForm from 'src/components/ContactForm';
 // == Import 'Fake data'
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
+import members from 'src/data/members';
 
 // == Composant
 
@@ -82,7 +83,7 @@ const App = ({ isLoggedIn, role, nickname }) => (
         {/* PAGES ACCESSIBLES PAR L'UTILISATEUR IDENTIFIE */}
         // TODO: comment on fait ça ???
         <Route exact path="/compte">
-        { isLoggedIn ? <Account /> : <Redirect to="/" />}
+        { isLoggedIn ? <Account member={members[1]} /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Page>

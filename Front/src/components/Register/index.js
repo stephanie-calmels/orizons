@@ -10,8 +10,8 @@ const Register = (props) => (
   <Title texte="Inscrivez-vous pour créer votre premier carnet !" />
   <RegisterForm
     nickname={props.nickname}
-    lastname={props.lastname}
-    firstname={props.firstname}
+    last_name={props.last_name}
+    first_name={props.first_name}
     email={props.email}
     password={props.password}
     passwordRepeat={props.passwordRepeat}
@@ -27,8 +27,8 @@ const Register = (props) => (
 
 Register.propTypes = {
   nickname: PropTypes.string.isRequired,
-  firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
+  first_name: PropTypes.string.isRequired,
+  last_name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordRepeat: PropTypes.string.isRequired,

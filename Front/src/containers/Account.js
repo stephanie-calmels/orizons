@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import Register from 'src/components/Register';
+import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, register, activateLoader,
+  changeRegisterField, update, activateLoader,
 } from '../actions/register';
 
 const mapStateToProps = (state) => ({
@@ -23,9 +23,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeRegisterField(name, value));
   },
   handleRegister: () => {
-    dispatch(register());
+    dispatch(update());
     dispatch(activateLoader());
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

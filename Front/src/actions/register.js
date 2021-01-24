@@ -26,3 +26,7 @@ export const registerFail = (message) => ({
 export const activateLoader = () => ({
   type: SET_LOADER_REGISTER,
 });
+
+export const update = () => ({
+  type: UPDATE
+});
