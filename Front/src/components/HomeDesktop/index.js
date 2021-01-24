@@ -9,7 +9,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLogged, trips, categories, randomSearch,
+  isLoggedIn, trips, categories, randomSearch,
 }) => (
   <Container fluid>
     <Row>
@@ -28,7 +28,7 @@ const HomeDesktop = ({
             </Card.Text>
 
             {
-                isLogged
+                isLoggedIn
                   ? (
                     <LinkContainer to="/ajouter-carnet">
                       <Button className="home_banner-card-btn">Créez votre carnet de voyage</Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Container, Row, Card, Button, Carousel, CardDeck, Col, Image,
+  Container, Row, Card, Button, Carousel, Image,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -8,7 +8,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 
 import './homeMobile.scss';
 
-const HomeMobile = ({ isLogged, trips }) => (
+const HomeMobile = ({ isLoggedIn, trips }) => (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
@@ -20,7 +20,7 @@ const HomeMobile = ({ isLogged, trips }) => (
             <Button className="home_banner-card-btn">Découvrez les carnets d'autres voyageurs</Button>
           </LinkContainer>
           {
-                isLogged
+                isLoggedIn
                   ? (
                     <LinkContainer to="/ajouter-carnet">
                       <Button className="home_banner-card-btn">Créez votre carnet de voyage</Button>

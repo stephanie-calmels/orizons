@@ -3,6 +3,7 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import trips from './trips';
 
 // combineReducers : on lui donne un objet
 // en clé : le nom de la "tranche" de state
@@ -11,4 +12,5 @@ import auth from './auth';
 // shorthand : si clé = valeur, on écrit juste une fois
 export default combineReducers({
   auth,
+  trips
 });
