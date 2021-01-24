@@ -37,7 +37,7 @@ const Header = ({ isLoggedIn, handleLogout, nickname }) => {
           {isLoggedIn
             ? (
               <>
-                <Image className="profile_photo m-2" src="https://resize-parismatch.lanmedia.fr/r/416,416/img/var/news/storage/images/paris-match/people-a-z/ryan-gosling/6048588-4-fre-FR/Ryan-Gosling.jpg" roundedCircle />
+                <Image className="profile_photo m-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrm42nsUpuTWs0XsEqedLlgReL51sG7Ljsw&usqp=CAU" roundedCircle />
                 <DropdownButton
                   title={nickname}
                   id="dropdown-menu-align-right"

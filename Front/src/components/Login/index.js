@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import Title from '../PageTitle';
+
 import './login.scss';
 import history from '../../history';
 
@@ -33,7 +35,7 @@ const Login = ({
 
   return (
     <>
-      <h1 className="text-center p-4 font-weight-bold">Connectez-vous pour partager vos aventures !</h1>
+      <Title texte="Connectez-vous pour partager vos aventures !"></Title>
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"
