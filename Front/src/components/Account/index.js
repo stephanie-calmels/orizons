@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container, Card, ListGroup, ListGroupItem, Button, Modal,
@@ -19,6 +19,7 @@ const Account = ({
     isLoading,
     changeField,
     handleRegister,
+    loadMember,
 }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -28,6 +29,12 @@ const Account = ({
   const handleDeleteModal = () => {
     setShowDelete(!showDelete);
   };
+
+  useEffect(() => {
+    // lors du chargement du composant Account, on charge les données du membre connecté
+    loadMember();
+  },[])
+
 
   return (
     <>
@@ -123,16 +130,6 @@ const Account = ({
       </Container>
     </>
   );
-};
-
-Account.propTypes = {
-  member: PropTypes.shape({
-    nickname: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    registration_date: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default Account;

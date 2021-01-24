@@ -25,10 +25,10 @@ const reducer = (oldState = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...oldState,
-        role: action.role,
-        token: action.token,
-        nickname: action.nickname,
-        isLoggedIn: action.isLogged,
+        role: action.member.role,
+        token: action.member.token,
+        nickname: action.member.nickname,
+        isLoggedIn: action.member.isLogged,
         isSuccessful: true,
         isLoading: false,
       };

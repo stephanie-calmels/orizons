@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, update, activateLoader,
+  changeRegisterField, activateLoader, getMember
 } from '../actions/register';
 
 const mapStateToProps = (state) => ({
@@ -23,9 +23,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeRegisterField(name, value));
   },
   handleRegister: () => {
-    dispatch(update());
     dispatch(activateLoader());
   },
+  loadMember: () => {
+    dispatch(getMember());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

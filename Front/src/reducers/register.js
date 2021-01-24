@@ -1,6 +1,6 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER_FAIL,
-  SET_LOADER_REGISTER,
+  SET_LOADER_REGISTER, GET_MEMBER_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -44,6 +44,16 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         isLoading: true,
+      }
+    case GET_MEMBER_SUCCESS:
+      return {
+        ...oldState,
+        nickname: action.member.nickname,
+        first_name: action.member.first_name,
+        last_name: action.member.last_name,
+        email: action.member.email,
+        photo_id: action.member.photo_id,
+        localisation_id: action.member.localisation_id,
       }
     default:
       return oldState;

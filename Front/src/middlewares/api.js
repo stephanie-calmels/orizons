@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { loginSuccess, loginFail } from '../actions/auth';
-import { registerSuccess, registerFail } from '../actions/register';
-import { LOGIN, REGISTER } from '../actions/types';
+import { registerSuccess, registerFail, getMemberSuccess, getMemberFail } from '../actions/register';
+import { LOGIN, REGISTER, GET_MEMBER } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -69,6 +69,30 @@ const api = (store) => (next) => (action) => {
           || error.toString();
           store.dispatch(registerFail(errorMessage));
         });
+    }
+    case GET_MEMBER: {
+      // const token = { auth: { token }} = store.getState();
+      // const memberId = parseJwt(token).memberId;
+      const config = {
+        method: 'get',
+        // url: `https://orizons.herokuapp.com/members/${memberId}`,
+        url: 'https://orizons.herokuapp.com/members/39',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+      .then((response) => {
+        store.dispatch(getMemberSuccess(response.data.data));
+      })
+      .catch((error) => {
+        const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+        store.dispatch(getMemberFail(errorMessage));
+      });
     }
       break;
     default:
