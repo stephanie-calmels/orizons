@@ -1,8 +1,13 @@
 import React, {useState, useRef, useMemo, useEffect} from 'react';
 
+
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import {Modal, Button, Form, Container, Row} from 'react-bootstrap';
+
+import {Modal, Button, Form, InputGroup} from 'react-bootstrap';
 import {useForm} from 'react-hook-form';
+
+import axios from 'axios';
+
 
 const AddStep =()=>{
   // Hooks and functions linked to Modal components
@@ -13,14 +18,16 @@ const AddStep =()=>{
   //Hooks and functions linked to the Form
   const [inputs, setInputs] = useState({
     title: '',
-    localisation: [45, -1],
+    localisation: [],
     date: '',
     summary: '',
-    pictures : []
+    pictures : [],
+    showInput: false,
+    localisationInput:''
   });
 
   const {
-    title, localisation, date, summary, pictures
+    title, localisation, date, summary, pictures, showInput, localisationInput
   } = inputs;
 
   const handleChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -37,10 +44,13 @@ const AddStep =()=>{
     setInputs({...inputs, localisation : userPosition})
   }))}
 
+  const showLocationInput = ()=>{
+    setInputs({...inputs, showInput: true})
+  }
   // This component will be added to the map container in order to react to certain events
   const MovingMap = ()=>{
     const map = useMap();
-    useEffect(()=>{
+    inputs.localisation.length > 0 && useEffect(()=>{
       map.flyTo(inputs.localisation)
     }, [inputs.localisation])
 
@@ -53,7 +63,6 @@ const AddStep =()=>{
     const eventHandlers = useMemo(
       ()=>({
         dragend(e){
-          console.log(e)
           // We are using the endpoint of the marker drag to update our input position
           const newPosition = [e.target._latlng.lat, e.target._latlng.lng]
             setPosition(newPosition);
@@ -72,7 +81,22 @@ const AddStep =()=>{
       </Marker>
     )
   }
-  console.log(inputs)
+  // adding geosearch to the form
+  const useGeocodingApi= (event)=>{
+    console.log(event.target.closest('.input-group').querySelector('input').value)
+    //On récupère la recherche tapée par l'utilisateur
+    const userQuery = event.target.closest('.input-group').querySelector('input').value
+    const APIkey = "3e6337fefe20a03c96bfeb8a7b479717"
+
+    axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
+    .then((response)=>{
+      const newPosition= [response.data.data[0].latitude, response.data.data[0].longitude];
+      setInputs({...inputs, localisation: newPosition})
+    })
+
+    
+  }
+
   // START OF ADDSTEP COMPONENT
   return <div>
     <Button onClick={handleShow}>
@@ -143,14 +167,20 @@ const AddStep =()=>{
           </MapContainer>
 
             <Button onClick={getUserPosition}>Utiliser ma position</Button>
-            <Form.Control
-              name="localisation"
+            <Button onClick={showLocationInput}>Entrer une adresse</Button>
+
+            {inputs.showInput && <InputGroup><Form.Control
+              name="localisationInput"
               type="text"
-              defaultValue={localisation}
+              defaultValue={localisationInput}
+              onChange={handleChange}
+              
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}
-            />
+            /> <InputGroup.Append><Button variant="outline-secondary" onClick={useGeocodingApi}>Chercher</Button></InputGroup.Append></InputGroup>}
+
+
             {errors.localisation && <div className="text-danger">{errors.localisation.message}</div>}
           </Form.Group>
 
