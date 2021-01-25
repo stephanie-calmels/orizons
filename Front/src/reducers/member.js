@@ -1,6 +1,8 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER_FAIL,
-  SET_LOADER_REGISTER, GET_MEMBER_SUCCESS,
+  SET_LOADER_REGISTER, GET_MEMBER_SUCCESS, UPDATE_MEMBER_SUCCESS,
+  UPDATE_MEMBER_FAIL,
+  GET_MEMBER_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -14,6 +16,8 @@ const initialState = {
   isSuccessful: false,
   isLoading: false,
   registrationDate: '',
+  profilePhoto: '',
+  id: null,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -40,6 +44,7 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         errorMessage: action.message,
         isLoading: false,
+        isSuccessful: false,
       };
     case SET_LOADER_REGISTER:
       return {
@@ -53,9 +58,36 @@ const reducer = (oldState = initialState, action) => {
         firstname: action.member.first_name,
         lastname: action.member.last_name,
         email: action.member.email,
+        localisationId: action.member.localisation_id,
+        registrationDate: action.member.registration_date,
+        profilePhoto: action.member.profile_photo,
+      };
+    case GET_MEMBER_FAIL:
+      return {
+        ...oldState,
+        isSuccessful: false,
+        isLoading: false,
+        errorMessage: action.member.errorMessage,
+      };
+    case UPDATE_MEMBER_SUCCESS:
+      return {
+        ...oldState,
+        nickname: action.member.nickname,
+        firstname: action.member.first_name,
+        lastname: action.member.last_name,
+        email: action.member.email,
         photoId: action.member.photo_id,
         localisationId: action.member.localisation_id,
         registrationDate: action.member.registration_date,
+        isSuccessful: true,
+        isLoading: false,
+      };
+    case UPDATE_MEMBER_FAIL:
+      return {
+        ...oldState,
+        isSuccessful: false,
+        isLoading: false,
+        errorMessage: action.member.errorMessage,
       };
     default:
       return oldState;

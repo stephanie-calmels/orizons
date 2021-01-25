@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, activateLoader, getMember,
+  changeRegisterField, activateLoader, getMember, updateMember,
 } from '../actions/member';
 
 const mapStateToProps = (state) => ({
@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   errorMessage: state.member.errorMessage,
   isLoading: state.member.isLoading,
   registrationDate: state.member.registrationDate,
+  profilePhoto: state.member.profilePhoto,
 });
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
@@ -25,6 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleRegister: () => {
     dispatch(activateLoader());
+    dispatch(updateMember());
   },
   loadMember: () => {
     dispatch(getMember());

@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import './header.scss';
 
-const Header = ({ isLoggedIn, handleLogout, nickname }) => {
+const Header = ({ isLoggedIn, handleLogout, nickname, profilePhoto }) => {
   const handleClick = () => {
     handleLogout();
   };
@@ -37,7 +37,7 @@ const Header = ({ isLoggedIn, handleLogout, nickname }) => {
           {isLoggedIn
             ? (
               <>
-                <Image className="profile_photo m-2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrm42nsUpuTWs0XsEqedLlgReL51sG7Ljsw&usqp=CAU" roundedCircle />
+                <Image className="profile_photo m-2" src={profilePhoto} roundedCircle />
                 <DropdownButton
                   title={nickname}
                   id="dropdown-menu-align-right"

@@ -10,6 +10,8 @@ import 'dayjs/locale/fr';
 import Title from '../PageTitle/index';
 import RegisterForm from '../Register/RegisterForm';
 
+import './account.scss';
+
 dayjs.locale('fr');
 
 const Account = ({
@@ -26,6 +28,7 @@ const Account = ({
   handleRegister,
   loadMember,
   registrationDate,
+  profilePhoto,
 }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -45,24 +48,24 @@ const Account = ({
     <>
       <Title texte="Mon compte" />
       <Container>
-        <Card>
-          <Card.Img style={{ maxWidth: '300px', height: '300px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxrm42nsUpuTWs0XsEqedLlgReL51sG7Ljsw&usqp=CAU" />
+        <Card className="card-account">
+          <Card.Img className="card-account__img" src={profilePhoto} />
           <Card.Body>
-            <Card.Title>Paramètres du compte</Card.Title>
-            <Card.Text>
+            <Card.Title className="card-account__title">Paramètres du compte</Card.Title>
+            <Card.Text className="card-account__text">
               Membre depuis le <span className="font-weight-bold">{dayjs(`${registrationDate}`).format('DD/MM/YYYY')}</span>
             </Card.Text>
             <ListGroup className="list-group-flush">
-              <ListGroupItem className="d-flex justify-content-between align-items-center">
+              <ListGroupItem>
                 <div>Nom : <span className="font-weight-bold">{lastname}</span></div>
               </ListGroupItem>
-              <ListGroupItem className="d-flex justify-content-between align-items-center">
+              <ListGroupItem>
                 <div>Prénom : <span className="font-weight-bold">{firstname}</span></div>
               </ListGroupItem>
-              <ListGroupItem className="d-flex justify-content-between align-items-center">
+              <ListGroupItem>
                 <div>Pseudonyme : <p>www.orizons.com/<span className="font-weight-bold">{nickname.toLowerCase()}</span></p></div>
               </ListGroupItem>
-              <ListGroupItem className="d-flex justify-content-between align-items-center">
+              <ListGroupItem>
                 <div>Adresse email : <span className="font-weight-bold">{email}</span></div>
               </ListGroupItem>
             </ListGroup>
@@ -89,6 +92,7 @@ const Account = ({
           </Button>
         </div>
 
+        {/* ================  Modal Modifier le compte ==================== */}
         <Modal size="xl" show={showUpdate} onHide={() => handleUpdateModal()}>
           <Modal.Header closeButton><h2>Modifier mes données personnelles</h2></Modal.Header>
           <Modal.Body>
@@ -107,6 +111,8 @@ const Account = ({
             />
           </Modal.Body>
         </Modal>
+
+        {/* ================  Modal Supprimer le compte ==================== */}
         <Modal size="md" show={showDelete} onHide={() => handleDeleteModal()}>
           <Modal.Header closeButton><h2>Supprimer mon compte</h2></Modal.Header>
           <Modal.Body>
@@ -147,6 +153,7 @@ Account.propTypes = {
   handleRegister: PropTypes.func.isRequired,
   loadMember: PropTypes.func.isRequired,
   registrationDate: PropTypes.string.isRequired,
+  profilePhoto: PropTypes.string.isRequired,
 };
 
 export default Account;

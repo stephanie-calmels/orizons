@@ -35,7 +35,7 @@ const Login = ({
 
   return (
     <>
-      <Title texte="Connectez-vous pour partager vos aventures !"></Title>
+      <Title texte="Connectez-vous pour partager vos aventures !" />
       <Container className="d-flex justify-content-center align-items-center">
         <Form
           className="form"

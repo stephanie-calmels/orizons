@@ -9,15 +9,14 @@ import history from '../history';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
-  nickname: state.auth.nickname,
+  nickname: state.member.nickname,
+  profilePhoto: state.member.profilePhoto,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleLogout: () => {
     dispatch(logout());
     localStorage.removeItem('token');
-    localStorage.removeItem('nickname');
-    localStorage.removeItem('role');
     history.push('/');
   },
 });

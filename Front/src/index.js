@@ -4,13 +4,13 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 
-
 import store from 'src/store';
-import history from './history';
 
 // == Import : local
 // Composants
 import App from 'src/containers/App';
+
+import history from './history';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';

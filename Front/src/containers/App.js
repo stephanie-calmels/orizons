@@ -2,10 +2,18 @@ import { connect } from 'react-redux';
 
 import App from '../components/App';
 
+import {
+  getMember,
+} from '../actions/member';
+
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
-  nickname: state.auth.nickname,
-  role: state.auth.route,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  loadMember: () => {
+    dispatch(getMember());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

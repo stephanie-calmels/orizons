@@ -4,13 +4,12 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  nickname: localStorage.getItem('nickname') || '',
-  token: localStorage.getItem('token') || '',
+  // on va chercher dans le localStorage = PERSISTANCE même après fermeture de la page
+  token: localStorage.getItem('token') || null,
+  isLoggedIn: !!localStorage.getItem('token'),
   email: '',
   password: '',
-  isLoggedIn: !!localStorage.getItem('token'),
   errorMessage: '',
-  role: localStorage.getItem('role') || '',
   isSuccessful: false,
   isLoading: false,
 };
@@ -25,10 +24,8 @@ const reducer = (oldState = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...oldState,
-        role: action.member.role,
         token: action.member.token,
-        nickname: action.member.nickname,
-        isLoggedIn: action.member.isLogged,
+        isLoggedIn: true,
         isSuccessful: true,
         isLoading: false,
       };

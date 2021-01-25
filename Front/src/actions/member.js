@@ -1,6 +1,7 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
-  SET_LOADER_REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MEMBER_SUCCESS, GET_MEMBER_FAIL,
+  SET_LOADER_REGISTER, GET_MEMBER, GET_MEMBER_SUCCESS, GET_MEMBER_FAIL,
+  UPDATE_MEMBER, UPDATE_MEMBER_SUCCESS, UPDATE_MEMBER_FAIL,
 } from './types';
 
 export const changeRegisterField = (name, value) => ({
@@ -27,10 +28,6 @@ export const activateLoader = () => ({
   type: SET_LOADER_REGISTER,
 });
 
-export const updateMember = () => ({
-  type: UPDATE_MEMBER,
-});
-
 export const getMember = () => ({
   type: GET_MEMBER,
 });
@@ -42,5 +39,19 @@ export const getMemberSuccess = (member) => ({
 
 export const getMemberFail = (message) => ({
   type: GET_MEMBER_FAIL,
-  message
+  message,
+});
+
+export const updateMember = () => ({
+  type: UPDATE_MEMBER,
+});
+
+export const updateMemberSuccess = (member) => ({
+  type: UPDATE_MEMBER_SUCCESS,
+  member,
+});
+
+export const updateMemberFail = (message) => ({
+  type: UPDATE_MEMBER_FAIL,
+  message,
 });
