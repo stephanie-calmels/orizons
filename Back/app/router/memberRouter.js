@@ -14,6 +14,6 @@ router.patch('/:memberId', jwt, memberController.updateOneMember);
 router.delete('/', jwt, memberController.deleteAllMember);
 router.delete('/:memberId', jwt, memberController.deleteOneMember);
 
-router.post('/login', memberController.loginMember);
+router.post('/login', jwt, memberController.loginMember);
 
 module.exports = router;
