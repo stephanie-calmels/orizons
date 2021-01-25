@@ -30,11 +30,7 @@ import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 import ContactForm from 'src/components/ContactForm';
 
-// == Import 'Fake data'
-import trips from 'src/data/trips';
-import categories from 'src/data/categories';
-
-// Custom hook for display according srceen size
+// Custom hook for display according to screen size
 function useMediaQuery() {
   const [screenSize, setScreenSize] = useState([0, 0]);
 
@@ -71,7 +67,7 @@ const App = ({ isLoggedIn, loadMember }) => {
             {
               width > 769
                 ? <HomeDesktop />
-                : <HomeMobile isLogged={false} trips={trips} />
+                : <HomeMobile />
             }
           </Route>
           <Route exact path="/inscription">
@@ -90,7 +86,7 @@ const App = ({ isLoggedIn, loadMember }) => {
             <Legals />
           </Route>
           <Route exact path="/exploration">
-            <Trips trips={trips} categories={categories} />
+            <Trips />
           </Route>
           <Route exact path="/exploration/:slug">
             <Trip />
