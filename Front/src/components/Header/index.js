@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Navbar, Nav, DropdownButton, Dropdown, Form, Button, FormControl, InputGroup, Image,
 } from 'react-bootstrap';
@@ -6,7 +7,12 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import './header.scss';
 
-const Header = ({ isLoggedIn, handleLogout, nickname, profilePhoto }) => {
+const Header = ({
+  isLoggedIn,
+  handleLogout,
+  nickname,
+  profilePhoto,
+}) => {
   const handleClick = () => {
     handleLogout();
   };
@@ -70,6 +76,13 @@ const Header = ({ isLoggedIn, handleLogout, nickname, profilePhoto }) => {
       </Navbar.Collapse>
     </Navbar>
   );
+};
+
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+  nickname: PropTypes.string.isRequired,
+  profilePhoto: PropTypes.string.isRequired,
 };
 
 export default Header;
