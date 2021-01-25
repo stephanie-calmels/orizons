@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, activateLoader, getMember
-} from '../actions/register';
+  changeRegisterField, activateLoader, getMember,
+} from '../actions/member';
 
 const mapStateToProps = (state) => ({
-  nickname: state.register.nickname,
-  last_name: state.register.last_name,
-  first_name: state.register.first_name,
-  email: state.register.email,
-  password: state.register.password,
-  passwordRepeat: state.register.passwordRepeat,
-  isSuccessful: state.register.isSuccessful,
-  errorMessage: state.register.errorMessage,
-  isLoading: state.register.isLoading,
+  nickname: state.member.nickname,
+  lastname: state.member.lastname,
+  firstname: state.member.firstname,
+  email: state.member.email,
+  password: state.member.password,
+  passwordRepeat: state.member.passwordRepeat,
+  isSuccessful: state.member.isSuccessful,
+  errorMessage: state.member.errorMessage,
+  isLoading: state.member.isLoading,
+  registrationDate: state.member.registrationDate,
 });
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
@@ -27,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadMember: () => {
     dispatch(getMember());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

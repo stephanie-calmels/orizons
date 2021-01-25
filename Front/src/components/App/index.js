@@ -20,7 +20,6 @@ import Home from 'src/components/Home';
 import Trips from 'src/components/Trips';
 import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
-
 import Trip from 'src/components/Trip';
 
 // == Dumb Components
@@ -32,14 +31,13 @@ import ContactForm from 'src/components/ContactForm';
 // == Import 'Fake data'
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
-import members from 'src/data/members';
 
 // == Composant
 
-const App = ({ isLoggedIn, role, nickname }) => (
+const App = ({ isLoggedIn }) => (
   <div>
     <Header isLoggedIn={isLoggedIn} />
-    <ToastContainer 
+    <ToastContainer
       position="bottom-right"
     />
     <Page>
@@ -48,11 +46,9 @@ const App = ({ isLoggedIn, role, nickname }) => (
           <Home />
         </Route>
         <Route exact path="/inscription">
-        {/* { isLoggedIn ? <Redirect to={`profil/${nickname}`}/> : <Register /> } */}
           <Register />
         </Route>
         <Route exact path="/connexion">
-          {/* { isLoggedIn ? <Redirect to={`profil/${nickname}`}/> : <Login /> } */}
           <Login />
         </Route>
         <Route exact path="/contact">
@@ -65,7 +61,7 @@ const App = ({ isLoggedIn, role, nickname }) => (
           <Legals />
         </Route>
         <Route exact path="/exploration">
-          <Trips trips={trips} categories={categories}/>
+          <Trips trips={trips} categories={categories} />
         </Route>
         <Route exact path="/exploration/:slug">
           <Trip />
@@ -79,11 +75,8 @@ const App = ({ isLoggedIn, role, nickname }) => (
         {/* <Route exact path="/ajouter-etape">
           <AddStep />
           </Route> */}
-        
-        {/* PAGES ACCESSIBLES PAR L'UTILISATEUR IDENTIFIE */}
-        // TODO: comment on fait ça ???
         <Route exact path="/compte">
-        { isLoggedIn ? <Account member={members[1]} /> : <Redirect to="/" />}
+          { isLoggedIn ? <Account /> : <Redirect to="/connexion" />}
         </Route>
       </Switch>
     </Page>

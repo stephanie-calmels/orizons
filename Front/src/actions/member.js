@@ -37,7 +37,7 @@ export const getMember = () => ({
 
 export const getMemberSuccess = (member) => ({
   type: GET_MEMBER_SUCCESS,
-  member
+  member,
 });
 
 export const getMemberFail = (message) => ({

@@ -5,14 +5,15 @@ import {
 
 const initialState = {
   nickname: '',
-  first_name: '',
-  last_name: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
   passwordRepeat: '',
   errorMessage: '',
   isSuccessful: false,
   isLoading: false,
+  registration_date: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -26,8 +27,8 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         nickname: '',
-        first_name: '',
-        last_name: '',
+        firstname: '',
+        lastname: '',
         email: '',
         password: '',
         passwordRepeat: '',
@@ -44,17 +45,18 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         isLoading: true,
-      }
+      };
     case GET_MEMBER_SUCCESS:
       return {
         ...oldState,
         nickname: action.member.nickname,
-        first_name: action.member.first_name,
-        last_name: action.member.last_name,
+        firstname: action.member.first_name,
+        lastname: action.member.last_name,
         email: action.member.email,
-        photo_id: action.member.photo_id,
-        localisation_id: action.member.localisation_id,
-      }
+        photoId: action.member.photo_id,
+        localisationId: action.member.localisation_id,
+        registrationDate: action.member.registration_date,
+      };
     default:
       return oldState;
   }

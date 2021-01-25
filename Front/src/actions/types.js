@@ -31,5 +31,3 @@ export const UPDATE_MEMBER_FAIL = 'UPDATE_FAIL';
 export const DELETE_MEMBER = 'UPDATE';
 export const DELETE_MEMBER_SUCCESS = 'UPDATE_SUCCESS';
 export const DELETE_MEMBER_FAIL = 'UPDATE_FAIL';
-
-
