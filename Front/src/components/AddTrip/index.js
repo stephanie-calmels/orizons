@@ -18,7 +18,7 @@ const AddTrip = () => {
     categories: [],
     departure: '',
     returndate: '',
-    coverpicture
+    coverpicture: null
   });
 
   const {
@@ -40,6 +40,13 @@ const AddTrip = () => {
     setInputs({...inputs, [e.target.name]: [...categories, clickedCategory]})
   }
   
+  const handleImage =(e)=>{
+    // creating a blob in order to add the image to the trip preview
+    let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
+    let blobLink = URL.createObjectURL(imageBlob)
+    setInputs({...inputs, [e.target.name]: blobLink})
+  }
+
   const {
     register, handleSubmit, errors,
   } = useForm({});
@@ -109,7 +116,7 @@ const AddTrip = () => {
                 name="coverpicture"
                 type="file"
                 defaultValue={coverpicture}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleImage(e)}
                 ref={register({
                   required: 'Veuillez sélectionner une photo',
                 })}
@@ -155,13 +162,10 @@ const AddTrip = () => {
               <Form.Control
                 name="returndate"
                 type="date"
+                min={departure}
                 defaultValue={returndate}
                 onChange={(e) => handleChange(e)}
                 ref={register({
-                  // tentative de vérification de la date de retour après le départ mais ça fonctionne pas
-                  // TODO: corriger cette vérif
-                  validate: value => new Date(value).getTime() < new Date(departure).getTime()
-                    
                 })}
               />
               {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
