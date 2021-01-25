@@ -106,7 +106,6 @@ const AddStep =()=>{
     
   }
 
-  console.log(inputs.localisation)
   // START OF ADDSTEP COMPONENT
   return <div>
     <Button onClick={handleShow}>
@@ -121,6 +120,7 @@ const AddStep =()=>{
             className="form-add-step"
             onSubmit={handleSubmit((formData) => {
               setSubmitting(true);
+              formData.localisation = inputs.localisation
               console.log('formData', formData);
               // TODO: requête AXIOS pour envoyer les infos au serveur
 
