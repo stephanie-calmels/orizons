@@ -1,6 +1,8 @@
 -- Deploy orizons:0030-trips-functions to pg
 
 BEGIN;
+
+
 CREATE OR REPLACE VIEW step_author AS
 SELECT "member"."id" AS "id_member",
     "member"."nickname",

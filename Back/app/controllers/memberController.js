@@ -53,6 +53,7 @@ const memberController = {
                 expiresIn: '3h'
             };
             response.json({
+                member_id: member.id,
                 isLogged: true,
                 nickname: member.nickname,
                 role: member.role_name,

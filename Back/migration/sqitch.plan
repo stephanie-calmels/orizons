@@ -6,4 +6,5 @@
 0010-add_role 2021-01-21T09:18:21Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add Role to the member
 0015-default_score 2021-01-21T15:34:12Z "Etudiant O'clock",,, <etudiant@teleporteur> # Default score in trip table
 0020-step_table_corrections 2021-01-22T07:46:11Z "Etudiant O'clock",,, <etudiant@teleporteur> # Step tables corrections
+0023-Modifying_tables_structures 2021-01-25T08:20:23Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add fields in tables trip and category
 0030-trips-functions-views 2021-01-22T09:28:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # Functions and views for the trips
