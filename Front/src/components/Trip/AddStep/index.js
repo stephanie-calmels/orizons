@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useMemo, useEffect} from 'react';
 
-import { MapContainer, TileLayer, Marker, Popup, useMapEvent, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import {Modal, Button, Form, Container, Row} from 'react-bootstrap';
 import {useForm} from 'react-hook-form';
 
@@ -13,7 +13,7 @@ const AddStep =()=>{
   //Hooks and functions linked to the Form
   const [inputs, setInputs] = useState({
     title: '',
-    localisation: '',
+    localisation: [45, -1],
     date: '',
     summary: '',
     pictures : []
@@ -31,8 +31,49 @@ const AddStep =()=>{
   const [submitting, setSubmitting] = useState(false);
 
   // FUNCTIONS LINKED TO THE MAP
-  const getUserPosition = ()=>{navigator.geolocation.getCurrentPosition((position=>console.log(position)))}
+  const getUserPosition = ()=>{
+    navigator.geolocation.getCurrentPosition((position=>{
+      let userPosition = [position.coords.latitude, position.coords.longitude];
+    setInputs({...inputs, localisation : userPosition})
+  }))}
 
+  // This component will be added to the map container in order to react to certain events
+  const MovingMap = ()=>{
+    const map = useMap();
+    useEffect(()=>{
+      map.flyTo(inputs.localisation)
+    }, [inputs.localisation])
+
+    return null;
+  }
+  // Creating a draggable marker that update its position when moved
+
+  const DraggableMarker = ()=>{
+    const [position, setPosition] = useState(inputs.localisation);
+    const eventHandlers = useMemo(
+      ()=>({
+        dragend(e){
+          console.log(e)
+          // We are using the endpoint of the marker drag to update our input position
+          const newPosition = [e.target._latlng.lat, e.target._latlng.lng]
+            setPosition(newPosition);
+            setInputs({...inputs, localisation : newPosition});
+            
+        }
+      }),
+      []
+    )
+    return (
+      <Marker
+      draggable
+      eventHandlers={eventHandlers}
+      position={position}>
+        <Popup>Position de votre étape</Popup>
+      </Marker>
+    )
+  }
+  console.log(inputs)
+  // START OF ADDSTEP COMPONENT
   return <div>
     <Button onClick={handleShow}>
       Ajouter une étape
@@ -86,23 +127,26 @@ const AddStep =()=>{
           <Form.Group size="lg" controlId="localisation">
             <Form.Label>Localisation</Form.Label>
             <MapContainer 
-      // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
-      center={[48.866667, 2.333333]} 
-      zoom={13} 
-      scrollWheelZoom={true}
-      id="modal-map"
-            >
-              <TileLayer
-                    attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-            </MapContainer>
+            // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
+            center={[45, -1]} 
+            zoom={13} 
+            scrollWheelZoom={true}
+            id="modal-map"
+          >
+            <TileLayer
+                  attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <MovingMap />
+                {/**Quand une position est ajoutée, on place notre Marker custom créé ci dessus */}
+            {inputs.localisation.length > 0 && <DraggableMarker />}    
+          </MapContainer>
+
             <Button onClick={getUserPosition}>Utiliser ma position</Button>
             <Form.Control
               name="localisation"
               type="text"
               defaultValue={localisation}
-              onChange={(e) => handleChange(e)}
               ref={register({
                 required: 'Veuillez remplir ce champ !',
               })}

@@ -12,7 +12,6 @@ import AddStep from './AddStep';
 const Trip = ()=>{
   
 const trip = trips[0]
- 
  return <div>
   <Banner author={trip.author} picture={trip.cover_photo} title={trip.title}/>
   <Description trip={trip} />
