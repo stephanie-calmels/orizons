@@ -22,11 +22,11 @@ const categoryDataMapper = {
         return result.rows[0];
     },
 
-    async createCategory(newCategory) {
+    async createCategory(newCategory, urlImage) {
         const result = await client.query("INSERT INTO category(entitled, color, image) VALUES ($1, $2, $3) RETURNING *", [
             newCategory.entitled,
             newCategory.color,
-            newCategory.image
+            urlImage
         ]);
         return result.rows[0];
     },

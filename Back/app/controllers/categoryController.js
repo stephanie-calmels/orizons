@@ -26,7 +26,8 @@ const categoriesController = {
     async createCategory(request, response, next) {
         try {
             const newCategory = request.body;
-            const category = await categoryDataMapper.createCategory(newCategory);
+            const urlImage = `.Front/src/assets/ownImages/${newCategory.image}`
+            const category = await categoryDataMapper.createCategory(newCategory, urlImage);
             response.json({
                 data: category
             })
