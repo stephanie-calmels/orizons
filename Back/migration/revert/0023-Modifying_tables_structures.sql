@@ -2,6 +2,6 @@
 
 BEGIN;
 
-ALTER TABLE "trip" DROP COLUMN "category_id";
+--ALTER TABLE "trip" DROP COLUMN "category_id";
 
 COMMIT;

@@ -57,6 +57,7 @@ const memberController = {
                 isLogged: true,
                 nickname: member.nickname,
                 role: member.role_name,
+                photo: member.profile_photo,
                 token: jsonwebtoken.sign(jwtContent, process.env.SECRET, jwtOptions)
             });
         } catch (error) {

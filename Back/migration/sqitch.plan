@@ -8,3 +8,4 @@
 0020-step_table_corrections 2021-01-22T07:46:11Z "Etudiant O'clock",,, <etudiant@teleporteur> # Step tables corrections
 0023-Modifying_tables_structures 2021-01-25T08:20:23Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add fields in tables trip and category
 0030-trips-functions-views 2021-01-22T09:28:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # Functions and views for the trips
+0040-settings-member-table 2021-01-25T11:29:28Z "Etudiant O'clock",,, <etudiant@teleporteur> # Settings in member table

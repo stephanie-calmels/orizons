@@ -2,7 +2,7 @@
 
 BEGIN;
 
-ALTER TABLE "trip" ADD COLUMN "category_id" INT REFERENCES "category"("id");
-ALTER TABLE "category" ADD COLUMN "image" TEXT;
+--ALTER TABLE "trip" ADD COLUMN "category_id" INT REFERENCES "category"("id");
+--ALTER TABLE "category" ADD COLUMN "image" TEXT;
 
 COMMIT;

@@ -35,7 +35,7 @@ GROUP BY t."id",
         t."arrival_date";
 
 
-CREATE OR REPLACE VIEW "trips_over" AS 
+--CREATE OR REPLACE VIEW "trips_over" AS 
 
 
 
