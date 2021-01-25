@@ -64,10 +64,19 @@ const AddStep =()=>{
       ()=>({
         dragend(e){
           // We are using the endpoint of the marker drag to update our input position
+          console.log(e.target)
           const newPosition = [e.target._latlng.lat, e.target._latlng.lng]
-            setPosition(newPosition);
-            setInputs({...inputs, localisation : newPosition});
-            
+          setPosition(newPosition);
+          setInputs({...inputs, localisation : newPosition});
+            // reverse geocoding in order to get the adress of the marker at the end
+            //const APIkey = "3e6337fefe20a03c96bfeb8a7b479717"
+            //const reverseQuery = newPosition.toString()
+            // axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
+            // .then((response)=>{
+            //   const adresseToInput = response.data.data[0].name ;
+              
+            //   setInputs({...inputs, localisationInput: adresseToInput})
+            // })
         }
       }),
       []
@@ -77,11 +86,11 @@ const AddStep =()=>{
       draggable
       eventHandlers={eventHandlers}
       position={position}>
-        <Popup>Position de votre étape</Popup>
+        <Popup>Position de votre étape. Déplacez le marqueur pour affiner la position.</Popup>
       </Marker>
     )
   }
-  // adding geosearch to the form
+  // adding geosearch to the form + using position stack API
   const useGeocodingApi= (event)=>{
     console.log(event.target.closest('.input-group').querySelector('input').value)
     //On récupère la recherche tapée par l'utilisateur
@@ -91,12 +100,13 @@ const AddStep =()=>{
     axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
     .then((response)=>{
       const newPosition= [response.data.data[0].latitude, response.data.data[0].longitude];
-      setInputs({...inputs, localisation: newPosition})
+      setInputs({...inputs, localisation: newPosition, showInput: false})
     })
 
     
   }
 
+  console.log(inputs.localisation)
   // START OF ADDSTEP COMPONENT
   return <div>
     <Button onClick={handleShow}>
@@ -173,7 +183,7 @@ const AddStep =()=>{
               name="localisationInput"
               type="text"
               defaultValue={localisationInput}
-              onChange={handleChange}
+              onChange={e=>handleChange(e)}
               
               ref={register({
                 required: 'Veuillez remplir ce champ !',
