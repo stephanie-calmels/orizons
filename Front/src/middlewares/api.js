@@ -1,14 +1,17 @@
 import axios from 'axios';
+
 import jwtDecode from 'jwt-decode';
 
+import { getTripsSuccess, getCategoriesSuccess } from '../actions/trips';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
   updateMemberFail,
 } from '../actions/member';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_CATEGORIES,
 } from '../actions/types';
+
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -137,7 +140,46 @@ const api = (store) => (next) => (action) => {
       // eslint-disable-next-line no-console
       console.log('random search');
       break;
-    }
+    };
+    case GET_TRIPS: {
+      const config = {
+        method: 'get',
+        url: 'https://orizons.herokuapp.com/trips',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getTripsSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
+    case GET_MORE_RESULTS: {
+      console.log('get more results');
+      break;
+    };
+    case GET_CATEGORIES: {
+      const config = {
+        method: 'get',
+        url: 'https://orizons.herokuapp.com/categories',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(getCategoriesSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
     default:
       next(action);
   }

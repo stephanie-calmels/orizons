@@ -17,9 +17,9 @@ import Login from 'src/containers/Login'; // REDUX
 import Register from 'src/containers/Register'; // REDUX
 import Account from 'src/containers/Account'; // REDUX
 import Page from 'src/components/Page';
-import HomeDesktop from 'src/containers/HomeDesktop';
-import HomeMobile from 'src/containers/HomeMobile';
-import Trips from 'src/components/Trips';
+import HomeDesktop from 'src/containers/HomeDesktop'; // REDUX
+import HomeMobile from 'src/containers/HomeMobile'; // REDUX
+import Trips from 'src/containers/Trips'; // REDUX
 import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
 import Trip from 'src/components/Trip';
