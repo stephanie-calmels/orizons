@@ -57,6 +57,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "leaflet": "^1.7.1",
+    "leaflet-geosearch": "^3.2.1",
     "prop-types": "^15.7.2",
     "proptypes": "^1.1.0",
     "react": "^16.13.1",
