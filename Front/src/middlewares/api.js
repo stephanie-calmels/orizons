@@ -39,6 +39,9 @@ const api = (store) => (next) => (action) => {
       console.log('random search');
       break;
     };
+    case GET_TRIP:{
+      
+    };
     default:
       next(action);
   }
