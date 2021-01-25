@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', jwt, memberController.getAllMember);
 router.get('/:memberId', jwt, memberController.getOneMember);
-router.post('/', jwt, memberController.createMember);
+router.post('/', memberController.createMember);
 router.patch('/', jwt, memberController.updateAllMember);
 router.patch('/:memberId', jwt, memberController.updateOneMember);
 router.delete('/', jwt, memberController.deleteAllMember);
