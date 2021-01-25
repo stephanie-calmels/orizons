@@ -71,7 +71,6 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
           store.dispatch(getCategoriesSuccess(response.data.data));
         })
         .catch((error) => {
