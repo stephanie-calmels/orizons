@@ -2,7 +2,7 @@ const client = require('./client');
 
 const categoryDataMapper = {
     async getAllCategory() {
-        const result = await client.query("SELECT * FROM category");
+        const result = await client.query("SELECT * FROM category ORDER BY entitled");
         return result.rows;
     },
 
@@ -22,8 +22,12 @@ const categoryDataMapper = {
         return result.rows[0];
     },
 
-    async createCategory() {
-        const result = await client.query("INSERT INTO category() VALUES RETURNING *", []);
+    async createCategory(newCategory) {
+        const result = await client.query("INSERT INTO category(entitled, color, image) VALUES ($1, $2, $3) RETURNING *", [
+            newCategory.entitled,
+            newCategory.color,
+            newCategory.image
+        ]);
         return result.rows[0];
     },
 
@@ -31,16 +35,29 @@ const categoryDataMapper = {
         const result = await client.query("");
     },
 
-    async updateOneCategory(idTrip) {
-        const result = await client.query("");
+    async updateOneCategory(updatedCategory) {
+        const result = await client.query(`UPDATE "category" 
+        SET "entitled" = $1,
+            "color" = $2,
+            "image" = $3
+        WHERE "id" = $4
+        RETURNING *`, [
+            updatedCategory.entitled,
+            updatedCategory.color,
+            updatedCategory.image,
+            updatedCategory.id
+        ]);
+        return result.rows[0];
     },
 
     async updateAllCategories() {
         const result = await client.query("");
     },
 
-    async deleteOneCategory() {
-        const result = await client.query("");
+    async deleteOneCategory(categoryId) {
+        await client.query(`DELETE FROM category WHERE category.id = $1`, [categoryId]);
+        message = `La catégorie a été supprimée`
+        return message
     }
 
 };
