@@ -1,17 +1,17 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT,
+  CHANGE_AUTH_FIELD, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
+  SET_LOADER_LOGIN,
 } from '../actions/types';
 
 const initialState = {
-  nickname: '',
-  token: '',
+  // on va chercher dans le localStorage = PERSISTANCE même après fermeture de la page
+  token: localStorage.getItem('token') || null,
+  isLoggedIn: !!localStorage.getItem('token'),
   email: '',
   password: '',
-  isLoggedIn: false,
-  isLoading: false,
-  message: '',
-  role: '',
+  errorMessage: '',
   isSuccessful: false,
+  isLoading: false,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -24,25 +24,24 @@ const reducer = (oldState = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...oldState,
-        role: action.role,
-        token: action.token,
-        nickname: action.nickname,
-        message: `Connexion réussie ${action.nickname} !`,
-        isLoggedIn: action.isLogged,
+        token: action.member.token,
+        isLoggedIn: true,
         isSuccessful: true,
+        isLoading: false,
       };
     case LOGOUT:
+      window.location.replace('/');// refresh pour vider tout l'historique du state
+      return oldState;
+    case LOGIN_FAIL:
       return {
         ...oldState,
-        nickname: '',
-        token: '',
-        email: '',
-        password: '',
-        isLoggedIn: false,
+        errorMessage: action.message,
         isLoading: false,
-        message: '',
-        role: '',
-        isSuccessful: false,
+      };
+    case SET_LOADER_LOGIN:
+      return {
+        ...oldState,
+        isLoading: true,
       };
     default:
       return oldState;

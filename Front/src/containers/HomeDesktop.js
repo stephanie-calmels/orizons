@@ -8,7 +8,7 @@ import {
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
   trips: state.trips.trips,
-  categories: state.trips.categories
+  categories: state.trips.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({

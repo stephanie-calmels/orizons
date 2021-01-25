@@ -1,5 +1,6 @@
 import {
-  CHANGE_AUTH_FIELD, LOGIN, LOGIN_SUCCESS, LOGOUT, SET_MESSAGE,
+  CHANGE_AUTH_FIELD, LOGIN, LOGIN_SUCCESS, LOGOUT, LOGIN_FAIL,
+  SET_LOADER_LOGIN,
 } from './types';
 
 export const changeAuthField = (name, value) => ({
@@ -12,21 +13,20 @@ export const login = () => ({
   type: LOGIN,
 });
 
-export const loginSuccess = ({
-  isLogged, nickname, role, token,
-}) => ({
+export const loginSuccess = (member) => ({
   type: LOGIN_SUCCESS,
-  isLogged,
-  nickname,
-  role,
-  token,
+  member
 });
 
 export const logout = () => ({
   type: LOGOUT,
 });
 
-export const setMessage = (message) => ({
-  type: SET_MESSAGE,
-  payload: message,
+export const loginFail = (message) => ({
+  type: LOGIN_FAIL,
+  message,
+});
+
+export const activateLoader = () => ({
+  type: SET_LOADER_LOGIN,
 });
