@@ -33,6 +33,9 @@ const tripController = {
             // 4 - Les informations de catégories
             const category = await categoryDataMapper.getCategoryByTripId(tripId);
 
+            // 5 - Les photos enregistrées pour chaque étape
+            const photos = await photoDataMapper.getPhotosByTripByStep(tripId)
+
 
             response.json({
                 data: [{
