@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { loginSuccess, setMessage } from '../actions/auth';
-import { getTripsSuccess } from '../actions/trips';
-import { LOGIN, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS } from '../actions/types';
+import { getTripsSuccess, getCategoriesSuccess } from '../actions/trips';
+import { LOGIN, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_CATEGORIES } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -59,6 +59,24 @@ const api = (store) => (next) => (action) => {
     };
     case GET_MORE_RESULTS: {
       console.log('get more results');
+      break;
+    };
+    case GET_CATEGORIES: {
+      const config = {
+        method: 'get',
+        url: 'https://orizons.herokuapp.com/categories',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getCategoriesSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       break;
     };
     default:

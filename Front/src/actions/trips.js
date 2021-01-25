@@ -1,5 +1,5 @@
 import {
-  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS
+  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS, GET_CATEGORIES, GET_CATEGORIES_SUCCESS
 } from './types';
 
 export const randomSearch = () => ({
@@ -17,4 +17,13 @@ export const getTrips = () => ({
 export const getTripsSuccess = (trips) => ({
   type: GET_TRIPS_SUCCESS,
   trips
+});
+
+export const getCategories = () => ({
+  type: GET_CATEGORIES,
+});
+
+export const getCategoriesSuccess = (categories) => ({
+  type: GET_CATEGORIES_SUCCESS,
+  categories
 });

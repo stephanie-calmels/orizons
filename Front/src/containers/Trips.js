@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Trips from 'src/components/Trips';
-import { getMoreResults, getTrips } from '../actions/trips';
+import { getMoreResults, getTrips, getCategories } from '../actions/trips';
 
 const mapStateToProps = (state) => ({
   trips: state.trips.trips,
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadTrips: () => {
     dispatch(getTrips());
+  },
+  loadCategories: () => {
+    dispatch(getCategories());
   }
 });
 
