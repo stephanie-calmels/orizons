@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.use('/trips', tripRouter);
 router.use('/categories', categoriesRouter);
-router.use('/members', jwt, memberRouter);
+router.use('/members', memberRouter);
 router.use('/steps', jwt, stepRouter)
 
 //router.use(errorController.error404);
