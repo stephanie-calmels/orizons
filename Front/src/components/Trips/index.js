@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
 
 import Tag from 'src/components/Tag';
@@ -6,7 +6,12 @@ import Tag from 'src/components/Tag';
 
 import './trips.scss';
 
-const Trips = ({ trips, categories, showMoreResults }) => (
+const Trips = ({ trips, categories, showMoreResults, loadTrips }) => {
+  // useEffect(() => {
+  //   loadTrips();
+  // },[]);
+
+  return (
     <Container>
         <h1 className="text-center p4 font-weight-bold">Explorer les carnets de voyage publiés par la communauté</h1>
 
@@ -57,7 +62,8 @@ const Trips = ({ trips, categories, showMoreResults }) => (
         
 
     </Container>
-);
+  );
+};
 
 export default Trips;
 

@@ -1,5 +1,6 @@
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
+import { GET_TRIPS_SUCCESS } from '../actions/types';
 
 const initialState = {
   trips: trips,
@@ -8,7 +9,11 @@ const initialState = {
 
 const reducer = (oldState = initialState, action) => {
   switch (action.type) {
-    
+    case GET_TRIPS_SUCCESS:
+      return {
+        ...oldState,
+        trips: action.trips,
+      };
     default:
       return oldState;
   }
