@@ -4,10 +4,13 @@ import {
   Container, Card, ListGroup, ListGroupItem, Button, Modal,
 } from 'react-bootstrap';
 
-// import DateTime from 'luxon/src/datetime';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
 
 import Title from '../PageTitle/index';
 import RegisterForm from '../Register/RegisterForm';
+
+dayjs.locale('fr');
 
 const Account = ({
   firstname,
@@ -47,7 +50,7 @@ const Account = ({
           <Card.Body>
             <Card.Title>Paramètres du compte</Card.Title>
             <Card.Text>
-              Membre depuis le {registrationDate}
+              Membre depuis le <span className="font-weight-bold">{dayjs(`${registrationDate}`).format('DD/MM/YYYY')}</span>
             </Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroupItem className="d-flex justify-content-between align-items-center">

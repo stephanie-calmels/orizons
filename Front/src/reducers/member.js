@@ -13,7 +13,7 @@ const initialState = {
   errorMessage: '',
   isSuccessful: false,
   isLoading: false,
-  registration_date: '',
+  registrationDate: '',
 };
 
 const reducer = (oldState = initialState, action) => {

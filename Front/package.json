@@ -56,8 +56,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "dayjs": "^1.10.4",
     "leaflet": "^1.7.1",
-    "luxon": "^1.25.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.3",
