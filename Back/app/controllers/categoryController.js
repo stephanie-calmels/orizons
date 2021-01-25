@@ -25,8 +25,8 @@ const categoriesController = {
     },
     async createCategory(request, response, next) {
         try {
-            // A voir
-            const category = await categoryDataMapper.createCategory();
+            const newCategory = request.body;
+            const category = await categoryDataMapper.createCategory(newCategory);
             response.json({
                 data: category
             })

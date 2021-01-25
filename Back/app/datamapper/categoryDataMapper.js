@@ -2,7 +2,7 @@ const client = require('./client');
 
 const categoryDataMapper = {
     async getAllCategory() {
-        const result = await client.query("SELECT * FROM category");
+        const result = await client.query("SELECT * FROM category ORDER BY entitled");
         return result.rows;
     },
 
@@ -22,8 +22,12 @@ const categoryDataMapper = {
         return result.rows[0];
     },
 
-    async createCategory() {
-        const result = await client.query("INSERT INTO category() VALUES RETURNING *", []);
+    async createCategory(newCategory) {
+        const result = await client.query("INSERT INTO category(entitled, color, image) VALUES ($1, $2, $3) RETURNING *", [
+            newCategory.entitled,
+            newCategory.color,
+            newCategory.image
+        ]);
         return result.rows[0];
     },
 
