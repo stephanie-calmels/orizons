@@ -4,8 +4,8 @@ import './trip.scss';
 
 import trips from 'src/data/trips';
 
-import Banner from 'src/components/Banner';
-import Description from 'src/components/Description';
+import Banner from './Banner';
+import Description from './Description';
 import AddStep from './AddStep';
 
 
