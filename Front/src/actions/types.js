@@ -8,3 +8,4 @@ export const CHANGE_AUTH_FIELD = 'CHANGE_AUTH_FIELD';
 
 // --- TRIPS
 export const RANDOM_SEARCH = 'RANDOM_SEARCH';
+export const GET_MORE_RESULTS = 'GET_MORE_RESULTS';
