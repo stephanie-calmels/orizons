@@ -14,6 +14,14 @@ const categoryDataMapper = {
         return result.rows[0];
     },
 
+    async getCategoryByTripId(tripId) {
+        const result = await client.query('SELECT * FROM category JOIN trip ON trip.category_id = category.id WHERE trip.id = $1', [tripId]);
+        if (result.rowCount == 0) {
+            return null;
+        }
+        return result.rows[0];
+    },
+
     async createCategory() {
         const result = await client.query("INSERT INTO category() VALUES RETURNING *", []);
         return result.rows[0];

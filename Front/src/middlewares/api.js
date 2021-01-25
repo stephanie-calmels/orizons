@@ -7,7 +7,7 @@ import {
   updateMemberFail,
 } from '../actions/member';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH,
 } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
@@ -133,7 +133,11 @@ const api = (store) => (next) => (action) => {
         });
       break;
     }
-
+    case RANDOM_SEARCH: {
+      // eslint-disable-next-line no-console
+      console.log('random search');
+      break;
+    }
     default:
       next(action);
   }

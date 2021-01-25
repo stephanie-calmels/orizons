@@ -14,7 +14,6 @@ const Steps = ({steps})=>{
         const sluggedTitleAsAnchor = '#' + slugify(step.title, {lower:true});
         // Je récupère la position de l'étape en cours dans le tableau et j'y ajoute 1 pour la barre de nav
         const stepNumber = steps.indexOf(step) + 1;
-        console.log(stepNumber)
         return <Nav key={step.id}>
           <Nav.Item>
             <Nav.Link href={sluggedTitleAsAnchor}>{stepNumber}</Nav.Link>

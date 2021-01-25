@@ -1,6 +1,3 @@
-const {
-    deleteAllMember
-} = require('../controllers/memberController');
 const router = require('../router/tripRouter');
 const client = require('./client');
 
@@ -19,8 +16,7 @@ const memberDataMapper = {
         return result.rows[0];
     },
 
-    async getMemberLogin(email, password) {
-        console.log(email, password);
+    async getMemberLogin(email) {
         //requêtes en étages
         const result = await client.query("SELECT member.id, member.nickname, member.password, docket.role_name FROM member JOIN docket on docket.id = member.docket_id WHERE email = $1", [email]);
         if (result.rowCount == 0) {

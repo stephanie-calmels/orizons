@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -17,7 +17,8 @@ import Login from 'src/containers/Login'; // REDUX
 import Register from 'src/containers/Register'; // REDUX
 import Account from 'src/containers/Account'; // REDUX
 import Page from 'src/components/Page';
-import Home from 'src/components/Home';
+import HomeDesktop from 'src/containers/HomeDesktop';
+import HomeMobile from 'src/containers/HomeMobile';
 import Trips from 'src/components/Trips';
 import AddTrip from 'src/components/AddTrip';
 import Profile from 'src/components/Profile';
@@ -33,9 +34,26 @@ import ContactForm from 'src/components/ContactForm';
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
 
+// Custom hook for display according srceen size
+function useMediaQuery() {
+  const [screenSize, setScreenSize] = useState([0, 0]);
+
+  useLayoutEffect(() => {
+    function updateScreenSize() {
+      setScreenSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateScreenSize);
+    updateScreenSize();
+    return () => window.removeEventListener('resize', updateScreenSize);
+  }, []);
+
+  return screenSize;
+}
+
 // == Composant
 
 const App = ({ isLoggedIn, loadMember }) => {
+  const [width] = useMediaQuery();
   useEffect(() => {
     if (isLoggedIn) {
       loadMember();
@@ -50,7 +68,11 @@ const App = ({ isLoggedIn, loadMember }) => {
       <Page>
         <Switch>
           <Route exact path="/">
-            <Home />
+            {
+              width > 769
+                ? <HomeDesktop />
+                : <HomeMobile isLogged={false} trips={trips} />
+            }
           </Route>
           <Route exact path="/inscription">
             <Register />
@@ -80,7 +102,7 @@ const App = ({ isLoggedIn, loadMember }) => {
             { isLoggedIn ? <AddTrip /> : <Redirect to="/connexion" />}
           </Route>
           {/* <Route exact path="/ajouter-etape">
-          <AddStep />
+            <AddStep />
           </Route> */}
           <Route exact path="/compte">
             { isLoggedIn ? <Account /> : <Redirect to="/connexion" />}
@@ -96,6 +118,5 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   loadMember: PropTypes.func.isRequired,
 };
-
 // == Export
 export default App;
