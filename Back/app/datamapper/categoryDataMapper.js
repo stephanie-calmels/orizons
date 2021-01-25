@@ -54,8 +54,10 @@ const categoryDataMapper = {
         const result = await client.query("");
     },
 
-    async deleteOneCategory() {
-        const result = await client.query("");
+    async deleteOneCategory(categoryId) {
+        await client.query(`DELETE FROM category WHERE category.id = $1`, [categoryId]);
+        message = `La catégorie a été supprimée`
+        return message
     }
 
 };

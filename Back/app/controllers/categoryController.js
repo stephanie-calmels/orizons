@@ -74,9 +74,9 @@ const categoriesController = {
             const {
                 categoryId
             } = request.params
-            const trip = await categoryDataMapper.deleteOneCategory(categoryId);
+            await categoryDataMapper.deleteOneCategory(categoryId);
             response.json({
-                data: category
+                message
             })
         } catch (error) {
             next(error)
