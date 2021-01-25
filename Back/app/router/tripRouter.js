@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', tripController.getAllTrip);
 router.get('/:tripId', tripController.getOneTrip);
-router.post('/', jwt, tripController.createTrip)
+router.post('/', tripController.createTrip)
 //router.post('/', authorizationMW, tripController.createTrip);
 //router.patch('/', jwt, tripController.updateAllTrip);
 //router.patch('/:tripId', jwt, tripController.updateOneTrip);

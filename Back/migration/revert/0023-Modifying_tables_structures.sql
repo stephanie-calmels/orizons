@@ -2,6 +2,7 @@
 
 BEGIN;
 
---ALTER TABLE "trip" DROP COLUMN "category_id";
+ALTER TABLE "trip" DROP COLUMN "category_id";
+ALTER TABLE "category" DROP COLUMN "image";
 
 COMMIT;

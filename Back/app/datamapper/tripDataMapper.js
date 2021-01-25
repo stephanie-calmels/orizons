@@ -2,7 +2,7 @@ const client = require('./client');
 
 const tripDataMapper = {
     async getAllTrips() {
-        const result = await client.query("SELECT * FROM trip");
+        const result = await client.query("SELECT * FROM trip_with_duratiuon_status");
 
         return result.rows;
     },
