@@ -35,8 +35,19 @@ const categoryDataMapper = {
         const result = await client.query("");
     },
 
-    async updateOneCategory(idTrip) {
-        const result = await client.query("");
+    async updateOneCategory(updatedCategory) {
+        const result = await client.query(`UPDATE "category" 
+        SET "entitled" = $1,
+            "color" = $2,
+            "image" = $3
+        WHERE "id" = $4
+        RETURNING *`, [
+            updatedCategory.entitled,
+            updatedCategory.color,
+            updatedCategory.image,
+            updatedCategory.id
+        ]);
+        return result.rows[0];
     },
 
     async updateAllCategories() {

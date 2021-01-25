@@ -36,7 +36,9 @@ const categoriesController = {
     },
     async updateAllCategory(request, response, next) {
         try {
-            const categories = await categoryDataMapper.updateAllCategories();
+            const updatedCategory = request.body
+            console.log(updatedCategory);
+            const categories = await categoryDataMapper.updateOneCategory(updatedCategory);
             response.json({
                 data: categories
             })
