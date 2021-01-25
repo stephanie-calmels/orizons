@@ -3,7 +3,6 @@ import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react
 
 import Tag from 'src/components/Tag';
 
-
 import './trips.scss';
 
 const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories }) => {
@@ -60,11 +59,10 @@ const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories }
             <Button variant="link" onClick={showMoreResults}>Afficher plus de carnets</Button>
           </Col>
         </Row>
-        
 
     </Container>
   );
 };
 
-export default Trips;
 
+export default Trips;

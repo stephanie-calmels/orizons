@@ -7,5 +7,4 @@ const mapStateToProps = (state) => ({
   trips: state.trips.trips,
 });
 
-
 export default connect(mapStateToProps)(HomeMobile);

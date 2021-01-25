@@ -1,0 +1,23 @@
+.card-account {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  &__img {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+  }
+  &__title {
+    text-align: center;
+  }
+  &__text {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-account {
+  width: 50%
+  }
+}
