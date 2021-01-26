@@ -1,9 +1,9 @@
 // Il vaut mieux utiliser un système de pool pour traiter plusieurs requête en même
 const {
-    Client
+    Pool
 } = require('pg');
 
-const client = new Client({
+const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
@@ -12,4 +12,4 @@ const client = new Client({
 
 // Pas besoin de connect car c'est le Pool qui va se charger d'établir les connexions
 
-module.exports = client;
+module.exports = pool;
