@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
 
-import Tag from 'src/components/Tag';
+import Tag from 'src/containers/Tag';
 
 import './trips.scss';
 
@@ -27,8 +27,7 @@ const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, 
           <Row>
             {trips.map(trip => (
               <Col md={6} lg={4} xl={3} key={trip.id}>
-              <div onClick={() => handleClick(trip.id)}>
-
+                <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
                   <Card className="card_trips">
                     <Card.Img className="card_trips-img-top" variant="top" src={trip.cover_photo.url} />
                     <Card.Body className="card_trips-body">
@@ -50,7 +49,7 @@ const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, 
                     <small className="text-muted">{trip.author.nickname}</small>
                     </Card.Footer>
                   </Card>
-              </div>
+                </div>
               </Col>
             ))}
           </Row>
