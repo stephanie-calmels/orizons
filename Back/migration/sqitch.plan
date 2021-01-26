@@ -10,3 +10,4 @@
 0030-trips-functions-views 2021-01-22T09:28:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # Functions and views for the trips
 0040-settings-member-table 2021-01-25T11:29:28Z "Etudiant O'clock",,, <etudiant@teleporteur> # Settings in member table
 0050-trip-with-duration-status 2021-01-25T12:27:59Z "Etudiant O'clock",,, <etudiant@teleporteur> # Modifying trip_with-duration_status
+0055-addings-bdd 2021-01-26T09:09:39Z "Etudiant O'clock",,, <etudiant@teleporteur> # Addings to tables
