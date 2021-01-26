@@ -9,7 +9,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, trips, categories, randomSearch,
+  isLoggedIn, trips, categories, randomSearch, handleClick
 }) => (
   <Container fluid>
     <Row>
@@ -102,27 +102,29 @@ const HomeDesktop = ({
         <CardDeck>
           {trips.map((trip) => (
             <Col md={6} key={trip.id}>
-              <Card className="card_home">
-                <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
-                <Card.Body className="card_home-body">
-                  <Card.Title className="card_home-title">{trip.title}</Card.Title>
-                  <Card.Text className="card_home-text">
-                    {trip.summary}
-                  </Card.Text>
-                  <Card.Text className="card_home-text">
-                    {trip.categories.map((category) => (
+              <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
+                <Card className="card_home">
+                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
+                  <Card.Body className="card_home-body">
+                    <Card.Title className="card_home-title">{trip.title}</Card.Title>
+                    <Card.Text className="card_home-text">
+                      {trip.summary}
+                    </Card.Text>
+                    <Card.Text className="card_home-text">
+                      {trip.categories.map((category) => (
 
-                      <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
-                        {category.entitled}
-                      </Badge>
-                    ))}
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer className="card_home-footer">
-                  <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
-                  <small className="text-muted">{trip.author.nickname}</small>
-                </Card.Footer>
-              </Card>
+                        <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
+                          {category.entitled}
+                        </Badge>
+                      ))}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className="card_home-footer">
+                    <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
+                    <small className="text-muted">{trip.author.nickname}</small>
+                  </Card.Footer>
+                </Card>
+              </div>
             </Col>
           ))}
         </CardDeck>
