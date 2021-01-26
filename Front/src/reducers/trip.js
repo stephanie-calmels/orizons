@@ -1,9 +1,8 @@
 import trips from 'src/data/trips';
 
-const trip = trips[0];
 
 const initialState = {
-  trip: trip,
+  tripItem: trips[1],
 };
 
 const reducer = (oldState = initialState, action) => {

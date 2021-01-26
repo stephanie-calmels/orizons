@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { loginSuccess, setMessage } from '../actions/auth';
 import { LOGIN } from '../actions/types';
-import { RANDOM_SEARCH } from '../actions/types';
+import { RANDOM_SEARCH, GET_TRIP } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -40,7 +40,22 @@ const api = (store) => (next) => (action) => {
       break;
     };
     case GET_TRIP:{
-      
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/trip/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getTripSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
     };
     default:
       next(action);

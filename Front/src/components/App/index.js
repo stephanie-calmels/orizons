@@ -22,7 +22,7 @@ import Login from 'src/containers/Login'; // REDUX
 import ContactForm from 'src/components/ContactForm';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
-import Trip from 'src/components/Trip';
+import Trip from 'src/containers/Trip';
 
 import trips from 'src/data/trips';
 import categories from 'src/data/categories';
