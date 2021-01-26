@@ -70,7 +70,7 @@ const tripLocalisations = require('./import_trip_localisation.json');
             ])
 
     }
-    console.log(members)
+
     // 5 - Import des membres
     const saltRounds = 10;
 
@@ -90,7 +90,7 @@ const tripLocalisations = require('./import_trip_localisation.json');
                 member.docket_id,
                 member.biography
             ])
-        console.log('****************************')
+
     }
 
     // 7 - Import des voyages

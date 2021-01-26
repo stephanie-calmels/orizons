@@ -6,6 +6,7 @@ const tripRouter = require('./tripRouter');
 const categoryRouter = require('./categoryRouter');
 const memberRouter = require('./memberRouter');
 const stepRouter = require('./stepRouter');
+const uploadRouter = require('./uploadRouter');
 
 const errorController = require('../controllers/errorController');
 
@@ -14,7 +15,8 @@ const router = express.Router();
 router.use('/trips', tripRouter);
 router.use('/categories', categoryRouter);
 router.use('/members', memberRouter);
-router.use('/steps', jwt, stepRouter)
+router.use('/steps', jwt, stepRouter);
+router.use('/uploads', uploadRouter);
 
 //router.use(errorController.error404);
 
