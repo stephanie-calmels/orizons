@@ -8,7 +8,6 @@ import Banner from './Banner';
 import Description from './Description';
 import AddStep from './AddStep';
 
-
 const Trip = ({trip, loadTrip})=>{
 
   useEffect(()=>{
@@ -21,6 +20,5 @@ const Trip = ({trip, loadTrip})=>{
   <AddStep />
   </div>
 }
-
 
 export default Trip;

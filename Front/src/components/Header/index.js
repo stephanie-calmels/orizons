@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import './header.scss';
 
-const Header = ({ isLoggedIn, handleLogout }) => {
+const Header = ({ isLoggedIn, handleLogout, nickname, profilePhoto }) => {
   const handleClick = () => {
     handleLogout();
   };
@@ -37,13 +37,13 @@ const Header = ({ isLoggedIn, handleLogout }) => {
           {isLoggedIn
             ? (
               <>
-                <Image className="profile_photo m-2" src="https://resize-parismatch.lanmedia.fr/r/416,416/img/var/news/storage/images/paris-match/people-a-z/ryan-gosling/6048588-4-fre-FR/Ryan-Gosling.jpg" roundedCircle />
+                <Image className="profile_photo m-2" src={profilePhoto} roundedCircle />
                 <DropdownButton
-                  title="Ryan Gosling"
+                  title={nickname}
                   id="dropdown-menu-align-right"
                   menuAlign="right"
                 >
-                  <LinkContainer to="/profile/:pseudo">
+                  <LinkContainer to={`/profil/${nickname}`}>
                     <Nav.Link>Mon profil</Nav.Link>
                   </LinkContainer>
 

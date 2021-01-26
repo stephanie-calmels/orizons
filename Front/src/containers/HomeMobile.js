@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import history from '../history';
 
 import HomeMobile from 'src/components/HomeMobile';
 
@@ -7,5 +8,9 @@ const mapStateToProps = (state) => ({
   trips: state.trips.trips,
 });
 
-
-export default connect(mapStateToProps)(HomeMobile);
+const mapDispatchToProps = (dispatch) => ({
+  handleClick: (id) => {
+    history.push(`/exploration/${id}`);
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(HomeMobile);
