@@ -6,6 +6,7 @@ require('dotenv').config({
 const {
     Client
 } = require('pg');
+const bcrypt = require('bcrypt');
 
 const dockets = require('./import_docket.json');
 const categories = require('./import_category.json');
@@ -71,14 +72,18 @@ const tripLocalisations = require('./import_trip_localisation.json');
     }
     console.log(members)
     // 5 - Import des membres
+    const saltRounds = 10;
+
     for (let member of members) {
+        console.log(member.password)
+        let hashedPassword = bcrypt.hashSync(member.password, saltRounds);
         await client.query(`INSERT INTO "member"("first_name", "last_name", "nickname", "email", "password", "profile_photo", "localisation_id", "photo_id", "docket_id", "biography") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
             [
                 member.first_name,
                 member.last_name,
                 member.nickname,
                 member.email,
-                member.password,
+                hashedPassword,
                 member.profile_photo,
                 member.localisation_id,
                 member.photo_id,
