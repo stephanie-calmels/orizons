@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import history from '../history';
 
 import Trips from 'src/components/Trips';
 import { getMoreResults, getTrips, getCategories } from '../actions/trips';
@@ -17,6 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadCategories: () => {
     dispatch(getCategories());
+  },
+  handleClick: (id) => {
+    history.push(`/exploration/${id}`);
   }
 });
 
