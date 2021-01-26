@@ -9,9 +9,8 @@ import {
   updateMemberFail,
 } from '../actions/member';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, 
 } from '../actions/types';
-
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -141,10 +140,29 @@ const api = (store) => (next) => (action) => {
       console.log('random search');
       break;
     };
+    case GET_TRIP:{
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/trip/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getTripSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
     case GET_TRIPS: {
       const config = {
         method: 'get',
         url: 'https://orizons.herokuapp.com/trips',
+
         headers: {
           'Content-Type': 'application/json',
         },
@@ -191,6 +209,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(getTripsSuccess(response.data.data));
+
         })
         .catch((error) => {
           console.error(error);
