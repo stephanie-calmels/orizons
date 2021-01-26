@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "node-dev app.js",
-    "import": "node-dev ./Back/datas/import.js"
+    "import": "node ./Back/datas/import.js"
   },
   "keywords": [],
   "author": "",
