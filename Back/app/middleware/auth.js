@@ -1,7 +1,8 @@
 const jwt = require('express-jwt');
 
-const authorizationMW = jwt({
+const authorizationMiddleware = jwt({
     secret: process.env.SECRET,
     algorithms: ['HS256']
 });
-module.exports = authorizationMW;
+
+module.exports = authorizationMiddleware;

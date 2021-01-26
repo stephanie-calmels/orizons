@@ -31,18 +31,21 @@ const tripController = {
             const localisation = await localisationDataMapper.getLocalisationByTrip(tripId);
 
             // 4 - Les informations de catégories
-            const category = await categoryDataMapper.getCategoryByTripId(tripId);
+            const categories = await categoryDataMapper.getCategoryByTripId(tripId);
 
+            // 5 - Les photos enregistrées pour chaque étape
+            const photos = await photoDataMapper.getPhotosByTripByStep(tripId)
+            // 6 - author -- nickname et le line vers la photo de profil
 
             response.json({
                 data: [{
-                    trip,
-                    localisation,
-                    author: {
+                        trip,
+                        localisation,
+                        author,
                         steps
                     },
-                    category
-                }]
+
+                ]
             })
         } catch (error) {
             next(error)

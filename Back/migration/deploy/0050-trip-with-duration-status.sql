@@ -1,18 +1,6 @@
--- Deploy orizons:0030-trips-functions to pg
+-- Deploy orizons:0050-trip-with-duration-status to pg
 
 BEGIN;
-
-
-CREATE OR REPLACE VIEW step_author AS
-SELECT "member"."id" AS "id_member",
-    "member"."nickname",
-    "step"."trip_id" AS "trip_id",
-    JSON_AGG("step") AS "steps"
-    FROM "member"
-    JOIN "step" ON "step"."member_id" = "member"."id"
-    GROUP BY "member"."id", "member"."nickname", "step"."trip_id";
-
-
 
 CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
@@ -20,7 +8,11 @@ SELECT t."id",
         t."summary",
         t."departure_date",
         t."arrival_date",(t."arrival_date"-t."departure_date" + 1) AS "duration",
-        (CASE WHEN t."arrival_date" IS NULL 
+        (CASE 
+            WHEN t."arrival_date" IS NULL 
+                THEN 'En cours'
+            WHEN CURRENT_DATE > t."departure_date" 
+                    AND CURRENT_DATE < t."arrival_date"
                 THEN 'En cours'
                 ELSE 'Terminé'
                 END) AS "status",
@@ -33,11 +25,5 @@ GROUP BY t."id",
         t."summary",
         t."departure_date",
         t."arrival_date";
-
-
---CREATE OR REPLACE VIEW "trips_over" AS 
-
-
-
 
 COMMIT;
