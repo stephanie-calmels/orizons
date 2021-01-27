@@ -1,4 +1,4 @@
--- Deploy orizons:0050-trip-with-duration-status to pg
+-- Deploy orizons:0060-trip_duration_status to pg
 
 BEGIN;
 
@@ -17,14 +17,22 @@ SELECT t."id",
                 ELSE 'Terminé'
                 END) AS "status",
         t."score",
-        JSON_AGG("photo") AS "cover_photo"
-        
+        JSON_AGG("photo") AS "cover_photo",
+        JSON_AGG("member") AS "author"
 FROM "trip" t
 JOIN "photo" ON "photo"."id" = t."photo_id"
+JOIN "member" ON "member"."id" = t."member_id"
 GROUP BY t."id",
         t."title",
         t."summary",
         t."departure_date",
         t."arrival_date";
+
+
+CREATE VIEW "category_trip_id" AS
+SELECT *
+FROM "category"
+JOIN "_m2m_trip_category" tc
+        ON tc."category_id" = "category"."id"
 
 COMMIT;

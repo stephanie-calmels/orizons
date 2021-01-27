@@ -22,7 +22,7 @@ const tripController = {
 
             // 1 - les informations de 1 vopyage
             const trip = await tripDataMapper.getTripById(tripId);
-            console.log(trip.member_id)
+            console.log(trip)
             // 2 - Les informations du member
             //const author = await memberDataMapper.getMemberById(trip.member_id)
             const steps = await stepDataMapper.getStepByTripId(tripId);

@@ -1,7 +1,6 @@
--- Deploy orizons:0050-trip-with-duration-status to pg
+-- Revert orizons:0060-trip_duration_status from pg
 
 BEGIN;
-
 CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
         t."title",
