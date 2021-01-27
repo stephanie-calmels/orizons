@@ -38,8 +38,9 @@ const memberController = require('../controllers/memberController');
 const router = express.Router();
 
 router.get('/', memberController.getAllMember);
-//router.get('/', jwt, memberController.getAllMember);
-router.get('/:memberId', memberController.getOneMember);
+np:
+    //router.get('/', jwt, memberController.getAllMember);
+    router.get('/:memberId', memberController.getOneMember);
 //router.get('/:memberId', jwt, memberController.getOneMember);
 router.post('/', memberController.createMember);
 router.patch('/', memberController.updateAllMember);

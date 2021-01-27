@@ -17,18 +17,18 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
 
-    // response to preflight request
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(200);
-    } else {
-        next();
-    }
-});
+// response to preflight request
+if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+} else {
+    next();
+}
+});*/
 
 const jwtSecret = process.env.SECRET;
 
