@@ -5,7 +5,7 @@ BEGIN;
 
 
 CREATE OR REPLACE VIEW "category_trip_id" AS
-SELECT c.entitled, c.color, tc.trip_id
+SELECT c.id, c.entitled, c.color, tc.trip_id
 FROM "category" c
 JOIN "_m2m_trip_category" tc
         ON tc."category_id" = c."id";
