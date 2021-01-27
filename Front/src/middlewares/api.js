@@ -216,6 +216,24 @@ const api = (store) => (next) => (action) => {
         });
       break;
     };
+    case GET_PROFILE:{
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/members/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getProfileSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
     default:
       next(action);
   }
