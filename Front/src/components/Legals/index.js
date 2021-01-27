@@ -11,16 +11,12 @@ const Legals = () => {
       <Container>
       <h1>Mentions légales </h1>
         <h2>Site web appartenant à la team O'rizons.</h2>
-        <p>
-        
-        O'rizons,
-        Michel,
-        01-02-03-04-05
-        42 avenue de l'univers,
-
-        
-
-      </p>
+        <p>Nom : O'rizons</p>
+        <p>Prénom : Michel</p>
+        <p>Adresse email : michel@oclock.com</p>
+        <p>Numéro de téléphone : 01-02-03-04-05</p>
+        <p>Adresse :42 avenue de l'univers, Pré-au-Lard.</p>
+      
       </Container>
     </div>
 </div>

@@ -13,7 +13,7 @@ const About = () => {
     
     <CardDeck>
         <Card>
-        <Card.Img className="img" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY0qwu0LmuFQgzpCz0veCKIAeFWDEPFIQtgA&usqp=CAU"></Card.Img>
+        <Card.Img className="img" variant="top" src="https://ca.slack-edge.com/T018S94MBUY-U018XGBSWDP-d41d27ad106a-512"></Card.Img>
           <Card.Body>
             <Card.Title>Kamil</Card.Title>
             <Card.Text>
@@ -25,7 +25,7 @@ const About = () => {
         
 
         <Card>
-        <Card.Img className="img" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY0qwu0LmuFQgzpCz0veCKIAeFWDEPFIQtgA&usqp=CAU"></Card.Img>
+        <Card.Img className="img" variant="top" src="https://ca.slack-edge.com/T018S94MBUY-U01846K5SG7-f25fc70a8b26-512"></Card.Img>
           <Card.Body>
             <Card.Title>Juliette</Card.Title>
             <Card.Text>
@@ -37,7 +37,7 @@ const About = () => {
         
 
         <Card>
-        <Card.Img className="img" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY0qwu0LmuFQgzpCz0veCKIAeFWDEPFIQtgA&usqp=CAU"></Card.Img>
+        <Card.Img className="img" variant="top" src="https://ca.slack-edge.com/T018S94MBUY-U0198NZKVT2-ecfac0f3a55b-512"></Card.Img>
           <Card.Body>
             <Card.Title>Steph</Card.Title>
             <Card.Text>
@@ -48,7 +48,7 @@ const About = () => {
 
 
         <Card>
-        <Card.Img className="img" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY0qwu0LmuFQgzpCz0veCKIAeFWDEPFIQtgA&usqp=CAU"></Card.Img>
+        <Card.Img className="img" variant="top" src="https://ca.slack-edge.com/T018S94MBUY-U018R2G9V60-f3e12639031e-512"></Card.Img>
           <Card.Body>
             <Card.Title>Armandine</Card.Title>
             <Card.Text>
@@ -58,7 +58,7 @@ const About = () => {
         </Card>
 
         <Card>
-          <Card.Img className="img" variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY0qwu0LmuFQgzpCz0veCKIAeFWDEPFIQtgA&usqp=CAU"></Card.Img>
+          <Card.Img className="img" variant="top" src="https://ca.slack-edge.com/T018S94MBUY-U01FWGGJ1S5-618ba15e20dd-512"></Card.Img>
           <Card.Body>
             <Card.Title>Paul</Card.Title>
             <Card.Text>
