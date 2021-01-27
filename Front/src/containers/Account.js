@@ -25,9 +25,10 @@ const mapDispatchToProps = (dispatch) => ({
   changeField: (name, value) => {
     dispatch(changeRegisterField(name, value));
   },
-  handleRegister: () => {
+  handleUpdate: (data) => {
+    //console.log(data);
     dispatch(activateLoader());
-    dispatch(updateMember());
+    dispatch(updateMember(data));
   },
   loadMember: () => {
     dispatch(getMember());

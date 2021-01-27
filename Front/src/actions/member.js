@@ -42,8 +42,9 @@ export const getMemberFail = (message) => ({
   message,
 });
 
-export const updateMember = () => ({
+export const updateMember = (data) => ({
   type: UPDATE_MEMBER,
+  data,
 });
 
 export const updateMemberSuccess = (member) => ({

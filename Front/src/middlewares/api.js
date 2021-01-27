@@ -63,7 +63,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           // on met à jour le state du membre avec ses infos
-          console.log(response.data.data)
+          // console.log(response.data.data)
           store.dispatch(getMemberSuccess(response.data.data));
         })
         .catch((error) => {
@@ -112,13 +112,16 @@ const api = (store) => (next) => (action) => {
       break;
     }
     case UPDATE_MEMBER: {
+      // On récupère le token après le login
+      const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'patch',
-        url: 'https://orizons.herokuapp.com/members/39',
+        url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer ${token}'
+          'Authorization': `Bearer ${token}`
         },
+        data: action.data
       };
       axios(config)
         .then((response) => {
@@ -130,6 +133,7 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
+        console.log(errorMessage)
           store.dispatch(updateMemberFail(errorMessage));
         });
       break;

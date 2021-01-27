@@ -94,7 +94,7 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         isSuccessful: false,
         isLoading: false,
-        errorMessage: action.member.errorMessage,
+        errorMessage: action.message,
       };
     default:
       return oldState;
