@@ -162,6 +162,7 @@ const memberController = {
                 memberId
             } = request.params;
             const memberPhoto = request.file.path;
+            console.log(memberPhoto)
             const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
             response.json({
                 data: member
