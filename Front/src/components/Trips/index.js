@@ -37,12 +37,12 @@ const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, 
                         {trip.summary}
                     </Card.Text>
                     <Card.Text className="card_trips-text">
-                      {/* {trip.categories.map(category => (
+                      {trip.categories.map(category => (
                         
                           <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
                             {category.entitled}
                           </Badge>                 
-                      ))} */}
+                      ))}
                     </Card.Text>
                     </Card.Body>
                     <Card.Footer className="card_trips-footer">
