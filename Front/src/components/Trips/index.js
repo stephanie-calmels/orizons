@@ -6,10 +6,10 @@ import Tag from 'src/components/Tag';
 import './trips.scss';
 
 const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories }) => {
-  // useEffect(() => {
-  //   loadTrips();
-  //   loadCategories();
-  // },[]);
+  useEffect(() => {
+    // loadTrips();
+    loadCategories();
+  },[]);
 
   return (
     <Container>
