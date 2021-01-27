@@ -1,5 +1,7 @@
 const express = require('express');
 
+const jwt = require('../middleware/auth')
+
 const categoryController = require('../controllers/categoryController');
 
 const router = express.Router();
@@ -9,8 +11,8 @@ router.get('/:categoriesId', categoryController.getOneCategory);
 router.post('/', categoryController.createCategory);
 router.patch('/', categoryController.updateAllCategory);
 router.patch('/:categoriesId', categoryController.updateOneCategory);
-router.delete('/', categoryController.deleteAllCategory);
-router.delete('/:categoriesId', categoryController.deleteOneCategory);
+router.delete('/', jwt, categoryController.deleteAllCategory);
+router.delete('/:categoriesId', jwt, categoryController.deleteOneCategory);
 
 
 module.exports = router;

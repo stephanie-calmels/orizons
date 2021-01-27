@@ -42,6 +42,7 @@ const AddTrip = () => {
   
   const handleImage =(e)=>{
     // creating a blob in order to add the image to the trip preview
+    console.log(e.target.files[0])
     let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
     let blobLink = URL.createObjectURL(imageBlob)
     setInputs({...inputs, [e.target.name]: blobLink})

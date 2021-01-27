@@ -6,12 +6,13 @@ import { getTripsSuccess, getCategoriesSuccess } from '../actions/trips';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail,
+  updateMemberFail
 } from '../actions/member';
+import {getProfileSuccess} from '../actions/profile'
+import {getTripSuccess} from '../actions/trip'
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_CATEGORIES,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, GET_PROFILE
 } from '../actions/types';
-
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -141,10 +142,29 @@ const api = (store) => (next) => (action) => {
       console.log('random search');
       break;
     };
+    case GET_TRIP:{
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/trip/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getTripSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
     case GET_TRIPS: {
       const config = {
         method: 'get',
         url: 'https://orizons.herokuapp.com/trips',
+
         headers: {
           'Content-Type': 'application/json',
         },
@@ -174,6 +194,42 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(getCategoriesSuccess(response.data.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
+    case GET_TRIPS_BY_CATEGORY: {
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/trips/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(getTripsSuccess(response.data.data));
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+    };
+    case GET_PROFILE:{
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/members/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data.data);
+          store.dispatch(getProfileSuccess(response.data.data));
         })
         .catch((error) => {
           console.error(error);

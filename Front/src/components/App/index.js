@@ -21,8 +21,8 @@ import HomeDesktop from 'src/containers/HomeDesktop'; // REDUX
 import HomeMobile from 'src/containers/HomeMobile'; // REDUX
 import Trips from 'src/containers/Trips'; // REDUX
 import AddTrip from 'src/components/AddTrip';
-import Profile from 'src/components/Profile';
-import Trip from 'src/components/Trip';
+import Profile from 'src/containers/Profile';
+import Trip from 'src/containers/Trip';
 
 // == Dumb Components
 import Footer from 'src/components/Footer';
