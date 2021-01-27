@@ -6,7 +6,7 @@ const multer = require('multer');
 // Multer : indiquer le chemin de stockage des photos
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
-        callbackb(null, '/public/uploads/profile');
+        callbackb(null, '/Back/public/uploads/profile');
     },
     filename: (request, file, callback) => {
         // arriver à ajouter id du member pour identifier plus facilement la photo 
@@ -156,6 +156,24 @@ const memberController = {
             next(error)
         }
     },
+    async updateProfilePhoto(request, response, next) {
+        try {
+            const {
+                memberId
+            } = request.params;
+            const memberPhoto = request.file.path;
+            const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
+            response.json({
+                data: member
+            })
+
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+
     async deleteAllMember(request, response, next) {
         try {
 

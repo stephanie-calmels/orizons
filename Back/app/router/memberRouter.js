@@ -10,7 +10,12 @@ router.get('/:memberId', memberController.getOneMember);
 //router.get('/:memberId', jwt, memberController.getOneMember);
 router.post('/', memberController.createMember);
 router.patch('/', memberController.updateAllMember);
-router.patch('/:memberId', memberController.updateOneMember);
+
+router.patch('/:memberId', memberController.updateOneMember); // toutes les infos sauf pw, profilephoto et bannnière eet la biography
+router.patch('/profile_photo/:memberId', memberController.updateProfilePhoto);
+
+
+
 router.delete('/', jwt, memberController.deleteAllMember);
 router.delete('/:memberId', jwt, memberController.deleteOneMember);
 

@@ -62,6 +62,10 @@ const memberDataMapper = {
         return result.rows[0]
     },
 
+    async updateProfilePhoto(memberId, memberPhoto) {
+        //const result = await client.query(`UPDATE "member" SET "profile_photo" = $1 WHERE id = $2 RETURNING id, profile_photo`, [memberPhoto.])
+    },
+
     async deleteAllMember() {
         //function sql pour supprimer les données des tables
         const result = await client.query("");
