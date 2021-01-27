@@ -48,9 +48,10 @@ function useMediaQuery() {
 
 // == Composant
 
-const App = ({ isLoggedIn, loadMember }) => {
+const App = ({ isLoggedIn, loadMember, loadTrips }) => {
   const [width] = useMediaQuery();
   useEffect(() => {
+    loadTrips()
     if (isLoggedIn) {
       loadMember();
     }

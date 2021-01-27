@@ -8,7 +8,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 
 import './homeMobile.scss';
 
-const HomeMobile = ({ isLoggedIn, trips, handleClick }) => (
+const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
@@ -86,22 +86,22 @@ const HomeMobile = ({ isLoggedIn, trips, handleClick }) => (
       <h4 className="carousel-title">En manque d'inspiration ?</h4>
       <Carousel touch>
         {
-            trips.map((trip) => (
-              <Carousel.Item key={trip.id}>
-                <div onClick={() => handleClick(trip.id)}>
-                  <img
-                    className="d-block w-100"
-                    src={trip.cover_photo.url}
-                    alt={trip.title}
-                  />
-                  <Carousel.Caption className="carousel-caption-text">
-                    <h3>{trip.title}</h3>
-                    <p>by {trip.author.nickname}</p>
-                  </Carousel.Caption>
-                </div>
-              </Carousel.Item>
-            ))
-          }
+          randomTrips.map((trip) => (
+            <Carousel.Item key={trip.id}>
+              <div onClick={() => handleClick(trip.id)}>
+                <img
+                  className="d-block w-100"
+                  src={trip.cover_photo[0].url}
+                  alt={trip.title}
+                />
+                <Carousel.Caption className="carousel-caption-text">
+                  <h3>{trip.title}</h3>
+                  <p>by {trip.author[0].nickname}</p>
+                </Carousel.Caption>
+              </div>
+            </Carousel.Item>
+          ))
+        }
       </Carousel>
     </Row>
 

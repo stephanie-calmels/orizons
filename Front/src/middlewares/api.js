@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import jwtDecode from 'jwt-decode';
 
-import { getTripsSuccess, getCategoriesSuccess } from '../actions/trips';
+import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../actions/trips';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
@@ -164,15 +164,14 @@ const api = (store) => (next) => (action) => {
       const config = {
         method: 'get',
         url: 'https://orizons.herokuapp.com/trips',
-
         headers: {
           'Content-Type': 'application/json',
         },
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
           store.dispatch(getTripsSuccess(response.data.data));
+          store.dispatch(getRandomTrips());
         })
         .catch((error) => {
           console.error(error);
