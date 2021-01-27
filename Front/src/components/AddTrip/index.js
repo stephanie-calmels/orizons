@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import AddTripPreview from './AddTripPreview'
 import './addtrip.scss'
 
-import FileBase64 from 'react-file-base64';
+// import FileBase64 from 'react-file-base64';
 
 const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip}) => {
 
