@@ -6,7 +6,7 @@ const multer = require('multer');
 // Multer : indiquer le chemin de stockage des photos
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
-        callbackb(null, '/public/uploads/profile');
+        callback(null, '/public/uploads/profile');
     },
     filename: (request, file, callback) => {
         // arriver à ajouter id du member pour identifier plus facilement la photo 
