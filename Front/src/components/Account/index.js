@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Card, ListGroup, ListGroupItem, Button, Modal,
+  Container, Card, ListGroup, ListGroupItem, Button, Modal, Nav,
 } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import dayjs from 'dayjs';
-import 'dayjs/locale/fr';
 
 import Title from '../PageTitle/index';
 import RegisterForm from '../Register/RegisterForm';
@@ -29,6 +29,8 @@ const Account = ({
   loadMember,
   registrationDate,
   profilePhoto,
+  id,
+
 }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -47,9 +49,15 @@ const Account = ({
   return (
     <>
       <Title texte="Mon compte" />
+      {isLoading && <Spinner animation="border" role="status">
+        <span className="sr-only">Chargement...</span>
+      </Spinner>}
       <Container>
         <Card className="card-account">
           <Card.Img className="card-account__img" src={profilePhoto} />
+          <LinkContainer to={`/profil/${id}`} className="card-account__link">
+            <Nav.Link>Consulter mon profil</Nav.Link>
+          </LinkContainer>
           <Card.Body>
             <Card.Title className="card-account__title">Paramètres du compte</Card.Title>
             <Card.Text className="card-account__text">

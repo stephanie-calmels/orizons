@@ -63,6 +63,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           // on met à jour le state du membre avec ses infos
+          console.log(response.data.data)
           store.dispatch(getMemberSuccess(response.data.data));
         })
         .catch((error) => {

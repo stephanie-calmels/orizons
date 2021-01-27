@@ -18,6 +18,7 @@ const initialState = {
   registrationDate: '',
   profilePhoto: '',
   id: null,
+  biography: '',
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -61,6 +62,11 @@ const reducer = (oldState = initialState, action) => {
         localisationId: action.member.localisation_id,
         registrationDate: action.member.registration_date,
         profilePhoto: action.member.profile_photo,
+        id: action.member.id,
+        biography: action.member.biography,
+        localisation: action.member.localisation,
+        isSuccessful: true,
+        isLoading: false,
       };
     case GET_MEMBER_FAIL:
       return {
@@ -76,9 +82,10 @@ const reducer = (oldState = initialState, action) => {
         firstname: action.member.first_name,
         lastname: action.member.last_name,
         email: action.member.email,
-        photoId: action.member.photo_id,
+        profilePhoto: action.member.profile_photo,
         localisationId: action.member.localisation_id,
         registrationDate: action.member.registration_date,
+        id: action.member.id,
         isSuccessful: true,
         isLoading: false,
       };

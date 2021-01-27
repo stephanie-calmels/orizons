@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.member.isLoading,
   registrationDate: state.member.registrationDate,
   profilePhoto: state.member.profilePhoto,
+  id: state.member.id,
 });
 // cablage des actions
 const mapDispatchToProps = (dispatch) => ({
