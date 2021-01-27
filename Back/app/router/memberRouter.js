@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     },
     filename: (request, file, callback) => {
         // arriver à ajouter id du member pour identifier plus facilement la photo 
-        const fileName = Date.now() + originalname.toLowerCase().split(' ').join('-');
+        const fileName = Date.now() + file.originalname.toLowerCase().split(' ').join('-');
         callback(null, fileName)
     }
 });
