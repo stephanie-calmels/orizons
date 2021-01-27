@@ -6,7 +6,7 @@ export const getProfile = (id)=>({
 });
 
 export const getProfileSuccess = (profile)=>({
-  type: GET_Profile_SUCCESS,
-  trip
+  type: GET_PROFILE_SUCCESS,
+  profile
 });
 

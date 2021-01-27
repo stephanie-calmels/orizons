@@ -6,10 +6,12 @@ import { getTripsSuccess, getCategoriesSuccess } from '../actions/trips';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail,
+  updateMemberFail
 } from '../actions/member';
+import {getProfileSuccess} from '../actions/profile'
+import {getTripSuccess} from '../actions/trip'
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, 
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, GET_PROFILE
 } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
