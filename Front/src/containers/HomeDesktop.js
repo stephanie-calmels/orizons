@@ -3,12 +3,12 @@ import history from '../history';
 
 import HomeDesktop from 'src/components/HomeDesktop';
 import {
-  randomSearch,
+  randomSearch, getCategories,
 } from '../actions/trips';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
-  trips: state.trips.trips,
+  randomTrips: state.trips.randomTrips,
   categories: state.trips.categories,
 });
 
@@ -18,7 +18,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleClick: (id) => {
     history.push(`/exploration/${id}`);
-  }
+  },
+  loadCategories: () => {
+    dispatch(getCategories());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeDesktop);

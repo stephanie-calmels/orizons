@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form,
 } from 'react-bootstrap';
@@ -9,8 +9,13 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, trips, categories, randomSearch, handleClick
-}) => (
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories
+}) => {
+  useEffect(() => {
+    loadCategories();
+  }, []);
+  
+  return (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
@@ -100,11 +105,11 @@ const HomeDesktop = ({
       <Col md={6}>
         <h5 className="col-title">Découvrez notre sélection de carnets publiés par la communauté O'rizons</h5>
         <CardDeck>
-          {trips.map((trip) => (
+          {randomTrips.map((trip) => (
             <Col md={6} key={trip.id}>
               <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
                 <Card className="card_home">
-                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
+                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo[0].url} />
                   <Card.Body className="card_home-body">
                     <Card.Title className="card_home-title">{trip.title}</Card.Title>
                     <Card.Text className="card_home-text">
@@ -120,8 +125,8 @@ const HomeDesktop = ({
                     </Card.Text>
                   </Card.Body>
                   <Card.Footer className="card_home-footer">
-                    <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
-                    <small className="text-muted">{trip.author.nickname}</small>
+                    <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />
+                    <small className="text-muted">{trip.author[0].nickname}</small>
                   </Card.Footer>
                 </Card>
               </div>
@@ -297,6 +302,6 @@ const HomeDesktop = ({
     </Row>
 
   </Container>
-);
+)};
 
 export default HomeDesktop;

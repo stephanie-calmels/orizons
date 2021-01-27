@@ -1,9 +1,10 @@
-import trips from 'src/data/trips';
-import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS } from '../actions/types';
+// import trips from 'src/data/trips';
+import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS } from '../actions/types';
 
 const initialState = {
-  trips,
+  trips: [],
   categories: [],
+  randomTrips: []
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -18,6 +19,11 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         categories: action.categories,
+      };
+    case GET_RANDOM_TRIPS_SUCCESS: 
+      return {
+        ...oldState,
+        randomTrips: action.randomItems,
       };
     default:
       return oldState;
