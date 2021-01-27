@@ -46,3 +46,7 @@ export const GET_TRIP = "GET_TRIP";
 export const GET_TRIP_SUCCESS = "GET_TRIP_SUCCESS";
 export const GET_TRIP_FAIL = "GET_TRIP_FAIL";
 
+// --- PROFILE
+export const GET_PROFILE = "GET_PROFILE";
+export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
+export const GET_PROFILE_FAIL = "GET_PROFILE_FAIL";
