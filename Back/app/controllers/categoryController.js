@@ -38,6 +38,7 @@ const categoriesController = {
     },
     async updateAllCategory(request, response, next) {
         try {
+
             const updatedCategory = request.body
             console.log(updatedCategory);
             const categories = await categoryDataMapper.updateOneCategory(updatedCategory);
@@ -51,9 +52,11 @@ const categoriesController = {
     async updateOneCategory(request, response, next) {
         try {
             const {
-                categoryId
+                categoriesId
             } = request.params;
-            const category = await categoryDataMapper.updateOneCategory(categoryId);
+
+            const updatedCategory = request.body
+            const category = await categoryDataMapper.updateOneCategory(categoriesId, updatedCategory);
             response.json({
                 data: category
             })

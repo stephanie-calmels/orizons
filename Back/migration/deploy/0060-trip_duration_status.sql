@@ -25,13 +25,11 @@ SELECT t."id",
                 ELSE 'Terminé'
                 END) AS "status",
         t."score",
-        ARRAY_AGG("category_trip_id") AS categories,
         JSON_AGG("photo") AS "cover_photo",
         JSON_AGG("member") AS "author"
 FROM "trip" t
 LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
 LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"
-LEFT OUTER JOIN "category_trip_id" cti ON cti."trip_id" = t."id"
 GROUP BY t."id",
         t."title",
         t."summary",
