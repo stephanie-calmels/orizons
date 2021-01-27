@@ -10,23 +10,9 @@ import AddTripPreview from './AddTripPreview'
 
 import './addtrip.scss'
 
-const AddTrip = () => {
-  const [inputs, setInputs] = useState({
-    title: '',
-    summary: '',
-    localisation: '',
-    categories: [],
-    departure: '',
-    returndate: '',
-    coverpicture: null
-  });
+const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField}) => {
 
-  const {
-    title, summary, localisation, categories, departure, returndate, coverpicture
-  } = inputs;
-
-  const handleChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
-
+  const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e)=> {
     // Je suis obligé de refaire un find ici, je ne pouvais pas récupérer l'objet catégorie depuis le formulaire, seulement une string
     const clickedCategory = categoriesList.find(category => category.entitled == e.target.value)
@@ -34,20 +20,18 @@ const AddTrip = () => {
     // Si index > -1, c'est à dire si notre clickedCategory existe déjà dans le state, alors on la supprime avec splice
     if (index > -1){
       categories.splice(index, 1);
-      return setInputs({...inputs, [e.target.name]:[...categories]});
+      return changeField([e.target.name],[...categories]);
     }
     // Sinon on l'ajoute au tableau des catégories
-    setInputs({...inputs, [e.target.name]: [...categories, clickedCategory]})
+    changeField([e.target.name],[...categories, clickedCategory])
   }
-  
   const handleImage =(e)=>{
     // creating a blob in order to add the image to the trip preview
     console.log(e.target.files[0])
     let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
     let blobLink = URL.createObjectURL(imageBlob)
-    setInputs({...inputs, [e.target.name]: blobLink})
+    changeField([e.target.name], blobLink)
   }
-
   const {
     register, handleSubmit, errors,
   } = useForm({});
@@ -57,20 +41,18 @@ const AddTrip = () => {
   return <div>
     <h1 className="text-center p4 font-weight-bold">Créer un nouveau carnet</h1>
     <Container>
-      
-        <Form
-              className="form-add-trip"
-              onSubmit={handleSubmit((formData) => {
-                setSubmitting(true);
-                console.log('formData', formData);
-                // TODO: requête AXIOS pour envoyer les infos au serveur
-
-                setSubmitting(false);
-              })}
-            >
-      <Row>
-      <Col sm={12} md={6} lg={4}>
-          <Form.Group size="lg" controlId="title">
+      <Form
+        className="form-add-trip"
+        onSubmit={handleSubmit((formData) => {
+        setSubmitting(true);
+        console.log('formData', formData);
+        // TODO: requête AXIOS pour envoyer les infos au serveur
+        setSubmitting(false);
+        })}
+      >
+        <Row>
+          <Col sm={12} md={6} lg={4}>
+            <Form.Group size="lg" controlId="title">
               <Form.Label>Titre de votre voyage</Form.Label>
               <Form.Control
                 autoFocus
@@ -129,20 +111,20 @@ const AddTrip = () => {
             <Form.Group size="lg" controlId="categories">
               <Form.Label>Style de votre voyage</Form.Label>
               <div>
-              {categoriesList.map(category =>{
-                return <Form.Check
-                key={category.id}
-                type="checkbox"
-                label={category.entitled}
-                name="categories"
-                value={category.entitled}
-                onChange={(e) => handleCheckbox(e)}
-                ref={register({
-                  required: 'Veuillez sélectionner au moins une catégorie !',
+                {categoriesList.map(category =>{
+                  return <Form.Check
+                  key={category.id}
+                  type="checkbox"
+                  label={category.entitled}
+                  name="categories"
+                  value={category.entitled}
+                  onChange={(e) => handleCheckbox(e)}
+                  ref={register({
+                    required: 'Veuillez sélectionner au moins une catégorie !',
+                  })}
+                  />
                 })}
-              />
-              })}
-            </div>
+              </div>
               {errors.categories && <div className="text-danger">{errors.categories.message}</div>}
             </Form.Group>
             <Form.Group size="lg" controlId="departure">
@@ -172,13 +154,14 @@ const AddTrip = () => {
               {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
             </Form.Group>
           </Col>
-          <Col lg={4} className="trip-preview-container"><AddTripPreview inputs={inputs}/></Col>
-            <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
-              Valider
-            </Button>  
-          </Row> 
-        </Form>
-                 
+          <Col lg={4} className="trip-preview-container">
+            <AddTripPreview title={title} summary={summary} localisation={localisation} categories={categories} coverpicture={coverpicture} departure={departure} returndate={returndate}/>
+          </Col>
+          <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+            Valider
+          </Button>  
+        </Row> 
+      </Form>            
     </Container>
   </div>
 }
