@@ -45,7 +45,7 @@ router.post('/', memberController.createMember);
 router.patch('/', memberController.updateAllMember);
 
 router.patch('/:memberId', memberController.updateOneMember); // toutes les infos sauf pw, profilephoto et bannnière eet la biography
-router.patch('/profile_photo/:memberId', upload.single('profilePhoto'), memberController.updateProfilePhoto);
+router.post('/profile_photo/:memberId', upload.single('profilePhoto'), memberController.updateProfilePhoto);
 
 
 
