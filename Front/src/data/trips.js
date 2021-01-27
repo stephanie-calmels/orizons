@@ -33,7 +33,7 @@ export default [
       profile_photo: {
         id: 101,
         title: 'photo 101',
-        url: '',
+        url: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         member_id: 1
       },
       registration_date: '04-07-2016',
@@ -48,9 +48,9 @@ export default [
     steps: [
       {
         id: 1,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 1',
+        longitude: '6.865175',
+        latitude: '45.832622',
+        title: 'Jour 1 - Mont Blanc',
         date: '12-08-2017',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
         photos: [
@@ -59,14 +59,26 @@ export default [
             title: 'photo 1',
             url: 'https://images.pexels.com/photos/1482927/pexels-photo-1482927.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
             member_id: 1
+          },
+          {
+            id: 1001,
+            title: 'photo 1001',
+            url : 'https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            member_id: 1
+          },
+          {
+            id: 1002,
+            title: 'photo 1002',
+            url : 'https://images.pexels.com/photos/290452/pexels-photo-290452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            member_id: 1
           }
         ]
       },
       {
         id: 2,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 2',
+        longitude: '6.855572',
+        latitude: '45.835346',
+        title: 'Jour 2 - Petite Bosse',
         date: '13-08-2017',
         content: 'Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex. Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis.',
         photos: [
@@ -80,9 +92,9 @@ export default [
       },
       {
         id: 3,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 3',
+        longitude: '6.888043',
+        latitude: '45.878658',
+        title: 'Jour 3 - Aiguille du Midi',
         date: '14-08-2017',
         content: 'Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. ',
         photos: [
@@ -96,9 +108,9 @@ export default [
       },
       {
         id: 4,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 4',
+        longitude: '6.88799',
+        latitude: '45.84510',
+        title: 'Jour 4 - Dent du géant',
         date: '15-08-2017',
         content: 'Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. Morbi lacinia turpis felis, et pulvinar urna suscipit sed.',
         photos: [
@@ -112,9 +124,9 @@ export default [
       },
       {
         id: 5,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 5',
+        longitude: '6.98529',
+        latitude: '45.8689',
+        title: 'Jour 5 - Grande Jorasse',
         date: '16-08-2017',
         content: 'tiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex.',
         photos: [
@@ -128,9 +140,9 @@ export default [
       },
       {
         id: 6,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 6',
+        longitude: '7.0457',
+        latitude: '45.9223',
+        title: 'Jour 6 - Mont Dolent',
         date: '17-08-2017',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. ',
         photos: [
@@ -144,9 +156,9 @@ export default [
       },
       {
         id: 7,
-        longitude: '',
-        latitude: '',
-        title: 'Jour 7',
+        longitude: '6.97006',
+        latitude: '45.934734',
+        title: 'Jour 7 - Aiguille Verte',
         date: '18-08-2017',
         content: 'Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis. Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.',
         photos: [
@@ -181,7 +193,7 @@ export default [
       {
         id: 2,
         entitled: 'Farniente',
-        color: '#FEFA85'
+        color: '#F1C40F'
       }
     ],
     author: {
@@ -194,7 +206,7 @@ export default [
       profile_photo: {
         id: 111,
         title: 'photo 111',
-        url: '',
+        url: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         member_id: 2
       },
       registration_date: '27-05-2004',
@@ -354,12 +366,117 @@ export default [
       id: 3,
       first_name: 'Arthur',
       last_name: 'Pendragon',
+      nickname: 'Arthur',
       email: 'kingarthur@google.com',
       password: 'sjgoaZvkA2xk',
       profile_photo: {
         id: 131,
         title: 'photo 131',
+        url: 'https://images.pexels.com/photos/6110534/pexels-photo-6110534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        member_id: 3
+      },
+      registration_date: '17-03-2002',
+      cover_photo: {
+        id: 132,
+        title: 'photo 132',
         url: '',
+        member_id: 3
+      },
+      localisation: 'Angleterre'
+    },
+    steps: [
+      {
+        id: 80,
+        longitude: '',
+        latitude: '',
+        title: 'Jour 1',
+        date: '01-07-500',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
+        photos: [
+          {
+            id: 80,
+            title: 'photo 1',
+            url: 'https://images.pexels.com/photos/3233007/pexels-photo-3233007.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 81,
+            title: 'photo 2',
+            url: 'https://images.pexels.com/photos/162056/pexels-photo-162056.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          }
+        ]
+      },
+      {
+        id: 90,
+        longitude: '',
+        latitude: '',
+        title: 'Jour 2',
+        date: '02-07-500',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.',
+        photos: [
+          {
+            id: 82,
+            title: 'photo 3',
+            url: 'https://images.pexels.com/photos/1590511/pexels-photo-1590511.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 83,
+            title: 'photo 4',
+            url: 'https://images.pexels.com/photos/941229/pexels-photo-941229.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          },
+          {
+            id: 84,
+            title: 'photo 5',
+            url: 'https://images.pexels.com/photos/1756325/pexels-photo-1756325.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+            member_id: 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Stonehenge',
+    summary: 'Petit week-end romantique avec Guenièvre',
+    departure_date: '01-07-2005',
+    arrival_date: '02-07-2005',
+    duration: 2,
+    score: 10,
+    cover_photo: {
+      id: 130,
+      title: 'photo 130',
+      url: 'https://images.pexels.com/photos/1448136/pexels-photo-1448136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+      member_id: 3
+    },
+    localisation: [
+      'Angleterre'
+    ],
+    categories: [
+      {
+        id: 1,
+        entitled: 'Randonnée',
+        color: '#59F19C'
+      },
+      {
+        id: 3,
+        entitled: 'Week-end',
+        color: '#FA85FE'
+      }
+    ],
+    author: {
+      id: 3,
+      first_name: 'Arthur',
+      last_name: 'Pendragon',
+      nickname: 'Arthur',
+      email: 'kingarthur@google.com',
+      password: 'sjgoaZvkA2xk',
+      profile_photo: {
+        id: 131,
+        title: 'photo 131',
+        url: 'https://images.pexels.com/photos/6110534/pexels-photo-6110534.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
         member_id: 3
       },
       registration_date: '17-03-2002',
