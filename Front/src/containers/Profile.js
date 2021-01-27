@@ -6,7 +6,7 @@ import { getProfile } from '../actions/profile';
 
 
 const mapStateToProps = (state) => ({
-  profile: state.trip.tripInfos
+  profile: state.profile.profileInfos,
 });
 
 const mapDispatchToProps = (dispatch)=>({
