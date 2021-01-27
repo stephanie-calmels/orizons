@@ -48,6 +48,7 @@ const categoryDataMapper = {
             updatedCategory.image,
             categoriesId
         ]);
+        console.log(result.rows)
         return result.rows[0];
     },
 

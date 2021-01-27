@@ -3,12 +3,13 @@ const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 
-// Multer : indiquer de stockage des photos
+// Multer : indiquer le chemin de stockage des photos
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
         callbackb(null, '/public/uploads/profile');
     },
     filename: (request, file, callback) => {
+        // arriver à ajouter id du member pour identifier plus facilement la photo 
         const fileName = Date.now() + originalname.toLowerCase().split(' ').join('-');
         callback(null, fileName)
     }
@@ -144,7 +145,10 @@ const memberController = {
             const {
                 memberId
             } = request.params;
-            const member = await memberDataMapper.updateOneMember(memberId);
+
+            const memberInfos = request.body;
+            const member = await memberDataMapper.updateOneMember(memberId, memberInfos);
+            //const member = await memberDataMapper.getMemberById(memberId)
             response.json({
                 data: member
             })
@@ -154,6 +158,7 @@ const memberController = {
     },
     async deleteAllMember(request, response, next) {
         try {
+
             const members = await memberDataMapper.deleteAllMember();
             response.json({
                 data: members

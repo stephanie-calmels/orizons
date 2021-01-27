@@ -26,10 +26,12 @@ SELECT t."id",
                 END) AS "status",
         t."score",
         JSON_AGG("photo") AS "cover_photo",
-        JSON_AGG("member") AS "author"
+        JSON_AGG("member") AS "author",
+        JSON_AGG("category_trip_id") AS "categories"
 FROM "trip" t
 LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
 LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"
+LEFT OUTER JOIN "category_trip_id" ON "category_trip_id"."trip_id" = t.id
 GROUP BY t."id",
         t."title",
         t."summary",
@@ -37,7 +39,7 @@ GROUP BY t."id",
         t."arrival_date";
 
 
-DROP VIEW step_author;
+--DROP VIEW step_author;
 
 CREATE OR REPLACE VIEW step_photo AS
 SELECT "step"."id" AS "id_step",
@@ -48,5 +50,8 @@ SELECT "step"."id" AS "id_step",
     JOIN "photo" ON "photo"."step_id" = "step"."id"
     GROUP BY "id_step",
     "longitude","latitude", "step_title", "number_step", "content", "trip_id";
+
+--CREATE VIEW all_trips AS
+--SELECT * FROM "trip_with_duration_status" JOIN "category_trip_id" ON "category_trip_id"."trip_id" = "trip_with_duration_status"."id" GROUP BY *;
 
 COMMIT;
