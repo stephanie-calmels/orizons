@@ -1,12 +1,14 @@
 const express = require('express');
 const jwt = require('../middleware/auth');
+const path = require('path');
 
 const multer = require('multer');
 
 // Multer : indiquer le chemin de stockage des photos
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
-        callback(null, './public/uploads/profile');
+        const rootDir = path.dirname(require.main.filename);
+        callback(null, path.join(rootDir, '/Back/public/uploads/profile'));
     },
     filename: (request, file, callback) => {
         // arriver à ajouter id du member pour identifier plus facilement la photo 
@@ -16,12 +18,12 @@ const storage = multer.diskStorage({
 });
 
 // Multer : appliquer un filtre de format
-const fileFilter = (request, file, cb) => {
+const fileFilter = (request, file, callback) => {
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-        cb(null, true);
+        callback(null, true);
     } else {
-        cb(null, false);
-        return cb(new Error('Seuls les formats .png, .jpg and .jpeg sont autorisés ! '));
+        callback(null, false);
+        return callback(new Error('Seuls les formats .png, .jpg and .jpeg sont autorisés ! '));
     }
 }
 

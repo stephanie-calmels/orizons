@@ -130,7 +130,7 @@ const memberController = {
             console.log(memberPhoto, '?????????????????????????????????')
             const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
             response.json({
-                data: member
+                data: 'truc'
             })
 
         } catch (error) {
