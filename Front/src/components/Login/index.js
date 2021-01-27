@@ -17,7 +17,7 @@ const Login = ({
   password,
   changeField,
   errorMessage,
-  isSuccessful,
+  isLoginSuccessful,
   handleLogin,
   isLoading,
 }) => {
@@ -27,11 +27,11 @@ const Login = ({
   const handleChange = (e) => changeField([e.target.name], e.target.value);
 
   useEffect(() => {
-    if (isSuccessful) {
+    if (isLoginSuccessful) {
       toast.success('Connexion réussie !');
       history.replace('/ajouter-carnet');
     }
-  }, [isSuccessful]);
+  }, [isLoginSuccessful]);
 
   return (
     <>
@@ -94,7 +94,7 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
-  isSuccessful: PropTypes.bool.isRequired,
+  isLoginSuccessful: PropTypes.bool.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

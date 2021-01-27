@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
   email: state.auth.email,
   password: state.auth.password,
   isLoggedIn: state.auth.isLoggedIn,
-  isSuccessful: state.auth.isSuccessful,
+  isLoginSuccessful: state.auth.isLoginSuccessful,
   errorMessage: state.auth.errorMessage,
   isLoading: state.auth.isLoading,
 });

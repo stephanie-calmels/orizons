@@ -1,9 +1,11 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER_FAIL,
-  SET_LOADER_REGISTER, GET_MEMBER_SUCCESS, UPDATE_MEMBER_SUCCESS,
-  UPDATE_MEMBER_FAIL,
-  GET_MEMBER_FAIL,
+  SET_LOADER_REGISTER, GET_MEMBER_SUCCESS, GET_MEMBER_FAIL, UPDATE_MEMBER_SUCCESS,
+  UPDATE_MEMBER_FAIL, DELETE_MEMBER_SUCCESS, DELETE_MEMBER_FAIL,
+  
 } from '../actions/types';
+
+import history from '../history';
 
 const initialState = {
   nickname: '',
@@ -13,11 +15,12 @@ const initialState = {
   password: '',
   passwordRepeat: '',
   errorMessage: '',
-  isSuccessful: false,
+  isRegisterSuccessful: false,
+  isUpdateSuccessful: false,
+  isDeleteSuccessful: false,
   isLoading: false,
   registrationDate: '',
   profilePhoto: '',
-  id: null,
   biography: '',
 };
 
@@ -37,7 +40,7 @@ const reducer = (oldState = initialState, action) => {
         email: '',
         password: '',
         passwordRepeat: '',
-        isSuccessful: true,
+        isRegisterSuccessful: true,
         isLoading: false,
       };
     case REGISTER_FAIL:
@@ -67,6 +70,7 @@ const reducer = (oldState = initialState, action) => {
         localisation: action.member.localisation,
         isSuccessful: true,
         isLoading: false,
+        errorMessage: '',
       };
     case GET_MEMBER_FAIL:
       return {
@@ -82,20 +86,21 @@ const reducer = (oldState = initialState, action) => {
         firstname: action.member.first_name,
         lastname: action.member.last_name,
         email: action.member.email,
-        profilePhoto: action.member.profile_photo,
-        localisationId: action.member.localisation_id,
-        registrationDate: action.member.registration_date,
-        id: action.member.id,
-        isSuccessful: true,
         isLoading: false,
+        errorMessage: '',
       };
     case UPDATE_MEMBER_FAIL:
       return {
         ...oldState,
-        isSuccessful: false,
         isLoading: false,
         errorMessage: action.message,
       };
+      case DELETE_MEMBER_SUCCESS:
+        return {
+          ...oldState,
+        isLoading: false,
+        errorMessage: action.message,
+        };
     default:
       return oldState;
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Container, Card, ListGroup, ListGroupItem, Button, Modal, Nav,
@@ -6,14 +6,9 @@ import {
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useForm } from 'react-hook-form';
-
 import dayjs from 'dayjs';
-
 import Title from '../PageTitle/index';
-
 import './account.scss';
-
-dayjs.locale('fr');
 
 const Account = ({
   firstname,
@@ -25,11 +20,10 @@ const Account = ({
   errorMessage,
   isLoading,
   handleUpdate,
-  loadMember,
+  handleDelete,
   registrationDate,
   profilePhoto,
   id,
-
 }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -41,16 +35,11 @@ const Account = ({
     setShowDelete(!showDelete);
   };
 
-  useEffect(() => {
-    // lors du chargement du composant Account, on charge les données du membre connecté
-    loadMember();
-  }, []);
-
-  // Hook qui vient de React Hook Form
+  // React Hook Form pour gérer la validation du formulaire
   const { register, handleSubmit, errors } = useForm({});
-  // Modification des champs
-  // const handleChange = (e) => changeField([e.target.name], e.target.value);
 
+  // On passe par une valeur intermédiaire pour les champs ne pas modifier le store
+  // tant que la modification n'a pas été validée par le serveur !
   const [values, setValues] = useState({
     nickname: nickname,
     lastname: lastname,
@@ -126,8 +115,8 @@ const Account = ({
           <Modal.Header closeButton><h2>Modifier mes données personnelles</h2></Modal.Header>
           <Modal.Body>
           <Form
-        className="form"
-        onSubmit={handleSubmit(handleUpdate)}
+            className="form"
+            onSubmit={handleSubmit(handleUpdate)}
           >
         {errorMessage && (
           <Alert variant="danger">{errorMessage}</Alert>)}
@@ -186,40 +175,6 @@ const Account = ({
           />
           {errors.email && <div className="text-danger">{errors.email.message}</div>}
         </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Mot de passe</Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            defaultValue={values.password}
-            onChange={(e) => handleInputChange(e)}
-            ref={register({
-              required: 'Veuillez remplir ce champ !',
-              minLength: {
-                value: 8,
-                message: 'Ce champ doit contenir au moins 8 caractères',
-              },
-              validate: (value) => (
-                [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/].every((pattern) => pattern.test(value)) || 'Ce champ doit contenir au moins une majuscule, une minuscule et un caractère spécial'
-              ),
-            })}
-          />
-          {errors.password && <div className="text-danger">{errors.password.message}</div>}
-        </Form.Group>
-        <Form.Group size="lg" controlId="password-repeat">
-          <Form.Label>Confirmation du mot de passe</Form.Label>
-          <Form.Control
-            name="passwordRepeat"
-            type="password"
-            defaultValue={values.passwordRepeat}
-            onChange={(e) => handleInputChange(e)}
-            ref={register({
-              required: 'Veuillez remplir ce champ !',
-              // validate: (value) => value === password || 'Veuillez entrer le même mot de passe',
-            })}
-          />
-          {errors.passwordRepeat && <div className="text-danger">{errors.passwordRepeat.message}</div>}
-        </Form.Group>
         {isLoading ? (
           <Button variant="primary" disabled>
             <Spinner
@@ -254,11 +209,7 @@ const Account = ({
           </Modal.Body>
           <Modal.Footer>
             <Button
-              onClick={() => {
-              // eslint-disable-next-line no-console
-                console.log('va envoyer les infos au serveur');
-                handleDeleteModal();
-              }}
+              onClick={() => handleDelete()}
               variant="danger"
             >
               Supprimer
@@ -277,11 +228,10 @@ Account.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordRepeat: PropTypes.string.isRequired,
-  isSuccessful: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  changeField: PropTypes.func.isRequired,
-  loadMember: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   registrationDate: PropTypes.string.isRequired,
   profilePhoto: PropTypes.string.isRequired,
 };

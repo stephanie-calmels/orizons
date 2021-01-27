@@ -4,10 +4,10 @@ import jwtDecode from 'jwt-decode';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail,
+  updateMemberFail, deleteMemberFail, deleteMemberSuccess
 } from '../actions/member';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, DELETE_MEMBER
 } from '../actions/types';
 
 const api = (store) => (next) => (action) => {
@@ -121,7 +121,12 @@ const api = (store) => (next) => (action) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        data: action.data
+        data: {
+          nickname: action.data.nickname,
+          first_name: action.data.firstname,
+          last_name: action.data.lastname,
+          email: action.data.email,
+        },
       };
       axios(config)
         .then((response) => {
@@ -135,6 +140,31 @@ const api = (store) => (next) => (action) => {
         || error.toString();
         console.log(errorMessage)
           store.dispatch(updateMemberFail(errorMessage));
+        });
+      break;
+    }
+    case DELETE_MEMBER: {
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'delete',
+        url: `https://orizons.herokuapp.com/members/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(deleteMemberSuccess(response.data.message));
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+        console.log(errorMessage)
+          store.dispatch(deleteMemberFail(errorMessage));
         });
       break;
     }

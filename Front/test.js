@@ -31,10 +31,5 @@ const [selectedPhoto, setSelectedPhoto] = useState(null);
     // || error.toString();
     //     console.log(errorMessage);
     //   });
-
-
-    // UI Component
-    <form className="form-account">
-            <input className="card-account__input" accept="image/*" type="file" onChange={onChangeHandler} />
-            <button type="submit" className="btn btn-primary" onClick={onSubmitHandler}>Valider</button>
-          </form>
+    }
+;

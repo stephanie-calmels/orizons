@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, activateLoader, getMember, updateMember,
+  changeRegisterField, activateLoader, getMember, updateMember, deleteMember
 } from '../actions/member';
 
 const mapStateToProps = (state) => ({
@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
   email: state.member.email,
   password: state.member.password,
   passwordRepeat: state.member.passwordRepeat,
-  isSuccessful: state.member.isSuccessful,
   errorMessage: state.member.errorMessage,
   isLoading: state.member.isLoading,
   registrationDate: state.member.registrationDate,
@@ -26,12 +25,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeRegisterField(name, value));
   },
   handleUpdate: (data) => {
-    //console.log(data);
     dispatch(activateLoader());
     dispatch(updateMember(data));
   },
-  loadMember: () => {
-    dispatch(getMember());
+  handleDelete: () => {
+    dispatch(deleteMember());
   },
 });
 
