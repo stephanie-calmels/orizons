@@ -2,6 +2,14 @@
 
 BEGIN;
 
+
+
+CREATE OR REPLACE VIEW "category_trip_id" AS
+SELECT c.entitled, c.color, tc.trip_id
+FROM "category" c
+JOIN "_m2m_trip_category" tc
+        ON tc."category_id" = c."id";
+
 CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
         t."title",
@@ -17,11 +25,13 @@ SELECT t."id",
                 ELSE 'Terminé'
                 END) AS "status",
         t."score",
+        ARRAY_AGG("category_trip_id") AS categories,
         JSON_AGG("photo") AS "cover_photo",
         JSON_AGG("member") AS "author"
 FROM "trip" t
-JOIN "photo" ON "photo"."id" = t."photo_id"
-JOIN "member" ON "member"."id" = t."member_id"
+LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
+LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"
+LEFT OUTER JOIN "category_trip_id" cti ON cti."trip_id" = t."id"
 GROUP BY t."id",
         t."title",
         t."summary",
@@ -29,10 +39,16 @@ GROUP BY t."id",
         t."arrival_date";
 
 
-CREATE VIEW "category_trip_id" AS
-SELECT *
-FROM "category"
-JOIN "_m2m_trip_category" tc
-        ON tc."category_id" = "category"."id"
+DROP VIEW step_author;
+
+CREATE OR REPLACE VIEW step_photo AS
+SELECT "step"."id" AS "id_step",
+    "longitude","latitude", "step"."title" AS "step_title", "number_step", "content",
+    "step"."trip_id" AS "trip_id",
+    JSON_AGG("photo") AS "photos"
+    FROM "step"
+    JOIN "photo" ON "photo"."step_id" = "step"."id"
+    GROUP BY "id_step",
+    "longitude","latitude", "step_title", "number_step", "content", "trip_id";
 
 COMMIT;

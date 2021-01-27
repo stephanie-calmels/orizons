@@ -1,6 +1,38 @@
 const memberDataMapper = require('../datamapper/memberDataMapper');
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+
+// Multer : indiquer de stockage des photos
+const storage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callbackb(null, '/public/uploads/profile');
+    },
+    filename: (request, file, callback) => {
+        const fileName = Date.now() + originalname.toLowerCase().split(' ').join('-');
+        callback(null, fileName)
+    }
+});
+
+// Multer : appliquer un filtre de format
+const fileFilter = (request, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        cb(null, true);
+    } else {
+        cb(null, false);
+        return cb(new Error('Seuls les formats .png, .jpg and .jpeg sont autorisés ! '));
+    }
+}
+
+// Multer : appliquer un filtre de taille de fichier max 5 mb
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
+
 
 
 const memberController = {

@@ -18,7 +18,6 @@ SELECT t."id",
                 END) AS "status",
         t."score",
         JSON_AGG("photo") AS "cover_photo"
-        
 FROM "trip" t
 JOIN "photo" ON "photo"."id" = t."photo_id"
 GROUP BY t."id",

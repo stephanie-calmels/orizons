@@ -13,9 +13,10 @@ const categoriesController = {
     async getOneCategory(request, response, next) {
         try {
             const {
-                categoryId
+                categoriesId
             } = request.params;
-            const category = await categoryDataMapper.getCategoryById(categoryId);
+            console.log(categoriesId);
+            const category = await categoryDataMapper.getCategoryById(categoriesId);
             response.json({
                 data: category
             })

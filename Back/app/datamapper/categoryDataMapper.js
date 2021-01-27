@@ -15,7 +15,7 @@ const categoryDataMapper = {
     },
 
     async getCategoryByTripId(tripId) {
-        const result = await client.query('SELECT * FROM category JOIN trip ON trip.category_id = category.id WHERE trip.id = $1', [tripId]);
+        const result = await client.query('SELECT * FROM "category_trip_id" cti WHERE cti.trip_id = $1', [tripId]);
         if (result.rowCount == 0) {
             return null;
         }
