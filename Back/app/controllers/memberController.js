@@ -1,40 +1,6 @@
 const memberDataMapper = require('../datamapper/memberDataMapper');
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const multer = require('multer');
-
-// Multer : indiquer le chemin de stockage des photos
-const storage = multer.diskStorage({
-    destination: (request, file, callback) => {
-        callbackb(null, '/Back/public/uploads/profile');
-    },
-    filename: (request, file, callback) => {
-        // arriver à ajouter id du member pour identifier plus facilement la photo 
-        const fileName = Date.now() + originalname.toLowerCase().split(' ').join('-');
-        callback(null, fileName)
-    }
-});
-
-// Multer : appliquer un filtre de format
-const fileFilter = (request, file, cb) => {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-        cb(null, true);
-    } else {
-        cb(null, false);
-        return cb(new Error('Seuls les formats .png, .jpg and .jpeg sont autorisés ! '));
-    }
-}
-
-// Multer : appliquer un filtre de taille de fichier max 5 mb
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-});
-
-
 
 const memberController = {
     async getAllMember(_, response, next) {
@@ -98,7 +64,6 @@ const memberController = {
             const {
                 memberId
             } = request.params
-            console.log(request.params);
             const member = await memberDataMapper.getMemberById(memberId);
             response.json({
                 data: member
@@ -162,7 +127,7 @@ const memberController = {
                 memberId
             } = request.params;
             const memberPhoto = request.file.path;
-            console.log(memberPhoto)
+            console.log(memberPhoto, '?????????????????????????????????')
             const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
             response.json({
                 data: member
