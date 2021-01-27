@@ -5,11 +5,12 @@ import Tag from 'src/containers/Tag';
 
 import './trips.scss';
 
-const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, handleClick }) => {
-  // useEffect(() => {
-  //   loadTrips();
-  //   loadCategories();
-  // },[]);
+
+const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, , handleClick }) => {
+  useEffect(() => {
+    // loadTrips();
+    loadCategories();
+  },[]);
 
   return (
     <Container>

@@ -1,10 +1,9 @@
 import trips from 'src/data/trips';
-import categories from 'src/data/categories';
 import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS } from '../actions/types';
 
 const initialState = {
   trips,
-  categories,
+  categories: [],
 };
 
 const reducer = (oldState = initialState, action) => {
