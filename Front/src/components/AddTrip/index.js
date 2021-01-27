@@ -4,32 +4,31 @@ import {
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
-import categoriesList from 'src/data/categories';
-
 import AddTripPreview from './AddTripPreview'
-
 import './addtrip.scss'
 
-const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField}) => {
+import FileBase64 from 'react-file-base64';
+
+const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip}) => {
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e)=> {
     // Je suis obligé de refaire un find ici, je ne pouvais pas récupérer l'objet catégorie depuis le formulaire, seulement une string
-    const clickedCategory = categoriesList.find(category => category.entitled == e.target.value)
-    const index = categories.indexOf(clickedCategory)
+    const clickedCategory = categoriesList.find(category => category.entitled == e.target.value);
+    const index = categories.indexOf(clickedCategory);
     // Si index > -1, c'est à dire si notre clickedCategory existe déjà dans le state, alors on la supprime avec splice
     if (index > -1){
       categories.splice(index, 1);
       return changeField([e.target.name],[...categories]);
     }
     // Sinon on l'ajoute au tableau des catégories
-    changeField([e.target.name],[...categories, clickedCategory])
+    changeField([e.target.name],[...categories, clickedCategory]);
   }
   const handleImage =(e)=>{
     // creating a blob in order to add the image to the trip preview
-    console.log(e.target.files[0])
+    console.log(e.target.files)
     let imageBlob = new Blob([e.target.files[0]], {type: 'image/jpeg'});
-    let blobLink = URL.createObjectURL(imageBlob)
+    let blobLink = URL.createObjectURL(imageBlob);
     changeField([e.target.name], blobLink)
   }
   const {
@@ -37,6 +36,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
   } = useForm({});
   const [submitting, setSubmitting] = useState(false);
 
+  
 
   return <div>
     <h1 className="text-center p4 font-weight-bold">Créer un nouveau carnet</h1>
@@ -45,8 +45,8 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
         className="form-add-trip"
         onSubmit={handleSubmit((formData) => {
         setSubmitting(true);
-        console.log('formData', formData);
-        // TODO: requête AXIOS pour envoyer les infos au serveur
+        console.log('formData',formData);
+        postTrip(formData)
         setSubmitting(false);
         })}
       >
@@ -95,6 +95,9 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
             </Form.Group>
             <Form.Group size="lg" controlId="coverpicture">
               <Form.Label>Photo de couverture</Form.Label>
+              {/*<FileBase64 multiple={false} onDone={(data)=>{
+                handleImage(data) 
+              }} /> */}
               <Form.Control
                 name="coverpicture"
                 type="file"
@@ -103,7 +106,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
                 ref={register({
                   required: 'Veuillez sélectionner une photo',
                 })}
-              />
+              /> 
               {errors.coverpicture && <div className="text-danger">{errors.coverpicture.message}</div>}
             </Form.Group>
           </Col>

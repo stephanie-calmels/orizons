@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import AddTrip from 'src/components/AddTrip';
-import {changeAddTripField} from 'src/actions/addTrip'
+import {changeAddTripField, postNewTrip} from 'src/actions/addTrip'
 
 const mapStateToProps = (state) => ({
   title: state.addTrip.title,
@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch)=>({
   changeField: (name, value)=>{dispatch(changeAddTripField(name,value))},
+  postTrip: (data)=>{dispatch(postNewTrip(data))},
 })
 // grace au hoc connect, j'enrichis mon composant avec des props liées au state
 const container = connect(mapStateToProps, mapDispatchToProps)(AddTrip);
