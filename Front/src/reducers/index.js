@@ -6,6 +6,7 @@ import trips from './trips';
 import trip from './trip';
 import profile from './profile';
 import addTrip from './addTrip';
+import addStep from './addStep';
 
 export default combineReducers({
   auth,
@@ -13,5 +14,6 @@ export default combineReducers({
   trip,
   member,
   profile,
-  addTrip
+  addTrip,
+  addStep,
 });

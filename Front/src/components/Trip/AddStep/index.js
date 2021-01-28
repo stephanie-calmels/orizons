@@ -9,33 +9,20 @@ import {
 import {
   Modal, Button, Form, InputGroup,
 } from 'react-bootstrap';
+
 import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = () => {
+const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField}) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Hooks and functions linked to the Form
-  const [inputs, setInputs] = useState({
-    title: '',
-    localisation: [],
-    date: '',
-    summary: '',
-    pictures: [],
-    showInput: false,
-    localisationInput: '',
-  });
-
-  const {
-    title, localisation, date, summary, pictures, showInput, localisationInput,
-  } = inputs;
-
-  const handleChange = (e) => setInputs({ ...inputs, [e.target.name]: e.target.value });
-  const handlePictures = (e) => setInputs({ ...inputs, [e.target.name]: [...pictures, e.target.files] });
+  // Hooks and functions linked to state
+  const handleChange = (e) => changeField([e.target.name], e.target.value);
+  const handlePictures = (e) => changeField([e.target.name], e.target.files);
   const {
     register, handleSubmit, errors,
   } = useForm({});
@@ -45,26 +32,26 @@ const AddStep = () => {
   const getUserPosition = () => {
     navigator.geolocation.getCurrentPosition(((position) => {
       const userPosition = [position.coords.latitude, position.coords.longitude];
-      setInputs({ ...inputs, localisation: userPosition });
+      changeField('localisation', userPosition);
     }));
   };
 
   const showLocationInput = () => {
-    setInputs({ ...inputs, showInput: true });
+    changeField('showInput', true );
   };
+
   // This component will be added to the map container in order to react to certain events
   const MovingMap = () => {
     const map = useMap();
-    inputs.localisation.length > 0 && useEffect(() => {
-      map.flyTo(inputs.localisation);
-    }, [inputs.localisation]);
-
+    localisation.length > 0 && useEffect(() => {
+      map.flyTo(localisation);
+    }, [localisation]);
     return null;
   };
-  // Creating a draggable marker that update its position when moved
 
+  // Creating a draggable marker that update its position when moved
   const DraggableMarker = () => {
-    const [position, setPosition] = useState(inputs.localisation);
+    const [position, setPosition] = useState(localisation);
     const eventHandlers = useMemo(
       () => ({
         dragend(e) {
@@ -72,7 +59,7 @@ const AddStep = () => {
           console.log(e.target);
           const newPosition = [e.target._latlng.lat, e.target._latlng.lng];
           setPosition(newPosition);
-          setInputs({ ...inputs, localisation: newPosition });
+          changeField('localisation', newPosition);
           // reverse geocoding in order to get the adress of the marker at the end
           // const APIkey = "3e6337fefe20a03c96bfeb8a7b479717"
           // const reverseQuery = newPosition.toString()
@@ -96,6 +83,7 @@ const AddStep = () => {
       </Marker>
     );
   };
+  
   // adding geosearch to the form + using position stack API
   const useGeocodingApi = (event) => {
     console.log(event.target.closest('.input-group').querySelector('input').value);
@@ -106,7 +94,8 @@ const AddStep = () => {
     axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
         const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
-        setInputs({ ...inputs, localisation: newPosition, showInput: false });
+        changeField('localisation', newPosition);
+        changeField('showInput', false);
       });
   };
 
@@ -125,7 +114,7 @@ const AddStep = () => {
             className="form-add-step"
             onSubmit={handleSubmit((formData) => {
               setSubmitting(true);
-              formData.localisation = inputs.localisation;
+              formData.localisation = localisation;
               console.log('formData', formData);
               // TODO: requête AXIOS pour envoyer les infos au serveur
 
@@ -178,13 +167,13 @@ const AddStep = () => {
                 />
                 <MovingMap />
                 {/** Quand une position est ajoutée, on place notre Marker custom créé ci dessus */}
-                {inputs.localisation.length > 0 && <DraggableMarker />}
+                {localisation.length > 0 && <DraggableMarker />}
               </MapContainer>
 
               <Button onClick={getUserPosition}>Utiliser ma position</Button>
               <Button onClick={showLocationInput}>Entrer une adresse</Button>
 
-              {inputs.showInput && (
+              {showInput && (
               <InputGroup><Form.Control
                 name="localisationInput"
                 type="text"
