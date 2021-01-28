@@ -23,6 +23,7 @@ import Trips from 'src/containers/Trips'; // REDUX
 import AddTrip from 'src/containers/AddTrip';
 import Profile from 'src/containers/Profile';
 import Trip from 'src/containers/Trip';
+import Results from 'src/containers/Results';
 
 // == Dumb Components
 import Footer from 'src/components/Footer';
@@ -103,6 +104,9 @@ const App = ({ isLoggedIn, loadMember, loadTrips }) => {
           </Route> */}
           <Route exact path="/compte">
             { isLoggedIn ? <Account /> : <Redirect to="/connexion" />}
+          </Route>
+          <Route exact path="/resultats">
+            <Results />
           </Route>
         </Switch>
       </Page>

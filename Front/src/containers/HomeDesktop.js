@@ -3,13 +3,14 @@ import history from '../history';
 
 import HomeDesktop from 'src/components/HomeDesktop';
 import {
-  randomSearch, getCategories, getTripsByCategory
+  randomSearch, getCategories, changeCategoryField, getTripsByCategory
 } from '../actions/trips';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
   randomTrips: state.trips.randomTrips,
   categories: state.trips.categories,
+  category_search: state.trips.category_search
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -22,9 +23,12 @@ const mapDispatchToProps = (dispatch) => ({
   loadCategories: () => {
     dispatch(getCategories());
   },
+  changeCategoryField: (value) => {
+    dispatch(changeCategoryField(value));
+  },
   searchByCategory: (id) => {
-    // history.push(`/exploration`);
     dispatch(getTripsByCategory(id))
+    history.push(`/resultats`);
   }
 });
 

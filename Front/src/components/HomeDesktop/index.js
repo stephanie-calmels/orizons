@@ -9,7 +9,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, searchByCategory
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, changeCategoryField, searchByCategory, category_search
 }) => {
   useEffect(() => {
     loadCategories();
@@ -176,15 +176,17 @@ const HomeDesktop = ({
             className="form_search" 
             onSubmit={(e) => {
               e.preventDefault();
-              searchByCategory(e.target.value);
-            }}
-          >
+              searchByCategory(category_search);
+              }}>
             <Form.Group as={Row} controlId="formGroupCategory">
               <Form.Label column sm={4}>Type de voyage</Form.Label>
               <Col sm={6}>
                 <InputGroup>
                   <Form.Control 
                     as="select" 
+                    onChange={(e) => changeCategoryField(e.target.value)}
+                    name="category_search"
+                    value={category_search}
                   >
                     {
                       categories.map((category) => (
@@ -194,7 +196,7 @@ const HomeDesktop = ({
                   </Form.Control>
                   <InputGroup.Append>
                     <Button 
-                      type="submit"
+                      type='submit'
                       variant="primary"
                     >
                       <i className="fas fa-search" />
