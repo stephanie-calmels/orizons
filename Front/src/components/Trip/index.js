@@ -8,10 +8,10 @@ import Banner from './Banner';
 import Description from './Description';
 import AddStep from 'src/containers/AddStep';
 
-const Trip = ({trip, loadTrip})=>{
-
+const Trip = ({trip, loadTrip, tripIdFromUrl})=>{
+console.log(tripIdFromUrl)
   useEffect(()=>{
-    loadTrip(trip.id)
+    loadTrip(tripIdFromUrl)
   });
 
  return <div>

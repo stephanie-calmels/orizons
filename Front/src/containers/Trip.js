@@ -8,8 +8,9 @@ import { getTrip } from '../actions/trip';
   
 // } from '../actions/';
 
-const mapStateToProps = (state) => ({
-  trip: state.trip.tripItem
+const mapStateToProps = (state, ownProps) => ({
+  trip: state.trip.tripItem,
+  tripIdFromUrl: ownProps.match.params.slug
 });
 
 const mapDispatchToProps = (dispatch)=>({

@@ -145,15 +145,15 @@ const api = (store) => (next) => (action) => {
     case GET_TRIP:{
       const config = {
         method: 'get',
-        url: `https://orizons.herokuapp.com/trip/${action.id}`,
+        url: `https://orizons.herokuapp.com/trips/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
         },
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
-          store.dispatch(getTripSuccess(response.data.data));
+          console.log(response.data.data[0]);
+          store.dispatch(getTripSuccess(response.data.data[0]));
         })
         .catch((error) => {
           console.error(error);
