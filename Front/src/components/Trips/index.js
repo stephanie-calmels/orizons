@@ -19,7 +19,7 @@ const Trips = ({ trips, categories, showMoreResults, loadTrips, loadCategories, 
         <CardDeck> 
           <Row>
             {categories.map(category => (
-              <Tag category={category} />
+              <Tag key={category.id} category={category} />
             ))}
           </Row>
         </CardDeck>

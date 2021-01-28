@@ -1,7 +1,8 @@
 // import trips from 'src/data/trips';
-import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS } from '../actions/types';
+import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS } from '../actions/types';
 
 const initialState = {
+  allTrips: [],
   trips: [],
   categories: [],
   randomTrips: []
@@ -13,6 +14,7 @@ const reducer = (oldState = initialState, action) => {
     case GET_TRIPS_SUCCESS:
       return {
         ...oldState,
+        allTrips: action.trips,
         trips: action.trips,
       };
     case GET_CATEGORIES_SUCCESS:
@@ -24,6 +26,11 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         randomTrips: action.randomItems,
+      };
+    case GET_TRIPS_BY_CATEGORIES_SUCCESS:
+      return {
+        ...oldState,
+        trips: action.trips,
       };
     default:
       return oldState;
