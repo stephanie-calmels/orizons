@@ -156,7 +156,7 @@ const HomeDesktop = ({
               <Form.Control as="select">
                 {
                   categories.map((category) => (
-                    <option>{category.entitled}</option>
+                    <option key={category.id}>{category.entitled}</option>
                   ))
                 }
               </Form.Control>

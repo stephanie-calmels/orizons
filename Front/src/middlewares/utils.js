@@ -1,7 +1,9 @@
 import { getRandomTripsSuccess, getTripsByCategoriesSuccess } from '../actions/trips';
 
+import history from '../history';
+
 import {
-  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY
+  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY, RANDOM_SEARCH
 } from '../actions/types';
 
 const utils = (store) => (next) => (action) => {
@@ -34,6 +36,13 @@ const utils = (store) => (next) => (action) => {
       store.dispatch(getTripsByCategoriesSuccess(results));
       break;
     }; 
+    case RANDOM_SEARCH: {
+      console.log('random search');
+      const { trips: { trips } } = store.getState();
+      const item = trips[Math.floor(Math.random() * trips.length)];
+      history.push(`/exploration/${item.id}`);
+      break;
+    };
     default:
       next(action);
   }
