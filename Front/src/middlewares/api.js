@@ -1,18 +1,21 @@
 import axios from 'axios';
 
 import jwtDecode from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../actions/trips';
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail
+  updateMemberFail, deleteMemberFail, deleteMemberSuccess
 } from '../actions/member';
 import {getProfileSuccess} from '../actions/profile'
 import {getTripSuccess} from '../actions/trip'
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, GET_PROFILE
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, GET_PROFILE, DELETE_MEMBER
 } from '../actions/types';
+
+import history from '../history';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -38,6 +41,8 @@ const api = (store) => (next) => (action) => {
           store.dispatch(loginSuccess(response.data));
           // on le stocke aussi dans le localStorage
           localStorage.setItem('token', token);
+          toast.success('Connexion réussie !');
+          history.replace('/ajouter-carnet');
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -67,6 +72,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           // on met à jour le state du membre avec ses infos
+          // console.log(response.data.data)
           store.dispatch(getMemberSuccess(response.data.data));
         })
         .catch((error) => {
@@ -103,6 +109,9 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(registerSuccess(response.data.message));
+          toast.success('Inscription réussie !');
+          history.replace('/connexion');
+          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -115,17 +124,27 @@ const api = (store) => (next) => (action) => {
       break;
     }
     case UPDATE_MEMBER: {
+      // On récupère le token après le login
+      const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'patch',
-        url: 'https://orizons.herokuapp.com/members/39',
+        url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer ${token}'
+          'Authorization': `Bearer ${token}`
+        },
+        data: {
+          nickname: action.data.nickname,
+          first_name: action.data.firstname,
+          last_name: action.data.lastname,
+          email: action.data.email,
         },
       };
       axios(config)
         .then((response) => {
           store.dispatch(updateMemberSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
+          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -133,7 +152,33 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
+        console.log(errorMessage)
           store.dispatch(updateMemberFail(errorMessage));
+        });
+      break;
+    }
+    case DELETE_MEMBER: {
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'delete',
+        url: `https://orizons.herokuapp.com/members/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(deleteMemberSuccess(response.data.message));
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+        console.log(errorMessage)
+          store.dispatch(deleteMemberFail(errorMessage));
         });
       break;
     }
