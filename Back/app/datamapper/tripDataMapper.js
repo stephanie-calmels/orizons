@@ -23,7 +23,8 @@ const tripDataMapper = {
     },
 
     async getTripByMember(memberId) {
-
+        const result = await client.query(`SELECT * FROM trip_by_member WHERE id = $1`, [memberId]);
+        return result.rows[0];
     },
 
     async createTrip(newTrip) {
