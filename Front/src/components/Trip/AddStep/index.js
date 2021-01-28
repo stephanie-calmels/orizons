@@ -113,11 +113,11 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
           <Form
             className="form-add-step"
             onSubmit={handleSubmit((formData) => {
+              handleClose();
               setSubmitting(true);
               formData.localisation = localisation;
               console.log('formData', formData);
-              // TODO: requête AXIOS pour envoyer les infos au serveur
-
+              postStep(formData);
               setSubmitting(false);
             })}
           >

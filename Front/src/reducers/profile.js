@@ -1,4 +1,5 @@
 import members from 'src/data/members';
+import { GET_PROFILE_SUCCESS} from '../actions/types';
 
 
 const initialState = {
@@ -7,7 +8,11 @@ const initialState = {
 
 const reducer = (oldState = initialState, action) => {
   switch (action.type) {
-    
+    case GET_PROFILE_SUCCESS:
+      return {
+        ...oldState,
+        profileInfos: action.trip,
+      };
     default:
       return oldState;
   }

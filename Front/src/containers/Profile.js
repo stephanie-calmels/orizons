@@ -5,8 +5,9 @@ import Profile from 'src/components/Profile';
 import { getProfile } from '../actions/profile';
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   profile: state.profile.profileInfos,
+  profileIdFromUrl: ownProps.match.params.pseudo
 });
 
 const mapDispatchToProps = (dispatch)=>({
