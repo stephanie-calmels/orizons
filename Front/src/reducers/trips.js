@@ -2,10 +2,10 @@
 import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS } from '../actions/types';
 
 const initialState = {
-  allTrips: [],
   trips: [],
   categories: [],
-  randomTrips: []
+  randomTrips: [],
+  filteredTrips: []
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -14,8 +14,8 @@ const reducer = (oldState = initialState, action) => {
     case GET_TRIPS_SUCCESS:
       return {
         ...oldState,
-        allTrips: action.trips,
         trips: action.trips,
+        filteredTrips: action.trips,
       };
     case GET_CATEGORIES_SUCCESS:
       return {
@@ -30,7 +30,7 @@ const reducer = (oldState = initialState, action) => {
     case GET_TRIPS_BY_CATEGORIES_SUCCESS:
       return {
         ...oldState,
-        trips: action.trips,
+        filteredTrips: action.trips,
       };
     default:
       return oldState;

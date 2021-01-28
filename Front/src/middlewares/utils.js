@@ -7,10 +7,10 @@ import {
 const utils = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_RANDOM_TRIPS: {
-      const { trips: { allTrips } } = store.getState();
+      const { trips: { trips } } = store.getState();
       let randomItems = [];
       for (let i = 0; i < 4; i++) {
-        let item = allTrips[Math.floor(Math.random() * allTrips.length)];
+        let item = trips[Math.floor(Math.random() * trips.length)];
         const found = randomItems.find(trip => trip.id === item.id);
         if (found) {
           i--;
@@ -22,9 +22,9 @@ const utils = (store) => (next) => (action) => {
       break;
     };
     case GET_TRIPS_BY_CATEGORY: {
-      const { trips: { allTrips } } = store.getState();
+      const { trips: { trips } } = store.getState();
       const results = []
-      allTrips.forEach((trip) => {
+      trips.forEach((trip) => {
         trip.categories.forEach((category) => {
           if (category.id === action.id) {
             results.push(trip);
