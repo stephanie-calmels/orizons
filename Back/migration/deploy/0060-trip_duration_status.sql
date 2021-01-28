@@ -14,9 +14,7 @@ CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
         t."title",
         t."summary",
-        t."departure_date",
-        t."arrival_date",(t."arrival_date"-t."departure_date" + 1) AS "duration",
-        (CASE 
+        t."departure_date",/5
             WHEN t."arrival_date" IS NULL 
                 THEN 'En cours'
             WHEN CURRENT_DATE > t."departure_date" 

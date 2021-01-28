@@ -27,23 +27,17 @@ const tripController = {
             // 1 - les informations de 1 vopyage
             const trip = await tripDataMapper.getTripById(tripId);
 
-            // 2 - Les informations du member
-            //const author = await memberDataMapper.getMemberById(trip.member_id)
 
             const steps = await stepDataMapper.getStepByTripId(tripId);
 
             // 3 - Les informations de localisation du voyage
             const localisation = await localisationDataMapper.getLocalisationByTrip(tripId);
 
-            // 4 - Les informations de catégories
-            const categories = await categoryDataMapper.getCategoryByTripId(tripId);
-
 
 
             response.json({
                 data: [{
                         trip,
-                        categories,
                         localisation,
                         steps
                     },
