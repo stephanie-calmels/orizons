@@ -13,7 +13,7 @@ const ProfileInfos = ({member, trips})=>{
       <Col md={6}>
         <h2>Statistiques</h2>
         <div className="stats-container">
-          <div>10 carnets  </div>
+          <div>{trips.length} carnets publiés  </div>
           <div>12000km parcourus</div>
           <div className="flags-container"><i className="far fa-flag"> </i><i className="far fa-flag"> </i><i className="far fa-flag"> </i></div>
         </div>
