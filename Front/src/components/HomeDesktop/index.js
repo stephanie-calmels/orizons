@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form,
 } from 'react-bootstrap';
@@ -9,12 +9,17 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, trips, categories, randomSearch,
-}) => (
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories
+}) => {
+  useEffect(() => {
+    loadCategories();
+  }, []);
+  
+  return (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
-        <Card.Img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
+        <Card.Img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
           <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
             Ibn Battuta
@@ -100,29 +105,31 @@ const HomeDesktop = ({
       <Col md={6}>
         <h5 className="col-title">Découvrez notre sélection de carnets publiés par la communauté O'rizons</h5>
         <CardDeck>
-          {trips.map((trip) => (
+          {randomTrips.map((trip) => (
             <Col md={6} key={trip.id}>
-              <Card className="card_home">
-                <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo.url} />
-                <Card.Body className="card_home-body">
-                  <Card.Title className="card_home-title">{trip.title}</Card.Title>
-                  <Card.Text className="card_home-text">
-                    {trip.summary}
-                  </Card.Text>
-                  <Card.Text className="card_home-text">
-                    {trip.categories.map((category) => (
+              <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
+                <Card className="card_home">
+                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo[0].url} />
+                  <Card.Body className="card_home-body">
+                    <Card.Title className="card_home-title">{trip.title}</Card.Title>
+                    <Card.Text className="card_home-text">
+                      {trip.summary}
+                    </Card.Text>
+                    <Card.Text className="card_home-text">
+                      {trip.categories.map((category) => (
 
-                      <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
-                        {category.entitled}
-                      </Badge>
-                    ))}
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer className="card_home-footer">
-                  <Image className="profile_photo m-2" src={trip.author.profile_photo.url} roundedCircle />
-                  <small className="text-muted">{trip.author.nickname}</small>
-                </Card.Footer>
-              </Card>
+                        <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
+                          {category.entitled}
+                        </Badge>
+                      ))}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className="card_home-footer">
+                    <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />
+                    <small className="text-muted">{trip.author[0].nickname}</small>
+                  </Card.Footer>
+                </Card>
+              </div>
             </Col>
           ))}
         </CardDeck>
@@ -295,6 +302,6 @@ const HomeDesktop = ({
     </Row>
 
   </Container>
-);
+)};
 
 export default HomeDesktop;

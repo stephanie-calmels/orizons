@@ -2,6 +2,7 @@
 
 BEGIN;
 
-DROP TABLE "trips" ADD COLUMN "category_id" INT NOT NULL REFERENCES "category"("id");
+ALTER TABLE "trip" DROP COLUMN "category_id";
+ALTER TABLE "category" DROP COLUMN "image";
 
 COMMIT;

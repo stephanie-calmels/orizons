@@ -13,9 +13,10 @@ const categoriesController = {
     async getOneCategory(request, response, next) {
         try {
             const {
-                categoryId
+                categoriesId
             } = request.params;
-            const category = await categoryDataMapper.getCategoryById(categoryId);
+            console.log(categoriesId);
+            const category = await categoryDataMapper.getCategoryById(categoriesId);
             response.json({
                 data: category
             })
@@ -25,8 +26,9 @@ const categoriesController = {
     },
     async createCategory(request, response, next) {
         try {
-            // A voir
-            const category = await categoryDataMapper.createCategory();
+            const newCategory = request.body;
+            const urlImage = `./Front/src/assets/ownImages/${newCategory.image}`
+            const category = await categoryDataMapper.createCategory(newCategory, urlImage);
             response.json({
                 data: category
             })
@@ -36,7 +38,10 @@ const categoriesController = {
     },
     async updateAllCategory(request, response, next) {
         try {
-            const categories = await categoryDataMapper.updateAllCategories();
+
+            const updatedCategory = request.body
+            console.log(updatedCategory);
+            const categories = await categoryDataMapper.updateOneCategory(updatedCategory);
             response.json({
                 data: categories
             })
@@ -47,9 +52,11 @@ const categoriesController = {
     async updateOneCategory(request, response, next) {
         try {
             const {
-                categoryId
+                categoriesId
             } = request.params;
-            const category = await categoryDataMapper.updateOneCategory(categoryId);
+
+            const updatedCategory = request.body
+            const category = await categoryDataMapper.updateOneCategory(categoriesId, updatedCategory);
             response.json({
                 data: category
             })
@@ -72,9 +79,9 @@ const categoriesController = {
             const {
                 categoryId
             } = request.params
-            const trip = await categoryDataMapper.deleteOneCategory(categoryId);
+            await categoryDataMapper.deleteOneCategory(categoryId);
             response.json({
-                data: category
+                message
             })
         } catch (error) {
             next(error)

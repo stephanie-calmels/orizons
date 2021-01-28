@@ -17,12 +17,12 @@ import Login from 'src/containers/Login'; // REDUX
 import Register from 'src/containers/Register'; // REDUX
 import Account from 'src/containers/Account'; // REDUX
 import Page from 'src/components/Page';
-import HomeDesktop from 'src/containers/HomeDesktop';
-import HomeMobile from 'src/containers/HomeMobile';
-import Trips from 'src/components/Trips';
-import AddTrip from 'src/components/AddTrip';
-import Profile from 'src/components/Profile';
-import Trip from 'src/components/Trip';
+import HomeDesktop from 'src/containers/HomeDesktop'; // REDUX
+import HomeMobile from 'src/containers/HomeMobile'; // REDUX
+import Trips from 'src/containers/Trips'; // REDUX
+import AddTrip from 'src/containers/AddTrip';
+import Profile from 'src/containers/Profile';
+import Trip from 'src/containers/Trip';
 
 // == Dumb Components
 import Footer from 'src/components/Footer';
@@ -30,11 +30,7 @@ import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 import ContactForm from 'src/components/ContactForm';
 
-// == Import 'Fake data'
-import trips from 'src/data/trips';
-import categories from 'src/data/categories';
-
-// Custom hook for display according srceen size
+// Custom hook for display according to screen size
 function useMediaQuery() {
   const [screenSize, setScreenSize] = useState([0, 0]);
 
@@ -52,9 +48,10 @@ function useMediaQuery() {
 
 // == Composant
 
-const App = ({ isLoggedIn, loadMember }) => {
+const App = ({ isLoggedIn, loadMember, loadTrips }) => {
   const [width] = useMediaQuery();
   useEffect(() => {
+    loadTrips()
     if (isLoggedIn) {
       loadMember();
     }
@@ -71,7 +68,7 @@ const App = ({ isLoggedIn, loadMember }) => {
             {
               width > 769
                 ? <HomeDesktop />
-                : <HomeMobile isLogged={false} trips={trips} />
+                : <HomeMobile />
             }
           </Route>
           <Route exact path="/inscription">
@@ -90,7 +87,7 @@ const App = ({ isLoggedIn, loadMember }) => {
             <Legals />
           </Route>
           <Route exact path="/exploration">
-            <Trips trips={trips} categories={categories} />
+            <Trips />
           </Route>
           <Route exact path="/exploration/:slug">
             <Trip />

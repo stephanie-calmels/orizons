@@ -7,8 +7,12 @@ const tripController = {
     async getAllTrip(request, response, next) {
         try {
             const trips = await tripDataMapper.getAllTrips();
+            console.log(trips)
+            //const categories = await categoryDataMapper.getCategoryByTripId(trips.id);
+            //console.log(categories)
             response.json({
-                data: trips
+                data: trips,
+                //    categories
             })
         } catch (error) {
             next(error)
@@ -22,27 +26,29 @@ const tripController = {
 
             // 1 - les informations de 1 vopyage
             const trip = await tripDataMapper.getTripById(tripId);
-            console.log(trip.member_id)
+
             // 2 - Les informations du member
             //const author = await memberDataMapper.getMemberById(trip.member_id)
+
             const steps = await stepDataMapper.getStepByTripId(tripId);
 
             // 3 - Les informations de localisation du voyage
             const localisation = await localisationDataMapper.getLocalisationByTrip(tripId);
 
             // 4 - Les informations de catégories
-            const category = await categoryDataMapper.getCategoryByTripId(tripId);
+            const categories = await categoryDataMapper.getCategoryByTripId(tripId);
+
 
 
             response.json({
                 data: [{
-                    trip,
-                    localisation,
-                    author: {
+                        trip,
+                        categories,
+                        localisation,
                         steps
                     },
-                    category
-                }]
+
+                ]
             })
         } catch (error) {
             next(error)
