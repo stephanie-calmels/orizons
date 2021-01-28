@@ -12,7 +12,7 @@ import {
 import {getProfileSuccess} from '../actions/profile'
 import {getTripSuccess} from '../actions/trip'
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER
 } from '../actions/types';
 
 import history from '../history';
@@ -182,11 +182,6 @@ const api = (store) => (next) => (action) => {
         });
       break;
     }
-    case RANDOM_SEARCH: {
-      // eslint-disable-next-line no-console
-      console.log('random search');
-      break;
-    };
     case GET_TRIP:{
       const config = {
         method: 'get',
