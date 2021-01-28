@@ -1,5 +1,5 @@
 import {
-  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS, GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_TRIPS_BY_CATEGORY, GET_RANDOM_TRIPS, GET_RANDOM_TRIPS_SUCCESS
+  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS, GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_TRIPS_BY_CATEGORY, GET_RANDOM_TRIPS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS
 } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -41,4 +41,8 @@ export const getRandomTrips = () => ({
 export const getRandomTripsSuccess = (randomItems) => ({
   type: GET_RANDOM_TRIPS_SUCCESS,
   randomItems
+});
+export const getTripsByCategoriesSuccess = (trips) => ({
+  type: GET_TRIPS_BY_CATEGORIES_SUCCESS,
+  trips
 });

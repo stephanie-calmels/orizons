@@ -1,7 +1,7 @@
-import { getRandomTripsSuccess } from '../actions/trips';
+import { getRandomTripsSuccess, getTripsByCategoriesSuccess } from '../actions/trips';
 
 import {
-  GET_RANDOM_TRIPS,
+  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY
 } from '../actions/types';
 
 const utils = (store) => (next) => (action) => {
@@ -20,8 +20,20 @@ const utils = (store) => (next) => (action) => {
       }
       store.dispatch(getRandomTripsSuccess(randomItems));
       break;
-    }
-      
+    };
+    case GET_TRIPS_BY_CATEGORY: {
+      const { trips: { trips } } = store.getState();
+      const results = []
+      trips.forEach((trip) => {
+        trip.categories.forEach((category) => {
+          if (category.id === action.id) {
+            results.push(trip);
+          }
+        });
+      })
+      store.dispatch(getTripsByCategoriesSuccess(results));
+      break;
+    }; 
     default:
       next(action);
   }

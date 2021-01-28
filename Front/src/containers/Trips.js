@@ -5,7 +5,7 @@ import Trips from 'src/components/Trips';
 import { getMoreResults, getTrips, getCategories } from '../actions/trips';
 
 const mapStateToProps = (state) => ({
-  trips: state.trips.trips,
+  filteredTrips: state.trips.filteredTrips,
   categories: state.trips.categories
 });
 
