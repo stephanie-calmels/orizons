@@ -53,15 +53,15 @@ const Description = ({trip, steps})=>{
   {/*Ajout d'un marqueur pour chaque étape du trip  TODO: CSS dans le popup pour gérer sa taille et celle de l'image*/}
   {steps.map(step =>{
     // Je prépare de quoi faire un lien vers une ancre de la page (format: #id)
-    const sluggedTitleAsAnchor = '#' + slugify(step.title, {lower:true});
+    const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
 
-    return <Marker key={step.id} position={[step.latitude, step.longitude]}>
+    return <Marker key={step.id_step} position={[step.latitude, step.longitude]}>
       <Popup>
         <Card >
           <Card.Img src={step.photos[0].url} style={{height:'10vh'}}/>
           <Card.Body>
-            <Card.Title> {step.title}</Card.Title>
-            <Card.Subtitle>{step.date}</Card.Subtitle>
+            <Card.Title> {step.step_title}</Card.Title>
+            <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Button variant="link" href={sluggedTitleAsAnchor}> Voir le détail</Button>
           </Card.Body>
         </Card>

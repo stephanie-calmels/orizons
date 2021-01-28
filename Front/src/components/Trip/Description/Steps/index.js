@@ -12,12 +12,12 @@ const Steps = ({steps})=>{
   <Row>
     <Col className="nav-container">
       {steps.map(step=>{
-        const sluggedTitleAsAnchor = '#' + slugify(step.title, {lower:true});
+        const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
         // Je récupère la position de l'étape en cours dans le tableau et j'y ajoute 1 pour la barre de nav
-        const stepNumber = steps.indexOf(step) + 1;
-        return <Nav key={step.id}>
+        
+        return <Nav key={step.id_step}>
           <Nav.Item>
-            <Nav.Link href={sluggedTitleAsAnchor}>{stepNumber}</Nav.Link>
+            <Nav.Link href={sluggedTitleAsAnchor}>{step.number_step}</Nav.Link>
           </Nav.Item>
         </Nav>
       })}
@@ -29,9 +29,9 @@ const Steps = ({steps})=>{
   {steps.map(step=>{
     // Je transforme les titres en slug pour les utiliser comme id de chaque carte afin de créer des ancres dans la page
     // pour plus tard TODO: refactorisation, mettre ça ailleurs puisque je le fais aussi dans Description, pour ajouter les liens sur la carte
-    const sluggedTitle = slugify(step.title, {lower:true});
+    const sluggedTitle = slugify(step.step_title, {lower:true});
     
-    return <Card key={step.id} id={sluggedTitle} className="card-steps">
+    return <Card key={step.id_step} id={sluggedTitle} className="card-steps">
     {/* On ajoute les photos dans chaque étape TODO: améliorer la disposition des photos, peut être penser à ne pas toutes les afficher s'il y en a trop */}
       <CardColumns className="card-images-container">
           {step.photos.map(photo=>{
@@ -39,8 +39,8 @@ const Steps = ({steps})=>{
           })}
       </CardColumns>    
           <Card.Body>
-            <Card.Title> {step.title}</Card.Title>
-            <Card.Subtitle>{step.date}</Card.Subtitle>
+            <Card.Title> {step.step_title}</Card.Title>
+            <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
             
           </Card.Body>
