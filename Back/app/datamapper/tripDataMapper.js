@@ -53,17 +53,18 @@ const tripDataMapper = {
 
     async deleteOneTrip(tripId) {
         const result = await client.query(`SELECT * FROM step WHERE trip_id = $1`, [tripId])
-        //console.log(result.rows)
+
         if (result.rowCount != 0) {
             for (let element of result.rows) {
-                let stepId = element.trip_id;
-                console.log(stepId);
+                let stepId = element.id;
                 await stepDataMapper.deleteOneStep(stepId);
-                console.log("prout", stepId)
+
             }
 
         }
-        //await client.query(`DELETE FROM trip WHERE id = $1 `, [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_localisation WHERE trip_id = $1` [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_category WHERE trip_id = $1` [tripId]);
+        await client.query(`DELETE FROM trip WHERE id = $1 `, [tripId]);
         const message = "supprimé"
         return message
 

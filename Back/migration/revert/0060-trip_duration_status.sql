@@ -36,6 +36,8 @@ SELECT "member"."id" AS "id_member",
     JOIN "step" ON "step"."member_id" = "member"."id"
     GROUP BY "member"."id", "member"."nickname", "step"."trip_id";
 DROP VIEW "trip_with_duration_status";
+
+
 CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
         t."title",
