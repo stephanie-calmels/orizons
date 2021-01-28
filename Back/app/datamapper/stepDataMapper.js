@@ -23,9 +23,22 @@ const stepDataMapper = {
     },
 
     async getStepByTripId(tripId) {
-        const result = await client.query('SELECT * FROM step_photo WHERE trip_id = $1', [tripId]);
+        const result = await client.query('SELECT * FROM step_photo WHERE step_id = $1', [tripId]);
         return result.rows;
+    },
+
+    async deleteOneStep(stepId) {
+        const verify = await client.query(`SELECT * FROM photo WHERE step_id = $1`, [stepId]);
+        if (verify.rowCount != 0) {
+            await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId]);
+
+        }
+        await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
+        const message = `Suppression de l'étape terminée`;
+        return message;
     }
+
+
 };
 
 module.exports = stepDataMapper;

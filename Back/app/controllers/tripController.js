@@ -54,6 +54,21 @@ const tripController = {
             next(error)
         }
     },
+
+    async getTripByMember(request, response, next) {
+        try {
+            const {
+                memberId
+            } = request.params
+            const trip = await tripController.getTripByMember(memberId);
+            response.json({
+                date: trip
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+
     async createTrip(request, response, next) {
         try {
             const newTrip = request.body;

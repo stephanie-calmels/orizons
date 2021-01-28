@@ -1,4 +1,5 @@
 const client = require('./client');
+const stepDataMapper = require('./stepDataMapper');
 
 const tripDataMapper = {
     async getAllTrips() {
@@ -19,6 +20,10 @@ const tripDataMapper = {
         }
         console.log(result.rows);
         return result.rows[0];
+    },
+
+    async getTripByMember(memberId) {
+
     },
 
     async createTrip(newTrip) {
@@ -45,9 +50,25 @@ const tripDataMapper = {
         const result = await client.query("");
     },
 
-    async deleteOneTrip() {
-        const result = await client.query("");
-    }
+    async deleteOneTrip(tripId) {
+        const result = await client.query(`SELECT * FROM step WHERE trip_id = $1`, [tripId])
+        //console.log(result.rows)
+        if (result.rowCount != 0) {
+            for (let element of result.rows) {
+                let stepId = element.trip_id;
+                console.log(stepId);
+                await stepDataMapper.deleteOneStep(stepId);
+                console.log("prout", stepId)
+            }
+
+        }
+        //await client.query(`DELETE FROM trip WHERE id = $1 `, [tripId]);
+        const message = "supprimé"
+        return message
+
+
+
+    },
 
 
 };

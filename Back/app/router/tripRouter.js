@@ -10,12 +10,13 @@ const router = express.Router();
 //router.get('/category/:categoryId', tripController.getTripsByCategory)
 router.get('/', tripController.getAllTrip);
 router.get('/:tripId', tripController.getOneTrip);
+router.get('/member/:memberId', tripController.getTripByMember)
 router.post('/', tripController.createTrip)
 
 //router.post('/', authorizationMW, tripController.createTrip);
 //router.patch('/', jwt, tripController.updateAllTrip);
 //router.patch('/:tripId', jwt, tripController.updateOneTrip);
 //router.delete('/', jwt, tripController.deleteAllTrip);
-//router.delete('/:tripId',jwt,  tripController.deleteOneTrip);
+router.delete('/:tripId', tripController.deleteOneTrip);
 
 module.exports = router;

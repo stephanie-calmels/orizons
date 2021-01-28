@@ -12,3 +12,5 @@
 0050-trip-with-duration-status 2021-01-25T12:27:59Z "Etudiant O'clock",,, <etudiant@teleporteur> # Modifying trip_with-duration_status
 0055-addings-bdd 2021-01-26T09:09:39Z "Etudiant O'clock",,, <etudiant@teleporteur> # Addings to tables
 0060-trip_duration_status 2021-01-27T07:21:27Z "Etudiant O'clock",,, <etudiant@teleporteur> # Update of view trip with duration status
+0070-modifying-cause-photos 2021-01-28T10:07:24Z "Etudiant O'clock",,, <etudiant@teleporteur> # Modifying many tables for photos
+0080-trips-members 2021-01-28T12:51:01Z "Etudiant O'clock",,, <etudiant@teleporteur> # trips by members
