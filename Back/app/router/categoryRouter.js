@@ -11,8 +11,8 @@ router.get('/:categoriesId', categoryController.getOneCategory);
 router.post('/', categoryController.createCategory);
 router.patch('/', categoryController.updateAllCategory);
 router.patch('/:categoriesId', categoryController.updateOneCategory);
-router.delete('/', jwt, categoryController.deleteAllCategory);
-router.delete('/:categoriesId', jwt, categoryController.deleteOneCategory);
+router.delete('/', categoryController.deleteAllCategory);
+router.delete('/:categoriesId', categoryController.deleteOneCategory);
 
 
 module.exports = router;

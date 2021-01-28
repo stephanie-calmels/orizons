@@ -2,7 +2,6 @@ const memberDataMapper = require('../datamapper/memberDataMapper');
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
 const memberController = {
     async getAllMember(_, response, next) {
         try {
@@ -65,7 +64,6 @@ const memberController = {
             const {
                 memberId
             } = request.params
-            console.log(request.params);
             const member = await memberDataMapper.getMemberById(memberId);
             response.json({
                 data: member
@@ -112,7 +110,10 @@ const memberController = {
             const {
                 memberId
             } = request.params;
-            const member = await memberDataMapper.updateOneMember(memberId);
+
+            const memberInfos = request.body;
+            const member = await memberDataMapper.updateOneMember(memberId, memberInfos);
+            //const member = await memberDataMapper.getMemberById(memberId)
             response.json({
                 data: member
             })
@@ -120,8 +121,28 @@ const memberController = {
             next(error)
         }
     },
+    async updateProfilePhoto(request, response, next) {
+        try {
+            const {
+                memberId
+            } = request.params;
+            const memberPhoto = request.file;
+            console.log(memberPhoto, '?????????????????????????????????')
+            const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
+            response.json({
+                data: 'truc'
+            })
+
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
+
     async deleteAllMember(request, response, next) {
         try {
+
             const members = await memberDataMapper.deleteAllMember();
             response.json({
                 data: members

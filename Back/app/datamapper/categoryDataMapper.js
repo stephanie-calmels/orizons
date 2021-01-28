@@ -15,7 +15,7 @@ const categoryDataMapper = {
     },
 
     async getCategoryByTripId(tripId) {
-        const result = await client.query('SELECT * FROM category JOIN trip ON trip.category_id = category.id WHERE trip.id = $1', [tripId]);
+        const result = await client.query('SELECT * FROM "category_trip_id" cti WHERE cti.trip_id = $1', [tripId]);
         if (result.rowCount == 0) {
             return null;
         }
@@ -35,7 +35,8 @@ const categoryDataMapper = {
         const result = await client.query("");
     },
 
-    async updateOneCategory(updatedCategory) {
+    async updateOneCategory(categoriesId, updatedCategory) {
+        console.log(updatedCategory);
         const result = await client.query(`UPDATE "category" 
         SET "entitled" = $1,
             "color" = $2,
@@ -45,8 +46,9 @@ const categoryDataMapper = {
             updatedCategory.entitled,
             updatedCategory.color,
             updatedCategory.image,
-            updatedCategory.id
+            categoriesId
         ]);
+        console.log(result.rows)
         return result.rows[0];
     },
 

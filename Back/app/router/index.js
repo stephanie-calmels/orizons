@@ -1,5 +1,4 @@
 const express = require('express');
-
 const jwt = require('../middleware/auth');
 
 const tripRouter = require('./tripRouter');
@@ -14,7 +13,7 @@ const router = express.Router();
 router.use('/trips', tripRouter);
 router.use('/categories', categoryRouter);
 router.use('/members', memberRouter);
-router.use('/steps', jwt, stepRouter)
+router.use('/steps', jwt, stepRouter);
 
 //router.use(errorController.error404);
 
