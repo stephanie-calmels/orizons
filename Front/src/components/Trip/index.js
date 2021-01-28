@@ -6,7 +6,7 @@ import trips from 'src/data/trips';
 
 import Banner from './Banner';
 import Description from './Description';
-import AddStep from './AddStep';
+import AddStep from 'src/containers/AddStep';
 
 const Trip = ({trip, loadTrip})=>{
 
