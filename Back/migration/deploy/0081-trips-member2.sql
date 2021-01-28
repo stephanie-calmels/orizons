@@ -9,11 +9,11 @@ m."nickname",
         m."profile_photo",
         m."registration_date",
         m."localisation",
-        JSON_AGG("trip") AS "trip"
-   --     JSON_AGG(category_by_trip) AS "categories"
+        JSON_AGG("trip") AS "trip",
+       JSON_AGG(cbt) AS "categories"
 FROM "member" m
 LEFT OUTER JOIN "trip" ON "trip"."member_id" = m."id"
---JOIN "category_by_trip" cbt ON cbt."id" = "trip"."id"
+LEFT OUTER JOIN "category_by_trip" cbt ON cbt."id" = "trip"."id"
 GROUP BY m."id",
 m."nickname",
         m."biography",
