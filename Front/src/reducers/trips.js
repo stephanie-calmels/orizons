@@ -1,11 +1,12 @@
 // import trips from 'src/data/trips';
-import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS } from '../actions/types';
+import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, 
+} from '../actions/types';
 
 const initialState = {
   trips: [],
   categories: [],
   randomTrips: [],
-  filteredTrips: []
+  filteredTrips: [],
 };
 
 const reducer = (oldState = initialState, action) => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form,
+  Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form, InputGroup
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -9,12 +9,12 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, searchByCategory
 }) => {
   useEffect(() => {
     loadCategories();
   }, []);
-  
+
   return (
   <Container fluid>
     <Row>
@@ -137,32 +137,75 @@ const HomeDesktop = ({
 
       <Col className="search_box" md={6}>
         <h5 className="col-title">Vous recherchez quelque chose en particulier ? Parcourez les carnets de voyage publiés sur O'rizons, triés par pays, ville ou catégorie.</h5>
-        <Form className="form_search">
-          <Form.Group as={Row} controlId="formGroupCountry">
-            <Form.Label column sm={4}>Pays</Form.Label>
-            <Col sm={6}>
-              <Form.Control type="country" placeholder="Rechercher par pays" />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formGroupCity">
-            <Form.Label column sm={4}>Ville</Form.Label>
-            <Col sm={6}>
-              <Form.Control type="city" placeholder="Rechercher par ville" />
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formGroupCategory">
-            <Form.Label column sm={4}>Type de voyage</Form.Label>
-            <Col sm={6}>
-              <Form.Control as="select">
-                {
-                  categories.map((category) => (
-                    <option key={category.id}>{category.entitled}</option>
-                  ))
-                }
-              </Form.Control>
-            </Col>
-          </Form.Group>
-        </Form>
+        <Container className='form_container'>
+          <Form className="form_search">
+            <Form.Group as={Row} controlId="formGroupCountry">
+              <Form.Label column sm={4}>Pays</Form.Label>
+              <Col sm={6}>
+                <InputGroup>
+                  <Form.Control 
+                    type="country" 
+                    placeholder="Rechercher par pays"
+                    />
+                  <InputGroup.Append>
+                    <Button variant="primary"><i className="fas fa-search" /></Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Col>
+            </Form.Group>
+          </Form>
+
+          <Form className="form_search">
+            <Form.Group as={Row} controlId="formGroupCity">
+              <Form.Label column sm={4}>Ville</Form.Label>
+              <Col sm={6}>
+                <InputGroup>
+                  <Form.Control 
+                    type="city" 
+                    placeholder="Rechercher par ville" 
+                  />
+                  <InputGroup.Append>
+                    <Button variant="primary"><i className="fas fa-search" /></Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Col>
+            </Form.Group>
+          </Form>
+
+          <Form 
+            className="form_search" 
+            onSubmit={(e) => {
+              e.preventDefault();
+              searchByCategory(e.target.value);
+            }}
+          >
+            <Form.Group as={Row} controlId="formGroupCategory">
+              <Form.Label column sm={4}>Type de voyage</Form.Label>
+              <Col sm={6}>
+                <InputGroup>
+                  <Form.Control 
+                    as="select" 
+                  >
+                    {
+                      categories.map((category) => (
+                        <option key={category.id} value={category.id}>{category.entitled}</option>
+                      ))
+                    }
+                  </Form.Control>
+                  <InputGroup.Append>
+                    <Button 
+                      type="submit"
+                      variant="primary"
+                    >
+                      <i className="fas fa-search" />
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Col>
+            </Form.Group>
+          </Form>
+        </Container>
+        
 
         <h5 className="col-title">Vous préférez vous faire surprendre ?</h5>
         <Button className="random_search-button" onClick={randomSearch}>Voir un carnet de voyage au hasard</Button>

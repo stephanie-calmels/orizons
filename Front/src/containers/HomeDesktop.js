@@ -3,7 +3,7 @@ import history from '../history';
 
 import HomeDesktop from 'src/components/HomeDesktop';
 import {
-  randomSearch, getCategories,
+  randomSearch, getCategories, getTripsByCategory
 } from '../actions/trips';
 
 const mapStateToProps = (state) => ({
@@ -22,6 +22,10 @@ const mapDispatchToProps = (dispatch) => ({
   loadCategories: () => {
     dispatch(getCategories());
   },
+  searchByCategory: (id) => {
+    // history.push(`/exploration`);
+    dispatch(getTripsByCategory(id))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeDesktop);

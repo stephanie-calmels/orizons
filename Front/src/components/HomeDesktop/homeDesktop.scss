@@ -130,14 +130,18 @@
   }
 }
 
-.form_search {
-  text-align: center;
-  margin: 4rem 0;
-}
-
 .search_box {
   display: flex;
   flex-direction: column;
+}
+
+.form_container {
+  margin: 3rem 0;
+}
+
+.form_search {
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .random_search-button {
