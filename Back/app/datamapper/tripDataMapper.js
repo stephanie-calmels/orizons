@@ -62,11 +62,11 @@ const tripDataMapper = {
             }
 
         }
-        await client.query(`DELETE FROM _m2m_trip_localisation WHERE trip_id = $1` [tripId]);
-        await client.query(`DELETE FROM _m2m_trip_category WHERE trip_id = $1` [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_localisation WHERE trip_id = $1`, [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_category WHERE trip_id = $1`, [tripId]);
         await client.query(`DELETE FROM trip WHERE id = $1 `, [tripId]);
-        const message = "supprimé"
-        return message
+        const message = "supprimé";
+        return message;
 
 
 
