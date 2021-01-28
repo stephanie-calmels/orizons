@@ -16,6 +16,6 @@ router.post('/', tripController.createTrip)
 //router.patch('/', jwt, tripController.updateAllTrip);
 //router.patch('/:tripId', jwt, tripController.updateOneTrip);
 //router.delete('/', jwt, tripController.deleteAllTrip);
-//router.delete('/:tripId',jwt,  tripController.deleteOneTrip);
+router.delete('/:tripId', tripController.deleteOneTrip);
 
 module.exports = router;
