@@ -11,7 +11,12 @@ const utils = (store) => (next) => (action) => {
       let randomItems = [];
       for (let i = 0; i < 4; i++) {
         let item = trips[Math.floor(Math.random() * trips.length)];
-        randomItems.push(item);
+        const found = randomItems.find(trip => trip.id === item.id);
+        if (found) {
+          i--;
+        } else {
+          randomItems.push(item);
+        }
       }
       store.dispatch(getRandomTripsSuccess(randomItems));
       break;
