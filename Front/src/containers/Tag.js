@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleClick: (id) => {
-    dispatch(getTripsByCategory());
+    dispatch(getTripsByCategory(id));
   }
 });
 

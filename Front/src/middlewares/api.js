@@ -12,7 +12,7 @@ import {
 import {getProfileSuccess} from '../actions/profile'
 import {getTripSuccess} from '../actions/trip'
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_TRIPS_BY_CATEGORY, GET_PROFILE, DELETE_MEMBER
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER
 } from '../actions/types';
 
 import history from '../history';
@@ -238,24 +238,6 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(getCategoriesSuccess(response.data.data));
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      break;
-    };
-    case GET_TRIPS_BY_CATEGORY: {
-      const config = {
-        method: 'get',
-        url: `https://orizons.herokuapp.com/trips/${action.id}`,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      axios(config)
-        .then((response) => {
-          store.dispatch(getTripsSuccess(response.data.data));
-
         })
         .catch((error) => {
           console.error(error);
