@@ -6,9 +6,9 @@ import ProfileInfos from './ProfileInfos';
 import members from 'src/data/members'
 import trips from 'src/data/trips'
 
-const Profile = ({profile, loadProfile}) => {
+const Profile = ({profile, loadProfile, profileIdFromUrl}) => {
  useEffect(()=>{
-   loadProfile(profile.id)
+   loadProfile(profileIdFromUrl)
  },[])
   return <div>
     <ProfileBanner member={profile}/>

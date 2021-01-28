@@ -7,6 +7,7 @@ const Steps = ({steps})=>{
 
   return <div>
   {/*J'ai ajouté un container sinon la carte empiétait sur les cartes des étapes */}
+  {steps.length > 0 &&
   <Container>
   <Row>
     <Col className="nav-container">
@@ -48,6 +49,7 @@ const Steps = ({steps})=>{
   </Col>
   </Row>
   </Container>
+  }
   </div>
 }
 

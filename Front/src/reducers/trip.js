@@ -1,9 +1,8 @@
-import trips from 'src/data/trips';
 import { GET_TRIP_SUCCESS} from '../actions/types';
 
 
 const initialState = {
-  tripItem: trips[0],
+  tripItem: null,
 };
 
 const reducer = (oldState = initialState, action) => {

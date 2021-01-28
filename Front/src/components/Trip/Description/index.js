@@ -7,8 +7,15 @@ import slugify from 'slugify'
 import './description.scss'
 import Steps from './Steps'
 
-const Description = ({trip})=>{
-
+const Description = ({trip, steps})=>{
+  // on crée une constante pour centrer la map sur la première étape, si celle ci existe
+  let mapCenter =[]
+  if (steps.length> 0){
+    mapCenter = [steps[0].latitude, steps[0].longitude];
+  } else{
+    mapCenter= [0,0]
+  }
+  console.log(trip)
   return <div>
   <Container>
     <Row className="infos-container">
@@ -37,14 +44,14 @@ const Description = ({trip})=>{
     </Row>
     <Row >
     <Col>
-    {/*On crée la map et on la centre sur la position de la première étape */}
-    <MapContainer center={[trip.steps[0].latitude, trip.steps[0].longitude]} zoom={11} scrollWheelZoom={true}>
+    {/*On crée la map et on la centre sur la position de la première étape si elle existe */}
+    <MapContainer center={mapCenter} zoom={11} scrollWheelZoom={true}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
   {/*Ajout d'un marqueur pour chaque étape du trip  TODO: CSS dans le popup pour gérer sa taille et celle de l'image*/}
-  {trip.steps.map(step =>{
+  {steps.map(step =>{
     // Je prépare de quoi faire un lien vers une ancre de la page (format: #id)
     const sluggedTitleAsAnchor = '#' + slugify(step.title, {lower:true});
 
@@ -65,7 +72,7 @@ const Description = ({trip})=>{
     </Col>
     </Row>
     <Row>
-      <Steps steps= {trip.steps}/>
+      <Steps steps= {steps}/>
     </Row>
   </Container>
 
