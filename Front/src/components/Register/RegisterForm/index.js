@@ -4,11 +4,10 @@ import {
   Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import './registerForm.scss';
 
-import history from '../../../history';
+// import history from '../../../history';
 
 const Register = ({
   nickname,
@@ -19,7 +18,7 @@ const Register = ({
   passwordRepeat,
   changeField,
   errorMessage,
-  isSuccessful,
+  isRegisterSuccessful,
   handleRegister,
   isLoading,
 }) => {
@@ -27,13 +26,6 @@ const Register = ({
   const { register, handleSubmit, errors } = useForm({});
   // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
-
-  useEffect(() => {
-    if (isSuccessful) {
-      toast.success('Inscription réussie !');
-      history.replace('/connexion');
-    }
-  }, [isSuccessful]);
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
@@ -158,7 +150,7 @@ Register.propTypes = {
   passwordRepeat: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
-  isSuccessful: PropTypes.bool.isRequired,
+  isRegisterSuccessful: PropTypes.bool.isRequired,
   handleRegister: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

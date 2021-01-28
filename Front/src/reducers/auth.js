@@ -10,7 +10,6 @@ const initialState = {
   email: '',
   password: '',
   errorMessage: '',
-  isSuccessful: false,
   isLoading: false,
 };
 
@@ -26,7 +25,6 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         token: action.member.token,
         isLoggedIn: true,
-        isSuccessful: true,
         isLoading: false,
       };
     case LOGOUT:

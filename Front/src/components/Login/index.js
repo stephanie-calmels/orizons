@@ -5,19 +5,16 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import Title from '../PageTitle';
 
 import './login.scss';
-import history from '../../history';
 
 const Login = ({
   email,
   password,
   changeField,
   errorMessage,
-  isSuccessful,
   handleLogin,
   isLoading,
 }) => {
@@ -25,13 +22,6 @@ const Login = ({
   const { register, handleSubmit, errors } = useForm();
   // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
-
-  useEffect(() => {
-    if (isSuccessful) {
-      toast.success('Connexion réussie !');
-      history.replace('/ajouter-carnet');
-    }
-  }, [isSuccessful]);
 
   return (
     <>
@@ -94,7 +84,6 @@ Login.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
-  isSuccessful: PropTypes.bool.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
