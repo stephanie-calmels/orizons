@@ -7,8 +7,12 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
+import axios from 'axios';
+
 import Title from '../PageTitle/index';
+
 import './account.scss';
+
 
 const Account = ({
   firstname,
@@ -54,6 +58,44 @@ const Account = ({
     setValues({...values, [name]: value})
   }
 
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  const onChangeHandler = (e) => {
+    setSelectedPhoto(e.target.files[0]);
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('profilePhoto', selectedPhoto);
+    // eslint-disable-next-line no-console
+    console.log(formData);
+    for (var value of formData.values()) {
+      console.log(value);
+   }
+    const config = {
+      method: 'post',
+      url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      data: formData,
+    };
+    axios(config)
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response.data);
+      })
+      .catch((error) => {
+        const errorMessage = (error.response
+    && error.response.data
+    && error.response.data.message)
+    || error.message
+    || error.toString();
+        console.log(errorMessage);
+      });
+  };
+
   return (
     <>
       <Title texte="Mon compte" />
@@ -64,6 +106,10 @@ const Account = ({
       {/* ==================== CARD ========================================= */}
         <Card className="card-account">
           <Card.Img className="card-account__img" src={profilePhoto} />
+          <form className="form-account">
+            <input className="card-account__input" accept="image/*" type="file" onChange={onChangeHandler} />
+            <button type="submit" className="btn btn-primary" onClick={onSubmitHandler}>Valider</button>
+          </form>
           <LinkContainer to={`/profil/${id}`} className="card-account__link">
             <Nav.Link>Consulter mon profil</Nav.Link>
           </LinkContainer>
@@ -116,7 +162,11 @@ const Account = ({
           <Modal.Body>
           <Form
             className="form"
-            onSubmit={handleSubmit(handleUpdate)}
+            onSubmit={handleSubmit((formData) => {
+              handleUpdateModal();
+              handleUpdate(formData);
+            }) 
+            }
           >
         {errorMessage && (
           <Alert variant="danger">{errorMessage}</Alert>)}

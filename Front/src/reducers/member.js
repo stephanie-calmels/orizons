@@ -5,8 +5,6 @@ import {
   
 } from '../actions/types';
 
-import history from '../history';
-
 const initialState = {
   nickname: '',
   firstname: '',

@@ -131,6 +131,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(updateMemberSuccess(response.data.data));
+          
         })
         .catch((error) => {
           const errorMessage = (error.response

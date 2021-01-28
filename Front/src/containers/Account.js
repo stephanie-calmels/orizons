@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, activateLoader, getMember, updateMember, deleteMember
+  changeRegisterField, activateLoader, updateMember, deleteMember
 } from '../actions/member';
 
 const mapStateToProps = (state) => ({
