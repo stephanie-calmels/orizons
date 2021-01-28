@@ -13,9 +13,6 @@ const initialState = {
   password: '',
   passwordRepeat: '',
   errorMessage: '',
-  isRegisterSuccessful: false,
-  isUpdateSuccessful: false,
-  isDeleteSuccessful: false,
   isLoading: false,
   registrationDate: '',
   profilePhoto: '',
@@ -38,7 +35,6 @@ const reducer = (oldState = initialState, action) => {
         email: '',
         password: '',
         passwordRepeat: '',
-        isRegisterSuccessful: true,
         isLoading: false,
       };
     case REGISTER_FAIL:
@@ -46,7 +42,6 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         errorMessage: action.message,
         isLoading: false,
-        isSuccessful: false,
       };
     case SET_LOADER_REGISTER:
       return {
@@ -66,14 +61,12 @@ const reducer = (oldState = initialState, action) => {
         id: action.member.id,
         biography: action.member.biography,
         localisation: action.member.localisation,
-        isSuccessful: true,
         isLoading: false,
         errorMessage: '',
       };
     case GET_MEMBER_FAIL:
       return {
         ...oldState,
-        isSuccessful: false,
         isLoading: false,
         errorMessage: action.member.errorMessage,
       };

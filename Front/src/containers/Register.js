@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
   email: state.member.email,
   password: state.member.password,
   passwordRepeat: state.member.passwordRepeat,
-  isRegisterSuccessful: state.member.isRegisterSuccessful,
   errorMessage: state.member.errorMessage,
   isLoading: state.member.isLoading,
 });

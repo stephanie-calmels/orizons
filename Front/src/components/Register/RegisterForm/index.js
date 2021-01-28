@@ -4,11 +4,10 @@ import {
   Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import './registerForm.scss';
 
-import history from '../../../history';
+// import history from '../../../history';
 
 const Register = ({
   nickname,
@@ -27,13 +26,6 @@ const Register = ({
   const { register, handleSubmit, errors } = useForm({});
   // Modification des champs
   const handleChange = (e) => changeField([e.target.name], e.target.value);
-
-  useEffect(() => {
-    if (isRegisterSuccessful) {
-      toast.success('Inscription réussie !');
-      history.replace('/connexion');
-    }
-  }, [isRegisterSuccessful]);
 
   return (
     <Container className="d-flex justify-content-center align-items-center">

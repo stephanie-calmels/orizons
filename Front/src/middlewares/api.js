@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
@@ -9,6 +10,8 @@ import {
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, RANDOM_SEARCH, DELETE_MEMBER
 } from '../actions/types';
+
+import history from '../history';
 
 const api = (store) => (next) => (action) => {
   switch (action.type) {
@@ -34,6 +37,8 @@ const api = (store) => (next) => (action) => {
           store.dispatch(loginSuccess(response.data));
           // on le stocke aussi dans le localStorage
           localStorage.setItem('token', token);
+          toast.success('Connexion réussie !');
+          history.replace('/ajouter-carnet');
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -100,6 +105,9 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(registerSuccess(response.data.message));
+          toast.success('Inscription réussie !');
+          history.replace('/connexion');
+          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -131,6 +139,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           store.dispatch(updateMemberSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
           
         })
         .catch((error) => {
