@@ -7,6 +7,13 @@ const stepDataMapper = {
     },
 
     async createStep(newStep) {
+        let nbStep
+        const steps = await client.query('SELECT * FROM step WHERE trip_id = $1 ORDER BY number_step DESC LIMIT 1)', [newStep.trip_id]);
+        if (steps.rowCount = 0) {
+            nbStep = 1;
+        } else {
+            nbStep = steps.n
+        }
         const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, member_id, localisation_id, trip_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
             [
                 newStep.longitude, //OK
