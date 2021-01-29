@@ -7,12 +7,13 @@ import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../action
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail, deleteMemberFail, deleteMemberSuccess
+  updateMemberFail, deleteMemberFail, deleteMemberSuccess,
 } from '../actions/member';
-import {getProfileSuccess} from '../actions/profile'
-import {getTripSuccess} from '../actions/trip'
+import { getProfileSuccess } from '../actions/profile';
+import { getTripSuccess } from '../actions/trip';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
+  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER,
 } from '../actions/types';
 
 import history from '../history';
@@ -111,7 +112,6 @@ const api = (store) => (next) => (action) => {
           store.dispatch(registerSuccess(response.data.message));
           toast.success('Inscription réussie !');
           history.replace('/connexion');
-          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -131,7 +131,7 @@ const api = (store) => (next) => (action) => {
         url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         data: {
           nickname: action.data.nickname,
@@ -144,7 +144,6 @@ const api = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(updateMemberSuccess(response.data.data));
           toast.success('Modification des données réussie !');
-          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -152,7 +151,7 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-        console.log(errorMessage)
+          console.log(errorMessage);
           store.dispatch(updateMemberFail(errorMessage));
         });
       break;
@@ -164,7 +163,7 @@ const api = (store) => (next) => (action) => {
         url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       };
       axios(config)
@@ -177,12 +176,12 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-        console.log(errorMessage)
+          console.log(errorMessage);
           store.dispatch(deleteMemberFail(errorMessage));
         });
       break;
     }
-    case GET_TRIP:{
+    case GET_TRIP: {
       const config = {
         method: 'get',
         url: `https://orizons.herokuapp.com/trips/${action.id}`,
@@ -199,7 +198,7 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
+    }
     case GET_TRIPS: {
       const config = {
         method: 'get',
@@ -217,11 +216,11 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
+    }
     case GET_MORE_RESULTS: {
       console.log('get more results');
       break;
-    };
+    }
     case GET_CATEGORIES: {
       const config = {
         method: 'get',
@@ -238,8 +237,8 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
-    case GET_PROFILE:{
+    }
+    case GET_PROFILE: {
       const config = {
         method: 'get',
         url: `https://orizons.herokuapp.com/members/${action.id}`,
@@ -256,7 +255,7 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
+    }
     default:
       next(action);
   }
