@@ -9,12 +9,14 @@ import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
   updateMemberFail, deleteMemberFail, deleteMemberSuccess
 } from '../actions/member';
-import {getProfileSuccess} from '../actions/profile';
-import {getTripSuccess} from '../actions/trip';
-import {postNewTrip} from '../actions/addTrip';
-import {postNewStep} from '../actions/addStep';
+import { getProfileSuccess } from '../actions/profile';
+import { getTripSuccess } from '../actions/trip';
+import { postNewTripSuccess } from '../actions/addTrip';
+import { postNewStepSuccess } from '../actions/addStep';
+import { getCountriesSuccess } from '../actions/countries';
+
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, POST_NEW_STEP, POST_NEW_TRIP,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES,
 } from '../actions/types';
 
 import history from '../history';
@@ -312,6 +314,24 @@ const api = (store) => (next) => (action) => {
         .then((response)=>{
           console.log(response.data);
           store.dispatch(postNewTripSuccess(response.data.data[0]));
+        })
+        .catch((error) =>{
+          console.error(error);
+        })
+        break;
+    }
+    case GET_COUNTRIES:{
+      const config = {
+        method: 'get',
+        url: `https://orizons.herokuapp.com/countries`,
+        headers:{
+          'Content-Type': 'application/json',
+        },
+      };  
+      axios(config)
+        .then((response) => {
+          console.log('countries', response.data.data.rows);
+          store.dispatch(getCountriesSuccess(response.data.data.rows));
         })
         .catch((error) =>{
           console.error(error);
