@@ -26,21 +26,30 @@ const tripDataMapper = {
     async getTripByMember(memberId) {
         const result = await client.query(`SELECT * FROM trip_by_member WHERE id = $1`, [memberId]);
         return result.rows[0];
+
     },
 
     async createTrip(newTrip) {
-        const result = await client.query("INSERT INTO trip(title, summary, departure_date, arrival_date, member_id) VALUES ($1, $2, $3, $4, $5)RETURNING *",
+        const trip = await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6)RETURNING *`,
             [
                 newTrip.title,
                 newTrip.summary,
                 newTrip.departure_date,
                 newTrip.arrival_date,
-                newTrip.member_id
-                //cover_picture
+                newTrip.member_id,
+                newTrip.cover_picture //cover_picture
                 //country pays -->table m2m
                 //categories // tableau dans m2m
             ]);
-        return result.rows[0];
+        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.code])
+        await client.query(`INSERT INTO "_m2m_trip_localisation"("trip_id", "localisation_id") VALUES $1, $2`, [trip.id, country.id]);
+
+        for (const categories of newTrip.category) {
+            await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES $1, $2`, [trip.id, categories.id]);
+
+        }
+
+        return this.getTripById(trip.id);
     },
 
     async updateAllTrip() {
