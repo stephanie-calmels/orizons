@@ -1,5 +1,5 @@
 import {
-  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS, GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_TRIPS_BY_CATEGORY, GET_RANDOM_TRIPS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD
+  RANDOM_SEARCH, GET_MORE_RESULTS, GET_TRIPS, GET_TRIPS_SUCCESS, GET_CATEGORIES, GET_CATEGORIES_SUCCESS, GET_TRIPS_BY_CATEGORY, GET_RANDOM_TRIPS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD, GET_TRIPS_BY_COUNTRY, GET_TRIPS_BY_COUNTRY_SUCCESS
 } from './types';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -49,4 +49,12 @@ export const getTripsByCategoriesSuccess = (trips) => ({
 export const changeCategoryField = (id) => ({
   type: CHANGE_CATEGORY_FIELD,
   id
+});
+export const getTripsByCountry = (code) => ({
+  type: GET_TRIPS_BY_COUNTRY,
+  code
+});
+export const getTripsByCountrySuccess = (trips) => ({
+  type: GET_TRIPS_BY_COUNTRY_SUCCESS,
+  trips
 });

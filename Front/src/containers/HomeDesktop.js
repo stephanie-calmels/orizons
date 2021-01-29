@@ -3,10 +3,9 @@ import history from '../history';
 
 import HomeDesktop from 'src/components/HomeDesktop';
 import {
-  randomSearch, getCategories, changeCategoryField, getTripsByCategory
+  randomSearch, getCategories, changeCategoryField, getTripsByCategory, getTripsByCountry
 } from '../actions/trips';
-import { changeCountryField } from '../actions/countries';
-import { getCountries } from '../actions/countries';
+import { getCountries, changeCountryField } from '../actions/countries';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
@@ -31,7 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeCategoryField(value));
   },
   searchByCategory: (id) => {
-    dispatch(getTripsByCategory(id))
+    dispatch(getTripsByCategory(id));
     history.push(`/resultats`);
   },
   loadCountries: () => {
@@ -39,6 +38,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   changeCountryField: (value) => {
     dispatch(changeCountryField(value));
+  },
+  searchByCountry: (code) => {
+    dispatch(getTripsByCountry(code));
+    history.push(`/resultats`);
   }
 });
 

@@ -12,4 +12,4 @@ export const getCountriesSuccess = (countries) => ({
 export const changeCountryField = (value) => ({
   type: CHANGE_COUNTRY_FIELD,
   value
-})
+});

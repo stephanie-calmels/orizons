@@ -9,7 +9,7 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, changeCategoryField, searchByCategory, category_search, loadCountries, countries, country_search, changeCountryField
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, changeCategoryField, searchByCategory, category_search, loadCountries, countries, country_search, changeCountryField, searchByCountry
 }) => {
   useEffect(() => {
     loadCategories();
@@ -139,27 +139,11 @@ const HomeDesktop = ({
       <Col className="search_box" md={6}>
         <h5 className="col-title">Vous recherchez quelque chose en particulier ? Parcourez les carnets de voyage publiés sur O'rizons, triés par pays, ville ou catégorie.</h5>
         <Container className='form_container'>
-          {/* <Form className="form_search">
-            <Form.Group as={Row} controlId="formGroupCountry">
-              <Form.Label column sm={4}>Pays</Form.Label>
-              <Col sm={6}>
-                <InputGroup>
-                  <Form.Control 
-                    type="country" 
-                    placeholder="Rechercher par pays"
-                    />
-                  <InputGroup.Append>
-                    <Button variant="primary"><i className="fas fa-search" /></Button>
-                  </InputGroup.Append>
-                </InputGroup>
-              </Col>
-            </Form.Group>
-          </Form> */}
           <Form 
             className="form_search" 
             onSubmit={(e) => {
               e.preventDefault();
-              // searchByCountry(country_search);
+              searchByCountry(country_search);
               }}>
             <Form.Group as={Row} controlId="formGroupCountry">
               <Form.Label column sm={4}>Pays</Form.Label>

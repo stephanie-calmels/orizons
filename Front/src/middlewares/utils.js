@@ -1,9 +1,9 @@
-import { getRandomTripsSuccess, getTripsByCategoriesSuccess } from '../actions/trips';
+import { getRandomTripsSuccess, getTripsByCategoriesSuccess, getTripsByCountrySuccess } from '../actions/trips';
 
 import history from '../history';
 
 import {
-  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY, RANDOM_SEARCH
+  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY, RANDOM_SEARCH, GET_TRIPS_BY_COUNTRY
 } from '../actions/types';
 
 const utils = (store) => (next) => (action) => {
@@ -43,6 +43,20 @@ const utils = (store) => (next) => (action) => {
       history.push(`/exploration/${item.id}`);
       break;
     };
+    case GET_TRIPS_BY_COUNTRY: {
+      console.log('get trips by country : ' + action.code);
+      // const { trips: { trips } } = store.getState();
+      // const results = []
+      // trips.forEach((trip) => {
+      //   trip.countries.forEach((country) => {
+      //     if (country.code === action.code) {
+      //       results.push(trip);
+      //     }
+      //   });
+      // })
+      // store.dispatch(getTripsByCountrySuccess(results));
+      break;
+    }; 
     default:
       next(action);
   }

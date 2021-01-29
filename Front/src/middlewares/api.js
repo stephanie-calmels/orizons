@@ -301,8 +301,7 @@ const api = (store) => (next) => (action) => {
         data:{
           title: action.data.title,
           summary: action.data.summary,
-          country: action.data.localisation,
-          country_code: action.data.localisation, // a ajouter au formData
+          country_code: action.data.localisation, // a ajouter au formData -- revoir où on le récupère
           cover_picture: action.data.coverpicture,
           categories: action.data.categories,
           departure_date: action.data.departure,

@@ -1,5 +1,4 @@
-// import trips from 'src/data/trips';
-import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD
+import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD, GET_TRIPS_BY_COUNTRY_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -38,6 +37,11 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         category_search: parseInt(action.id, 10),
+      };
+    case GET_TRIPS_BY_COUNTRY_SUCCESS:
+      return {
+        ...oldState,
+        filteredTrips: action.trips,
       };
     default:
       return oldState;
