@@ -7,8 +7,6 @@ import { useForm } from 'react-hook-form';
 
 import './registerForm.scss';
 
-// import history from '../../../history';
-
 const Register = ({
   nickname,
   lastname,

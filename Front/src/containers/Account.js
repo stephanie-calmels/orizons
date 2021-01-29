@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Account from 'src/components/Account';
 
 import {
-  changeRegisterField, activateLoader, updateMember, deleteMember
+  changeRegisterField, activateLoader, updateMember, deleteMember,
+  updateMemberProfilePhoto, getMember,
 } from '../actions/member';
 
 const mapStateToProps = (state) => ({
@@ -30,6 +31,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleDelete: () => {
     dispatch(deleteMember());
+  },
+  handleUpdatePhoto: (url) => {
+    dispatch(updateMemberProfilePhoto(url));
+  },
+  loadMember: () => {
+    dispatch(getMember());
   },
 });
 

@@ -82,7 +82,11 @@ Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   handleLogout: PropTypes.func.isRequired,
   nickname: PropTypes.string.isRequired,
-  profilePhoto: PropTypes.string.isRequired,
+  profilePhoto: PropTypes.string,
+};
+
+Header.defaultProps = {
+  profilePhoto: 'https://media.fabfab.net/images/products/popup/cotton-poplin-plain-white--15_10005_001.jpg',
 };
 
 export default Header;

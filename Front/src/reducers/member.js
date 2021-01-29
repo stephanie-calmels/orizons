@@ -1,8 +1,8 @@
 import {
   CHANGE_REGISTER_FIELD, REGISTER_SUCCESS, REGISTER_FAIL,
   SET_LOADER_REGISTER, GET_MEMBER_SUCCESS, GET_MEMBER_FAIL, UPDATE_MEMBER_SUCCESS,
-  UPDATE_MEMBER_FAIL, DELETE_MEMBER_SUCCESS, DELETE_MEMBER_FAIL,
-  
+  UPDATE_MEMBER_FAIL, DELETE_MEMBER_SUCCESS, DELETE_MEMBER_FAIL,UPDATE_PROFILE_PHOTO_SUCCESS
+
 } from '../actions/types';
 
 const initialState = {
@@ -86,12 +86,17 @@ const reducer = (oldState = initialState, action) => {
         isLoading: false,
         errorMessage: action.message,
       };
-      case DELETE_MEMBER_SUCCESS:
-        return {
-          ...oldState,
+    case DELETE_MEMBER_SUCCESS:
+      return {
+        ...oldState,
         isLoading: false,
         errorMessage: action.message,
-        };
+      };
+    case UPDATE_PROFILE_PHOTO_SUCCESS:
+      return {
+        ...oldState,
+        profilePhoto: action.profile_photo,
+      };
     default:
       return oldState;
   }
