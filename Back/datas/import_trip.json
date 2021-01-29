@@ -9,7 +9,7 @@
         "localisation_id": 4,
         "photo_id": null,
         "member_id": 1,
-        "cover_trip": 
+        "cover_trip": "https://docs.microsoft.com/fr-fr/microsoft-edge/visual-studio-code/media/vscode-debugger-install.png"
     },
     {
         "id": 2,
@@ -20,7 +20,8 @@
         "score": 3,
         "localisation_id": 6,
         "photo_id": 28,
-        "member_id": 2
+        "member_id": 2,
+        "cover_trip": "http://www.topopyrenees.com/wp-content/uploads/2013/10/Tour-des-Lacs-du-Carlit_043.jpg"
     },
     {
         "id": 3,
@@ -31,7 +32,8 @@
         "score":0,
         "localisation_id": 1,
         "photo_id": 3,
-        "member_id": 2
+        "member_id": 2,
+        "cover_trip": "https://media.routard.com/image/90/2/bordeaux.1555902.c1000x300.jpg"
     },
     {
         "id": 4,
@@ -42,7 +44,8 @@
         "score": 3,
         "localisation_id": 7,
         "photo_id": 4,
-        "member_id": 5
+        "member_id": 5,
+        "cover_trip": "https://images.pexels.com/photos/1562/italian-landscape-mountains-nature.jpg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
     },
     
     {
@@ -54,7 +57,8 @@
         "score": 8,
         "localisation_id": 9,
         "photo_id": 14,
-        "member_id": 6
+        "member_id": 6,
+        "cover_trip": "https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
     },
     {
         "id": 6,
@@ -65,6 +69,7 @@
         "score": 8,
         "localisation_id": 11,
         "photo_id": 22,
-        "member_id": 7
+        "member_id": 7,
+        "cover_trip": "https://images.pexels.com/photos/1448136/pexels-photo-1448136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
     }
 ]
