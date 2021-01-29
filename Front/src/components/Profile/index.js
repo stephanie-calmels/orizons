@@ -10,12 +10,12 @@ const Profile = ({profile, loadProfile, profileIdFromUrl}) => {
  useEffect(()=>{
    loadProfile(profileIdFromUrl)
  },[])
-  return (
-    <div>
+  return <div>
+      {profile && <div>
       <ProfileBanner member={profile}/>
-      <ProfileInfos member={profile} trips={trips} />
+      <ProfileInfos member={profile} trips={profile.trip} />
+      </div>}
     </div>
-  );
 };
 
 export default Profile;

@@ -10,7 +10,7 @@ const ProfileTrips = ({trips})=>{
       {trips.map(trip =>{
         return <Col md={6} lg={4} xl={3} key={trip.id}>
           <Card>
-          <Card.Img src={trip.cover_photo.url} />
+          <Card.Img src={trip.cover_trip} />
           <Card.Title>{trip.title}</Card.Title>
           <Card.Subtitle>{trip.summary}</Card.Subtitle>
           <Card.Footer className="card_profile_trips-footer">

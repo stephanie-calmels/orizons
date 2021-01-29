@@ -1,9 +1,9 @@
-import members from 'src/data/members';
+
 import { GET_PROFILE_SUCCESS} from '../actions/types';
 
 
 const initialState = {
-  profileInfos: members[0],
+  profileInfos: null,
 };
 
 const reducer = (oldState = initialState, action) => {
