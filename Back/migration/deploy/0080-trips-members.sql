@@ -37,7 +37,7 @@ SELECT t."id",
         t."score",
         t."cover_trip",
         JSON_AGG(DISTINCT "member") AS "author",
-        JSON_AGG("category_trip_id") AS "trips"
+        JSON_AGG("category_trip_id") AS "categories"
 FROM "trip" t
 LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
 LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"

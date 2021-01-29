@@ -1,5 +1,3 @@
-const router = require("./tripRouter");
-
 const express = require('express');
 
 const commentController = require('../controllers/commentController');
