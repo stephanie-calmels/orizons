@@ -12,6 +12,8 @@ const mapStateToProps = (state) => ({
   showInput: state.addStep.showInput,
   date: state.addStep.date,
   pictures: state.addStep.coverpicture,
+  country: state.addStep.country,
+  country_code: state.addStep.country_code
 });
 
 const mapDispatchToProps = (dispatch)=>({

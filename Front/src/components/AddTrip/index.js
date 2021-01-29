@@ -9,7 +9,7 @@ import './addtrip.scss'
 
 // import FileBase64 from 'react-file-base64';
 
-const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip}) => {
+const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code}) => {
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e)=> {
@@ -46,6 +46,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
         onSubmit={handleSubmit((formData) => {
         setSubmitting(true);
         console.log('formData',formData);
+        formData.country_code = country_code;
         postTrip(formData)
         setSubmitting(false);
         })}
@@ -82,6 +83,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
             </Form.Group>
             <Form.Group size="lg" controlId="localisation">
               <Form.Label>Localisation</Form.Label>
+              {/* ajouter un select avec la liste de tous les pays  */}
               <Form.Control
                 name="localisation"
                 type="text"

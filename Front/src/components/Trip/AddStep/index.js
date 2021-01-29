@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField}) => {
+const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, tripId }) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -60,15 +60,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
           const newPosition = [e.target._latlng.lat, e.target._latlng.lng];
           setPosition(newPosition);
           changeField('localisation', newPosition);
-          // reverse geocoding in order to get the adress of the marker at the end
-          // const APIkey = "3e6337fefe20a03c96bfeb8a7b479717"
-          // const reverseQuery = newPosition.toString()
-          // axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
-          // .then((response)=>{
-          //   const adresseToInput = response.data.data[0].name ;
-
-          //   setInputs({...inputs, localisationInput: adresseToInput})
-          // })
+            // setInputs({...inputs, localisationInput: adresseToInput})
         },
       }),
       [],
@@ -99,6 +91,26 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
       });
   };
 
+  // reverse geocoding in order to get the adress of the marker at the end
+  const getCountryFromAPI = () => {
+    const APIkey = "3e6337fefe20a03c96bfeb8a7b479717";
+    const reverseQuery = localisation.toString();
+    axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
+    .then((response)=>{
+      const currentCountry = response.data.data[0].country;
+      const currentCountry_code = response.data.data[0].country_code;
+      changeField('country', currentCountry);
+      changeField('country_code', currentCountry_code);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
+
+  useEffect(() => {
+    getCountryFromAPI();
+  }, [localisation]);
+
   // START OF ADDSTEP COMPONENT
   return (
     <div>
@@ -116,6 +128,9 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               handleClose();
               setSubmitting(true);
               formData.localisation = localisation;
+              formData.country = country;
+              formData.country_code = country_code;
+              formData.trip_id = tripId;
               console.log('formData', formData);
               postStep(formData);
               setSubmitting(false);

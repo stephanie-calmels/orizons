@@ -9,10 +9,12 @@ import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
   updateMemberFail, deleteMemberFail, deleteMemberSuccess
 } from '../actions/member';
-import {getProfileSuccess} from '../actions/profile'
-import {getTripSuccess} from '../actions/trip'
+import {getProfileSuccess} from '../actions/profile';
+import {getTripSuccess} from '../actions/trip';
+import {postNewTrip} from '../actions/addTrip';
+import {postNewStep} from '../actions/addStep';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, POST_NEW_STEP, POST_NEW_TRIP,
 } from '../actions/types';
 
 import history from '../history';
@@ -257,6 +259,65 @@ const api = (store) => (next) => (action) => {
         });
       break;
     };
+    case POST_NEW_STEP:{
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/steps`,
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        data:{
+          title: action.data.title,
+          content: action.data.summary,
+          step_date: action.data.date,
+          latitude: action.data.localisation[0],
+          longitude: action.data.localisation[1],
+          pictures: action.data.pictures,
+          country_code: action.data.country_code,
+          trip_id: action.data.trip_id 
+        }
+      };
+      axios(config)
+        .then((response)=>{
+          console.log(response.data);
+          store.dispatch(postNewStepSuccess(response.data.data[0]));
+        })
+        .catch((error) =>{
+          console.error(error);
+        })
+        break;
+    }
+    case POST_NEW_TRIP:{
+      const { member: { id } } = store.getState();
+
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/trips`,
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        data:{
+          title: action.data.title,
+          summary: action.data.summary,
+          country: action.data.localisation,
+          country_code: action.data.localisation, // a ajouter au formData
+          cover_picture: action.data.coverpicture,
+          categories: action.data.categories,
+          departure_date: action.data.departure,
+          arrival_date: action.data.returndate,
+          member_id: id 
+        }
+      };
+      axios(config)
+        .then((response)=>{
+          console.log(response.data);
+          store.dispatch(postNewTripSuccess(response.data.data[0]));
+        })
+        .catch((error) =>{
+          console.error(error);
+        })
+        break;
+    }
     default:
       next(action);
   }
