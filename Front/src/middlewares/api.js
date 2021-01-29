@@ -196,6 +196,7 @@ const api = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.error(error);
+          
         });
       break;
     }
