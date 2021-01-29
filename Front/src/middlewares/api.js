@@ -7,13 +7,14 @@ import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../action
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail, deleteMemberFail, deleteMemberSuccess,
+  updateMemberFail, deleteMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
+  updateMemberProfilePhotoFail
 } from '../actions/member';
 import { getProfileSuccess } from '../actions/profile';
 import { getTripSuccess } from '../actions/trip';
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
-  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER,
+  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO,
 } from '../actions/types';
 
 import history from '../history';
@@ -120,6 +121,7 @@ const api = (store) => (next) => (action) => {
           || error.message
           || error.toString();
           store.dispatch(registerFail(errorMessage));
+          toast.warning(errorMessage);
         });
       break;
     }
@@ -153,6 +155,7 @@ const api = (store) => (next) => (action) => {
         || error.toString();
           console.log(errorMessage);
           store.dispatch(updateMemberFail(errorMessage));
+          toast.warning(errorMessage);
         });
       break;
     }
@@ -253,6 +256,40 @@ const api = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.error(error);
+        });
+      break;
+    }
+    case UPDATE_PROFILE_PHOTO: {
+      console.log(action.url)
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          url: action.url,
+        },
+      };
+      axios(config)
+        .then((response) => {
+          // eslint-disable-next-line no-console
+          console.log(response.data.data);
+          store.dispatch(updateMemberProfilePhotoSuccess(response.data.data));
+          toast.success('Modification prise en compte !');
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+      && error.response.data
+      && error.response.data.message)
+      || error.message
+      || error.toString();
+          // eslint-disable-next-line no-console
+          console.log(errorMessage);
+          store.dispatch(updateMemberProfilePhotoSuccess(errorMessage));
+          toast.warning(errorMessage);
         });
       break;
     }

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { storage } from 'src/firebase';
 import PropTypes from 'prop-types';
 import {
   Container, Card, ListGroup, ListGroupItem, Button, Modal, Nav,
@@ -8,10 +9,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
-import axios from 'axios';
 
 import Title from '../PageTitle/index';
-
+import history from '../../history';
 import './account.scss';
 
 const Account = ({
@@ -24,11 +24,19 @@ const Account = ({
   errorMessage,
   isLoading,
   handleUpdate,
+  handleUpdatePhoto,
   handleDelete,
   registrationDate,
   profilePhoto,
   id,
+  loadMember,
 }) => {
+  
+  useEffect(() => {
+    loadMember();
+  }, [profilePhoto])
+  
+  
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
@@ -62,40 +70,41 @@ const Account = ({
   // la photo de profil
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
+  // la barre de progression de l'upload
+  const [progress, setProgress] = useState(0);
+
   // Changement de photo selectionnée
   const onChangeHandler = (e) => {
-    setSelectedPhoto(e.target.files[0]);
+    if (e.target.files[0]) {
+      setSelectedPhoto(e.target.files[0]);
+    }
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (selectedPhoto) {
-      const formData = new FormData();
-      formData.append('profilePhoto', selectedPhoto);
-      // eslint-disable-next-line no-console
-      console.log(formData);
-      const config = {
-        method: 'post',
-        url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const uploadTask = storage.ref(`photos/profile/${selectedPhoto.name}`).put(selectedPhoto);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          );
+          setProgress(progress);
         },
-        data: formData,
-      };
-      axios(config)
-        .then((response) => {
-          // eslint-disable-next-line no-console
-          console.log(response.data);
-        })
-        .catch((error) => {
-          const message = (error.response
-      && error.response.data
-      && error.response.data.message)
-      || error.message
-      || error.toString();
-          // eslint-disable-next-line no-console
-          console.log(message);
-        });
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref('photos/profile/')
+            .child(selectedPhoto.name)
+            .getDownloadURL()
+            .then((url) => {
+              handleUpdatePhoto(url);
+            });
+        },
+      );
     }
     else {
       toast.warning('Veuillez sélectionner une photo');
@@ -114,6 +123,7 @@ const Account = ({
         {/* ==================== CARD ========================================= */}
         <Card className="card-account">
           <Card.Img className="card-account__img" src={profilePhoto} />
+          {progress > 0 && progress !==100 && <progress value={progress} max="100" />}
           <form className="form-account">
             <input className="card-account__input" accept="image/*" type="file" onChange={onChangeHandler} />
             <button type="submit" className="btn btn-primary" onClick={onSubmitHandler}>Valider
@@ -296,6 +306,7 @@ Account.propTypes = {
   handleDelete: PropTypes.func.isRequired,
   registrationDate: PropTypes.string.isRequired,
   profilePhoto: PropTypes.string.isRequired,
+  handleUpdatePhoto: PropTypes.func.isRequired,
 };
 
 export default Account;
