@@ -36,6 +36,9 @@ const tripDataMapper = {
                 newTrip.departure_date,
                 newTrip.arrival_date,
                 newTrip.member_id
+                //cover_picture
+                //country pays -->table m2m
+                //categories // tableau dans m2m
             ]);
         return result.rows[0];
     },
