@@ -8,7 +8,7 @@ import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
   updateMemberFail, deleteMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
-  updateMemberProfilePhotoFail
+  updateMemberProfilePhotoFail,
 } from '../actions/member';
 import { getProfileSuccess } from '../actions/profile';
 import { getTripSuccess } from '../actions/trip';
@@ -153,7 +153,6 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-          console.log(errorMessage);
           store.dispatch(updateMemberFail(errorMessage));
           toast.warning(errorMessage);
         });
@@ -194,7 +193,6 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data[0]);
           store.dispatch(getTripSuccess(response.data.data[0]));
         })
         .catch((error) => {
@@ -260,7 +258,6 @@ const api = (store) => (next) => (action) => {
       break;
     }
     case UPDATE_PROFILE_PHOTO: {
-      console.log(action.url)
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'post',
@@ -276,7 +273,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           // eslint-disable-next-line no-console
-          console.log(response.data.data);
+          // console.log(response.data.data);
           store.dispatch(updateMemberProfilePhotoSuccess(response.data.data));
           toast.success('Modification prise en compte !');
         })
@@ -288,7 +285,7 @@ const api = (store) => (next) => (action) => {
       || error.toString();
           // eslint-disable-next-line no-console
           console.log(errorMessage);
-          store.dispatch(updateMemberProfilePhotoSuccess(errorMessage));
+          store.dispatch(updateMemberProfilePhotoFail(errorMessage));
           toast.warning(errorMessage);
         });
       break;

@@ -305,8 +305,12 @@ Account.propTypes = {
   handleUpdate: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   registrationDate: PropTypes.string.isRequired,
-  profilePhoto: PropTypes.string.isRequired,
+  profilePhoto: PropTypes.string,
   handleUpdatePhoto: PropTypes.func.isRequired,
+};
+
+Account.defaultProps = {
+  profilePhoto: 'https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg',
 };
 
 export default Account;

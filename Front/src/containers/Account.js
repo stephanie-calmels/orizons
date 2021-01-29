@@ -33,7 +33,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(deleteMember());
   },
   handleUpdatePhoto: (url) => {
-    console.log('url dans container', url);
     dispatch(updateMemberProfilePhoto(url));
   },
   loadMember: () => {
