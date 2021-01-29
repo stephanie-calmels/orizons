@@ -77,7 +77,7 @@ const tripLocalisations = require('./import_trip_localisation.json');
     for (let member of members) {
         console.log(member.password)
         let hashedPassword = bcrypt.hashSync(member.password, saltRounds);
-        await client.query(`INSERT INTO "member"("first_name", "last_name", "nickname", "email", "password", "profile_photo", "localisation_id", "photo_id", "docket_id", "biography") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        await client.query(`INSERT INTO "member"("first_name", "last_name", "nickname", "email", "password", "profile_photo", "localisation_id", "photo_id", "docket_id", "biography", "cover_member") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
             [
                 member.first_name,
                 member.last_name,
@@ -88,14 +88,15 @@ const tripLocalisations = require('./import_trip_localisation.json');
                 member.localisation_id,
                 member.photo_id,
                 member.docket_id,
-                member.biography
+                member.biography,
+                member.cover_photo
             ])
 
     }
 
     // 7 - Import des voyages
     for (let trip of trips) {
-        await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "score", "localisation_id", "photo_id", "member_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "score", "localisation_id", "photo_id", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
             [
                 trip.title,
                 trip.summary,
@@ -104,7 +105,8 @@ const tripLocalisations = require('./import_trip_localisation.json');
                 trip.score,
                 trip.localisation_id,
                 trip.photo_id,
-                trip.member_id
+                trip.member_id,
+                trip.cover_trip
             ])
     }
     // 8 - Import des étapes

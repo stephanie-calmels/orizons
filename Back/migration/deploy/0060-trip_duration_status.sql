@@ -9,13 +9,14 @@ SELECT c.id, c.entitled, c.color, tc.trip_id
 FROM "category" c
 JOIN "_m2m_trip_category" tc
         ON tc."category_id" = c."id";
-
+DROP VIEW IF EXISTS "trip_with_duration_status";
 CREATE OR REPLACE VIEW "trip_with_duration_status" AS
 SELECT t."id",
         t."title",
         t."summary",
-        t."departure_date",/5
-            WHEN t."arrival_date" IS NULL 
+        t."departure_date",
+        t."arrival_date",
+            (CASE WHEN t."arrival_date" IS NULL 
                 THEN 'En cours'
             WHEN CURRENT_DATE > t."departure_date" 
                     AND CURRENT_DATE < t."arrival_date"
