@@ -127,11 +127,11 @@ const memberController = {
             const {
                 memberId
             } = request.params;
-            const memberPhoto = request.file;
-            console.log(memberPhoto, '?????????????????????????????????')
-            const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
+            const memberPhotoUrl = request.body;
+            console.log(memberPhotoUrl, '?????????????????????????????????')
+            const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhotoUrl);
             response.json({
-                data: 'truc'
+                data: member.profile_photo
             })
 
         } catch (error) {
