@@ -1,4 +1,5 @@
 const memberDataMapper = require('../datamapper/memberDataMapper');
+const tripDataMapper = require('../datamapper/tripDataMapper')
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -64,7 +65,7 @@ const memberController = {
             const {
                 memberId
             } = request.params
-            const member = await memberDataMapper.getMemberById(memberId);
+            const member = await tripDataMapper.getTripByMember(memberId);
             response.json({
                 data: member
             })

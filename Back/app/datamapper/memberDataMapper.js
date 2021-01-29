@@ -1,6 +1,3 @@
-const {
-    updateOneMember
-} = require('../controllers/memberController');
 const router = require('../router/tripRouter');
 const client = require('./client');
 

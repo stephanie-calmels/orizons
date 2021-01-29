@@ -9,7 +9,7 @@
      {
          "id": 2,
          "title": "Les lacs du Carlit",
-         "url": "https://lh3.googleusercontent.com/proxy/t9PO2HTQPoVpt3tL2d1tN0qMgbaiOvTVqlF6wPWqn5ZCVbUuG4Qq_b_-l23zSnaesUW7tqvNOorSteWn2zTIsVJO0v9ScDLDNLcgR5BzPgNqr-vfSymiSf19OlBFi8LtNDvze1C76JXftlFQaJR4Gx3TZ98pfw",
+         "url": "http://www.topopyrenees.com/wp-content/uploads/2013/10/Tour-des-Lacs-du-Carlit_043.jpg",
          "member_id": 2,
          "step_id": null
      },
@@ -185,6 +185,13 @@
         "id": 27,
         "title": "Photo 5",
         "url": "https://images.pexels.com/photos/1756325/pexels-photo-1756325.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "member_id": 7,
+        "step_id": 18
+    },
+    {
+        "id": 28,
+        "title": "Photo 5",
+        "url": "https://docs.microsoft.com/fr-fr/microsoft-edge/visual-studio-code/media/vscode-debugger-install.png",
         "member_id": 7,
         "step_id": 18
     }

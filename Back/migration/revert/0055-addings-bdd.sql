@@ -2,8 +2,8 @@
 
 BEGIN;
 
-ALTER TABLE photo DROP COLUMN "step_id";
-
+UPDATE "step" SET "localisation_id" = 1;
 ALTER TABLE "step" ALTER COLUMN "localisation_id" SET NOT NULL;
 
+ALTER TABLE "photo" DROP COLUMN "step_id" CASCADE;
 COMMIT;
