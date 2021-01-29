@@ -11,7 +11,7 @@ const reducer = (oldState = initialState, action) => {
     case GET_PROFILE_SUCCESS:
       return {
         ...oldState,
-        profileInfos: action.trip,
+        profileInfos: action.profile,
       };
     default:
       return oldState;
