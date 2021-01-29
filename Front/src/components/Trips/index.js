@@ -31,7 +31,7 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
                 <Col md={6} lg={4} xl={3} key={trip.id}>
                   <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
                     <Card className="card_trips">
-                      <Card.Img className="card_trips-img-top" variant="top" src={trip.cover_photo} />
+                      <Card.Img className="card_trips-img-top" variant="top" src={trip.cover_trip} />
                       <Card.Body className="card_trips-body">
                       <Card.Title className="card_trips-title">{trip.title}</Card.Title>
                       <Card.Text className="card_trips-text">

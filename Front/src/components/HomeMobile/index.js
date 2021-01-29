@@ -91,7 +91,7 @@ const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
               <div onClick={() => handleClick(trip.id)}>
                 <img
                   className="d-block w-100"
-                  src={trip.cover_photo}
+                  src={trip.cover_trip}
                   alt={trip.title}
                 />
                 <Carousel.Caption className="carousel-caption-text">

@@ -5,7 +5,7 @@ import './banner.scss';
 
 const Banner = ({ author, picture, title }) => {
   const styles = {
-    backgroundImage: `url(${picture.url})`,
+    backgroundImage: `url(${picture})`,
     height: '20vh',
     width: '100%',
     backgroundSize: 'cover',
