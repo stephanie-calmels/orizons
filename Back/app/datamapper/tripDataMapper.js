@@ -1,3 +1,4 @@
+const commentDataMapper = require('../datamapper/commentDataMapper');
 const client = require('./client');
 const stepDataMapper = require('./stepDataMapper');
 
@@ -52,6 +53,11 @@ const tripDataMapper = {
     },
 
     async deleteOneTrip(tripId) {
+        const resultComment = await client.query(`SELECT * FROM "comment" WHERE "trip_id" = $1`, [tripId]);
+        if (resultComment.rowCount != 0) {
+            await commentDataMapper.deleteAllCommentByTrip(tripId)
+        }
+
         const result = await client.query(`SELECT * FROM step WHERE trip_id = $1`, [tripId])
 
         if (result.rowCount != 0) {

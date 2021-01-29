@@ -52,8 +52,8 @@ router.post('/profile_photo/:memberId', upload.single('profilePhoto'), memberCon
 
 
 
-router.delete('/', jwt, memberController.deleteAllMember);
-router.delete('/:memberId', jwt, memberController.deleteOneMember);
+//router.delete('/', memberController.deleteAllMember);
+router.delete('/:memberId', memberController.deleteOneMember);
 
 router.post('/login', memberController.loginMember);
 
