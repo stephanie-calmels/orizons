@@ -178,7 +178,7 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-          console.log(errorMessage);
+          // console.log(errorMessage);
           store.dispatch(deleteMemberFail(errorMessage));
         });
       break;
@@ -197,7 +197,6 @@ const api = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.error(error);
-          
         });
       break;
     }
@@ -250,7 +249,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           store.dispatch(getProfileSuccess(response.data.data));
         })
         .catch((error) => {

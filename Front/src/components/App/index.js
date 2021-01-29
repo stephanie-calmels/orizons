@@ -90,18 +90,15 @@ const App = ({ isLoggedIn, loadMember, loadTrips }) => {
           <Route exact path="/exploration">
             <Trips />
           </Route>
-          <Route exact path="/exploration/:slug">
+          <Route exact path="/exploration/:id">
             <Trip />
           </Route>
-          <Route exact path="/profil/:pseudo">
+          <Route exact path="/profil/:id">
             <Profile />
           </Route>
           <Route exact path="/ajouter-carnet">
             { isLoggedIn ? <AddTrip /> : <Redirect to="/connexion" />}
           </Route>
-          {/* <Route exact path="/ajouter-etape">
-            <AddStep />
-          </Route> */}
           <Route exact path="/compte">
             { isLoggedIn ? <Account /> : <Redirect to="/connexion" />}
           </Route>
@@ -118,6 +115,7 @@ const App = ({ isLoggedIn, loadMember, loadTrips }) => {
 App.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   loadMember: PropTypes.func.isRequired,
+  loadTrips: PropTypes.func.isRequired,
 };
 // == Export
 export default App;

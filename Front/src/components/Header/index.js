@@ -12,6 +12,7 @@ const Header = ({
   handleLogout,
   nickname,
   profilePhoto,
+  id,
 }) => {
   const handleClick = () => {
     handleLogout();
@@ -49,7 +50,7 @@ const Header = ({
                   id="dropdown-menu-align-right"
                   menuAlign="right"
                 >
-                  <LinkContainer to={`/profil/${nickname}`}>
+                  <LinkContainer to={`/profil/${id}`}>
                     <Nav.Link>Mon profil</Nav.Link>
                   </LinkContainer>
 
@@ -83,6 +84,7 @@ Header.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   nickname: PropTypes.string.isRequired,
   profilePhoto: PropTypes.string,
+  id: PropTypes.number.isRequired,
 };
 
 Header.defaultProps = {
