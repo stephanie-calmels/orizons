@@ -7,7 +7,7 @@ const initialState = {
   categories: [],
   randomTrips: [],
   filteredTrips: [],
-  category_search: null,
+  category_search: 12,
 };
 
 const reducer = (oldState = initialState, action) => {

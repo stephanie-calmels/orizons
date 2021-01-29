@@ -109,7 +109,7 @@ const HomeDesktop = ({
             <Col md={6} key={trip.id}>
               <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
                 <Card className="card_home">
-                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo[0].url} />
+                  <Card.Img className="card_home-img-top" variant="top" src={trip.cover_photo} />
                   <Card.Body className="card_home-body">
                     <Card.Title className="card_home-title">{trip.title}</Card.Title>
                     <Card.Text className="card_home-text">

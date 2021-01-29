@@ -14,7 +14,7 @@ const Banner = ({ author, picture, title }) => {
   return (
     <div style={styles} className="cover-container">
       <h1>{title}</h1>
-      <Image src={author.profile_photo.url} className="author-profile-pic" roundedCircle />
+      <Image src={author.profile_photo} className="author-profile-pic" roundedCircle />
       <p>{author.nickname}</p>
     </div>
   );
