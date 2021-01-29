@@ -9,66 +9,66 @@
       "id": 2,
    "entitled": "Farniente",
    "color": "#ffc107",
-   "image": "src/assets/ownImages/farniente.jpeg"
+   "image": "farniente.jpeg"
    },
    {
       "id": 3,
    "entitled": "Week-end",
    "color": "#59f19c",
-   "image": "src/assets/ownImages/weekend.jpeg"
+   "image": "weekend.jpeg"
 },
    {
       "id": 4,
    "entitled":"Road Trip",
    "color":"#607d8b",
-   "image": "src/assets/ownImages/roadtrip.jpeg"
+   "image": "roadtrip.jpeg"
    },
    {
       "id": 5,
    "entitled":"City Trip",
    "color":"#673ab7",
-   "image": "src/assets/ownImages/citytrip.jpeg"
+   "image": "citytrip.jpeg"
    },
    {
       "id": 6,
    "entitled":"Humanitaire",
    "color":"#ED3B3B",
-   "image": "src/assets/ownImages/humanitaire.jpeg"
+   "image": "humanitaire.jpeg"
    },
    {
       "id": 7,
    "entitled":"Festival",
    "color":"#81f100",
-   "image": "src/assets/ownImages/festival.jpeg"
+   "image": "festival.jpeg"
    },
    {
       "id": 8,
    "entitled":"Croisière",
    "color":"#00bcd4",
-   "image": "src/assets/ownImages/croisiere.jpeg"
+   "image": "croisiere.jpeg"
    },
    {
       "id": 9,
    "entitled":"Sportif",
    "color":"#3f51b5",
-   "image": "src/assets/ownImages/sportif.jpeg"
+   "image": "sportif.jpeg"
    },
    {
       "id": 10,
    "entitled":"Noces",
    "color":"#e91e63",
-   "image": "src/assets/ownImages/noces.jpeg"
+   "image": "noces.jpeg"
    },
    {
       "id": 11,
    "entitled":"Safari",
    "color":"#ff6838",
-   "image": "src/assets/ownImages/safari.jpeg"
+   "image": "safari.jpeg"
    },
    {
       "id": 12,
    "entitled":"Business",
    "color":"#9e9e9e",
-   "image": "src/assets/ownImages/business.jpeg"
+   "image": "business.jpeg"
 }
 ]
