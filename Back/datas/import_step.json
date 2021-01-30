@@ -7,8 +7,7 @@
         "number_day": "1",
         "content": "Découverte des merveilles du HTML et du CSS",
         "trip_id": 1,
-        "localisation_id": 3,
-        "member_id": 1
+        "localisation_id": 75
     },
     {
         "id": 2,
@@ -18,8 +17,7 @@
         "number_day": 2,
         "content": "La transition a été dure : le javascript c''beau mais ce n''est pas simple",
         "trip_id": 1,
-        "localisation_id": 5,
-        "member_id": 1
+        "localisation_id": 75
     },
     {
         "id": 3,
@@ -29,8 +27,7 @@
         "number_day": 1,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 4,
@@ -40,8 +37,7 @@
         "number_day": 2,
         "content": "Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex. Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 5,
@@ -51,8 +47,7 @@
         "number_day": 3,
         "content": "Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 6,
@@ -62,8 +57,7 @@
         "number_day": 4,
         "content": "Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 7,
@@ -73,8 +67,7 @@
         "number_day": 5,
         "content": "tiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 8,
@@ -84,8 +77,7 @@
         "number_day": 6,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 9,
@@ -95,8 +87,7 @@
         "number_day": 7,
         "content": "Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis. Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.",
         "trip_id": 4,
-        "localisation_id": null,
-        "member_id": 5
+        "localisation_id": 75
     },
     {
         "id": 10,
@@ -106,8 +97,7 @@
         "number_day": 1,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 11,
@@ -117,8 +107,7 @@
         "number_day": 2,
         "content": "Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex. Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis.",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 12,
@@ -128,8 +117,7 @@
         "number_day": 3,
         "content": "Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. ",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 13,
@@ -139,8 +127,7 @@
         "number_day": 4,
         "content": "Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros. Morbi lacinia turpis felis, et pulvinar urna suscipit sed. ",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 14,
@@ -150,8 +137,7 @@
         "number_day": 5,
         "content": "tiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula. Quisque nec placerat tellus. Proin imperdiet ipsum vitae velit rhoncus volutpat. Duis eros turpis, ullamcorper et gravida vitae, fermentum vel ex.",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 15,
@@ -161,8 +147,7 @@
         "number_day": 6,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis. Donec gravida viverra neque quis vehicula.",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 16,
@@ -172,8 +157,7 @@
         "number_day": 7,
         "content": "Morbi cursus purus ipsum, sed efficitur tellus dictum sed. Cras finibus sit amet justo id venenatis. Etiam vel bibendum lectus. Pellentesque porttitor non lectus et mollis. Phasellus mollis, dolor ac suscipit iaculis, justo ligula pharetra ligula, ullamcorper pulvinar nulla nunc vel eros.",
         "trip_id": 5,
-        "localisation_id": null,
-        "member_id": 6
+        "localisation_id": 77
     },
     {
         "id": 17,
@@ -183,8 +167,7 @@
         "number_day": 1,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.",
         "trip_id": 6,
-        "localisation_id": 11,
-        "member_id": 7
+        "localisation_id": 228
     },
     {
         "id": 18,
@@ -194,7 +177,5 @@
         "number_day": 2,
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sollicitudin egestas pharetra. Duis non lectus hendrerit turpis tristique venenatis.",
         "trip_id": 6,
-        "localisation_id": 11,
-        "member_id": 7
-    }              
+        "localisation_id": 228
 ]

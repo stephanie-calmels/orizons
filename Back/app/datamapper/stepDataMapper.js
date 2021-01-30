@@ -12,17 +12,17 @@ const stepDataMapper = {
         if (steps.rowCount = 0) {
             nbStep = 1;
         } else {
-            nbStep = steps.n
+            nbStep = steps.n + 1;
         }
-        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, member_id, localisation_id, trip_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
             [
                 newStep.longitude, //OK
                 newStep.latitude, //OK
                 newStep.title, //OK
                 newStep.number_step, //1 étape par jour devient un champ calculé (sur l'ordre décroissant)
                 newStep.content, //OK
-                newStep.member_id, // j'aille le créer en ai je basoin
-                newStep.localisation_id, //// y en n'a plus besoin
+                //newStep.member_id, // j'aille le créer en ai je basoin -- en fait faudrait le supprimer
+                newStep.localisation_id, //// y en n'a plus besoin en fait si pour la jointure avec la table country à modifier
                 newStep.trip_id
                 //newStep.step_date --> step_date add date_stamp de l'étape
                 //add country
