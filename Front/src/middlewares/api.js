@@ -302,7 +302,7 @@ const api = (store) => (next) => (action) => {
         data: {
           biography: action.data.biography,
           localisation: action.data.localisation,
-          photo_url: action.data.photo_url
+          coverpicture_url: action.data.coverpicture
         },
       };
       axios(config)

@@ -1,5 +1,5 @@
 
-import {GET_PROFILE_SUCCESS, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL} from '../actions/types';
+import {GET_PROFILE_SUCCESS, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, CHANGE_PROFILE_FIELD} from '../actions/types';
 
 
 const initialState = {
@@ -23,6 +23,7 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         errorMessage: action.message,
       };
+      
     default:
       return oldState;
   }
