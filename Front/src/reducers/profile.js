@@ -1,5 +1,5 @@
 
-import { GET_PROFILE_SUCCESS} from '../actions/types';
+import {GET_PROFILE_SUCCESS, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL} from '../actions/types';
 
 
 const initialState = {
@@ -12,6 +12,16 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         profileInfos: action.profile,
+      };
+      case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...oldState,
+        profileInfos: action.profile,
+      };
+      case UPDATE_PROFILE_FAIL:
+      return {
+        ...oldState,
+        errorMessage: action.message,
       };
     default:
       return oldState;
