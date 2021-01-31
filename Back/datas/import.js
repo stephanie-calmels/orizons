@@ -111,7 +111,7 @@ const tripLocalisations = require('./import_trip_localisation.json');
     }
     // 8 - Import des étapes
     for (let step of steps) {
-        await client.query(`INSERT INTO "step"("longitude", "latitude", "title", "number_step", "content", "localisation_id", "trip_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        await client.query(`INSERT INTO "step"("longitude", "latitude", "title", "number_step", "content", "localisation_id", "trip_id", "country_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
             [
                 step.longitude,
                 step.latitude,
@@ -119,7 +119,8 @@ const tripLocalisations = require('./import_trip_localisation.json');
                 step.number_day,
                 step.content,
                 step.localisation_id,
-                step.trip_id
+                step.trip_id,
+                step_country_id
             ])
     }
 
