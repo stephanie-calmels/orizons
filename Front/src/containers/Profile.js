@@ -7,6 +7,7 @@ import { getProfile } from '../actions/profile';
 const mapStateToProps = (state, ownProps) => ({
   profile: state.profile.profileInfos,
   profileIdFromUrl: ownProps.match.params.id,
+  connectedUserId: state.member.id
 });
 
 const mapDispatchToProps = (dispatch) => ({
