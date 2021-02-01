@@ -12,7 +12,8 @@ import ProfileTrips from './ProfileTrips';
 const ProfileInfos = ({ member, trips }) => {
   // création de mapData, pour alimenter la carte
   const mapData = {
-    FR: 1000
+    FR: 1000,
+    US: 1000
   }
   return <Container className="profile-infos-container">
     <Row>
