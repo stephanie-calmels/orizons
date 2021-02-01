@@ -53,21 +53,21 @@ const stepDataMapper = {
         console.log('3')
         // 4 - Insert step's photos
         for (let picture of newStep.pictures) {
-            let counter = 1;
+            /*let counter = 1;
             await client.query(`INSERT INTO "photo"("title", "url", "step.id") VALUES ($1, $2, $3)`,
                 [`${result.rows[0].title}_${counter++}`,
                     picture,
-                    result.rows[0].id
+                    result.rows[0].id*/
+            console.log(picture)
+        ])
+    console.log('4')
+}
+// 5 - We return the new datas
+await this.getOneStep(result.rows.id)
 
-                ])
-            console.log('4')
-        }
-        // 5 - We return the new datas
-        await this.getOneStep(result.rows.id)
+},
 
-    },
-
-    async getStepByTripId(tripId) {
+async getStepByTripId(tripId) {
         const result = await client.query('SELECT * FROM step_photo WHERE trip_id = $1', [tripId]);
         return result.rows;
     },
