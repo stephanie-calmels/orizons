@@ -13,6 +13,8 @@ const Header = ({
   nickname,
   profilePhoto,
   id,
+  search,
+  changeSearchField
 }) => {
   const handleClick = () => {
     handleLogout();
@@ -34,7 +36,12 @@ const Header = ({
         </Nav>
         <Form inline>
           <InputGroup>
-            <FormControl type="text" placeholder="Recherche" />
+            <FormControl 
+              type="text" 
+              placeholder="Recherche" 
+              value={search}
+              onChange={(e) => changeSearchField(e.target.value)}
+              />
             <InputGroup.Append>
               <Button variant="primary"><i className="fas fa-search" /></Button>
             </InputGroup.Append>
