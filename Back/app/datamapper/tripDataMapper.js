@@ -41,7 +41,7 @@ const tripDataMapper = {
                 //country pays -->table m2m
                 //categories // tableau dans m2m
             ]);
-        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.code])
+        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code])
         await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES $1, $2`, [trip.id, country.id]);
 
         for (const categories of newTrip.category) {
