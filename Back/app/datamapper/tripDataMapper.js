@@ -50,7 +50,7 @@ const tripDataMapper = {
 
         }
 
-        return this.getTripById(trip.id);
+        return this.getTripById(trip.rows.id);
     },
 
     async updateAllTrip() {
