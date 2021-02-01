@@ -30,7 +30,7 @@ const tripDataMapper = {
     },
 
     async createTrip(newTrip) {
-        const trip = await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6)RETURNING *`,
+        const trip = await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
             [
                 newTrip.title,
                 newTrip.summary,
@@ -43,7 +43,7 @@ const tripDataMapper = {
             ]);
         console.log(newTrip.country_code, '----------------------------------')
         const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code])
-        await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES $1, $2`, [trip.rows[0].id, country.rows[0].id]);
+        await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [trip.rows[0].id, country.rows[0].id]);
 
         for (const categories of newTrip.category) {
             await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES ($1, $2)`, [trip.rows[0].id, categories.rows[0].id]);
