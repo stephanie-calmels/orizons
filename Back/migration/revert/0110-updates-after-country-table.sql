@@ -8,7 +8,7 @@ ALTER TABLE "step" ADD COLUMN "localisation_id" INT REFERENCES "localisation"("i
 DROP VIEW "step_by_step";
 
 --DROP TABLE "_m2m_trip_country";
-
+UPDATE "step" SET member_id = 1;
 ALTER TABLE "step" ALTER COLUMN "member_id" SET NOT NULL;
 
 ALTER TABLE "step" DROP COLUMN "country_id";
