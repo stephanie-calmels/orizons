@@ -20,7 +20,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl }) => {
           title={trip.trip.title}
         />
         <Description trip={trip.trip} steps={trip.steps} />
-        <AddStep />
+        <AddStep tripId={tripIdFromUrl}/>
       </div>
       )}
     </div>

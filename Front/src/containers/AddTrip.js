@@ -12,7 +12,8 @@ const mapStateToProps = (state) => ({
   departure: state.addTrip.departure,
   returndate: state.addTrip.returndate,
   coverpicture: state.addTrip.coverpicture,
-  categoriesList: state.trips.categories
+  categoriesList: state.trips.categories,
+  country_code: state.addTrip.country_code
 });
 
 const mapDispatchToProps = (dispatch)=>({
