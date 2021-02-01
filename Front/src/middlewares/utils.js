@@ -45,16 +45,16 @@ const utils = (store) => (next) => (action) => {
     };
     case GET_TRIPS_BY_COUNTRY: {
       console.log('get trips by country : ' + action.code);
-      // const { trips: { trips } } = store.getState();
-      // const results = []
-      // trips.forEach((trip) => {
-      //   trip.countries.forEach((country) => {
-      //     if (country.code === action.code) {
-      //       results.push(trip);
-      //     }
-      //   });
-      // })
-      // store.dispatch(getTripsByCountrySuccess(results));
+      const { trips: { trips } } = store.getState();
+      const results = []
+      trips.forEach((trip) => {
+        trip.trip_localisation.forEach((country) => {
+          if (country.code === action.code) {
+            results.push(trip);
+          }
+        });
+      })
+      store.dispatch(getTripsByCountrySuccess(results));
       break;
     }; 
     default:
