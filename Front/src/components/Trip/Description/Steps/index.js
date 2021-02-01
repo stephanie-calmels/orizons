@@ -31,12 +31,16 @@ const Steps = ({steps})=>{
     // pour plus tard TODO: refactorisation, mettre ça ailleurs puisque je le fais aussi dans Description, pour ajouter les liens sur la carte
     const sluggedTitle = slugify(step.step_title, {lower:true});
     
-    return <Card key={step.id_step} id={sluggedTitle} className="card-steps">
+    return <Card key={step.id_step} id={sluggedTitle} className="card-step">
     {/* On ajoute les photos dans chaque étape TODO: améliorer la disposition des photos, peut être penser à ne pas toutes les afficher s'il y en a trop */}
-      <CardColumns className="card-images-container">
-          {step.photos.map(photo=>{
-            return <Card className="image-card" key={photo.id}><Card.Img src={photo.url}  className="card-steps-image"/></Card>
-          })}
+      <CardColumns className="card-step-container">
+        {step.photos.map(photo=>{
+          return (
+            <Card >
+              <Card.Img src={photo.url}  className="card-step-image" key={photo.id}/>
+            </Card>
+        )})}
+        
       </CardColumns>    
           <Card.Body>
             <Card.Title> {step.step_title}</Card.Title>
