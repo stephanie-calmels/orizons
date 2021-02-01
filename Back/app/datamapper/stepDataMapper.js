@@ -20,11 +20,14 @@ const stepDataMapper = {
         } else {
             nbStep = steps.number_step + 1;
         }
+        console.log('nbstep', nbStep);
         // 2 - search if the pair trip/country exists en table m2m
-        const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = rc."country_id" WHERE tc."trip_id" = $1` [newStep.trip_id])
+        const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = tc."country_id" WHERE tc."trip_id" = $1` [newStep.trip_id])
+        console.log("2-1")
         if (!tripCountry.rows[0]) {
             const idCountry = await client.query(`SELECT "id" FROM "country", WHERE "code" = $1`, [newStep.country_code])
             await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [newStep.trip_id, idCountry.rows.id])
+            console.log("2-2")
         }
 
         // 3 - Insert new step
@@ -44,7 +47,7 @@ const stepDataMapper = {
 
 
             ]);
-
+        console.log('3')
         // 4 - Insert step's photos
         for (let picture of newStep.pictures) {
             let counter = 1;
@@ -52,8 +55,9 @@ const stepDataMapper = {
                 [`${result.rows[0].title}_${counter++}`,
                     picture,
                     result.rows[0].id
-                ])
 
+                ])
+            console.log('4')
         }
         // 5 - We return the new datas
         await this.getOneStep(result.rows.id)
