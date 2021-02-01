@@ -146,11 +146,13 @@ const memberController = {
     async updateProfileInfos(request, response, next) {
         try {
             const {
-                profileId
+                memberId
             } = request.params;
+
             const profileInfos = request.body;
+
             console.log('request params', request.params, '????????????????????????????????')
-            const member = await memberDataMapper.updateOneProfile(profileId, profileInfos);
+            const member = await memberDataMapper.updateOneProfile(memberId, profileInfos);
             response.json({
                 data: member
             })
