@@ -1,0 +1,22 @@
+.profile-infos-container{
+  margin-top: 15vh;
+  h2{
+    font-size: 1.4rem ;
+  }
+  .stats-container{
+    font-size: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 1rem;
+    padding: 1rem;
+    div{
+      padding-right: .5rem;
+    }
+    .flags-container{
+      padding: .5rem;
+    }
+  }
+}
+
+
