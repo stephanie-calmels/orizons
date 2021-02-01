@@ -45,8 +45,8 @@ const tripDataMapper = {
         const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code])
         await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [trip.rows[0].id, country.rows[0].id]);
 
-        for (const categories of newTrip.category) {
-            await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES ($1, $2)`, [trip.rows[0].id, categories.rows[0].id]);
+        for (let category of newTrip.categories) {
+            await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES ($1, $2)`, [trip.rows[0].id, category.id]);
 
         }
 
