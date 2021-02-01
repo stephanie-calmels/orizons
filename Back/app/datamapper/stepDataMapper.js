@@ -14,7 +14,7 @@ const stepDataMapper = {
     async createStep(newStep) {
         let nbStep
         // 1 - search biggest number_step in this trip to calculte next number
-        const steps = await client.query('SELECT * FROM step WHERE trip_id = $1 ORDER BY number_step DESC LIMIT 1)', [newStep.trip_id]);
+        const steps = await client.query('SELECT * FROM step WHERE trip_id = $1 ORDER BY number_step DESC LIMIT 1', [newStep.trip_id]);
         if (steps.rowCount = 0) {
             nbStep = 1;
         } else {
