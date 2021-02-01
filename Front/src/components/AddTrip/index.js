@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Container, Form, Button, Row, Col
+  Container, Form, Button, Row, Col, InputGroup
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { storage } from 'src/firebase';
@@ -8,7 +8,10 @@ import { storage } from 'src/firebase';
 import AddTripPreview from './AddTripPreview'
 import './addtrip.scss'
 
-const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code}) => {
+
+
+const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code, countries}) => {
+
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e)=> {
@@ -101,17 +104,24 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
             </Form.Group>
             <Form.Group size="lg" controlId="localisation">
               <Form.Label>Localisation</Form.Label>
-              {/* ajouter un select avec la liste de tous les pays  */}
-              <Form.Control
-                name="localisation"
-                type="text"
-                defaultValue={localisation}
-                onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
-              />
-              {errors.localisation && <div className="text-danger">{errors.localisation.message}</div>}
+                <InputGroup>
+                  <Form.Control
+                    as="select"
+                    name="country_code"
+                    defaultValue={localisation}
+                    onChange={(e) => handleChange(e)}
+                    ref={register({
+                      required: 'Veuillez remplir ce champ !',
+                    })}
+                  >
+                    {
+                      countries.map((country) => (
+                        <option key={country.id} value={country.code}>{country.fr_name}</option>
+                      ))
+                    }
+                  </Form.Control>
+                </InputGroup>
+                  {errors.localisation && <div className="text-danger">{errors.localisation.message}</div>}
             </Form.Group>
             <Form.Group size="lg" controlId="coverpicture">
               <Form.Label>Photo de couverture</Form.Label>
