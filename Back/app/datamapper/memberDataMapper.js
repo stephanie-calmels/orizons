@@ -77,6 +77,21 @@ const memberDataMapper = {
         return result.rows[0]
     },
 
+    async updateOneProfile(memberId, profileInfos) {
+
+        const result = await client.query(`UPDATE "member" SET "biography" = $1,
+                                                                    "localisation" = $2,
+                                                                    "cover_member" = $3
+                                                                    WHERE id = $4
+                                                                    RETURNING *`,
+            [profileInfos.biography,
+                profileInfos.localisation,
+                profileInfos.coverpicture_url,
+                memberId
+            ]);
+        return result.rows[0]
+    },
+
     async updateProfilePhoto(memberId, memberPhotoUrl) {
         const result = await client.query(`UPDATE "member" SET "profile_photo" = $1 WHERE id = $2 RETURNING id, profile_photo`, [memberPhotoUrl, memberId]);
         return result.rows[0]

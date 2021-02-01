@@ -30,7 +30,7 @@ const tripDataMapper = {
     },
 
     async createTrip(newTrip) {
-        const trip = await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6)RETURNING *`,
+        const trip = await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
             [
                 newTrip.title,
                 newTrip.summary,
@@ -41,15 +41,18 @@ const tripDataMapper = {
                 //country pays -->table m2m
                 //categories // tableau dans m2m
             ]);
-        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code])
-        await client.query(`INSERT INTO "_m2m_trip_localisation"("trip_id", "localisation_id") VALUES $1, $2`, [trip.id, country.id]);
 
-        for (const categories of newTrip.category) {
-            await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES $1, $2`, [trip.id, categories.id]);
+        console.log(newTrip.country_code, '----------------------------------')
+        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code])
+        await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [trip.rows[0].id, country.rows[0].id]);
+
+
+        for (let category of newTrip.categories) {
+            await client.query(`INSERT INTO "_m2m_trip_category"("trip_id", "category_id") VALUES ($1, $2)`, [trip.rows[0].id, category.id]);
 
         }
 
-        return this.getTripById(trip.id);
+        return this.getTripById(trip.rows[0].id);
     },
 
     async updateAllTrip() {
@@ -65,12 +68,15 @@ const tripDataMapper = {
     },
 
     async deleteOneTrip(tripId) {
-        const resultComment = await client.query(`SELECT * FROM "comment" WHERE "trip_id" = $1`, [tripId]);
+        const resultComment = await client.query(`
+                            SELECT * FROM "comment"
+                            WHERE "trip_id" = $1 `, [tripId]);
         if (resultComment.rowCount != 0) {
             await commentDataMapper.deleteAllCommentByTrip(tripId)
         }
 
-        const result = await client.query(`SELECT * FROM step WHERE trip_id = $1`, [tripId])
+        const result = await client.query(`
+                            SELECT * FROM step WHERE trip_id = $1 `, [tripId])
 
         if (result.rowCount != 0) {
             for (let element of result.rows) {
@@ -80,8 +86,8 @@ const tripDataMapper = {
             }
 
         }
-        await client.query(`DELETE FROM _m2m_trip_localisation WHERE trip_id = $1`, [tripId]);
-        await client.query(`DELETE FROM _m2m_trip_category WHERE trip_id = $1`, [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1 `, [tripId]);
+        await client.query(`DELETE FROM _m2m_trip_category WHERE trip_id = $1 `, [tripId]);
         await client.query(`DELETE FROM trip WHERE id = $1 `, [tripId]);
         const message = "supprimé";
         return message;
