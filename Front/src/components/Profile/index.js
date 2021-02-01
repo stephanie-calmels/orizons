@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Button, Form, Modal} from 'react-bootstrap';
+import { storage } from 'src/firebase';
 
 import ProfileBanner from './ProfileBanner';
 import ProfileInfos from './ProfileInfos';
@@ -12,8 +13,6 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
   useEffect(() => {
     loadProfile(profileIdFromUrl);
   }, []);
-  console.log(profile);
-
 
   //Gestion modale modification de profil
   const [show, setShow] = useState(false);
@@ -34,7 +33,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
      const { name, value } = e.target;
    setValues({ ...values, [name]: value });
   }
-  console.log(values)
+ 
    const {
      register, handleSubmit, errors,
    } = useForm({});
@@ -62,8 +61,38 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                   handleClose();
                   setSubmitting(true);
                   console.log('formData', formData);
+                  if (formData.cover.length > 0) {
+                  const uploadTask = storage.ref(`photos/profile/cover/${formData.cover[0].name}`).put(formData.cover[0]);
+                  uploadTask.on(
+                    'state_changed',
+                    (snapshot) => {},
+                    (error) => {
+                      // eslint-disable-next-line no-console
+                      console.log(error);
+                    },
+                    () => {
+                      storage
+                        .ref('photos/profile/cover/')
+                        .child(formData.cover[0].name)
+                        .getDownloadURL()
+                        .then((url) => {
+                          console.log('url', url);
+                          formData.cover = url;
+                          console.log('formData2', formData);
+                          editProfile(formData);
+                          setSubmitting(false);
+                        });
+                    },
+                  );
+                  }
+                  else {
+                  formData.cover = profile.cover_member;
+                  console.log('formData3', formData);
+
                   editProfile(formData);
                   setSubmitting(false);
+                  }
+                  
                 })}
               >
 
