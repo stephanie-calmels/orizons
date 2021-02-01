@@ -48,11 +48,16 @@ SELECT t."id",
         t."score",
         t."cover_trip",
         JSON_AGG(DISTINCT "member") AS "author",
-        JSON_AGG("category_country_by_trip") AS "trips"
+        JSON_AGG(DISTINCT "category") AS "categories",
+        JSON_AGG(DISTINCT "country") AS "trip_localisation"
+      --  JSON_AGG("category_country_by_trip") AS "trips"
 FROM "trip" t
 LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
 LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"
-LEFT OUTER JOIN "category_country_by_trip" ON "category_country_by_trip"."trip_id" = t."id"
+JOIN "_m2m_trip_category" tc ON "tc"."trip_id" = t."id"
+JOIN "category" ON "category"."id" = "tc"."category_id"
+JOIN "_m2m_trip_country" tl ON tl."trip_id" = t."id"
+JOIN "country" ON "country"."id" = "tl"."country_id"
 GROUP BY t."id",
         t."title",
         t."summary",
@@ -76,13 +81,16 @@ SELECT t."id",
         t."score",
         t."cover_trip",
         JSON_AGG(DISTINCT "member") AS "author",
-        JSON_AGG("category_country_by_trip") AS "trips",
+        JSON_AGG(DISTINCT "category") AS "categories",
+        JSON_AGG(DISTINCT "country") AS "trip_localisation",
         JSON_AGG("step_photo") AS "steps"
 FROM "trip" t
 LEFT OUTER JOIN "photo" ON "photo"."id" = t."photo_id"
 LEFT OUTER JOIN "member" ON "member"."id" = t."member_id"
-LEFT OUTER JOIN "category_country_by_trip" ON "category_country_by_trip".
-"trip_id" = t."id"
+JOIN "_m2m_trip_category" tc ON "tc"."trip_id" = t."id"
+JOIN "category" ON "category"."id" = "tc"."category_id"
+JOIN "_m2m_trip_country" tl ON tl."trip_id" = t."id"
+JOIN "country" ON "country"."id" = "tl"."country_id"
 LEFT OUTER JOIN "step_photo" ON "step_photo"."trip_id" = t."id"
 GROUP BY t."id",
         t."title",

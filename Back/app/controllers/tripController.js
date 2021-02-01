@@ -40,7 +40,6 @@ const tripController = {
             response.json({
                 data: [{
                         trip,
-                        localisation,
                         steps
                     },
 
