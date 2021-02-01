@@ -159,6 +159,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               Promise.all(promises)
               .then(() => {
                 formData.pictures = fileListToArray;
+                console.log(formData);
                 postStep(formData);
                 setSubmitting(false);
               })

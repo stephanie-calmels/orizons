@@ -14,9 +14,12 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
 
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
-  const handleCheckbox = (e)=> {
+  const handleCheckbox = (e) => {
+    console.log(categoriesList)
+    console.log(categories)
     // Je suis obligé de refaire un find ici, je ne pouvais pas récupérer l'objet catégorie depuis le formulaire, seulement une string
     const clickedCategory = categoriesList.find(category => category.entitled == e.target.value);
+    console.log(clickedCategory)
     const index = categories.indexOf(clickedCategory);
     // Si index > -1, c'est à dire si notre clickedCategory existe déjà dans le state, alors on la supprime avec splice
     if (index > -1){
@@ -45,8 +48,8 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
         className="form-add-trip"
         onSubmit={handleSubmit((formData) => {
         setSubmitting(true);
+        formData.categories = categories;
         console.log('formData',formData);
-        formData.country_code = country_code;
         const uploadTask = storage.ref(`photos/trips/cover/${formData.coverpicture[0].name}`).put(formData.coverpicture[0]);
           uploadTask.on(
             'state_changed',
