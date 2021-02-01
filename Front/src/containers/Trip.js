@@ -1,23 +1,19 @@
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import Trip from 'src/components/Trip';
 import { getTrip } from '../actions/trip';
-// import des actions
-// import {
-  
-// } from '../actions/';
 
 const mapStateToProps = (state, ownProps) => ({
-  tripIdFromUrl: ownProps.match.params.slug,
+  tripIdFromUrl: ownProps.match.params.id,
   trip: state.trip.tripItem,
 });
 
-const mapDispatchToProps = (dispatch)=>({
-  loadTrip: (id)=>{
-    dispatch(getTrip(id))
-  }
-})
+const mapDispatchToProps = (dispatch) => ({
+  loadTrip: (id) => {
+    dispatch(getTrip(id));
+  },
+});
 // grace au hoc connect, j'enrichis mon composant avec des props liées au state
 const container = connect(mapStateToProps, mapDispatchToProps)(Trip);
 

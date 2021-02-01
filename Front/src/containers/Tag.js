@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleClick: (id) => {
     dispatch(getTripsByCategory(id));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tag);

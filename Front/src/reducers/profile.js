@@ -1,9 +1,9 @@
-import members from 'src/data/members';
-import { GET_PROFILE_SUCCESS} from '../actions/types';
+
+import {GET_PROFILE_SUCCESS, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, CHANGE_PROFILE_FIELD} from '../actions/types';
 
 
 const initialState = {
-  profileInfos: members[0],
+  profileInfos: null,
 };
 
 const reducer = (oldState = initialState, action) => {
@@ -11,8 +11,19 @@ const reducer = (oldState = initialState, action) => {
     case GET_PROFILE_SUCCESS:
       return {
         ...oldState,
-        profileInfos: action.trip,
+        profileInfos: action.profile,
       };
+      case UPDATE_PROFILE_SUCCESS:
+      return {
+        ...oldState,
+        profileInfos: action.profile,
+      };
+      case UPDATE_PROFILE_FAIL:
+      return {
+        ...oldState,
+        errorMessage: action.message,
+      };
+      
     default:
       return oldState;
   }

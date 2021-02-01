@@ -17,7 +17,7 @@ export const getTrips = () => ({
 
 export const getTripsSuccess = (trips) => ({
   type: GET_TRIPS_SUCCESS,
-  trips
+  trips,
 });
 
 export const getCategories = () => ({
@@ -26,12 +26,12 @@ export const getCategories = () => ({
 
 export const getCategoriesSuccess = (categories) => ({
   type: GET_CATEGORIES_SUCCESS,
-  categories
+  categories,
 });
 
 export const getTripsByCategory = (id) => ({
   type: GET_TRIPS_BY_CATEGORY,
-  id
+  id,
 });
 
 export const getRandomTrips = () => ({
@@ -40,15 +40,15 @@ export const getRandomTrips = () => ({
 
 export const getRandomTripsSuccess = (randomItems) => ({
   type: GET_RANDOM_TRIPS_SUCCESS,
-  randomItems
+  randomItems,
 });
 export const getTripsByCategoriesSuccess = (trips) => ({
   type: GET_TRIPS_BY_CATEGORIES_SUCCESS,
-  trips
+  trips,
 });
 export const changeCategoryField = (id) => ({
   type: CHANGE_CATEGORY_FIELD,
-  id
+  id,
 });
 export const getTripsByCountry = (code) => ({
   type: GET_TRIPS_BY_COUNTRY,

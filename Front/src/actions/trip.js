@@ -1,12 +1,11 @@
 import { GET_TRIP, GET_TRIP_SUCCESS } from './types';
 
-export const getTrip = (id)=>({
+export const getTrip = (id) => ({
   type: GET_TRIP,
-  id
-})
+  id,
+});
 
-export const getTripSuccess = (trip)=>({
+export const getTripSuccess = (trip) => ({
   type: GET_TRIP_SUCCESS,
-  trip
-})
-
+  trip,
+});

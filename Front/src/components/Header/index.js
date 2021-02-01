@@ -12,6 +12,7 @@ const Header = ({
   handleLogout,
   nickname,
   profilePhoto,
+  id,
 }) => {
   const handleClick = () => {
     handleLogout();
@@ -49,7 +50,7 @@ const Header = ({
                   id="dropdown-menu-align-right"
                   menuAlign="right"
                 >
-                  <LinkContainer to={`/profil/${nickname}`}>
+                  <LinkContainer to={`/profil/${id}`}>
                     <Nav.Link>Mon profil</Nav.Link>
                   </LinkContainer>
 
@@ -82,7 +83,12 @@ Header.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   handleLogout: PropTypes.func.isRequired,
   nickname: PropTypes.string.isRequired,
-  profilePhoto: PropTypes.string.isRequired,
+  profilePhoto: PropTypes.string,
+  id: PropTypes.number.isRequired,
+};
+
+Header.defaultProps = {
+  profilePhoto: 'https://media.fabfab.net/images/products/popup/cotton-poplin-plain-white--15_10005_001.jpg',
 };
 
 export default Header;

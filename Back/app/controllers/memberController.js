@@ -127,19 +127,36 @@ const memberController = {
             const {
                 memberId
             } = request.params;
-            const memberPhoto = request.file;
-            console.log(memberPhoto, '?????????????????????????????????')
-            const member = await memberDataMapper.updateProfilePhoto(memberId, memberPhoto);
+
+
+            const {
+                url
+            } = request.body;
+            console.log(url, '?????????????????????????????????')
+            const member = await memberDataMapper.updateProfilePhoto(memberId, url);
             response.json({
-                data: 'truc'
+                data: member.profile_photo
             })
 
         } catch (error) {
             next(error)
         }
     },
-
-
+    // Mise à jour des infos du profil
+    async updateProfileInfos(request, response, next){
+        try {
+            const {
+                profileId
+            } = request.params;
+            const profileInfos = request.body;
+            const member = await memberDataMapper.updateOneProfile(profileId, profileInfos);
+            response.json({
+                data: member
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 
     async deleteAllMember(request, response, next) {
         try {

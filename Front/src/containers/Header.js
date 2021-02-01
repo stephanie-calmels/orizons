@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
   nickname: state.member.nickname,
   profilePhoto: state.member.profilePhoto,
+  id: state.member.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

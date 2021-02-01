@@ -7,16 +7,17 @@ import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../action
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail, deleteMemberFail, deleteMemberSuccess
+  updateMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
 } from '../actions/member';
-import { getProfileSuccess } from '../actions/profile';
-import { getTripSuccess } from '../actions/trip';
+
+import { getProfileSuccess, updateProfileSuccess, updateProfileFail } from '../actions/profile';
 import { postNewTripSuccess } from '../actions/addTrip';
 import { postNewStepSuccess } from '../actions/addStep';
 import { getCountriesSuccess } from '../actions/countries';
-
+import { getTripSuccess } from '../actions/trip';
 import {
-  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP, GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES,
+  LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
+  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO, UPDATE_PROFILE, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES,
 } from '../actions/types';
 
 import history from '../history';
@@ -115,7 +116,6 @@ const api = (store) => (next) => (action) => {
           store.dispatch(registerSuccess(response.data.message));
           toast.success('Inscription réussie !');
           history.replace('/connexion');
-          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -124,6 +124,7 @@ const api = (store) => (next) => (action) => {
           || error.message
           || error.toString();
           store.dispatch(registerFail(errorMessage));
+          toast.warning(errorMessage);
         });
       break;
     }
@@ -135,7 +136,7 @@ const api = (store) => (next) => (action) => {
         url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         data: {
           nickname: action.data.nickname,
@@ -148,7 +149,6 @@ const api = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(updateMemberSuccess(response.data.data));
           toast.success('Modification des données réussie !');
-          
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -156,19 +156,21 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-        console.log(errorMessage)
           store.dispatch(updateMemberFail(errorMessage));
+          toast.warning(errorMessage);
         });
       break;
     }
     case DELETE_MEMBER: {
+      localStorage.removeItem('token');
+      toast.success('Suppression du compte confirmée');
+      history.push('/');
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'delete',
         url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       };
       axios(config)
@@ -181,12 +183,11 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-        console.log(errorMessage)
-          store.dispatch(deleteMemberFail(errorMessage));
+          console.log(errorMessage);
         });
       break;
     }
-    case GET_TRIP:{
+    case GET_TRIP: {
       const config = {
         method: 'get',
         url: `https://orizons.herokuapp.com/trips/${action.id}`,
@@ -196,14 +197,13 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data[0]);
           store.dispatch(getTripSuccess(response.data.data[0]));
         })
         .catch((error) => {
           console.error(error);
         });
       break;
-    };
+    }
     case GET_TRIPS: {
       const config = {
         method: 'get',
@@ -221,11 +221,11 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
+    }
     case GET_MORE_RESULTS: {
       console.log('get more results');
       break;
-    };
+    }
     case GET_CATEGORIES: {
       const config = {
         method: 'get',
@@ -242,8 +242,8 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         });
       break;
-    };
-    case GET_PROFILE:{
+    }
+    case GET_PROFILE: {
       const config = {
         method: 'get',
         url: `https://orizons.herokuapp.com/members/${action.id}`,
@@ -253,8 +253,8 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
-          store.dispatch(getProfileSuccess(response.data.data[0]));
+          // console.log(response.data.data);
+          store.dispatch(getProfileSuccess(response.data.data));
         })
         .catch((error) => {
           console.error(error);
@@ -336,6 +336,69 @@ const api = (store) => (next) => (action) => {
           console.error(error);
         })
         break;
+    }
+    case UPDATE_PROFILE_PHOTO: {
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          url: action.url,
+        },
+      };
+      axios(config)
+        .then((response) => {
+          // eslint-disable-next-line no-console
+          // console.log(response.data.data);
+          store.dispatch(updateMemberProfilePhotoSuccess(response.data.data));
+          toast.success('Modification prise en compte !');
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+      && error.response.data
+      && error.response.data.message)
+      || error.message
+      || error.toString();
+          // eslint-disable-next-line no-console
+          console.log(errorMessage);
+          toast.warning(errorMessage);
+        });
+      break;
+    }
+    case UPDATE_PROFILE: {
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/members/profile_infos/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          biography: action.data.biography,
+          localisation: action.data.localisation,
+          coverpicture_url: action.data.coverpicture
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(updateProfileSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          store.dispatch(updateProfileFail(errorMessage));
+          toast.warning(errorMessage);
+        });
+      break;
     }
     default:
       next(action);

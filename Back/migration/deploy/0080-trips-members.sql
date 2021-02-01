@@ -6,7 +6,7 @@ ALTER TABLE "step" ADD COLUMN "step_date" DATE;
 
 CREATE OR REPLACE VIEW "category_by_trip" AS
 SELECT "trip"."id",
-     "title", "summary","departure_date", "arrival_date", "score",
+     "title", "summary","departure_date", "arrival_date", "score", "cover_trip",
      JSON_AGG(DISTINCT "category") AS "categories",
      JSON_AGG(DISTINCT "localisation") AS "trip_localisation"
 FROM "trip"
@@ -15,7 +15,7 @@ JOIN "category" ON "category"."id" = "tc"."category_id"
 JOIN "_m2m_trip_localisation" tl ON "tl"."trip_id" = "trip"."id"
 JOIN "localisation" ON "localisation"."id" = "tl"."localisation_id"
 GROUP BY "trip"."id",
-     "title", "summary","departure_date", "arrival_date", "score";
+     "title", "summary","departure_date", "arrival_date", "score", "cover_trip";
 
 
 DROP VIEW "trip_with_duration_status";
