@@ -1,9 +1,11 @@
+import slugify from 'slugify';
+
 import { getRandomTripsSuccess, getTripsByCategoriesSuccess, getTripsByCountrySuccess } from '../actions/trips';
 
 import history from '../history';
 
 import {
-  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY, RANDOM_SEARCH, GET_TRIPS_BY_COUNTRY
+  GET_RANDOM_TRIPS, GET_TRIPS_BY_CATEGORY, RANDOM_SEARCH, GET_TRIPS_BY_COUNTRY, SEARCH
 } from '../actions/types';
 
 const utils = (store) => (next) => (action) => {
@@ -25,7 +27,7 @@ const utils = (store) => (next) => (action) => {
     };
     case GET_TRIPS_BY_CATEGORY: {
       const { trips: { trips } } = store.getState();
-      const results = []
+      const results = [];
       trips.forEach((trip) => {
         trip.categories.forEach((category) => {
           if (category.id === action.id) {
@@ -46,7 +48,7 @@ const utils = (store) => (next) => (action) => {
     case GET_TRIPS_BY_COUNTRY: {
       console.log('get trips by country : ' + action.code);
       const { trips: { trips } } = store.getState();
-      const results = []
+      const results = [];
       trips.forEach((trip) => {
         trip.trip_localisation.forEach((country) => {
           if (country.code === action.code) {
@@ -54,6 +56,26 @@ const utils = (store) => (next) => (action) => {
           }
         });
       })
+      store.dispatch(getTripsByCountrySuccess(results));
+      break;
+    }; 
+    case SEARCH: {
+      console.log('get search : ' + action.value);
+      const { trips: { trips } } = store.getState();
+      const results = [];
+      trips.forEach((trip) => {
+        trip.trip_localisation.forEach((country) => {
+          if (slugify(country.fr_name, {lower:true}) === slugify(action.value, {lower:true})) {
+            results.push(trip);
+          }
+        });
+        trip.categories.forEach((category) => {
+            if (slugify(category.entitled, {lower:true}) === slugify(action.value, {lower:true})) {
+                results.push(trip);
+              }
+            });
+      });
+      console.log('résultats : ' + results);
       store.dispatch(getTripsByCountrySuccess(results));
       break;
     }; 

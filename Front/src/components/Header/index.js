@@ -14,7 +14,8 @@ const Header = ({
   profilePhoto,
   id,
   search,
-  changeSearchField
+  changeSearchField,
+  handleSearch
 }) => {
   const handleClick = () => {
     handleLogout();
@@ -34,7 +35,13 @@ const Header = ({
             <Nav.Link>Explorer les carnets de voyage</Nav.Link>
           </LinkContainer>
         </Nav>
-        <Form inline>
+        <Form 
+          inline
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch(search);
+          }}
+        >
           <InputGroup>
             <FormControl 
               type="text" 
@@ -43,7 +50,7 @@ const Header = ({
               onChange={(e) => changeSearchField(e.target.value)}
               />
             <InputGroup.Append>
-              <Button variant="primary"><i className="fas fa-search" /></Button>
+              <Button type='submit' variant="primary"><i className="fas fa-search" /></Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>

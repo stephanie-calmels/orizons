@@ -5,7 +5,7 @@ import {
   logout,
 } from '../actions/auth';
 import {
-  changeSearchField
+  changeSearchField, search
 } from '../actions/trips';
 import history from '../history';
 
@@ -23,9 +23,13 @@ const mapDispatchToProps = (dispatch) => ({
     localStorage.removeItem('token');
     history.push('/');
   },
-  changeSearchField:  (value) => {
+  changeSearchField: (value) => {
     dispatch(changeSearchField(value));
   },
+  handleSearch: (value) => {
+    dispatch(search(value));
+    history.push(`/resultats`);
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
