@@ -31,7 +31,7 @@ const stepDataMapper = {
         }
 
         // 3 - Insert new step
-        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
+        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id, country_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
             [
                 newStep.longitude, //OK
                 newStep.latitude, //OK
@@ -43,7 +43,7 @@ const stepDataMapper = {
                 newStep.trip_id,
                 //newStep.step_date --> step_date add date_stamp de l'étape
                 //add country
-                newStep.country_code //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
+                idCountry.rows.id //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
 
 
             ]);
