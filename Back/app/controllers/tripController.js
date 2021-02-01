@@ -3,6 +3,8 @@ const tripDataMapper = require('../datamapper/tripDataMapper');
 const stepDataMapper = require('../datamapper/stepDataMapper');
 const localisationDataMapper = require('../datamapper/localisationDataMapper');
 const categoryDataMapper = require('../datamapper/categoryDataMapper');
+
+
 const tripController = {
     async getAllTrip(request, response, next) {
         try {
