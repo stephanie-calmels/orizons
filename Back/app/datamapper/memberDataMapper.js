@@ -64,6 +64,7 @@ const memberDataMapper = {
     },
 
     async updateOneProfile(profileId, profileInfos) {
+        console.log(profileInfos, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         const result = await client.query(`UPDATE "member" SET "biography" = $1,
                                                                     "localisation" = $2,
                                                                     "cover_member" = $3
