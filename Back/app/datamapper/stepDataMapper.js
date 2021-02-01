@@ -24,12 +24,13 @@ const stepDataMapper = {
         // 2 - search if the pair trip/country exists en table m2m
         const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = tc."country_id" WHERE tc."trip_id" = $1`, [newStep.trip_id])
         console.log("2-1");
-        const country = ""
+        const idCountry = await client.query(`SELECT "id" FROM "country", WHERE "code" = $1`, [newStep.country_code])
+
         if (!tripCountry.rows[0]) {
-            const idCountry = await client.query(`SELECT "id" FROM "country", WHERE "code" = $1`, [newStep.country_code])
+
             await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [newStep.trip_id, idCountry.rows[0].id])
             console.log("2-2");
-            return country = idCountry.rows[0];
+
         }
 
         // 3 - Insert new step
@@ -45,7 +46,7 @@ const stepDataMapper = {
                 newStep.trip_id,
                 //newStep.step_date --> step_date add date_stamp de l'étape
                 //add country
-                country.id //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
+                idCountry.rows[0].id //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
 
 
             ]);
