@@ -11,6 +11,7 @@ import { register } from '../../actions/member';
 
 const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , editProfile}) => {
   useEffect(() => {
+    //console.log(profile)
     loadProfile(profileIdFromUrl);
   }, []);
 
@@ -26,7 +27,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
   const [values, setValues] = useState({
     biography: '',
     localisation: '',
-    coverpicture: null
+    cover: null
   });
 
    const handleChange = (e) => {

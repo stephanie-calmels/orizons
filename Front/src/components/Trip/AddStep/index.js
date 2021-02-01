@@ -1,6 +1,7 @@
 import React, {
   useState, useRef, useMemo, useEffect,
 } from 'react';
+import { storage } from 'src/firebase';
 
 import {
   MapContainer, TileLayer, Marker, Popup, useMap,
@@ -131,9 +132,36 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               formData.country = country;
               formData.country_code = country_code;
               formData.trip_id = tripId;
-              console.log('formData', formData);
-              postStep(formData);
-              setSubmitting(false);
+              const fileListToArray = [...formData.pictures];
+              const promises = [];
+              fileListToArray.forEach(picture => {
+                let index = fileListToArray.indexOf(picture)
+                const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
+                promises.push(uploadTask);
+                uploadTask.on(
+                  'state_changed',
+                  (snapshot) => {},
+                  (error) => {
+                    // eslint-disable-next-line no-console
+                    console.log(error);
+                  },
+                  () => {
+                    storage
+                      .ref('photos/trips/steps/')
+                      .child(picture.name)
+                      .getDownloadURL()
+                      .then((url) => {
+                        fileListToArray[index]= url;
+                      });
+                  },
+                );
+              })
+              Promise.all(promises)
+              .then(() => {
+                formData.pictures = fileListToArray;
+                postStep(formData);
+                setSubmitting(false);
+              })
             })}
           >
 

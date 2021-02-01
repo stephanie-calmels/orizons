@@ -195,7 +195,7 @@ const Account = ({
                   autoFocus
                   name="nickname"
                   type="text"
-                  defaultValue={values.nickname}
+                  defaultValue={nickname}
                   onChange={(e) => handleInputChange(e)}
               // on attache notre input au React Hook Form pour les critères de validation
                   ref={register({
@@ -210,7 +210,7 @@ const Account = ({
                 <Form.Control
                   name="lastname"
                   type="text"
-                  defaultValue={values.lastname}
+                  defaultValue={lastname}
                   onChange={(e) => handleInputChange(e)}
                   ref={register({
                     required: 'Veuillez remplir ce champ !',
@@ -223,7 +223,7 @@ const Account = ({
                 <Form.Control
                   name="firstname"
                   type="text"
-                  defaultValue={values.firstname}
+                  defaultValue={firstname}
                   onChange={(e) => handleInputChange(e)}
                   ref={register({
                     required: 'Veuillez remplir ce champ !',
@@ -236,7 +236,7 @@ const Account = ({
                 <Form.Control
                   name="email"
                   type="email"
-                  defaultValue={values.email}
+                  defaultValue={email}
                   onChange={(e) => handleInputChange(e)}
                   ref={register({
                     required: 'Veuillez remplir ce champ !',

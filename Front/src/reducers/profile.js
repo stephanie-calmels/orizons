@@ -16,7 +16,12 @@ const reducer = (oldState = initialState, action) => {
       case UPDATE_PROFILE_SUCCESS:
       return {
         ...oldState,
-        profileInfos: action.profile,
+          profileInfos: {
+        ...oldState.profileInfos, 
+          biography: action.profile.biography,
+          localisation : action.profile.localisation,
+          cover_member: action.profile.cover_member,
+        }
       };
       case UPDATE_PROFILE_FAIL:
       return {

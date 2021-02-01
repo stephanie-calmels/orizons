@@ -340,10 +340,10 @@ const api = (store) => (next) => (action) => {
     case UPDATE_PROFILE_PHOTO: {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
-        method: 'post',
+        method: 'patch',
         url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
         data: {
@@ -372,7 +372,7 @@ const api = (store) => (next) => (action) => {
     case UPDATE_PROFILE: {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
-        method: 'post',
+        method: 'patch',
         url: `https://orizons.herokuapp.com/members/profile_infos/${id}`,
         headers: {
           'Content-Type': 'application/json',
@@ -381,13 +381,15 @@ const api = (store) => (next) => (action) => {
         data: {
           biography: action.data.biography,
           localisation: action.data.localisation,
-          coverpicture_url: action.data.coverpicture
+          coverpicture_url: action.data.cover
         },
       };
       axios(config)
         .then((response) => {
+          console.log(response.data);
           store.dispatch(updateProfileSuccess(response.data.data));
           toast.success('Modification des données réussie !');
+          history.push(`/profil/${id}`);
         })
         .catch((error) => {
           const errorMessage = (error.response

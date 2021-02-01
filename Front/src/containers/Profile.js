@@ -7,7 +7,7 @@ import { changeProfileField, getProfile, updateProfile } from '../actions/profil
 const mapStateToProps = (state, ownProps) => ({
   profile: state.profile.profileInfos,
   profileIdFromUrl: ownProps.match.params.id,
-  connectedUserId: state.member.id
+  connectedUserId: state.member.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

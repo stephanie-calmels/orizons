@@ -7,6 +7,8 @@ import { getTrip } from '../actions/trip';
 const mapStateToProps = (state, ownProps) => ({
   tripIdFromUrl: ownProps.match.params.id,
   trip: state.trip.tripItem,
+  connectedUserId: state.member.id,
+  categoriesList: state.trips.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({
