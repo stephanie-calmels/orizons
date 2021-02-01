@@ -15,9 +15,9 @@ const photos = require('./import_photos.json');
 const members = require('./import_member.json');
 const trips = require('./import_trip.json');
 const steps = require('./import_step.json');
-const comments = require('./import_commentaires.json');
+//const comments = require('./import_commentaires.json');
 const tripCategories = require('./import_trip_category.json');
-const tripLocalisations = require('./import_trip_localisation.json');
+const tripCountries = require('./import_trip_country.json');
 
 
 (async () => {
@@ -27,10 +27,9 @@ const tripLocalisations = require('./import_trip_localisation.json');
     await client.connect();
 
     await client.query(`TRUNCATE TABLE _m2m_trip_category,
-                                        _m2m_trip_localisation,
+                                        _m2m_trip_country,
                                         member,
                                         category,
-                                        comment,
                                         localisation,
                                         photo,
                                         step,
@@ -75,9 +74,8 @@ const tripLocalisations = require('./import_trip_localisation.json');
     const saltRounds = 10;
 
     for (let member of members) {
-        console.log(member.password)
         let hashedPassword = bcrypt.hashSync(member.password, saltRounds);
-        await client.query(`INSERT INTO "member"("first_name", "last_name", "nickname", "email", "password", "profile_photo", "localisation_id", "photo_id", "docket_id", "biography", "cover_member") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+        await client.query(`INSERT INTO "member"("first_name", "last_name", "nickname", "email", "password", "profile_photo", "localisation", "docket_id", "biography", "cover_member") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
             [
                 member.first_name,
                 member.last_name,
@@ -85,8 +83,7 @@ const tripLocalisations = require('./import_trip_localisation.json');
                 member.email,
                 hashedPassword,
                 member.profile_photo,
-                member.localisation_id,
-                member.photo_id,
+                member.localisation,
                 member.docket_id,
                 member.biography,
                 member.cover_photo
@@ -96,46 +93,45 @@ const tripLocalisations = require('./import_trip_localisation.json');
 
     // 7 - Import des voyages
     for (let trip of trips) {
-        await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "score", "localisation_id", "photo_id", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+        await client.query(`INSERT INTO "trip"("title", "summary", "departure_date", "arrival_date", "score", "photo_id", "member_id", "cover_trip") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
             [
                 trip.title,
                 trip.summary,
                 trip.departure_date,
                 trip.arrival_date,
                 trip.score,
-                trip.localisation_id,
                 trip.photo_id,
                 trip.member_id,
                 trip.cover_trip
             ])
     }
+    console.log('trip OK');
     // 8 - Import des étapes
     for (let step of steps) {
-        await client.query(`INSERT INTO "step"("longitude", "latitude", "title", "number_step", "content", "localisation_id", "trip_id", "country_id") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+        await client.query(`INSERT INTO "step"("longitude", "latitude", "title", "number_step", "content", "trip_id", "country_id") VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [
                 step.longitude,
                 step.latitude,
                 step.title,
                 step.number_day,
                 step.content,
-                step.localisation_id,
                 step.trip_id,
-                step_country_id
+                step.country_id
             ])
     }
-
+    console.log('step OK');
     // 9 - Import des commentaires
-    for (const comment of comments) {
-        await client.query(`INSERT INTO "comment"("title", "content", "score", "member_id", "trip_id") VALUES ($1, $2, $3, $4, $5)`,
-            [
-                comment.title,
-                comment.content,
-                comment.score,
-                comment.member_id,
-                comment.trip_id
-            ])
-    }
-
+    /* for (const comment of comments) {
+         await client.query(`INSERT INTO "comment"("title", "content", "score", "member_id", "trip_id") VALUES ($1, $2, $3, $4, $5)`,
+             [
+                 comment.title,
+                 comment.content,
+                 comment.score,
+                 comment.member_id,
+                 comment.trip_id
+             ])
+     }
+     console.log('comment OK');*/
     // 10 - Import de la table m2m trip category
 
     for (const tripCategory of tripCategories) {
@@ -144,15 +140,14 @@ const tripLocalisations = require('./import_trip_localisation.json');
     }
 
 
-    for (const tripLocalisation of tripLocalisations) {
-        await client.query(`INSERT INTO "_m2m_trip_localisation"("localisation_id", "trip_id") VALUES ($1, $2)`,
-            [tripLocalisation.localisation_id, tripLocalisation.trip_id])
+    for (const tripCountry of tripCountries) {
+        await client.query(`INSERT INTO "_m2m_trip_country"("country_id", "trip_id") VALUES ($1, $2)`,
+            [tripCountry.country_id, tripCountry.trip_id])
     }
     for (let photo of photos) {
         let photoId = photo.id;
-        client.query(`UPDATE "photo" SET "member_id" = $1, "step_id" = $2 WHERE id = $3`,
+        client.query(`UPDATE "photo" SET "step_id" = $1 WHERE id = $2`,
             [
-                photo.member_id,
                 photo.step_id,
                 photoId
             ])

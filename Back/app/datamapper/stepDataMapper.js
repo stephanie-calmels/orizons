@@ -36,7 +36,7 @@ const stepDataMapper = {
                 nbStep, //1 étape par jour devient un champ calculé (sur l'ordre décroissant)
                 newStep.content, //OK
                 //newStep.member_id, // j'aille le créer en ai je basoin -- en fait faudrait le supprimer
-                newStep.localisation_id, //// y en n'a plus besoin en fait si pour la jointure avec la table country à modifier
+                //newStep.localisation_id, //// y en n'a plus besoin en fait si pour la jointure avec la table country à modifier
                 newStep.trip_id,
                 //newStep.step_date --> step_date add date_stamp de l'étape
                 //add country
@@ -46,8 +46,13 @@ const stepDataMapper = {
             ]);
 
         // 4 - Insert step's photos
-        for (let photo of newStep.photos) {
-            await client.query(`INSERT INTO "photo"("title", "url", "step.id") VALUES ($1, $2, $3, $4)`, [photo.title, photo.url, result.rows[0].id])
+        for (let picture of newStep.pictures) {
+            let counter = 1;
+            await client.query(`INSERT INTO "photo"("title", "url", "step.id") VALUES ($1, $2, $3)`,
+                [`${result.rows[0].title}_${counter++}`,
+                    picture,
+                    result.rows[0].id
+                ])
 
         }
         // 5 - We return the new datas
