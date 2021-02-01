@@ -68,6 +68,7 @@ const tripController = {
         try {
             const newTrip = request.body;
             const trip = await tripDataMapper.createTrip(newTrip);
+            console.log(trip)
             response.json({
                 data: trip
             })
