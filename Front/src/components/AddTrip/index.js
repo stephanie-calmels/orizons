@@ -3,11 +3,10 @@ import {
   Container, Form, Button, Row, Col
 } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { storage } from 'src/firebase';
 
 import AddTripPreview from './AddTripPreview'
 import './addtrip.scss'
-
-// import FileBase64 from 'react-file-base64';
 
 const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code}) => {
 
@@ -36,8 +35,6 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
   } = useForm({});
   const [submitting, setSubmitting] = useState(false);
 
-  
-
   return <div>
     <h1 className="text-center p4 font-weight-bold">Créer un nouveau carnet</h1>
     <Container>
@@ -47,8 +44,29 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
         setSubmitting(true);
         console.log('formData',formData);
         formData.country_code = country_code;
-        postTrip(formData)
-        setSubmitting(false);
+        const uploadTask = storage.ref(`photos/trips/cover/${formData.coverpicture[0].name}`).put(formData.coverpicture[0]);
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {},
+            (error) => {
+              // eslint-disable-next-line no-console
+              console.log(error);
+            },
+            () => {
+              storage
+                .ref('photos/trips/cover/')
+                .child(formData.coverpicture[0].name)
+                .getDownloadURL()
+                .then((url) => {
+                  console.log('url', url);
+                  formData.coverpicture = url;
+                  console.log('formData2', formData);
+                  postTrip(formData);
+                  setSubmitting(false);
+                });
+            },
+          );
+
         })}
       >
         <Row>
