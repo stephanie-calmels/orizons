@@ -133,7 +133,6 @@ const memberController = {
                 url
             } = request.body;
 
-            console.log(url, '?????????????????????????');
 
             const member = await memberDataMapper.updateProfilePhoto(memberId, url);
             response.json({
