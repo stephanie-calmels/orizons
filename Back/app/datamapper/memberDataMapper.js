@@ -60,7 +60,7 @@ const memberDataMapper = {
                 memberId
             ]);
         console.log(result.rows)
-        return result.rows[0]
+        return getTripByMember(memberId);
     },
 
     async updateOneProfile(memberId, profileInfos) {
@@ -75,7 +75,6 @@ const memberDataMapper = {
                 profileInfos.coverpicture_url,
                 memberId
             ]);
-        console.log(result.rows, '?????????????????????????????????')
         return result.rows[0]
     },
 
