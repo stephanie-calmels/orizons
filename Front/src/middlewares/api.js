@@ -277,7 +277,7 @@ const api = (store) => (next) => (action) => {
           pictures: action.data.pictures,
           country_code: action.data.country_code,
           trip_id: action.data.trip_id 
-        }
+        },
       };
       axios(config)
         .then((response)=>{
@@ -301,7 +301,7 @@ const api = (store) => (next) => (action) => {
         data:{
           title: action.data.title,
           summary: action.data.summary,
-          country_code: action.data.localisation, // a ajouter au formData -- revoir où on le récupère
+          country_code: action.data.country_code,
           cover_picture: action.data.coverpicture,
           categories: action.data.categories,
           departure_date: action.data.departure,
@@ -311,8 +311,11 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response)=>{
+          const { id } = response.data.data;
           console.log(response.data);
-          store.dispatch(postNewTripSuccess(response.data.data[0]));
+          store.dispatch(postNewTripSuccess(response.data.data));
+          toast.success('Votre carnet a bien été créé !');
+          history.push(`/exploration/${id}`);
         })
         .catch((error) =>{
           console.error(error);
@@ -334,6 +337,7 @@ const api = (store) => (next) => (action) => {
         })
         .catch((error) =>{
           console.error(error);
+          toast.warning(errorMessage);
         })
         break;
     }
@@ -343,7 +347,7 @@ const api = (store) => (next) => (action) => {
         method: 'patch',
         url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
         data: {

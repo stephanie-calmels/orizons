@@ -15,6 +15,7 @@ const ProfileInfos = ({ member, trips }) => {
     FR: 1000,
     US: 1000
   }
+  console.log(trips)
   return <Container className="profile-infos-container">
     <Row>
       <Col md={6}>
