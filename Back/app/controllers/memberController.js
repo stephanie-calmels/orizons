@@ -142,8 +142,21 @@ const memberController = {
             next(error)
         }
     },
-
-
+    // Mise à jour des infos du profil
+    async updateProfileInfos(request, response, next){
+        try {
+            const {
+                profileId
+            } = request.params;
+            const profileInfos = request.body;
+            const member = await memberDataMapper.updateOneProfile(profileId, profileInfos);
+            response.json({
+                data: member
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
 
     async deleteAllMember(request, response, next) {
         try {

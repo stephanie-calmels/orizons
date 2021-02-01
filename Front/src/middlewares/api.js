@@ -9,11 +9,11 @@ import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
   updateMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
 } from '../actions/member';
-import { getProfileSuccess } from '../actions/profile';
+import { getProfileSuccess, updateProfileSuccess, updateProfileFail } from '../actions/profile';
 import { getTripSuccess } from '../actions/trip';
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
-  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO,
+  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO, UPDATE_PROFILE
 } from '../actions/types';
 
 import history from '../history';
@@ -285,6 +285,37 @@ const api = (store) => (next) => (action) => {
       || error.toString();
           // eslint-disable-next-line no-console
           console.log(errorMessage);
+          toast.warning(errorMessage);
+        });
+      break;
+    }
+    case UPDATE_PROFILE: {
+      const { auth: { token }, member: { id } } = store.getState();
+      const config = {
+        method: 'post',
+        url: `https://orizons.herokuapp.com/members/profile_infos/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          biography: action.data.biography,
+          localisation: action.data.localisation,
+          coverpicture_url: action.data.coverpicture
+        },
+      };
+      axios(config)
+        .then((response) => {
+          store.dispatch(updateProfileSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          store.dispatch(updateProfileFail(errorMessage));
           toast.warning(errorMessage);
         });
       break;

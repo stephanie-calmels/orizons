@@ -14,6 +14,9 @@ router.patch('/', memberController.updateAllMember);
 router.patch('/:memberId', memberController.updateOneMember); // toutes les infos sauf pw, profilephoto et bannnière eet la biography
 router.post('/profile_photo/:memberId', memberController.updateProfilePhoto);
 
+// Nouvelle route pour mettre à jour la biographie, la localisation, la bannière
+router.patch('/profile_infos/:memberId', memberController.updateProfileInfos);
+
 //router.delete('/', memberController.deleteAllMember);
 router.delete('/:memberId', memberController.deleteOneMember);
 

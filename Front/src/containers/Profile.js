@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Profile from 'src/components/Profile';
-import { getProfile } from '../actions/profile';
+import { changeProfileField, getProfile, updateProfile } from '../actions/profile';
 
 const mapStateToProps = (state, ownProps) => ({
   profile: state.profile.profileInfos,
@@ -14,6 +14,10 @@ const mapDispatchToProps = (dispatch) => ({
   loadProfile: (id) => {
     dispatch(getProfile(id));
   },
+  editProfile: (data)=>{
+    dispatch(updateProfile(data))
+  },
+  
 });
 // grace au hoc connect, j'enrichis mon composant avec des props liées au state
 const container = connect(mapStateToProps, mapDispatchToProps)(Profile);
