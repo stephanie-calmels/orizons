@@ -24,7 +24,6 @@ Register.propTypes = {
   passwordRepeat: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
-  isRegisterSuccessful: PropTypes.bool.isRequired,
   handleRegister: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

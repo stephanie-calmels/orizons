@@ -2,8 +2,8 @@ import {
   CHANGE_REGISTER_FIELD, REGISTER, REGISTER_SUCCESS, REGISTER_FAIL,
   SET_LOADER_REGISTER, GET_MEMBER, GET_MEMBER_SUCCESS, GET_MEMBER_FAIL,
   UPDATE_MEMBER, UPDATE_MEMBER_SUCCESS, UPDATE_MEMBER_FAIL,
-  UPDATE_PROFILE_PHOTO_SUCCESS, UPDATE_PROFILE_PHOTO_FAIL,
-  UPDATE_PROFILE_PHOTO, DELETE_MEMBER, DELETE_MEMBER_SUCCESS, DELETE_MEMBER_FAIL,
+  UPDATE_PROFILE_PHOTO_SUCCESS,
+  UPDATE_PROFILE_PHOTO, DELETE_MEMBER, DELETE_MEMBER_SUCCESS,
 } from './types';
 
 export const changeRegisterField = (name, value) => ({
@@ -72,11 +72,6 @@ export const updateMemberProfilePhotoSuccess = (url) => ({
   url,
 });
 
-export const updateMemberProfilePhotoFail = (message) => ({
-  type: UPDATE_PROFILE_PHOTO_FAIL,
-  message,
-});
-
 // ======= DELETE MEMBER =======================
 export const deleteMember = () => ({
   type: DELETE_MEMBER,
@@ -84,9 +79,4 @@ export const deleteMember = () => ({
 
 export const deleteMemberSuccess = () => ({
   type: DELETE_MEMBER_SUCCESS,
-});
-
-export const deleteMemberFail = (message) => ({
-  type: DELETE_MEMBER_FAIL,
-  message,
 });

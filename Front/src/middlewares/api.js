@@ -7,8 +7,7 @@ import { getTripsSuccess, getCategoriesSuccess, getRandomTrips } from '../action
 import { loginSuccess, loginFail } from '../actions/auth';
 import {
   registerSuccess, registerFail, getMemberSuccess, getMemberFail, updateMemberSuccess,
-  updateMemberFail, deleteMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
-  updateMemberProfilePhotoFail,
+  updateMemberFail, deleteMemberSuccess, updateMemberProfilePhotoSuccess,
 } from '../actions/member';
 import { getProfileSuccess } from '../actions/profile';
 import { getTripSuccess } from '../actions/trip';
@@ -159,12 +158,14 @@ const api = (store) => (next) => (action) => {
       break;
     }
     case DELETE_MEMBER: {
+      localStorage.removeItem('token');
+      toast.success('Suppression du compte confirmée');
+      history.push('/');
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'delete',
         url: `https://orizons.herokuapp.com/members/${id}`,
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       };
@@ -178,8 +179,7 @@ const api = (store) => (next) => (action) => {
         && error.response.data.message)
         || error.message
         || error.toString();
-          // console.log(errorMessage);
-          store.dispatch(deleteMemberFail(errorMessage));
+          console.log(errorMessage);
         });
       break;
     }
@@ -285,7 +285,6 @@ const api = (store) => (next) => (action) => {
       || error.toString();
           // eslint-disable-next-line no-console
           console.log(errorMessage);
-          store.dispatch(updateMemberProfilePhotoFail(errorMessage));
           toast.warning(errorMessage);
         });
       break;

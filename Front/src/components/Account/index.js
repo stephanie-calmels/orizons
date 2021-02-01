@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 
 import Title from '../PageTitle/index';
-import history from '../../history';
+
 import './account.scss';
 
 const Account = ({
@@ -31,12 +31,10 @@ const Account = ({
   id,
   loadMember,
 }) => {
-  
   useEffect(() => {
     loadMember();
-  }, [profilePhoto])
-  
-  
+  }, [profilePhoto]);
+
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
 
@@ -87,12 +85,13 @@ const Account = ({
       uploadTask.on(
         'state_changed',
         (snapshot) => {
-          const progress = Math.round(
+          const progressBar = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           );
-          setProgress(progress);
+          setProgress(progressBar);
         },
         (error) => {
+          // eslint-disable-next-line no-console
           console.log(error);
         },
         () => {
@@ -123,7 +122,7 @@ const Account = ({
         {/* ==================== CARD ========================================= */}
         <Card className="card-account">
           <Card.Img className="card-account__img" src={profilePhoto} />
-          {progress > 0 && progress !==100 && <progress value={progress} max="100" />}
+          {progress > 0 && progress !== 100 && <progress value={progress} max="100" />}
           <form className="form-account">
             <input className="card-account__input" accept="image/*" type="file" onChange={onChangeHandler} />
             <button type="submit" className="btn btn-primary" onClick={onSubmitHandler}>Valider
@@ -281,7 +280,10 @@ const Account = ({
           </Modal.Body>
           <Modal.Footer>
             <Button
-              onClick={() => handleDelete()}
+              onClick={() => {
+                handleDelete();
+                handleDeleteModal();
+              }}
               variant="danger"
             >
               Supprimer
@@ -307,6 +309,8 @@ Account.propTypes = {
   registrationDate: PropTypes.string.isRequired,
   profilePhoto: PropTypes.string,
   handleUpdatePhoto: PropTypes.func.isRequired,
+  loadMember: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 Account.defaultProps = {
