@@ -1,10 +1,15 @@
-.card-steps{
- margin: 1rem;
+.card-step{
+  margin: 1rem;
+
+  &-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center !important;
+  }
 
   &-image {
     height: 100%;
     width: 100%;
-    margin: auto !important;
   }
 }
 
