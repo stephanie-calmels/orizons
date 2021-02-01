@@ -132,6 +132,8 @@ const memberController = {
             const {
                 url
             } = request.body;
+
+            const url;
             const member = await memberDataMapper.updateProfilePhoto(memberId, url);
             response.json({
                 data: member.profile_photo
