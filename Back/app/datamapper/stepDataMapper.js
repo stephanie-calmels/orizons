@@ -33,7 +33,7 @@ const stepDataMapper = {
         }
 
         // 3 - Insert new step
-        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id, country_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id, country_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',
             [
                 newStep.longitude, //OK
                 newStep.latitude, //OK
