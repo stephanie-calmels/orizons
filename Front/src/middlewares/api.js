@@ -14,10 +14,11 @@ import { getProfileSuccess, updateProfileSuccess, updateProfileFail } from '../a
 import { postNewTripSuccess } from '../actions/addTrip';
 import { postNewStepSuccess } from '../actions/addStep';
 import { getCountriesSuccess } from '../actions/countries';
-import { getTripSuccess } from '../actions/trip';
+import { getTripSuccess, updateTripSuccess } from '../actions/trip';
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
-  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO, UPDATE_PROFILE, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES,
+  GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO,
+  UPDATE_PROFILE, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES, UPDATE_TRIP,
 } from '../actions/types';
 
 import history from '../history';
@@ -262,7 +263,6 @@ const api = (store) => (next) => (action) => {
       break;
     };
     case POST_NEW_STEP:{
-      console.log(action.data)
       const config = {
         method: 'post',
         url: `https://orizons.herokuapp.com/steps`,
@@ -283,7 +283,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response)=>{
           console.log(response.data);
-          store.dispatch(postNewStepSuccess(response.data.data[0]));
+          store.dispatch(postNewStepSuccess(response.data.data));
         })
         .catch((error) =>{
           console.error(error);
@@ -333,7 +333,7 @@ const api = (store) => (next) => (action) => {
       };  
       axios(config)
         .then((response) => {
-          console.log('countries', response.data.data.rows);
+          // console.log('countries', response.data.data.rows);
           store.dispatch(getCountriesSuccess(response.data.data.rows));
         })
         .catch((error) =>{
@@ -407,6 +407,36 @@ const api = (store) => (next) => (action) => {
         });
       break;
     }
+    case UPDATE_TRIP: {
+      const { auth: { token } } = store.getState();
+      const { id } = store.getState().trip.tripItem.trip;
+      console.log(id);
+      const config = {
+        method: 'patch',
+        url: `https://orizons.herokuapp.com/trips/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: action.data,
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(updateTripSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
+          history.push(`/exploration/${id}`);
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          toast.warning(errorMessage);
+        });
+        break;
+      }
     default:
       next(action);
   }

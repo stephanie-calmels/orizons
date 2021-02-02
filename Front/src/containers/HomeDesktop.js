@@ -23,9 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleClick: (id) => {
     history.push(`/exploration/${id}`);
   },
-  loadCategories: () => {
-    dispatch(getCategories());
-  },
+  
   changeCategoryField: (value) => {
     dispatch(changeCategoryField(value));
   },
@@ -33,9 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getTripsByCategory(id));
     history.push(`/resultats`);
   },
-  loadCountries: () => {
-    dispatch(getCountries());
-  },
+  
   changeCountryField: (value) => {
     dispatch(changeCountryField(value));
   },

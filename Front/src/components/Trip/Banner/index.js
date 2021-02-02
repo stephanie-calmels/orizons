@@ -4,7 +4,7 @@ import { Image } from 'react-bootstrap';
 import './banner.scss';
 
 const Banner = ({ author, picture, title }) => {
-  console.log(picture)
+  // console.log(picture)
   const styles = {
     backgroundImage: `url(${picture})`,
     height: '20vh',

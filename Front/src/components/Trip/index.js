@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {Modal, Button, Form} from 'react-bootstrap';
+import {Modal, Button, Form, InputGroup} from 'react-bootstrap';
+import { storage } from 'src/firebase';
 import './trip.scss';
-
 import AddStep from 'src/containers/AddStep';
 import Banner from './Banner';
 import Description from './Description';
+import dayjs from 'dayjs';
 
-const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }) => {
+const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, countries, editTrip }) => {
   useEffect(() => {
     loadTrip(tripIdFromUrl);
   }, []);
 
-   //Gestion modale modification de profil
+   //Gestion modale modification de carnet
    const [show, setShow] = useState(false);
 
    const handleClose = () => setShow(false);
@@ -23,22 +24,33 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
   const [values, setValues] = useState({
     title: '',
     summary: '',
-    departuredate: '',
-    arrivaldate: '',
+    departureDate: '',
+    arrivalDate: '',
     categories: [],
     localisation: '',
     coverpicture: null
   });
 
-   const handleChange = (e) => {
-     const { name, value } = e.target;
-   setValues({ ...values, [name]: value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
   }
- 
-   const {
-     register, handleSubmit, errors,
-   } = useForm({});
-   const [submitting, setSubmitting] = useState(false);
+  const handleCheckbox = (e) => {
+    // Je suis obligé de refaire un find ici, je ne pouvais pas récupérer l'objet catégorie depuis le formulaire, seulement une string
+    const clickedCategory = categoriesList.find(category => category.entitled == e.target.value);
+    const index = categories.indexOf(clickedCategory);
+    // Si index > -1, c'est à dire si notre clickedCategory existe déjà dans le state, alors on la supprime avec splice
+    if (index > -1){
+      categories.splice(index, 1);
+      return setValues([e.target.name],[...categories]);
+    }
+    // Sinon on l'ajoute au tableau des catégories
+    setValues([e.target.name],[...categories, clickedCategory]);
+  }
+  const {
+    register, handleSubmit, errors,
+  } = useForm({});
+  const [submitting, setSubmitting] = useState(false);
 
   return (
     <div>
@@ -50,8 +62,8 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
           title={trip.trip.title}
         />
         {trip.trip.author[0].id === connectedUserId && <Button className="edit-trip-button" onClick={handleShow}>Editer mon carnet</Button>}
-        <Description trip={trip.trip} steps={trip.steps} />
-        <AddStep tripId={tripIdFromUrl} authorId={trip.trip.author[0].id}/>
+        <Description trip={trip.trip} steps={trip.steps} connectedUserId={connectedUserId}/>
+        <AddStep tripId={trip.trip.author[0].id} authorId={connectedUserId}/>
 
         {/* Modale modification de carnet */}
         <Modal show={show} onHide={handleClose}>
@@ -66,8 +78,8 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
                   handleClose();
                   setSubmitting(true);
                   console.log('formData', formData);
-                  if (formData.cover.length > 0) {
-                  const uploadTask = storage.ref(`photos/profile/cover/${formData.cover[0].name}`).put(formData.cover[0]);
+                  if (formData.coverpicture.length > 0) {
+                  const uploadTask = storage.ref(`photos/trips/cover/${formData.coverpicture[0].name}`).put(formData.coverpicture[0]);
                   uploadTask.on(
                     'state_changed',
                     (snapshot) => {},
@@ -77,24 +89,24 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
                     },
                     () => {
                       storage
-                        .ref('photos/profile/cover/')
-                        .child(formData.cover[0].name)
+                        .ref('photos/trips/cover/')
+                        .child(formData.coverpicture[0].name)
                         .getDownloadURL()
                         .then((url) => {
                           console.log('url', url);
                           formData.cover = url;
                           console.log('formData2', formData);
-                          editProfile(formData);
+                          editTrip(formData);
                           setSubmitting(false);
                         });
                     },
                   );
                   }
                   else {
-                  formData.cover = profile.cover_member;
+                  formData.cover = trip.trip.cover_trip;
                   console.log('formData3', formData);
 
-                  editProfile(formData);
+                  editTrip(formData);
                   setSubmitting(false);
                   }
                   
@@ -107,7 +119,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
                 autoFocus
                 name="title"
                 type="text"
-                defaultValue={trip.title}
+                defaultValue={trip.trip.title}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
@@ -121,7 +133,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
                 name="summary"
                 as="textarea"
                 rows={5}
-                defaultValue={trip.summary}
+                defaultValue={trip.trip.summary}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
@@ -131,31 +143,32 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
             </Form.Group>
             <Form.Group size="lg" controlId="localisation">
               <Form.Label>Localisation</Form.Label>
-              {/* ajouter un select avec la liste de tous les pays  */}
-              <Form.Control
-                name="localisation"
-                type="text"
-                defaultValue={trip.localisation}
-                onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
-              />
-              {errors.localisation && <div className="text-danger">{errors.localisation.message}</div>}
+                <InputGroup>
+                  <Form.Control
+                    as="select"
+                    name="country_code"
+                    defaultValue={trip.trip.trip_localisation[0].code}
+                    onChange={(e) => handleChange(e)}
+                    ref={register({
+                      required: 'Veuillez remplir ce champ !',
+                    })}
+                  >
+                    {
+                      countries.map((country) => (
+                        <option key={country.id} value={country.code}>{country.fr_name}</option>
+                      ))
+                    }
+                  </Form.Control>
+                </InputGroup>  
             </Form.Group>
             <Form.Group size="lg" controlId="coverpicture">
               <Form.Label>Photo de couverture</Form.Label>
-              {/*<FileBase64 multiple={false} onDone={(data)=>{
-                handleImage(data) 
-              }} /> */}
               <Form.Control
                 name="coverpicture"
                 type="file"
-                defaultValue={trip.coverpicture}
+                defaultValue={''}
                 onChange={(e) => handleImage(e)}
-                ref={register({
-                  required: 'Veuillez sélectionner une photo',
-                })}
+                ref={register()}
               /> 
               {errors.coverpicture && <div className="text-danger">{errors.coverpicture.message}</div>}
             </Form.Group>
@@ -165,27 +178,44 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
               <Form.Label>Style de votre voyage</Form.Label>
               <div>
                 {categoriesList.map(category =>{
-                  return <Form.Check
-                  key={category.id}
-                  type="checkbox"
-                  label={category.entitled}
-                  name="categories"
-                  value={category.entitled}
-                  onChange={(e) => handleCheckbox(e)}
-                  ref={register({
-                    required: 'Veuillez sélectionner au moins une catégorie !',
+                  let categoryClicked = trip.trip.categories.find(categoryInTrip => categoryInTrip.entitled == category.entitled )
+                    if (categoryClicked){
+                      return <Form.Check
+                    key={category.id}
+                    type="checkbox"
+                    label={category.entitled}
+                    name="categories"
+                    value={category.entitled}
+                    onChange={(e) => handleCheckbox(e)}
+                    checked
+                    ref={register({
+                      required: 'Veuillez sélectionner au moins une catégorie !',
                   })}
                   />
-                })}
+                    }
+                  else return <Form.Check
+                    key={category.id}
+                    type="checkbox"
+                    label={category.entitled}
+                    name="categories"
+                    value={category.entitled}
+                    onChange={(e) => handleCheckbox(e)}
+                    
+                    ref={register({
+                      required: 'Veuillez sélectionner au moins une catégorie !',
+                  })}
+                  />
+                  
+                    })}
               </div>
               {errors.categories && <div className="text-danger">{errors.categories.message}</div>}
             </Form.Group>
             <Form.Group size="lg" controlId="departure">
               <Form.Label>Date de départ</Form.Label>
               <Form.Control
-                name="departure"
+                name="departureDate"
                 type="date"
-                defaultValue={trip.departure}
+                defaultValue={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
@@ -196,10 +226,10 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
             <Form.Group size="lg" controlId="returndate">
               <Form.Label>Date de retour</Form.Label>
               <Form.Control
-                name="returndate"
+                name="arrivalDate"
                 type="date"
-                min={trip.departure}
-                defaultValue={trip.returndate}
+                min={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
+                defaultValue={dayjs(`${trip.trip.arrival_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                 })}

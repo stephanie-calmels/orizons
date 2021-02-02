@@ -9,11 +9,10 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, randomTrips, categories, randomSearch, handleClick, loadCategories, changeCategoryField, searchByCategory, category_search, loadCountries, countries, country_search, changeCountryField, searchByCountry
+  isLoggedIn, randomTrips, categories, randomSearch, handleClick, changeCategoryField, searchByCategory, category_search, countries, country_search, changeCountryField, searchByCountry
 }) => {
   useEffect(() => {
-    loadCategories();
-    loadCountries();
+    
   }, []);
 
   return (
