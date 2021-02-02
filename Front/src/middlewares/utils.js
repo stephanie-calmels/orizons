@@ -64,18 +64,37 @@ const utils = (store) => (next) => (action) => {
       const { trips: { trips } } = store.getState();
       const results = [];
       trips.forEach((trip) => {
+        let notFound = true;
+        // By default, the variable 'notFound' is true. When an occurrence is found, 'notFound' turns to false : the following code is ignored to avoid duplicates trips.
         trip.trip_localisation.forEach((country) => {
-          if (slugify(country.fr_name, {lower:true}) === slugify(action.value, {lower:true})) {
+          // slugify is used to format the search and the target field to compare them.
+          if (slugify(country.fr_name, {lower:true}).includes(slugify(action.value, {lower:true}))) {
             results.push(trip);
+            notFound = false;
+            return;
           }
         });
-        trip.categories.forEach((category) => {
-            if (slugify(category.entitled, {lower:true}) === slugify(action.value, {lower:true})) {
-                results.push(trip);
-              }
-            });
+        if (notFound) {
+          trip.categories.forEach((category) => {
+            if (slugify(category.entitled, {lower:true}).includes(slugify(action.value, {lower:true}))) {
+              results.push(trip);
+              notFound = false;
+              return;
+            }
+          });
+          if (notFound) {
+            if (slugify(trip.title, {lower:true}).includes(slugify(action.value, {lower:true}))) {
+              results.push(trip);
+              return;
+            }
+            if (slugify(trip.summary, {lower:true}).includes(slugify(action.value, {lower:true}))) {
+              results.push(trip);
+              return;
+            }
+          }
+        }
       });
-      console.log('résultats : ' + results);
+
       store.dispatch(getTripsByCountrySuccess(results));
       break;
     }; 
