@@ -49,9 +49,9 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList }
           picture={trip.trip.cover_trip}
           title={trip.trip.title}
         />
-        {tripIdFromUrl == connectedUserId && <Button className="edit-trip-button" onClick={handleShow}>Editer mon carnet</Button>}
+        {trip.trip.author[0].id === connectedUserId && <Button className="edit-trip-button" onClick={handleShow}>Editer mon carnet</Button>}
         <Description trip={trip.trip} steps={trip.steps} />
-        <AddStep tripId={tripIdFromUrl}/>
+        <AddStep tripId={tripIdFromUrl} authorId={trip.trip.author[0].id}/>
 
         {/* Modale modification de carnet */}
         <Modal show={show} onHide={handleClose}>
