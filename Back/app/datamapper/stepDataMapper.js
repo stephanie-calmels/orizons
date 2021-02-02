@@ -7,9 +7,8 @@ const stepDataMapper = {
     },
 
     async getOneStep(stepId) {
-        console.log('choucroute')
         const result = await client.query(`SELECT * FROM "step_by_step" WHERE "step_id" = $1`, [stepId])
-        console.log(result.rows[0], 'one step ????????????????')
+
         return result.rows[0]
     },
 
@@ -58,20 +57,21 @@ const stepDataMapper = {
 
             ]);
         console.log('3')
-        console.log(newStep.pictures, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
         // 4 - Insert step's photos
+        let picture = newStep.pictures;
+        console.log('picture', picture);
         let counter = 1;
-        for (let picture of newStep.pictures) {
+        for (let index = 0; index < picture.length; index++) {
 
             await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
                 [`${result.rows[0].title}_${counter++}`,
-                    picture.url,
+                    picture[index],
                     result.rows[0].id
                 ])
 
         }
-        console.log(result.rows[0])
+        console.log('id', result.rows[0])
         // 5 - We return the new datas
         const theStep = await this.getOneStep(result.rows[0].id);
         return theStep
