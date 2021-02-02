@@ -132,7 +132,8 @@ const memberController = {
             const {
                 url
             } = request.body;
-            console.log(url, '?????????????????????????????????')
+
+
             const member = await memberDataMapper.updateProfilePhoto(memberId, url);
             response.json({
                 data: member.profile_photo
@@ -142,14 +143,19 @@ const memberController = {
             next(error)
         }
     },
+
     // Mise à jour des infos du profil
-    async updateProfileInfos(request, response, next){
+    async updateProfileInfos(request, response, next) {
         try {
             const {
-                profileId
+                memberId
             } = request.params;
+
             const profileInfos = request.body;
-            const member = await memberDataMapper.updateOneProfile(profileId, profileInfos);
+
+            console.log('request params', request.params, '????????????????????????????????')
+            const member = await memberDataMapper.updateOneProfile(memberId, profileInfos);
+
             response.json({
                 data: member
             })

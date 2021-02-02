@@ -3,6 +3,8 @@ const tripDataMapper = require('../datamapper/tripDataMapper');
 const stepDataMapper = require('../datamapper/stepDataMapper');
 const localisationDataMapper = require('../datamapper/localisationDataMapper');
 const categoryDataMapper = require('../datamapper/categoryDataMapper');
+
+
 const tripController = {
     async getAllTrip(request, response, next) {
         try {
@@ -38,7 +40,6 @@ const tripController = {
             response.json({
                 data: [{
                         trip,
-                        localisation,
                         steps
                     },
 
@@ -67,6 +68,7 @@ const tripController = {
         try {
             const newTrip = request.body;
             const trip = await tripDataMapper.createTrip(newTrip);
+            console.log(trip)
             response.json({
                 data: trip
             })
