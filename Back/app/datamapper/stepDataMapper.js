@@ -58,6 +58,7 @@ const stepDataMapper = {
 
             ]);
         console.log('3')
+        console.log(newStep.pictures, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
         // 4 - Insert step's photos
         let counter = 1;
