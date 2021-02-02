@@ -191,7 +191,16 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
             </Form.Group>
           </Col>
           <Col lg={4} className="trip-preview-container">
-            <AddTripPreview title={title} summary={summary} localisation={localisation} categories={categories} coverpicture={coverpicture} departure={departure} returndate={returndate}/>
+            <AddTripPreview 
+              title={title} 
+              summary={summary} 
+              localisation={localisation} 
+              categories={categories} 
+              coverpicture={coverpicture} 
+              departure={departure} 
+              returndate={returndate}
+              country_code={country_code}
+              />
           </Col>
           <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
             Valider

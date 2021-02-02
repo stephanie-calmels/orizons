@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
+import Flag from 'react-world-flags';
 
 import slugify from 'slugify'
 
@@ -22,12 +23,20 @@ const Description = ({trip, steps})=>{
         <Col md={6} className="stats-container">Statistiques
         <Container>
           <Row>
-            <Col>Durée</Col>
-            <Col>Distance</Col>
+            <Col xs={4} lg={3}>Durée</Col>
+            <Col xs={4} lg={3}>Distance</Col>
+            <Col xs={4} lg={6}>Pays</Col>
           </Row>
           <Row>
-            <Col>{trip.duration} jours</Col>
-            <Col>12000 km</Col>
+            <Col xs={4} lg={3}>{trip.duration} jours</Col>
+            <Col xs={4} lg={3}>12000 km</Col>
+            <Col xs={4} lg={6}>
+            {
+              trip.trip_localisation.map(country => (
+                  <Flag className="mr-2" key={country.id} code={country.code} height="16" title={country.fr_name} alt={country.fr_name}/>
+              ))
+            }
+            </Col>
           </Row>
           <Row>
             {trip.categories.map(category =>{
