@@ -28,7 +28,7 @@ const stepDataMapper = {
 
         const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = tc."country_id" WHERE tc."trip_id" = $1 AND tc."country_id"` = $2, [newStep.trip_id, idCountry.rows[0].id])
 
-
+        console.log('truc')
 
         if (!tripCountry.rows[0]) {
 
