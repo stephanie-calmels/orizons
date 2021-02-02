@@ -262,6 +262,7 @@ const api = (store) => (next) => (action) => {
       break;
     };
     case POST_NEW_STEP:{
+      console.log(action.data)
       const config = {
         method: 'post',
         url: `https://orizons.herokuapp.com/steps`,

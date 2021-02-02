@@ -133,11 +133,14 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               formData.country_code = country_code;
               formData.trip_id = tripId;
               const fileListToArray = [...formData.pictures];
+              const emptyArray = [];
               const promises = [];
-              fileListToArray.forEach(picture => {
+              fileListToArray.map(picture => {
                 let index = fileListToArray.indexOf(picture)
+
                 const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
                 promises.push(uploadTask);
+                console.log('promises inside', promises);
                 uploadTask.on(
                   'state_changed',
                   (snapshot) => {},
@@ -151,16 +154,19 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
                       .child(picture.name)
                       .getDownloadURL()
                       .then((url) => {
-                        fileListToArray[index]= url;
+                        // fileListToArray[index]= url;
+                        emptyArray.push(url)
                       });
                   },
                 );
-              })
+              });
+              console.log('promises outside before PROMISE', promises);
               Promise.all(promises)
-              .then(() => {
-                formData.pictures = fileListToArray;
-                console.log(formData);
-                postStep(formData);
+                .then(() => {
+                // formData.pictures = fileListToArray;
+                formData.pictures = emptyArray;
+                console.log('formDataPictures',formData.pictures)
+                setTimeout(()=>postStep(formData), 500);
                 setSubmitting(false);
               })
             })}
