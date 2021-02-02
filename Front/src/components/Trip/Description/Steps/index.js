@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Card, Form, Container, Row, Col, Nav, CardColumns, Modal } from 'react-bootstrap';
+import { Card, Form, Container, Row, Col, Nav, CardColumns, Modal, Button, InputGroup } from 'react-bootstrap';
 import slugify from 'slugify'
+import dayjs from 'dayjs';
 import './steps.scss'
+import axios from 'axios';
+
+import { storage } from 'src/firebase';
+
+import {
+  MapContainer, TileLayer, Marker, Popup, useMap,
+} from 'react-leaflet';
 
 const Steps = ({ steps, trip, connectedUserId })=>{
 
@@ -11,7 +19,7 @@ const Steps = ({ steps, trip, connectedUserId })=>{
    const [show, setShow] = useState(false);
 
    const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
+   const handleShow = () => {setShow(true);};
    
    //Formulaire
    const {
@@ -19,15 +27,116 @@ const Steps = ({ steps, trip, connectedUserId })=>{
   } = useForm({});
   const [submitting, setSubmitting] = useState(false);
 
+  // Values tampons pour l'édition de l'étape
+  const [values, setValues] = useState({
+    title: '',
+    summary: '',
+    localisation: '',
+    localisationInput: '',
+    pictures: [],
+    date: '',
+    showInput: false,
+    country: '',
+    country_code: '',
+  });
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  }
+  const handlePictures = (e) => setValues({...values,[e.target.name]: e.target.files});
+
+  // FUNCTIONS LINKED TO THE MAP
+  const getUserPosition = () => {
+    navigator.geolocation.getCurrentPosition(((position) => {
+      const userPosition = [position.coords.latitude, position.coords.longitude];
+      setValues({...values, 'localisation': userPosition});
+    }));
+  };
+
+  const showLocationInput = () => {
+    setValues({...values,'showInput': true });
+  };
+
+  // This component will be added to the map container in order to react to certain events
+  const MovingMap = () => {
+    const map = useMap();
+    values.localisation.length > 0 && useEffect(() => {
+      map.flyTo(values.localisation);
+    }, [values.localisation]);
+    return null;
+  };
+
+  // Creating a draggable marker that update its position when moved
+  const DraggableMarker = () => {
+    const [position, setPosition] = useState(values.localisation);
+    const eventHandlers = useMemo(
+      () => ({
+        dragend(e) {
+          // We are using the endpoint of the marker drag to update our input position
+          console.log(e.target);
+          const newPosition = [e.target._latlng.lat, e.target._latlng.lng];
+          setPosition(newPosition);
+          setValues({...values, 'localisation': newPosition});
+            // setInputs({...inputs, localisationInput: adresseToInput})
+        },
+      }),
+      [],
+    );
+    return (
+      <Marker
+        draggable
+        eventHandlers={eventHandlers}
+        position={position}
+      >
+        <Popup>Position de votre étape. Déplacez le marqueur pour affiner la position.</Popup>
+      </Marker>
+    );
+  };
+  
+  // adding geosearch to the form + using position stack API
+  const useGeocodingApi = (event) => {
+    console.log(event.target.closest('.input-group').querySelector('input').value);
+    // On récupère la recherche tapée par l'utilisateur
+    const userQuery = event.target.closest('.input-group').querySelector('input').value;
+    const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
+
+    axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
+      .then((response) => {
+        const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
+        setValues({...values,'localisation': newPosition});
+        setValues({...values,'showInput': false});
+      });
+  };
+
+  // reverse geocoding in order to get the adress of the marker at the end
+  const getCountryFromAPI = () => {
+    const APIkey = "3e6337fefe20a03c96bfeb8a7b479717";
+    const reverseQuery = values.localisation.toString();
+    axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
+    .then((response)=>{
+      const currentCountry = response.data.data[0].country;
+      const currentCountry_code = response.data.data[0].country_code;
+      setValues({...values, 'country': currentCountry});
+      setValues({...values, 'country_code':currentCountry_code});
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
+
+  useEffect(() => {
+    getCountryFromAPI();
+  }, [values.localisation]);
+
+  //-------------------------------------------- DEBUT DU COMPOSANT Steps ------------------------------------------- //
   return <div>
-  {/*J'ai ajouté un container sinon la carte empiétait sur les cartes des étapes */}
   {steps.length > 0 &&
   <Container>
   <Row>
     <Col className="nav-container">
       {steps.map(step=> {
         const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
-        // Je récupère la position de l'étape en cours dans le tableau et j'y ajoute 1 pour la barre de nav
         
         return <Nav key={step.id_step}>
           <Nav.Item>
@@ -50,8 +159,8 @@ const Steps = ({ steps, trip, connectedUserId })=>{
       <CardColumns className="card-step-container">
         {step.photos.map(photo=>{
           return (
-            <Card >
-              <Card.Img src={photo.url}  className="card-step-image" key={photo.id}/>
+            <Card key={photo.id}>
+              <Card.Img src={photo.url}  className="card-step-image" />
             </Card>
         )})}
         
@@ -60,83 +169,87 @@ const Steps = ({ steps, trip, connectedUserId })=>{
             <Card.Title> {step.step_title}</Card.Title>
             <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
-            {trip.author[0].id  === connectedUserId && <Button className="edit-trip-button" onClick={handleShow}>Editer l'étape</Button>}
+            {trip.author[0].id  === connectedUserId && <Button className="edit-trip-button" onClick={handleShow} >Editer l'étape</Button>}
           </Card.Body>
-        </Card>
-  })}
-  </Col>
-  </Row>
-  </Container>
-  }
-   {/* Modale modification d'une étape */}
-   <Modal show={show} onHide={handleClose}>
+
+           {/* Modale modification d'une étape */}
+   <Modal show={show} onHide={handleClose} >
+   {console.log('je suis une modale')}
           <Modal.Header closeButton>
               <Modal.Title>Modifier les infos de votre étape</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
-              {/* <Form
-                className="form-edit-trip"
-                onSubmit={handleSubmit((formData) => {
-                  handleClose();
-                  setSubmitting(true);
-                  console.log('formData', formData);
-                  if (formData.coverpicture.length > 0) {
-                  const uploadTask = storage.ref(`photos/trips/cover/${formData.coverpicture[0].name}`).put(formData.coverpicture[0]);
-                  uploadTask.on(
-                    'state_changed',
-                    (snapshot) => {},
-                    (error) => {
-                      // eslint-disable-next-line no-console
-                      console.log(error);
-                    },
-                    () => {
-                      storage
-                        .ref('photos/trips/cover/')
-                        .child(formData.coverpicture[0].name)
-                        .getDownloadURL()
-                        .then((url) => {
-                          console.log('url', url);
-                          formData.cover = url;
-                          console.log('formData2', formData);
-                          editTrip(formData);
-                          setSubmitting(false);
-                        });
-                    },
-                  );
-                  }
-                  else {
-                  formData.cover = trip.trip.cover_trip;
-                  console.log('formData3', formData);
+            <Form
+            className="form-edit-step"
+            onSubmit={handleSubmit((formData) => {
+              handleClose();
+              setSubmitting(true);
+              formData.localisation = values.localisation;
+              formData.country = values.country;
+              formData.country_code = values.country_code;
+              formData.trip_id = step.trip_id;
+              const fileListToArray = [...formData.pictures];
+              const emptyArray = [];
+              const promises = [];
+              fileListToArray.map(picture => {
 
-                  editTrip(formData);
-                  setSubmitting(false);
-                  }
-                  
-                })}
-              >
+                const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
+                promises.push(uploadTask);
+                console.log('promises inside', promises);
+                uploadTask.on(
+                  'state_changed',
+                  (snapshot) => {},
+                  (error) => {
+                    // eslint-disable-next-line no-console
+                    console.log(error);
+                  },
+                  () => {
+                    storage
+                      .ref('photos/trips/steps/')
+                      .child(picture.name)
+                      .getDownloadURL()
+                      .then((url) => {
+                        // fileListToArray[index]= url;
+                        emptyArray.push(url)
+                      });
+                  },
+                );
+              });
+              console.log('promises outside before PROMISE', promises);
+              Promise.all(promises)
+                .then(() => {
+                // formData.pictures = fileListToArray;
+                formData.pictures = emptyArray;
+                console.log('formData',formData)
+                setTimeout(()=>postStep(formData), 500);
+                setSubmitting(false);
+              })
+            })}
+          >
 
             <Form.Group size="lg" controlId="title">
-              <Form.Label>Titre de votre voyage</Form.Label>
+              <Form.Label>Titre de votre étape</Form.Label>
               <Form.Control
                 autoFocus
                 name="title"
                 type="text"
-                defaultValue={}
+                defaultValue={step.step_title}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
                 })}
               />
-              {errors.title && <div className="text-danger">{errors.title.message}</div>}
+              
+              {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
             </Form.Group>
             <Form.Group size="lg" controlId="summary">
-              <Form.Label>Description de votre voyage</Form.Label>
+              <Form.Label>Description de votre étape</Form.Label>
               <Form.Control
                 name="summary"
                 as="textarea"
                 rows={5}
-                defaultValue={}
+                defaultValue={step.content}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
@@ -144,110 +257,90 @@ const Steps = ({ steps, trip, connectedUserId })=>{
               />
               {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
             </Form.Group>
+            {/* INPUT LOCALISATION CUSTOM EN UTILISANT LA CARTE */}
             <Form.Group size="lg" controlId="localisation">
               <Form.Label>Localisation</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    as="select"
-                    name="country_code"
-                    defaultValue={trip.trip.trip_localisation[0].code}
-                    onChange={(e) => handleChange(e)}
-                    ref={register({
-                      required: 'Veuillez remplir ce champ !',
-                    })}
-                  >
-                    {
-                      countries.map((country) => (
-                        <option key={country.id} value={country.code}>{country.fr_name}</option>
-                      ))
-                    }
-                  </Form.Control>
-                </InputGroup>  
-            </Form.Group>
-            <Form.Group size="lg" controlId="coverpicture">
-              <Form.Label>Photo de couverture</Form.Label>
-              <Form.Control
-                name="coverpicture"
-                type="file"
+              <MapContainer
+            // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
+                center={[45, -1]}
+                zoom={13}
+                scrollWheelZoom
+                id="modal-map"
+              >
+                <TileLayer
+                  attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <MovingMap />
+                {/** Quand une position est ajoutée, on place notre Marker custom créé ci dessus */}
+                {values.localisation.length > 0 && <DraggableMarker />}
+              </MapContainer>
+
+              <Button onClick={getUserPosition}>Utiliser ma position</Button>
+              <Button onClick={showLocationInput}>Entrer une adresse</Button>
+
+              {values.showInput && (
+              <InputGroup><Form.Control
+                name="localisationInput"
+                type="text"
                 defaultValue={''}
-                onChange={(e) => handleImage(e)}
-                ref={register()}
-              /> 
-              {errors.coverpicture && <div className="text-danger">{errors.coverpicture.message}</div>}
+                onChange={(e) => handleChange(e)}
+
+                ref={register({
+                  required: 'Veuillez remplir ce champ !',
+                })}
+              /> <InputGroup.Append><Button variant="outline-secondary" onClick={useGeocodingApi}>Chercher</Button></InputGroup.Append>
+              </InputGroup>
+              )}
+
+              {errors.localisation && <div className="text-danger">{errors.localisation.message}</div>}
             </Form.Group>
-          
-          
-            <Form.Group size="lg" controlId="categories">
-              <Form.Label>Style de votre voyage</Form.Label>
-              <div>
-                {categoriesList.map(category =>{
-                  let categoryClicked = trip.trip.categories.find(categoryInTrip => categoryInTrip.entitled == category.entitled )
-                    if (categoryClicked){
-                      return <Form.Check
-                    key={category.id}
-                    type="checkbox"
-                    label={category.entitled}
-                    name="categories"
-                    value={category.entitled}
-                    onChange={(e) => handleCheckbox(e)}
-                    checked
-                    ref={register({
-                      required: 'Veuillez sélectionner au moins une catégorie !',
-                  })}
-                  />
-                    }
-                  else return <Form.Check
-                    key={category.id}
-                    type="checkbox"
-                    label={category.entitled}
-                    name="categories"
-                    value={category.entitled}
-                    onChange={(e) => handleCheckbox(e)}
-                    
-                    ref={register({
-                      required: 'Veuillez sélectionner au moins une catégorie !',
-                  })}
-                  />
-                  
-                    })}
-              </div>
-              {errors.categories && <div className="text-danger">{errors.categories.message}</div>}
-            </Form.Group>
-            <Form.Group size="lg" controlId="departure">
-              <Form.Label>Date de départ</Form.Label>
+
+            <Form.Group size="lg" controlId="pictures">
+              <Form.Label>Ajouter des photos</Form.Label>
               <Form.Control
-                name="departureDate"
+                name="pictures"
+                type="file"
+                multiple
+                defaultValue={step.pictures}
+                onChange={(e) => handlePictures(e)}
+                ref={register({
+                  required: 'Veuillez ajouter au moins une photo',
+                })}
+              />
+              {errors.pictures && <div className="text-danger">{errors.pictures.message}</div>}
+            </Form.Group>
+
+            <Form.Group size="lg" controlId="date">
+              <Form.Label>Date de cette étape</Form.Label>
+              <Form.Control
+                name="date"
                 type="date"
-                defaultValue={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
+                defaultValue={dayjs(`${step.step_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
                 })}
               />
-              {errors.departure && <div className="text-danger">{errors.departure.message}</div>}
+              {errors.date && <div className="text-danger">{errors.date.message}</div>}
             </Form.Group>
-            <Form.Group size="lg" controlId="returndate">
-              <Form.Label>Date de retour</Form.Label>
-              <Form.Control
-                name="arrivalDate"
-                type="date"
-                min={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
-                defaultValue={dayjs(`${trip.trip.arrival_date}`).format('YYYY-MM-DD')}
-                onChange={(e) => handleChange(e)}
-                ref={register({
-                })}
-              />
-              {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
-            </Form.Group>
-                <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
-                Valider
-                </Button>
-              </Form>
-              {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
-            </Form.Group>
-              </Form>*/}
+
+            <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+              Valider
+            </Button>
+
+          </Form>
             </Modal.Body>
         </Modal>
+        </Card>
+
+        
+  })}
+  </Col>
+  </Row>
+  </Container>
+  }
+  
   </div>
 }
 

@@ -136,7 +136,6 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               const emptyArray = [];
               const promises = [];
               fileListToArray.map(picture => {
-                let index = fileListToArray.indexOf(picture)
 
                 const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
                 promises.push(uploadTask);
