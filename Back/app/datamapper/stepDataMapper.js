@@ -16,22 +16,20 @@ const stepDataMapper = {
         let nbStep
         // 1 - search biggest number_step in this trip to calculte next number
         const steps = await client.query('SELECT * FROM step WHERE trip_id = $1 ORDER BY number_step DESC LIMIT 1', [newStep.trip_id]);
-        console.log(steps.rows[0], '-------------------------------')
+
         if (steps.rowCount == 0) {
             nbStep = 1;
         } else {
             nbStep = steps.rows[0].number_step + 1;
         }
-        console.log('nbstep', nbStep);
         // 2 - search if the pair trip/country exists en table m2m
-        const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = tc."country_id" WHERE tc."trip_id" = $1`, [newStep.trip_id])
-        console.log("2-1");
-
-        const idCountry = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newStep.country_code])
-        console.log(idCountry.rows[0])
+        const idCountry = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newStep.country_code]);
 
 
-        console.log(tripCountry.rows)
+        const tripCountry = await client.query(`SELECT tc."id" FROM "_m2m_trip_country" tc JOIN "country" ON "country"."id" = tc."country_id" WHERE tc."trip_id" = $1 AND tc."country_id"` = $2, [newStep.trip_id, idCountry.rows[0].id])
+
+
+
         if (!tripCountry.rows[0]) {
 
             await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [newStep.trip_id, idCountry.rows[0].id])
@@ -56,8 +54,6 @@ const stepDataMapper = {
 
 
             ]);
-        console.log('3')
-
         // 4 - Insert step's photos
         let picture = newStep.pictures;
         console.log('picture', picture);
@@ -71,7 +67,6 @@ const stepDataMapper = {
                 ])
 
         }
-        console.log('id', result.rows[0])
         // 5 - We return the new datas
         const theStep = await this.getOneStep(result.rows[0].id);
         return theStep
