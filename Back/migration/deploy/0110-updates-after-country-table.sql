@@ -10,8 +10,7 @@ ALTER TABLE "step" ALTER COLUMN "member_id" DROP NOT NULL;
 CREATE TABLE IF NOT EXISTS "_m2m_trip_country"(
 "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 "trip_id" INT NOT NULL REFERENCES "trip"("id"),
-"country_id" INT NOT NULL REFERENCES "country"("id"),
-"trip" BOOLEAN NOT NULL DEFAULT TRUE
+"country_id" INT NOT NULL REFERENCES "country"("id")
 );
 
 -- add column country_id in step table

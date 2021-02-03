@@ -13,4 +13,6 @@ ALTER TABLE "step" ALTER COLUMN "member_id" SET NOT NULL;
 
 ALTER TABLE "step" DROP COLUMN "country_id";
 
+
+
 COMMIT;

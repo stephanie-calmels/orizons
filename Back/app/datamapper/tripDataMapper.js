@@ -70,22 +70,23 @@ const tripDataMapper = {
                 tripId
             ]);
 
-        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [tripInfos.country_code])
+        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [tripInfos.country_code]);
+        console.log(country.rows[0].id);
 
         const searchedTripCountry = await client.query(`SELECT * FROM "_m2m_trip_country" tc WHERE tc.trip_id = $1 AND tc.country_id = $2`,
             [
                 tripId,
-                country.result.rows[0].id
+                country.rows[0].id
             ])
         //searchedTripCountry = searchedTripCountry.result.rows[0]
-
-        if (searchedTripCountry) {
+        console.log(searchedTripCountry.rows[0])
+        if (searchedTripCountry.rows[0]) {
             // if trip = true, we check if the pair is linked to a step.
-            if (searchedTripCountry.result.rows[0].trip == true) {
+            if (searchedTripCountry.rows[0].trip == true) {
                 // if the pair exists, we check if the pair is usefull for the steps
                 const stepCheck = await client.query(`SELECT "id" FROM "step" WHERE "trip_id" = $1, "country_id" = $2`, [
-                    searchedTripCountry.result.rows[0].trip_id,
-                    searchedTripCountry.result.rows[0].country_id
+                    searchedTripCountry.rows[0].trip_id,
+                    searchedTripCountry.rows[0].country_id
                 ])
                 if (stepCheck) {
                     //if it is usefull we put trip = true to trip = false
@@ -101,9 +102,16 @@ const tripDataMapper = {
             }
 
         } else {
+            // we delete the old pair
+            await client.query(`DELETE FROM "_m2m_trip_country" WHERE "trip_id" = $1 AND "trip" = $2`,
+                [tripId,
+                    true
+                ])
             // if the pair doesn't exist, we create de pair
 
-            await client.query(`INSERT INTO "_m2m_trip_country" SET "trip_id" = $1, "country_id" = $2`);
+            await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`,
+                [tripId, country.rows[0].id]);
+
 
         }
 
