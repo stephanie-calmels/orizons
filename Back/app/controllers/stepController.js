@@ -25,6 +25,24 @@ const stepController = {
         }
     },
 
+    async uptdateOneStep(request, response, next) {
+        try {
+            const {
+                stepId
+            } = request.params;
+            const stepInfos = request.body;
+            console.log(stepInfos);
+
+            const step = await stepDataMapper.updateOneStep(stepId, stepInfos);
+
+            response.json({
+                data: step
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+
     async deleteOneStep(request, response, next) {
         try {
             const {
