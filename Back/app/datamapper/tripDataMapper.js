@@ -64,8 +64,8 @@ const tripDataMapper = {
             [
                 tripInfos.title,
                 tripInfos.summary,
-                tripInfos.departure_date,
-                tripInfos.arrival_date,
+                tripInfos.departureDate,
+                tripInfos.arrivalDate,
                 tripInfos.cover,
                 tripId
             ]);
