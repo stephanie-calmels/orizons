@@ -14,21 +14,21 @@ import ProfileTrips from './ProfileTrips';
 const ProfileInfos = ({ member, trips }) => {
   // création de mapData, pour alimenter la carte
   const mapData = {
-    FR: 1000,
-    US: 1000
+    FR: 1,
+    US: 2
   }
   console.log(trips)
   return <Container>
     <Row className="infos-container">
-      <Col md={6} className="stats-container">Statistiques
-        <Container>
-          <Row>
+      <Col className="stats-container">Statistiques
+        <Container className="stats">
+          <Row className="stats-row">
             <Col lg={6} >{trips.length} carnets publiés</Col>
             <Col lg={6}>12000km parcourus</Col>
           </Row>
-          <Row>
-            <Col lg={3}>Pays visités</Col>
-            <Col lg={9} className="flags-container">
+          <Row className="stats-row">
+            <Col lg={4}>Pays visités</Col>
+            <Col lg={8}>
             {
               trips.map(trip => (
                 trip.trip_localisation.map(country => (
@@ -43,31 +43,17 @@ const ProfileInfos = ({ member, trips }) => {
         </Container> 
       </Col>
 
-      <Col md={6} className="resume-container">
+      <Col className="resume-container">
         Biographie
         <p>{member.biography}</p>
       </Col>
     </Row>
-    {/* <Row>
-      <Col md={6}>
-        <h2>Statistiques</h2>
-        <div className="stats-container">
-          <div>{trips.length} carnets publiés  </div>
-          <div>12000km parcourus</div>
-          <div className="flags-container"><i className="far fa-flag"> </i><i className="far fa-flag"> </i><i className="far fa-flag"> </i></div>
-        </div>
-      </Col>
-      <Col md={6}>
-        <h2>Biographie</h2>
-        <p>{member.biography}</p>
-      </Col>
-    </Row> */}
     <Row>
       <Col>
         {/* ICI LA CARTE DES PAYS VISITES */}
       <VectorMap
       map={"world_mill"}
-      backgroundColor= "#0077be"
+      backgroundColor= "#79c5fb"
       zoomOnScroll= {false}
       containerStyle={{
         width: "100%",
@@ -88,7 +74,7 @@ const ProfileInfos = ({ member, trips }) => {
           regions: [
             {
               values: mapData, //this is your data
-              scale: ["#146804", "#ff0000"], //your color game's here
+              scale: ["#df7861"], //your color game's here
               normalizeFunction: "polynomial"
             }
           ]
