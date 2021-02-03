@@ -500,7 +500,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token } } = store.getState();
       const { id: tripId} = store.getState().trip.tripItem.trip;
       const config = {
-        method: 'patch',
+        method: 'delete',
         url: `https://orizons.herokuapp.com/steps/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
@@ -510,8 +510,8 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          toast.success('Modification des données réussie !');
-          history.push(`/exploration/${tripId}`);
+          toast.success('Suppression de l\'étape réussie !');
+          history.go(0);
         })
         .catch((error) => {
           const errorMessage = (error.response
