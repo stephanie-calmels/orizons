@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap'
-import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
+import {MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet'
 import Flag from 'react-world-flags';
 
 import slugify from 'slugify'
@@ -16,7 +16,25 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   } else{
     mapCenter= [48.856614,2.3522219]
   }
-  // console.log(trip)
+  const distanceCalculatorBetween2points = (lat1, lon1, lat2, lon2)=>{
+    var p = 0.017453292519943295;    // Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+          c(lat1 * p) * c(lat2 * p) * 
+          (1 - c((lon2 - lon1) * p))/2;
+
+    return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  }
+
+  const calculateDistanceBewteenAllSteps = (allSteps) =>{
+    let travelledDistance = 0;
+    for (let i = 0; i<(allSteps.length - 1); i++){
+      travelledDistance += distanceCalculatorBetween2points(allSteps[i].latitude, allSteps[i].longitude, allSteps[i+1].latitude, allSteps[i+1].longitude)
+    }
+    return travelledDistance
+  }
+
+
   return <div>
   <Container>
     <Row className="infos-container">
@@ -29,7 +47,7 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
           </Row>
           <Row>
             <Col xs={4} lg={3}>{trip.duration} jours</Col>
-            <Col xs={4} lg={3}>12000 km</Col>
+            <Col xs={4} lg={3}>{Math.round(calculateDistanceBewteenAllSteps(steps))} km</Col>
             <Col xs={4} lg={6}>
             {
               trip.trip_localisation.map(country => (
@@ -59,7 +77,6 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  {/*Ajout d'un marqueur pour chaque étape du trip  TODO: CSS dans le popup pour gérer sa taille et celle de l'image*/}
   {steps.map(step =>{
     // Je prépare de quoi faire un lien vers une ancre de la page (format: #id)
     const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
