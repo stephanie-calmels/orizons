@@ -21,7 +21,7 @@ const Header = ({
     handleLogout();
   };
   return (
-    <Navbar className="Navbar" sticky="top" collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar className="navbar_header" sticky="top" collapseOnSelect expand="lg" variant="light">
       <LinkContainer to="/">
         <Navbar.Brand className="logo"><i className="fas fa-globe-americas">'rizons</i></Navbar.Brand>
       </LinkContainer>
@@ -73,7 +73,7 @@ const Header = ({
                   </LinkContainer>
 
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={handleClick}><i className="fas fa-sign-out-alt" />Se déconnecter</Dropdown.Item>
+                  <Dropdown.Item onClick={handleClick}><i className="fas fa-sign-out-alt mr-2" />Se déconnecter</Dropdown.Item>
                 </DropdownButton>
               </>
             )
