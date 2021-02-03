@@ -23,7 +23,7 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       <Col className="stats-container">Statistiques
         <Container className="stats">
           <Row className="stats-row">
-            <Col lg={6} ><i class="fas fa-book-open mr-2 stats-icons"></i><div>{trips[0] != null ? trips.length : 0} carnet(s) publié(s)</div></Col>
+            <Col lg={6} ><i class="fas fa-book-open mr-2 stats-icons"></i>{trips[0] != null ? trips.length : 0} carnet(s) publié(s)</Col>
             <Col lg={6}><i class="fas fa-road mr-2 stats-icons"></i>12000km parcourus</Col>
           </Row>
           <Row className="stats-row">
