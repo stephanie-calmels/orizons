@@ -16,7 +16,7 @@ router.post('/', tripController.createTrip);
 router.patch('/addFavorite/:tripId');
 
 //router.patch('/', jwt, tripController.updateAllTrip);
-//router.patch('/:tripId', jwt, tripController.updateOneTrip);
+router.patch('/:tripId', tripController.updateOneTrip);
 //router.delete('/', jwt, tripController.deleteAllTrip);
 router.delete('/:tripId', tripController.deleteOneTrip);
 

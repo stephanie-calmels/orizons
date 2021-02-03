@@ -59,8 +59,57 @@ const tripDataMapper = {
         const result = await client.query("");
     },
 
-    async updateOneTrip(idTrip) {
-        const result = await client.query("");
+    async updateOneTrip(tripId, tripInfos) {
+        const result = await client.query(`UPDATE "trip" SET "title" = $1, "summary" = $2, "departure_date" = $3, "arrival_date" = $4, "cover_trip" = $5 WHERE "id" = $6`,
+            [
+                tripInfos.title,
+                tripInfos.summary,
+                tripInfos.departure_date,
+                tripInfos.arrival_date,
+                tripInfos.cover_picture,
+                tripId
+            ]);
+
+        const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [tripInfos.country_code])
+
+        const searchedTripCountry = await client.query(`SELECT * FROM "_m2m_trip_country" tc WHERE tc.trip_id = $1 AND tc.country_id = $2`,
+            [
+                tripId,
+                country.result.rows[0].id
+            ])
+        //searchedTripCountry = searchedTripCountry.result.rows[0]
+
+        if (searchedTripCountry) {
+            // if trip = true, we check if the pair is linked to a step.
+            if (searchedTripCountry.result.rows[0].trip == true) {
+                // if the pair exists, we check if the pair is usefull for the steps
+                const stepCheck = await client.query(`SELECT "id" FROM "step" WHERE "trip_id" = $1, "country_id" = $2`, [
+                    searchedTripCountry.result.rows[0].trip_id,
+                    searchedTripCountry.result.rows[0].country_id
+                ])
+                if (stepCheck) {
+                    //if it is usefull we put trip = true to trip = false
+                    await client.query(`UPDATE "_m2m_trip_country" SET "trip" = $1 WHERE "id" = $2`,
+                        [false, searchedTripCountry.result.rows[0].id])
+                } else {
+                    // if the old pair is usless with the steps, we delete it
+                    await client.query(`DELETE FROM "_m2m_trip_country" WHERE "id" = $1`,
+                        [searchedTripCountry.result.rows[0].id])
+                }
+
+
+            }
+
+        } else {
+            // if the pair doesn't exist, we create de pair
+
+            await client.query(`INSERT INTO "_m2m_trip_country" SET "trip_id" = $1, "country_id" = $2`);
+
+        }
+
+
+
+
     },
 
     async deleteAllTrip() {

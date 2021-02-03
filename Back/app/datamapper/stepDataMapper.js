@@ -35,8 +35,7 @@ const stepDataMapper = {
 
         if (!tripCountry.rows[0]) {
 
-            await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [newStep.trip_id, idCountry.rows[0].id])
-            console.log("2-2");
+            await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id", "trip") VALUES ($1, $2, $3)`, [newStep.trip_id, idCountry.rows[0].id, false]);
 
         }
 
