@@ -6,8 +6,9 @@ import {
   getMember,
 } from '../actions/member';
 import {
-  getTrips,
+  getTrips, getCategories,
 } from '../actions/trips';
+import { getCountries, } from '../actions/countries';
 
 const mapStateToProps = (state) => ({
   isLoggedIn: state.auth.isLoggedIn,
@@ -19,6 +20,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadTrips: () => {
     dispatch(getTrips());
+  },
+  loadCategories: () => {
+    dispatch(getCategories());
+  },
+  loadCountries: () => {
+    dispatch(getCountries());
   },
 });
 

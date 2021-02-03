@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, tripId }) => {
+const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, tripId, authorId }) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -115,9 +115,9 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   // START OF ADDSTEP COMPONENT
   return (
     <div>
-      <Button onClick={handleShow}>
-        Ajouter une étape
-      </Button>
+            {authorId == tripId && <Button onClick={handleShow}> Ajouter une étape </Button>}
+
+      
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Ajouter une étape</Modal.Title>
@@ -136,7 +136,6 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               const emptyArray = [];
               const promises = [];
               fileListToArray.map(picture => {
-                let index = fileListToArray.indexOf(picture)
 
                 const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
                 promises.push(uploadTask);

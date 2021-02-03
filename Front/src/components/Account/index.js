@@ -144,7 +144,7 @@ const Account = ({
                 <div>Prénom : <span className="font-weight-bold">{firstname}</span></div>
               </ListGroupItem>
               <ListGroupItem>
-                <div>Pseudonyme : <p>www.orizons.com/<span className="font-weight-bold">{nickname.toLowerCase()}</span></p></div>
+                <div>Pseudonyme : <span className="font-weight-bold">{nickname}</span></div>
               </ListGroupItem>
               <ListGroupItem>
                 <div>Adresse email : <span className="font-weight-bold">{email}</span></div>

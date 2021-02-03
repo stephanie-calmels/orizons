@@ -8,7 +8,7 @@ import slugify from 'slugify'
 import './description.scss'
 import Steps from './Steps'
 
-const Description = ({trip, steps})=>{
+const Description = ({trip, steps, connectedUserId})=>{
   // on crée une constante pour centrer la map sur la première étape, si celle ci existe
   let mapCenter =[]
   if (steps.length> 0){
@@ -16,7 +16,7 @@ const Description = ({trip, steps})=>{
   } else{
     mapCenter= [0,0]
   }
-  console.log(trip)
+  // console.log(trip)
   return <div>
   <Container>
     <Row className="infos-container">
@@ -81,7 +81,7 @@ const Description = ({trip, steps})=>{
     </Col>
     </Row>
     <Row>
-      <Steps steps= {steps}/>
+      <Steps steps= {steps} trip={trip} connectedUserId={connectedUserId}/>
     </Row>
   </Container>
 
