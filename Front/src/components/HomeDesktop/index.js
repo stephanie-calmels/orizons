@@ -19,7 +19,7 @@ const HomeDesktop = ({
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
-        <Card.Img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg" className="home_banner-image" />
+        <Card.Img src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
           <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
             Ibn Battuta

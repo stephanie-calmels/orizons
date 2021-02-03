@@ -1,4 +1,16 @@
-.edit-profile-button{
+.edit-profile-button {
   display: flex;
-  margin: 20vh auto 0;
+  margin: 7.5rem auto 1rem;
+  background-color: #161d6f;
+  border-radius: 50px;
+  border: none;
+  color: aliceblue;
+  transition-duration: 500ms;
+
+  
+}
+.edit-profile-button:hover {
+  background-color: aliceblue;
+  color: #161d6f;
+  border: 2px solid #161d6f;
 }

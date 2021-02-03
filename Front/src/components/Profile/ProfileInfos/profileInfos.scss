@@ -1,22 +1,59 @@
-.profile-infos-container{
-  margin-top: 15vh;
-  h2{
-    font-size: 1.4rem ;
-  }
-  .stats-container{
-    font-size: 1.2rem;
+@use 'src/styles/vars';
+
+.infos-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 0 0 1rem 0;
+  font-style: italic;
+}
+
+.stats-container {
+  font-size: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: vars.$color-secondary;
+
+  .stats {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 1rem;
-    padding: 1rem;
-    div{
-      padding-right: .5rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-style: normal;
+
+    &-row {
+      padding-bottom: 1rem;
     }
-    .flags-container{
-      padding: .5rem;
-    }
+  }
+  
+}
+
+.resume-container {
+  font-size: 1.2rem;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: vars.$color-secondary;
+
+  p {
+    font-style: normal;
   }
 }
 
+@media screen and (min-width: 768px) {
+  .infos-container {
+    flex-direction: row;
+  }
+
+  .stats-container {
+    margin: 1rem 0.5rem 1rem 0;
+  }
+  
+  .resume-container {
+    margin: 1rem 0 1rem 0.5rem;
+  }
+}
 
