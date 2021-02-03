@@ -13,16 +13,39 @@ import {
   MapContainer, TileLayer, Marker, Popup, useMap,
 } from 'react-leaflet';
 
-const Steps = ({ steps, trip, connectedUserId })=>{
+const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
 
-   //Gestion modale modification de carnet
-   const [show, setShow] = useState(false);
+  //Gestion modale modification de carnet
+  const [show, setShow] = useState([]);
 
-   const handleClose = () => setShow(false);
-   const handleShow = () => {setShow(true);};
-   
-   //Formulaire
-   const {
+  const handleClose = (modalId) => {
+    let showTest = show.slice();
+    showTest[modalId] = false;
+    setShow(showTest);
+  };
+
+  const handleShow = (step) => {
+    setValues({...values, localisation: [step.latitude, step.longitude]})
+    let showTest = show.slice();
+    showTest[step.id_step] = true;
+    setShow(showTest);
+  };
+
+  // Gestion modale suppression carnet
+  const[showDelete, setShowDelete] = useState([]);
+  const handleCloseDelete = (modalId) => {
+    let showTest = showDelete.slice();
+    showTest[modalId] = false;
+    setShowDelete(showTest);
+  };
+  const handleShowDelete = (modalId) => {
+    let showTest = showDelete.slice();
+    showTest[modalId] = true;
+    setShowDelete(showTest);
+  };
+  
+  //Formulaire
+  const {
     register, handleSubmit, errors,
   } = useForm({});
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +54,7 @@ const Steps = ({ steps, trip, connectedUserId })=>{
   const [values, setValues] = useState({
     title: '',
     summary: '',
-    localisation: '',
+    localisation:[],
     localisationInput: '',
     pictures: [],
     date: '',
@@ -160,7 +183,7 @@ const Steps = ({ steps, trip, connectedUserId })=>{
         {step.photos.map(photo=>{
           return (
             <Card key={photo.id}>
-              <Card.Img src={photo.url}  className="card-step-image" />
+              <Card.Img src={photo.url} className="card-step-image" />
             </Card>
         )})}
         
@@ -169,12 +192,32 @@ const Steps = ({ steps, trip, connectedUserId })=>{
             <Card.Title> {step.step_title}</Card.Title>
             <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
-            {trip.author[0].id  === connectedUserId && <Button className="edit-trip-button" onClick={handleShow} >Editer l'étape</Button>}
+            {trip.author[0].id  === connectedUserId && <>
+            <Button className="edit-step-button" onClick={()=>{handleShow(step)}} ><i className="fas fa-pencil-alt" /> Editer l'étape</Button>
+            <Button variant="danger" className="delete-step-button" onClick={()=>{handleShowDelete(step.id_step)}}><i className="fas fa-trash-alt" /> Supprimer l'étape</Button>
+            </>
+            }
           </Card.Body>
 
+      {/* Modale confirmation suppression de l'étape */}
+      <Modal show={showDelete[step.id_step]} onHide={()=>{handleCloseDelete(step.id_step)}}>
+              <Modal.Header closeButton>
+                    <Modal.Title>Suppression de votre étape</Modal.Title>
+              </Modal.Header>
+                    <Modal.Body>
+                      <p> Êtes-vous sûr de vouloir supprimer votre étape ? Toute suppression est irréversible.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="danger" onClick={()=>{
+                        handleCloseDelete;
+                        deleteStep(step.id_step);
+                      }}>Oui, supprimer</Button>
+                      <Button onClick={handleCloseDelete}>Annuler</Button>
+                    </Modal.Footer>
+              </Modal>
+
            {/* Modale modification d'une étape */}
-   <Modal show={show} onHide={handleClose} >
-   {console.log('je suis une modale')}
+   <Modal show={show[step.id_step]} onHide={()=>{handleClose(step.id_step)}} >
           <Modal.Header closeButton>
               <Modal.Title>Modifier les infos de votre étape</Modal.Title>
             </Modal.Header>
@@ -222,7 +265,7 @@ const Steps = ({ steps, trip, connectedUserId })=>{
                 // formData.pictures = fileListToArray;
                 formData.pictures = emptyArray;
                 console.log('formData',formData)
-                setTimeout(()=>postStep(formData), 500);
+                setTimeout(()=>editStep(formData, step.id_step), 500);
                 setSubmitting(false);
               })
             })}
@@ -262,8 +305,8 @@ const Steps = ({ steps, trip, connectedUserId })=>{
               <Form.Label>Localisation</Form.Label>
               <MapContainer
             // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
-                center={[45, -1]}
-                zoom={13}
+                center={[step.latitude, step.longitude]}
+                zoom={9}
                 scrollWheelZoom
                 id="modal-map"
               >

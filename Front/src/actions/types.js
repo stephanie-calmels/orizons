@@ -58,6 +58,13 @@ export const GET_TRIP_FAIL = 'GET_TRIP_FAIL';
 export const UPDATE_TRIP = 'UPDATE_TRIP';
 export const UPDATE_TRIP_SUCCESS = 'UPDATE_TRIP_SUCCESS';
 export const UPDATE_TRIP_FAIL = 'UPDATE_TRIP_FAIL';
+export const DELETE_TRIP = 'DELETE_TRIP';
+
+// === STEP
+export const UPDATE_STEP = 'UPDATE_STEP';
+export const UPDATE_STEP_SUCCESS = 'UPDATE_STEP_SUCCESS';
+export const DELETE_STEP = 'DELETE_STEP';
+
 
 // === PROFILE
 export const GET_PROFILE = 'GET_PROFILE';

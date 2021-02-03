@@ -1,4 +1,4 @@
-import { GET_TRIP_SUCCESS} from '../actions/types';
+import { GET_TRIP_SUCCESS, UPDATE_TRIP_SUCCESS} from '../actions/types';
 
 
 const initialState = {
@@ -12,6 +12,12 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         tripItem: action.trip,
       };
+    case UPDATE_TRIP_SUCCESS:
+      return{
+        ...oldState,
+        tripItem: action.trip
+      }
+    
     default:
       return oldState;
   }
