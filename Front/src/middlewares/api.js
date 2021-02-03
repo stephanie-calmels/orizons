@@ -498,7 +498,6 @@ const api = (store) => (next) => (action) => {
     }
     case DELETE_STEP: {
       const { auth: { token } } = store.getState();
-      const { id: tripId} = store.getState().trip.tripItem.trip;
       const config = {
         method: 'delete',
         url: `https://orizons.herokuapp.com/steps/${action.id}`,
