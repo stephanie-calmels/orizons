@@ -115,7 +115,7 @@ const tripDataMapper = {
 
         }
 
-
+        return this.getTripById(tripId)
 
 
     },
