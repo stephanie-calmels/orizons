@@ -1,6 +1,6 @@
 @use 'src/styles/vars';
 
-.infos-container{
+.infos-container {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -9,11 +9,11 @@
   font-style: italic;
 }
 
-.stats-container{
+.stats-container {
   font-size: 1.2rem;
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem 0.5rem 1rem 0;
+  margin: 1rem auto;
   padding: 1rem;
   border-radius: 5px;
   background-color: vars.$color-secondary;
@@ -31,9 +31,9 @@
   
 }
 
-.resume-container{
+.resume-container {
   font-size: 1.2rem;
-  margin: 1rem 0 1rem 0.5rem;
+  margin: 1rem auto;
   padding: 1rem;
   border-radius: 5px;
   background-color: vars.$color-secondary;
@@ -47,4 +47,13 @@
   .infos-container {
     flex-direction: row;
   }
+
+  .stats-container {
+    margin: 1rem 0.5rem 1rem 0;
+  }
+  
+  .resume-container {
+    margin: 1rem 0 1rem 0.5rem;
+  }
 }
+

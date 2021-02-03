@@ -11,11 +11,12 @@ import ProfileTrips from './ProfileTrips';
 
 // La map est temporaire, je vais essayer d'en mettre une plus graphique sur laquelle on pourrait colorer les pays visités
 
-const ProfileInfos = ({ member, trips }) => {
+const ProfileInfos = ({ member, trips, handleClick }) => {
   // création de mapData, pour alimenter la carte
   const mapData = {
     FR: 1,
-    US: 2
+    CD: 1,
+    NA: 1
   }
   console.log(trips)
   return <Container>
@@ -53,7 +54,7 @@ const ProfileInfos = ({ member, trips }) => {
         {/* ICI LA CARTE DES PAYS VISITES */}
       <VectorMap
       map={"world_mill"}
-      backgroundColor= "#79c5fb"
+      backgroundColor= "#C9E4FF"
       zoomOnScroll= {false}
       containerStyle={{
         width: "100%",
@@ -62,7 +63,7 @@ const ProfileInfos = ({ member, trips }) => {
       containerClassName="map"
       regionStyle={{
           initial: {
-            fill: "#e4e4e4",
+            fill: "#ffffff",
             "fill-opacity": 0.9,
             stroke: "none",
             "stroke-width": 0,
@@ -74,7 +75,7 @@ const ProfileInfos = ({ member, trips }) => {
           regions: [
             {
               values: mapData, //this is your data
-              scale: ["#df7861"], //your color game's here
+              scale: ["#161d6f"], //your color game's here
               normalizeFunction: "polynomial"
             }
           ]
@@ -85,7 +86,7 @@ const ProfileInfos = ({ member, trips }) => {
     {trips.length > 1 && (
       <Row>
         <Col>
-          <ProfileTrips trips={trips} />
+          <ProfileTrips trips={trips} handleClick={handleClick}/>
         </Col>
       </Row>
     )}

@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import './profile.scss'
 import { register } from '../../actions/member';
 
-const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , editProfile}) => {
+const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , editProfile, handleClick}) => {
   useEffect(() => {
     //console.log(profile)
     loadProfile(profileIdFromUrl);
@@ -47,7 +47,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
       <div>
         <ProfileBanner member={profile} />
         {profileIdFromUrl == connectedUserId && <Button className="edit-profile-button" onClick={handleShow}>Editer mon profil</Button>}
-        <ProfileInfos member={profile} trips={profile.trips} />
+        <ProfileInfos member={profile} trips={profile.trips} handleClick={handleClick}/>
 
          {/* Modale modification de profil */}
         <Modal show={show} onHide={handleClose}>

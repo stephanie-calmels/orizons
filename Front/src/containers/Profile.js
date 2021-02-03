@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import history from '../history';
 
 import Profile from 'src/components/Profile';
 import { changeProfileField, getProfile, updateProfile } from '../actions/profile';
@@ -16,6 +17,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   editProfile: (data)=>{
     dispatch(updateProfile(data))
+  },
+  handleClick: (id) => {
+    history.push(`/exploration/${id}`);
   },
   
 });

@@ -12,7 +12,7 @@ const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
   <Container fluid>
     <Row>
       <Card className="text-white home_banner">
-        <Card.Img src="https://images.pexels.com/photos/3464632/pexels-photo-3464632.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
+        <Card.Img src="https://images.pexels.com/photos/4014919/pexels-photo-4014919.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
           <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur" - Ibn Battuta
           </Card.Title>
