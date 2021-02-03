@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .card-step{
   margin: 1rem;
 
@@ -20,3 +22,42 @@
   justify-content: center;
   margin-bottom: 2rem;
 }
+
+.step-numbers {
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
+  margin: 0 15px;
+  text-decoration: none;
+  font-size: 22px;
+  color: vars.$color-tertiary;
+  background-color: vars.$color-secondary;
+  position: relative;
+  &:hover {
+    background-color: vars.$color-primary;
+  }
+}
+
+.step-numbers::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -30px;
+  left: -20px;
+  height: 2px;
+  content: '';
+  background-color: vars.$color-secondary;
+}
+
+.step-numbers:first-of-type:before {
+  left: 0;
+}
+
+.icon-flag {
+  font-size: 3em;
+  margin-left: 0.25em;
+}
+

@@ -5,13 +5,11 @@ import {
 import { useForm } from 'react-hook-form';
 import { storage } from 'src/firebase';
 
+import Title from '../PageTitle';
 import AddTripPreview from './AddTripPreview'
 import './addtrip.scss'
 
-
-
 const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code, countries}) => {
-
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e) => {
@@ -42,7 +40,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
   const [submitting, setSubmitting] = useState(false);
 
   return <div>
-    <h1 className="text-center p4 font-weight-bold">Créer un nouveau carnet</h1>
+    <Title texte="Créer un nouveau carnet" />
     <Container>
       <Form
         className="form-add-trip"
@@ -202,9 +200,11 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
               country_code={country_code}
               />
           </Col>
+          <Col className="text-center">
           <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
             Valider
           </Button>  
+          </Col>
         </Row> 
       </Form>            
     </Container>

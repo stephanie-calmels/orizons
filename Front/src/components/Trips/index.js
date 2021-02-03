@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
-
 import Tag from 'src/containers/Tag';
+import Title from '../PageTitle';
 
 import './trips.scss';
 
@@ -14,7 +14,7 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
 
   return (
     <Container>
-        <h1 className="text-center p4 font-weight-bold">Explorer les carnets de voyage publiés par la communauté</h1>
+        <Title texte="Explorer les carnets de voyage de la communauté" />
 
         <CardDeck> 
           <Row>
