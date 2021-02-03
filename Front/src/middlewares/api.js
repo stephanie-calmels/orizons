@@ -14,11 +14,13 @@ import { getProfileSuccess, updateProfileSuccess, updateProfileFail } from '../a
 import { postNewTripSuccess } from '../actions/addTrip';
 import { postNewStepSuccess } from '../actions/addStep';
 import { getCountriesSuccess } from '../actions/countries';
-import { getTripSuccess, updateTripSuccess } from '../actions/trip';
+import { getTripSuccess, updateTripSuccess, updateStepSuccess, 
+} from '../actions/trip';
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
   GET_TRIPS, GET_CATEGORIES, GET_PROFILE, DELETE_MEMBER, UPDATE_PROFILE_PHOTO,
-  UPDATE_PROFILE, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES, UPDATE_TRIP,
+  UPDATE_PROFILE, POST_NEW_STEP, POST_NEW_TRIP, GET_COUNTRIES, UPDATE_TRIP, UPDATE_STEP,
+  DELETE_TRIP, DELETE_STEP,
 } from '../actions/types';
 
 import history from '../history';
@@ -410,7 +412,7 @@ const api = (store) => (next) => (action) => {
     case UPDATE_TRIP: {
       const { auth: { token } } = store.getState();
       const { id } = store.getState().trip.tripItem.trip;
-      console.log(id);
+      console.log('id',id);
       const config = {
         method: 'patch',
         url: `https://orizons.herokuapp.com/trips/${id}`,
@@ -422,10 +424,38 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
+          console.log('réponseArmandine',response.data);
           store.dispatch(updateTripSuccess(response.data.data));
           toast.success('Modification des données réussie !');
           history.push(`/exploration/${id}`);
+        })
+        .catch((error) => {
+          console.log(error);
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          toast.warning(errorMessage);
+        });
+        break;
+      }
+    case DELETE_TRIP: {
+      const { auth: { token } } = store.getState();
+      const { id } = store.getState().trip.tripItem.trip;
+      const config = {
+        method: 'delete',
+        url: `https://orizons.herokuapp.com/trips/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data);
+          toast.success('Suppression du carnet réussie !');
+          history.push(`/exploration`);
         })
         .catch((error) => {
           const errorMessage = (error.response
@@ -436,7 +466,62 @@ const api = (store) => (next) => (action) => {
           toast.warning(errorMessage);
         });
         break;
-      }
+    }
+    case UPDATE_STEP: {
+      const { auth: { token } } = store.getState();
+      const { id: tripId} = store.getState().trip.tripItem.trip;
+      const config = {
+        method: 'patch',
+        url: `https://orizons.herokuapp.com/steps/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: action.data,
+      };
+      axios(config)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(updateStepSuccess(response.data.data));
+          toast.success('Modification des données réussie !');
+          history.push(`/exploration/${tripId}`);
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          toast.warning(errorMessage);
+        });
+        break;
+    }
+    case DELETE_STEP: {
+      const { auth: { token } } = store.getState();
+      const config = {
+        method: 'delete',
+        url: `https://orizons.herokuapp.com/steps/${action.id}`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        data: action.data,
+      };
+      axios(config)
+        .then((response) => {
+          toast.success('Suppression de l\'étape réussie !');
+          history.go(0);
+        })
+        .catch((error) => {
+          const errorMessage = (error.response
+        && error.response.data
+        && error.response.data.message)
+        || error.message
+        || error.toString();
+          toast.warning(errorMessage);
+        });
+        break;
+    }
     default:
       next(action);
   }

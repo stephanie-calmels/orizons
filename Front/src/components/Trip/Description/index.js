@@ -8,13 +8,13 @@ import slugify from 'slugify'
 import './description.scss'
 import Steps from './Steps'
 
-const Description = ({trip, steps, connectedUserId})=>{
+const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   // on crée une constante pour centrer la map sur la première étape, si celle ci existe
   let mapCenter =[]
   if (steps.length> 0){
     mapCenter = [steps[0].latitude, steps[0].longitude];
   } else{
-    mapCenter= [0,0]
+    mapCenter= [48.856614,2.3522219]
   }
   // console.log(trip)
   return <div>
@@ -54,7 +54,7 @@ const Description = ({trip, steps, connectedUserId})=>{
     <Row >
     <Col>
     {/*On crée la map et on la centre sur la position de la première étape si elle existe */}
-    <MapContainer center={mapCenter} zoom={11} scrollWheelZoom={true}>
+    <MapContainer center={mapCenter} zoom={6} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -81,16 +81,11 @@ const Description = ({trip, steps, connectedUserId})=>{
     </Col>
     </Row>
     <Row>
-      <Steps steps= {steps} trip={trip} connectedUserId={connectedUserId}/>
+      <Steps steps={steps} trip={trip} connectedUserId={connectedUserId} editStep={editStep} deleteStep={deleteStep}/>
     </Row>
   </Container>
-
-
-
-
-  
   </div>
-}
+};
 
 
 export default Description
