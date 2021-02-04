@@ -5,12 +5,13 @@
   border: none;
   height: 92vh;
   overflow: hidden;
+  border-radius: 0 !important;
   
   &-title {
-    font-style: italic;
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     text-align: center;
-    text-shadow: 2px 0px 0px #000000, -2px 0px 0px #000000, 0px 2px 0px #000000, 0px -2px 0px #000000;
+    font-family: vars.$font-quote;
+    font-style: italic;
     
   }
   
@@ -21,6 +22,10 @@
     padding: 2rem;
     text-align: center;
     font-size: 1.1rem;
+
+    &-img-overlay {
+      border-radius: 0 !important;
+    }
     
     &-btn {
     min-width: 35%;
@@ -55,9 +60,10 @@
 
   &-title {
     text-align: center;
-    margin: 2rem auto !important;
+    margin: 3.5rem auto !important;
     font-style: italic;
-    font-size: 2rem;
+    font-size: 2.7rem;
+    font-family: vars.$font-title !important;
   }
 }
 
@@ -131,6 +137,11 @@
   margin: 1rem 0 !important;
   max-width: 260px;
   box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  text-align: center;
+
+  &-container {
+    margin-top: 2.5rem;
+  }
 
   &-img-top {
     height: 150px;
@@ -138,12 +149,18 @@
   }
 
   &-body {
-    height: 180px;
+    // height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &-title {
-    height: 20px;
-    font-size: 1.1rem;
+    // height: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    font-family: vars.$font-title;
   }
 
   &-text {
@@ -165,7 +182,7 @@
 }
 
 .form_container {
-  margin: 3rem 0;
+  margin: 1.5rem 0;
 }
 
 .form_search {
@@ -180,7 +197,7 @@
 
 .random_search-button {
   align-self: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background-color: vars.$color-tertiary;
   border-radius: 50px;
   border: 3px solid vars.$color-tertiary;
@@ -197,10 +214,12 @@
 }
  
 .blockquote {
-  font-size: 0.9rem;
-  font-style: italic;
+  font-size: 1rem;
   margin-top: 4rem;
+  padding: 0 4rem !important;
   text-align: center;
+  font-family: vars.$font-quote;
+  font-style: italic;
 }
 
 @media screen and (min-width: 1200px) {
@@ -227,5 +246,7 @@
 
   .card_home {
     margin: 1rem auto !important;
+    height: 200px;
+
   }
 }

@@ -6,6 +6,9 @@
 
   a {
     color:vars.$color-primary !important;
+    &:hover {
+      color:vars.$color-secondary !important;
+    }
   }
 
   .input-group {
@@ -32,6 +35,12 @@
 
       a {
         color: vars.$color-tertiary !important;
+        transition-duration: 500ms;
+
+        &:hover {
+          color: vars.$color-primary !important;
+          background-color: vars.$color-tertiary !important;
+        }
       }
     }
 
@@ -58,6 +67,7 @@
   background: -webkit-linear-gradient(#EE82EE, #1E90FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: vars.$font-title !important;
 }
 
 @media screen and (min-width: 1024px) {
