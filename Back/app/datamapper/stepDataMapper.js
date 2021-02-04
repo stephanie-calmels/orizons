@@ -1,4 +1,5 @@
 const client = require('./client');
+const tripDataMapper = require('./tripDataMapper');
 
 const stepDataMapper = {
     async getAllStep() {
@@ -78,12 +79,13 @@ const stepDataMapper = {
 
         // searching country's id
         const country = await client.query(`SELECT id FROM "country" WHERE "code" = $1`, [stepInfos.country_code])
-        console.log("test1");
+        await console.log("test1");
         // searching the old country id of the step
         const oldStepCountry = await client.query(`SELECT "country_id" FROM "step" WHERE "id" = $1`, [stepId])
-        console.log("test2");
+        await console.log("test2");
+        console.log(country.rows[0].id);
         // update datas in step table
-        await client.query(`UPDATE "step" SET ("longitude" = $1, "latitude" = $2, "title" = $3, "content" = $4, "step_date" = $5, "country_id" = $6) WHERE "id" = $7`,
+        await client.query(`UPDATE step SET longitude = $1, latitude = $2, title = $3, content = $4, step_date = $5, country_id = $6 WHERE (id= $7)`,
             [stepInfos.longitude,
                 stepInfos.latitude,
                 stepInfos.title,
@@ -92,10 +94,10 @@ const stepDataMapper = {
                 country.rows[0].id,
                 stepId
             ])
-        console.log("test3");
+        await console.log("test3");
         // if the old country's step is different of the new country's id
         if (oldStepCountry.rows[0].country_id != country.rows[0].id) {
-            await client.query(`UPDATE "_m2m_trip_country" SET "country_id" = $1, WHERE "trip_id" = $2 AND "country_id" = $3`,
+            await client.query(`UPDATE _m2m_trip_country SET country_id = $1 WHERE trip_id = $2 AND country_id = $3`,
                 [country.rows[0].id,
                     stepInfos.step_id,
                     oldStepCountry.rows[0].country_id
@@ -103,7 +105,7 @@ const stepDataMapper = {
         }
         console.log("test4");
         // update photos
-        let pictures = newStep.pictures;
+        let pictures = stepInfos.pictures;
         for (let index = 0; index < pictures.length; index++) {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures[index]]);
             if (!checkPicture) {
@@ -125,7 +127,7 @@ const stepDataMapper = {
         }
         console.log("test6");
 
-        return this.getTripById(tripId)
+        return tripDataMapper.getTripById(stepInfos.trip_id);
 
 
     },

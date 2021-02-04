@@ -1,6 +1,6 @@
 const commentDataMapper = require('../datamapper/commentDataMapper');
 const client = require('./client');
-const stepDataMapper = require('./stepDataMapper');
+//const stepDataMapper = require('./stepDataMapper');
 
 const tripDataMapper = {
     async getAllTrips() {
@@ -139,7 +139,7 @@ const tripDataMapper = {
         if (result.rowCount != 0) {
             for (let element of result.rows) {
                 let stepId = element.id;
-                await stepDataMapper.deleteOneStep(stepId);
+                await this.deleteOneStep(stepId);
 
             }
 
@@ -153,6 +153,20 @@ const tripDataMapper = {
 
 
     },
+    async deleteOneStep(stepId) {
+        console.log(stepId, 'deleteOneStep')
+        const verify = await client.query(`SELECT * FROM photo WHERE step_id = $1`, [stepId]);
+        console.log(verify.rowCount, '-------------');
+        if (verify.rowCount != 0) {
+            await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId]);
+
+        }
+        console.log('stepId', stepId)
+        await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
+        console.log('pouet')
+        const messages = `Suppression de l'étape terminée`;
+        return messages;
+    }
 
 
 };
