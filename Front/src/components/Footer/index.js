@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Nav } from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 
 import './footer.scss';
 
 
-const Footer = () => (
-  <footer className="footer">
+const Footer = () => {
+  const [scrollValue, setScrollValue] = useState(0);
+
+  const scrollDistance = ()=>{
+    setScrollValue(window.scrollY);
+  }
+  window.addEventListener('scroll', scrollDistance);
+  let pageHeight = document.body.clientHeight;
+
+  return <footer className="footer">
 
     <Nav className="justify-content-center">
       <Nav.Item>
@@ -30,8 +38,8 @@ const Footer = () => (
         <Nav.Link eventKey="link-6"><i className="fab fa-twitter"></i></Nav.Link>
       </Nav.Item>
     </Nav>
-
+  {((scrollValue/pageHeight)*100 >= 40) && <div className="back-to-top"><a href="#" className="fa fa-angle-up"></a></div> }
   </footer>
 
-);
+};
 export default Footer;

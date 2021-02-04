@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .footer {
   display: flex;
   align-items: center;
@@ -25,3 +27,30 @@
   display: flex;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
+.back-to-top{
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .back-to-top {
+    height: 2em;
+    width: 2em;
+    position: fixed;
+    bottom: 1em;
+    right: 3em;
+    background-color: vars.$color-secondary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    a{
+      color: vars.$color-tertiary;
+    }
+  }
+
+}

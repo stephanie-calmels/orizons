@@ -477,7 +477,16 @@ const api = (store) => (next) => (action) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        data: action.data,
+        data: {
+          title: action.data.title,
+          content: action.data.summary,
+          step_date: action.data.date,
+          latitude: action.data.localisation[0],
+          longitude: action.data.localisation[1],
+          pictures: action.data.pictures,
+          country_code: action.data.country_code,
+          trip_id: action.data.trip_id 
+        }
       };
       axios(config)
         .then((response) => {

@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, tripId, authorId }) => {
+const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, authorId, connectedUserId, realTripId }) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -115,7 +115,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   // START OF ADDSTEP COMPONENT
   return (
     <div>
-            {authorId == tripId && <Button onClick={handleShow}> Ajouter une étape </Button>}
+            {connectedUserId == authorId && <Button onClick={handleShow}> Ajouter une étape </Button>}
 
       
       <Modal show={show} onHide={handleClose}>
@@ -131,7 +131,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               formData.localisation = localisation;
               formData.country = country;
               formData.country_code = country_code;
-              formData.trip_id = tripId;
+              formData.trip_id = realTripId;
               const fileListToArray = [...formData.pictures];
               const emptyArray = [];
               const promises = [];
@@ -164,7 +164,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
                 .then(() => {
                 // formData.pictures = fileListToArray;
                 formData.pictures = emptyArray;
-                console.log('formDataPictures',formData.pictures)
+                console.log('formDataPictures',formData)
                 setTimeout(()=>postStep(formData), 500);
                 setSubmitting(false);
               })
