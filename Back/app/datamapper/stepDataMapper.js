@@ -1,5 +1,6 @@
 const client = require('./client');
 const tripDataMapper = require('./tripDataMapper');
+const tripStepDataMapper = require('./tripStepDataMapper')
 
 const stepDataMapper = {
     async getAllStep() {
@@ -71,8 +72,8 @@ const stepDataMapper = {
 
         }
         // 5 - We return the new datas
-        const theStep = await this.getOneStep(result.rows[0].id);
-        return theStep
+        //const theStep = await this.getOneStep(result.rows[0].id);
+        return newStep.trip_id
 
     },
     async updateOneStep(stepId, stepInfos) {
@@ -127,7 +128,7 @@ const stepDataMapper = {
         }
         console.log("test6");
 
-        return tripDataMapper.getTripById(stepInfos.trip_id);
+        return stepInfos.trip_id;
 
 
     },

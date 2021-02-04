@@ -20,3 +20,4 @@
 0110-updates-after-country-table 2021-01-30T12:54:16Z "Etudiant O'clock",,, <etudiant@teleporteur> # Updates after the country table creation
 00115-updates-after-country-table2 2021-02-01T09:32:13Z "Etudiant O'clock",,, <etudiant@teleporteur> # Updates views after table country creation
 0120-add-columns 2021-02-03T09:41:52Z "Etudiant O'clock",,, <etudiant@teleporteur> # Add columns in trip_country and step
+0130-create-view_after_update_trip 2021-02-04T13:06:37Z "Etudiant O'clock",,, <etudiant@teleporteur> # Create view for sending datas after update trip
