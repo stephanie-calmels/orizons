@@ -21,9 +21,9 @@ const Header = ({
     handleLogout();
   };
   return (
-    <Navbar className="navbar_header" sticky="top" collapseOnSelect expand="lg" variant="light">
+    <Navbar className="navbar_header" sticky="top" collapseOnSelect expand="lg" variant="dark">
       <LinkContainer to="/">
-        <Navbar.Brand className="logo"><i className="fas fa-globe-americas">'rizons</i></Navbar.Brand>
+        <Navbar.Brand className="logo"><i className="fas fa-globe-americas"></i>'rizons</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">

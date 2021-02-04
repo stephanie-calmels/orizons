@@ -6,7 +6,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   margin: 0 0 1rem 0;
-  font-style: italic;
+  // font-style: italic;
 }
 
 .stats-container {
@@ -16,8 +16,9 @@
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 5px;
-  background-color: vars.$color-secondary;
-  box-shadow: 5px 5px 5px vars.$color-tertiary;
+  background-color: vars.$color-tertiary;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  color: vars.$color-primary;
 
   .stats {
     display: flex;
@@ -29,7 +30,7 @@
       padding-bottom: 1rem;
 
       .stats-icons {
-        color: vars.$color-tertiary;
+        color: vars.$color-secondary;
       }
     }
   }
@@ -41,12 +42,17 @@
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 5px;
-  background-color: vars.$color-secondary;
-  box-shadow: 5px 5px 5px vars.$color-tertiary;
+  background-color: vars.$color-tertiary;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  color: vars.$color-primary;
 
   p {
-    font-style: normal;
+    font-style: italic;
   }
+}
+
+.infos-col-title {
+  margin: 0 auto 0.5rem !important;
 }
 
 @media screen and (min-width: 768px) {

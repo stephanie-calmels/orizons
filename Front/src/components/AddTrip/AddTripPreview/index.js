@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, Badge} from 'react-bootstrap';
 import Flag from 'react-world-flags';
+import dayjs from 'dayjs';
 
 const AddTripPreview =({title, summary, localisation, categories, departure, returndate, coverpicture, country_code})=>{
   
@@ -9,9 +10,8 @@ const AddTripPreview =({title, summary, localisation, categories, departure, ret
       <Card.Img className="card_trips-img-top" variant="top" src={coverpicture} />
       <Card.Body className="card_trips-body">
         <Card.Title className="card_trips-title">{title}</Card.Title>
-                    {/*Corriger l'affichage de la date dans le bon sens */}
-        <Card.Subtitle>{departure} {returndate && "jusqu'au"} {returndate}</Card.Subtitle>
-        <Card.Subtitle><Flag code={country_code} height="16"/></Card.Subtitle>
+        <Card.Subtitle className="card_trips-subtitle">{departure && dayjs(`${departure}`).format('DD/MM/YYYY')} {returndate && "jusqu'au"} {returndate && dayjs(`${returndate}`).format('DD/MM/YYYY')}</Card.Subtitle>
+        <Card.Subtitle className="card_trips-subtitle"> <Flag code={country_code} height="16"/></Card.Subtitle>
         <Card.Text className="card_trips-text">
           {summary}
         </Card.Text>

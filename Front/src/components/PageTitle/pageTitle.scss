@@ -1,0 +1,5 @@
+@use 'src/styles/vars';
+
+.page-title {
+    font-family: vars.$font-title !important;
+}
