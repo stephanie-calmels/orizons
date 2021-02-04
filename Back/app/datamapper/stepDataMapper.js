@@ -83,7 +83,7 @@ const stepDataMapper = {
         const oldStepCountry = await client.query(`SELECT "country_id" FROM "step" WHERE "id" = $1`, [stepId])
 
         // update datas in step table
-        await client.query(`UPDATE "step" SET ("longitude" = $1, "latitude = $2", "title" = $3, "content" = $4, "step_date" = $5, "country_id" = $6) WHERE "id" = $7`,
+        await client.query(`UPDATE "step" SET ("longitude" = $1, "latitude" = $2, "title" = $3, "content" = $4, "step_date" = $5, "country_id" = $6) WHERE "id" = $7`,
             [stepInfos.longitude,
                 stepInfos.latitude,
                 stepInfos.title,
@@ -117,7 +117,7 @@ const stepDataMapper = {
         for (const pictures of oldPictures) {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
             if (!checkPicture) {
-                await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url])
+                await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
             }
         }
 
