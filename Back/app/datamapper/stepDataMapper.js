@@ -78,10 +78,10 @@ const stepDataMapper = {
 
         // searching country's id
         const country = await client.query(`SELECT id FROM "country" WHERE "code" = $1`, [stepInfos.country_code])
-
+        console.log("test1");
         // searching the old country id of the step
         const oldStepCountry = await client.query(`SELECT "country_id" FROM "step" WHERE "id" = $1`, [stepId])
-
+        console.log("test2");
         // update datas in step table
         await client.query(`UPDATE "step" SET ("longitude" = $1, "latitude" = $2, "title" = $3, "content" = $4, "step_date" = $5, "country_id" = $6) WHERE "id" = $7`,
             [stepInfos.longitude,
@@ -92,6 +92,7 @@ const stepDataMapper = {
                 country.rows[0].id,
                 stepId
             ])
+        console.log("test3");
         // if the old country's step is different of the new country's id
         if (oldStepCountry.rows[0].country_id != country.rows[0].id) {
             await client.query(`UPDATE "_m2m_trip_country" SET "country_id" = $1, WHERE "trip_id" = $2 AND "country_id" = $3`,
@@ -100,6 +101,7 @@ const stepDataMapper = {
                     oldStepCountry.rows[0].country_id
                 ])
         }
+        console.log("test4");
         // update photos
         let pictures = newStep.pictures;
         for (let index = 0; index < pictures.length; index++) {
@@ -112,6 +114,7 @@ const stepDataMapper = {
                     ])
             }
         };
+        console.log("test5");
         let oldPictures = await client.query('SELECT * FROM photo WHERE step_id = $1', [stepId]);
         oldPictures = oldPictures.rows
         for (const pictures of oldPictures) {
@@ -120,7 +123,7 @@ const stepDataMapper = {
                 await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
             }
         }
-
+        console.log("test6");
 
         return this.getTripById(tripId)
 
