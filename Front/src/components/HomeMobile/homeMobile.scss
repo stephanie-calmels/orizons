@@ -1,0 +1,52 @@
+.home_banner {
+  width: 100%;
+
+  &-title {
+    font-style: italic;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 0px 3px #000000, -2px 0px 3px #000000, 0px 2px 3px #000000, 0px -2px 3px #000000;
+
+  }
+
+  &-card {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 60%;
+    border: none;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    
+    &-btn {
+      min-width: 35%;
+      max-width: 50%;
+      align-self: center;
+
+    }
+  }
+   
+  &-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-shadow: 0px 0px 3px rgb(37, 37, 37);
+  }
+
+}
+
+.carousel-caption-text {
+  text-shadow: 2px 0px 3px #000000, -2px 0px 3px #000000, 0px 2px 3px #000000, 0px -2px 3px #000000;
+
+}
+
+.carousel-title {
+  text-align: center;
+  margin: 1rem auto !important;
+  font-style: italic;
+
+}
+
+.card_comment-mobile {
+  width: 100vw;
+}

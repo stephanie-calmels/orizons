@@ -1,0 +1,6 @@
+@use 'src/styles/vars';
+
+.page {
+  background-color: vars.$color-primary;
+  padding-bottom: 2em;
+}
