@@ -38,10 +38,6 @@
     &-divider {
       border-top: 1px solid vars.$color-tertiary !important;
     }
-
-    .dropdown-item {
-      margin-left: -1.5rem !important;
-    }
   }
 }
 
@@ -81,10 +77,8 @@
     text-align: center;
   }
   
-}
-
-@media screen and (min-width: 1200px) {
-  #responsive-navbar-nav {
-    
+  .dropdown-menu {
+    margin-top: 0.5rem !important;
+    border: 2px solid vars.$color-tertiary;
   }
 }
