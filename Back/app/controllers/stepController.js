@@ -13,10 +13,31 @@ const stepController = {
     async createStep(request, response, next) {
         try {
             const newStep = request.body;
+            console.log('---------------------')
             console.log(request.body)
+            console.log('---------------------')
             const step = await stepDataMapper.createStep(newStep);
             // je récupère l'id de l'étape et l'id de l'user ou l'id du trip
             //  dans request.file j'insère en bouclant sur le file dans la table photo
+            response.json({
+                data: step
+            })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    async uptdateOneStep(request, response, next) {
+        try {
+            const {
+                stepId
+            } = request.params;
+            const stepInfos = request.body;
+
+            console.log(stepInfos);
+
+            const step = await stepDataMapper.updateOneStep(stepId, stepInfos);
+
             response.json({
                 data: step
             })

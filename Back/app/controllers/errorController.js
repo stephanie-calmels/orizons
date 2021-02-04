@@ -23,3 +23,4 @@ const errorController = {
     },
 
 };
+module.exports = errorController;

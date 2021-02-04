@@ -9,7 +9,7 @@ const photoRouter = require('./photoRouter');
 const commentRouter = require('./commentRouter');
 const countryRouter = require('./countryRouter');
 
-const errorController = require('../controllers/errorController');
+const errorController = require('../controllers/errorController')
 
 const router = express.Router();
 
@@ -21,8 +21,8 @@ router.use('/photos', photoRouter);
 router.use('/comments', commentRouter);
 router.use('/countries', countryRouter);
 
-//router.use(errorController.error404);
+router.use(errorController.error404);
 
-//router.use(errorController.error500);
+router.use(errorController.error500);
 
 module.exports = router;

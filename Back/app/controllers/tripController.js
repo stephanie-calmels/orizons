@@ -91,7 +91,9 @@ const tripController = {
             const {
                 tripId
             } = request.params
-            const trip = await tripDataMapper.updateOneTrip(tripId);
+            const tripInfos = request.body
+            console.log('trip Infos', tripInfos)
+            const trip = await tripDataMapper.updateOneTrip(tripId, tripInfos);
             response.json({
                 data: trip
             })
