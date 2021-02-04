@@ -59,7 +59,9 @@
 
 .logo {
   font-size: 40px;
-  color:vars.$color-primary !important;
+  background: -webkit-linear-gradient(#EE82EE, #1E90FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media screen and (min-width: 1024px) {
