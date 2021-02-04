@@ -200,6 +200,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
+          console.log('réponse get_trip', response.data)
           store.dispatch(getTripSuccess(response.data.data[0]));
         })
         .catch((error) => {
@@ -425,9 +426,8 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response) => {
           console.log('réponseArmandine',response.data);
-          store.dispatch(updateTripSuccess(response.data.data));
+          store.dispatch(updateTripSuccess(response.data.data[0])); //modif
           toast.success('Modification des données réussie !');
-          history.push(`/exploration/${id}`);
         })
         .catch((error) => {
           console.log(error);
@@ -490,10 +490,10 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
-          store.dispatch(updateStepSuccess(response.data.data));
+          console.log('réponse updateStep',response.data);
+          store.dispatch(updateStepSuccess(response.data.data[0])); //modif ici
           toast.success('Modification des données réussie !');
-          history.push(`/exploration/${tripId}`);
+          // history.go(0);
         })
         .catch((error) => {
           const errorMessage = (error.response

@@ -1,6 +1,10 @@
+@use 'src/styles/vars';
+
+
 .leaflet-container{
-  height: 30vh;
+  height: 40vh;
   margin-bottom: 2rem;
+  border: .3rem solid vars.$color-tertiary;
 }
 
 // .infos-container{
@@ -14,3 +18,6 @@
 // .resume-container{
 //   border: 1px black solid;
 // }
+
+
+

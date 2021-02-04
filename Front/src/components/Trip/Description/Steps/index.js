@@ -225,7 +225,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
             <Form
             className="form-edit-step"
             onSubmit={handleSubmit((formData) => {
-              handleClose();
+              handleClose(step.id_step);
               setSubmitting(true);
               formData.localisation = values.localisation;
               formData.country = values.country;
@@ -278,9 +278,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 type="text"
                 defaultValue={step.step_title}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               
               {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
@@ -293,9 +291,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 rows={5}
                 defaultValue={step.content}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
             </Form.Group>
@@ -328,9 +324,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 defaultValue={''}
                 onChange={(e) => handleChange(e)}
 
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               /> <InputGroup.Append><Button variant="outline-secondary" onClick={useGeocodingApi}>Chercher</Button></InputGroup.Append>
               </InputGroup>
               )}
@@ -346,9 +340,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 multiple
                 defaultValue={step.pictures}
                 onChange={(e) => handlePictures(e)}
-                ref={register({
-                  required: 'Veuillez ajouter au moins une photo',
-                })}
+                ref={register()}
               />
               {errors.pictures && <div className="text-danger">{errors.pictures.message}</div>}
             </Form.Group>
@@ -360,9 +352,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 type="date"
                 defaultValue={dayjs(`${step.step_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               {errors.date && <div className="text-danger">{errors.date.message}</div>}
             </Form.Group>
