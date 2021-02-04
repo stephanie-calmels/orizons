@@ -1,4 +1,6 @@
 const stepDataMapper = require('../datamapper/stepDataMapper');
+const tripStepDataMapper = require('../datamapper/tripStepDataMapper')
+
 const stepController = {
     async getAllStep(request, response, next) {
         try {
@@ -16,11 +18,24 @@ const stepController = {
             console.log('---------------------')
             console.log(request.body)
             console.log('---------------------')
-            const step = await stepDataMapper.createStep(newStep);
+            const stepTripId = await stepDataMapper.createStep(newStep);
             // je récupère l'id de l'étape et l'id de l'user ou l'id du trip
             //  dans request.file j'insère en bouclant sur le file dans la table photo
+            const trip = await tripStepDataMapper.getTripById(stepTripId);
+
+
+            const steps = await stepDataMapper.getStepByTripId(stepTripId);
+
+
+
+
             response.json({
-                data: step
+                data: [{
+                        trip,
+                        steps
+                    },
+
+                ]
             })
         } catch (error) {
             next(error)
@@ -37,9 +52,21 @@ const stepController = {
             console.log(stepInfos);
 
             const step = await stepDataMapper.updateOneStep(stepId, stepInfos);
+            const trip = await tripStepDataMapper.getTripById(step);
+
+
+            const steps = await stepDataMapper.getStepByTripId(step);
+
+
+
 
             response.json({
-                data: step
+                data: [{
+                        trip,
+                        steps
+                    },
+
+                ]
             })
         } catch (error) {
             next(error)
