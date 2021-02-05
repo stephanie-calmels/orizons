@@ -15,7 +15,6 @@ const categoriesController = {
             const {
                 categoriesId
             } = request.params;
-            console.log(categoriesId);
             const category = await categoryDataMapper.getCategoryById(categoriesId);
             response.json({
                 data: category
@@ -40,7 +39,6 @@ const categoriesController = {
         try {
 
             const updatedCategory = request.body
-            console.log(updatedCategory);
             const categories = await categoryDataMapper.updateOneCategory(updatedCategory);
             response.json({
                 data: categories

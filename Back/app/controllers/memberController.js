@@ -152,8 +152,6 @@ const memberController = {
             } = request.params;
 
             const profileInfos = request.body;
-
-            console.log('request params', request.params, '????????????????????????????????')
             const member = await memberDataMapper.updateOneProfile(memberId, profileInfos);
 
             response.json({
