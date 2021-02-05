@@ -65,6 +65,9 @@
   padding-bottom: 1rem;
 }
 
+.map{
+  border: .3rem solid vars.$color-tertiary;
+}
 @media screen and (min-width: 768px) {
   .infos-container {
     flex-direction: row;

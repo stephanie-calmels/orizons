@@ -38,7 +38,7 @@ const Footer = () => {
         <Nav.Link eventKey="link-6"><i className="fab fa-twitter"></i></Nav.Link>
       </Nav.Item>
     </Nav>
-  {((scrollValue/pageHeight)*100 >= 40) && <div className="back-to-top"><a href="#" className="fa fa-angle-up"></a></div> }
+  {((scrollValue/pageHeight)*100 >= 33) && <div className="back-to-top"><a href="#" className="fa fa-angle-up"></a></div> }
   </footer>
 
 };

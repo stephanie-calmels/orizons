@@ -75,7 +75,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
           </div>
         }
         <Description trip={trip.trip} steps={trip.steps} connectedUserId={connectedUserId} editStep={editStep} deleteStep={deleteStep}/>
-        <AddStep authorId={trip.trip.author[0].id} connectedUserId={connectedUserId} realTripId={trip.trip.id}/> 
+        <AddStep connectedUserId={connectedUserId} trip={trip.trip}/> 
 
         {/* Modale confirmation suppression de carnet */}
         <Modal show={showDelete} onHide={handleCloseDelete}>
