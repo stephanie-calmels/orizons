@@ -1,6 +1,6 @@
 import { GET_TRIP, GET_TRIP_SUCCESS, UPDATE_TRIP,
   UPDATE_STEP, UPDATE_STEP_SUCCESS, DELETE_TRIP, DELETE_STEP, 
-  UPDATE_TRIP_SUCCESS,
+  UPDATE_TRIP_SUCCESS, DELETE_STEP_SUCCESS
 } from './types';
 
 export const getTrip = (id) => ({
@@ -38,7 +38,13 @@ export const updateStepSuccess = (step) => ({
   step,
 });
 
-export const deleteStep = (id) => ({
+export const deleteStep = (id, trip_id) => ({
   type: DELETE_STEP,
   id,
+  trip_id
 });
+
+export const deleteStepSuccess = (trip) => ({
+  type: DELETE_STEP_SUCCESS,
+  trip
+})

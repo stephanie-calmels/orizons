@@ -25,8 +25,8 @@ const mapDispatchToProps = (dispatch) => ({
   editStep: (data, id) => {
     dispatch(updateStep(data, id));
   },
-  deleteStep: (id) => {
-    dispatch(deleteStep(id));
+  deleteStep: (id, tripid) => {
+    dispatch(deleteStep(id, tripid));
   }
 });
 // grace au hoc connect, j'enrichis mon composant avec des props liées au state
