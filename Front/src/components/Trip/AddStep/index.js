@@ -121,7 +121,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
 
       
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="form-title">
           <Modal.Title>Ajouter une étape</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -220,8 +220,10 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
                 {localisation.length > 0 && <DraggableMarker />}
               </MapContainer>
 
-              <Button onClick={getUserPosition}>Utiliser ma position</Button>
-              <Button onClick={showLocationInput}>Entrer une adresse</Button>
+              <div className="form_buttons">
+                <Button onClick={getUserPosition} className="form-button form-button-gps">Utiliser ma position</Button>
+                <Button onClick={showLocationInput} className="form-button form-button-gps">Entrer une adresse</Button>
+              </div>
 
               {showInput && (
               <InputGroup><Form.Control
@@ -270,7 +272,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               {errors.date && <div className="text-danger">{errors.date.message}</div>}
             </Form.Group>
 
-            <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+            <Button size="lg" className="form-button" type="submit" disabled={submitting}>
               Valider
             </Button>
 
