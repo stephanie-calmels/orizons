@@ -161,7 +161,12 @@ const stepDataMapper = {
             // si ce n'est pas l'étape du carnet on la supprime
             console.log('test4');
             if (!checkTripCountry) {
+                console.log('test4-5')
+                console.log(client.query("SELECT * FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2 AND trip = $3", [tripId.trip_id, tripId.country_id, false]))
+
+
                 client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2 AND trip = $3`, [tripId.trip_id, tripId.country_id, false])
+                console.log('test 4-6')
             }
         }
 
