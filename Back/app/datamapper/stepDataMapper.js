@@ -104,7 +104,7 @@ const stepDataMapper = {
                     oldStepCountry.rows[0].country_id
                 ])
         }
-        console.log("test4");
+        console.log("test4, essai");
         // update photos
         let pictures = stepInfos.pictures;
         for (let index = 0; index < pictures.length; index++) {
