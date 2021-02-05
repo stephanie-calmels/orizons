@@ -109,9 +109,9 @@ const stepDataMapper = {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures[index]]);
             if (!checkPicture.rows[0]) {
                 await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
-                    [`${result.rows[0].title}_${counter++}`,
+                    [`${stepInfos.title}_${counter++}`,
                         pictures[index],
-                        result.rows[0].id
+                        stepId
                     ])
             }
         };
