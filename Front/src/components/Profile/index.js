@@ -13,7 +13,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
   useEffect(() => {
     //console.log(profile)
     loadProfile(profileIdFromUrl);
-  }, []);
+  }, [profileIdFromUrl]);
 
   //Gestion modale modification de profil
   const [show, setShow] = useState(false);
