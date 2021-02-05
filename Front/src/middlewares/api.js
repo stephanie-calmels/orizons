@@ -286,7 +286,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response)=>{
           console.log(response.data);
-          store.dispatch(postNewStepSuccess(response.data.data));
+          store.dispatch(postNewStepSuccess(response.data.data[0]));
         })
         .catch((error) =>{
           console.error(error);
