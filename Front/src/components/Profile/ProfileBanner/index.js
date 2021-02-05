@@ -18,7 +18,7 @@ const ProfileBanner = ({member})=>{
         <Image src={member.profile_photo} className='author-profile-img' rounded/>
         <h1>{member.nickname}</h1>
         <p>Membre depuis {signupDate.getFullYear()} <br /> 
-        <i class="fas fa-map-marker-alt mr-2 stats-icons"></i>{member.localisation}</p>
+        <i className="fas fa-map-marker-alt mr-2 stats-icons"></i>{member.localisation}</p>
       </div>
     </div>
 };
