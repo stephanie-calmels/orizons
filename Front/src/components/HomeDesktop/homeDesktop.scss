@@ -1,18 +1,19 @@
 @use 'src/styles/vars';
 
+// ====================== HERO SECTION =============================
+
 .background-image-home {
   background-image: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 92vh;
-  width: 100vw;
   position: relative;
 }
 
 .home-banner-body {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -21,7 +22,7 @@
 
 .home-banner-title {
   margin: 6rem 0;
-  font-size: 1.4rem !important;
+  font-size: 1.3rem !important;
   font-family: vars.$font-quote;
   font-style: italic;
   text-shadow: 0px 0px 3px rgb(37, 37, 37);
@@ -52,9 +53,10 @@
       color: vars.$color-tertiary;
       border: 3px solid vars.$color-tertiary;
     }
-    }
+  }
 } 
 
+// ====================== BENEFITS SECTION =============================
 .row {
 
   &-title {
@@ -75,65 +77,40 @@
 .card_benefits {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0 2rem 2rem 2rem;
-  position: relative;
-  left: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
   border: none;
   background-color: vars.$color-secondary;
   color: vars.$color-primary;
-
+  margin: 2rem;
 
   &-image {
-    max-width: 35%;
+    max-height: 300px;
+  }
+
+  &-title {
+    font-size: 2rem !important;
   }
 
   &-body {
-    position: absolute;
-    left: 320px;
-    right: 100px;
     background-color: vars.$color-tertiary;
     border-radius: 5px;
-    font-size: 0.8rem !important;
-
+    width: 800px;
+    padding: 2rem;
   }
 
   &-text {
-    font-style: italic;
+    margin-top: 2rem;
+    font-size: 1.1rem !important;
+    line-height: 1.7;
   }
 }
 
-.card_benefits-revert {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0 2rem 2rem 2rem;
-  position: relative;
-  right: 100px;
-  border: none;
+.revert {
   flex-direction: row-reverse;
-  text-align: right;
-  background-color: vars.$color-secondary;
-  color: vars.$color-primary;
-
-
-  &-body {
-    position: absolute;
-    left: 100px;
-    right: 320px;
-    background-color:  vars.$color-tertiary;
-    border-radius: 5px;
-    font-size: 0.8rem !important;
-  }
-
-  &-text {
-    font-style: italic;
-  }
-
-  &-text {
-    font-style: italic;
-  }
 }
+
+// ====================== INSPIRATION SECTION =============================
 
 .card_home {
   margin: 1rem 0 !important;
@@ -151,14 +128,12 @@
   }
 
   &-body {
-    // height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &-title {
-    // height: 20px;
     font-size: 1.2rem;
     font-weight: bold;
     font-style: italic;
@@ -224,34 +199,7 @@
   font-style: italic;
 }
 
-@media screen and (min-width: 1200px) {
-
-  .card_benefits {
-
-    &-image {
-      max-width: 25%;
-    }
-
-    &-body {
-      right: 200px;
-      font-size: 1rem;
-    }
-  }
-
-  .card_benefits-revert {
-
-    &-body {
-      left: 200px;
-      font-size: 1rem;
-    }
-  }
-
-  .card_home {
-    margin: 1rem auto !important;
-    height: 200px;
-
-  }
-}
+// ====================== TESTIMONIALS SECTION =============================
 
 .home-testimonials {
   padding: 0 2rem 2rem 2rem;
@@ -259,7 +207,33 @@
   margin: 0 auto;
 }
 
+@media screen and (min-width: 1200px) {
 
-// ========== ESSAIS KAMIL ===============================================
+  // .card_benefits {
+  //   width: 40%;
+  //   &-image {
+  //     max-width: 25%;
+  //   }
+
+  //   &-body {
+  //     // right: 200px;
+  //     font-size: 2rem;
+  //   }
+  // }
+
+  // .card_benefits-revert {
+
+  //   &-body {
+  //     // left: 200px;
+  //     font-size: 2rem;
+  //   }
+  // }
+
+  .card_home {
+    margin: 1rem auto !important;
+    height: 200px;
+  }
+
+}
 
 

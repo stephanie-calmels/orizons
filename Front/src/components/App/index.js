@@ -30,6 +30,7 @@ import Footer from 'src/components/Footer';
 import About from 'src/components/About';
 import Legals from 'src/components/Legals';
 import ContactForm from 'src/components/ContactForm';
+import Lost404 from 'src/components/Lost404';
 
 // Custom hook for display according to screen size
 function useMediaQuery() {
@@ -106,6 +107,9 @@ const App = ({ isLoggedIn, loadMember, loadTrips, loadCountries, loadCategories 
           </Route>
           <Route exact path="/resultats">
             <Results />
+          </Route>
+          <Route>
+            <Lost404 />
           </Route>
         </Switch>
       </Page>

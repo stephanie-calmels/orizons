@@ -1,15 +1,24 @@
+@use 'src/styles/vars';
+
+.form-account {
+  margin: 0 auto;
+}
+
 .card-account {
   margin: 0 auto;
   display: flex;
   justify-content: center;
   width: 90%;
+  border-radius: 10px;
   &__link {
     margin: 0 auto;
   }
   &__img {
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 200px;
     height: 200px;
+    border-radius: 50%;
+    border: 1px solid vars.$color-tertiary;
   }
   &__title {
     text-align: center;
@@ -17,15 +26,34 @@
   &__text {
     text-align: center;
   }
+  &__input {
+
+    &__btn {
+      // min-width: 35%;
+      // max-width: 50%;
+      align-self: center;
+      background-color: vars.$color-tertiary;
+      border-radius: 50px;
+      border: 3px solid vars.$color-tertiary;
+      color: vars.$color-primary;
+      transition-duration: 500ms;
+      padding: 0.5rem 1.5rem;
+    
+        &:hover {
+          background-color: vars.$color-secondary;
+          color: vars.$color-tertiary;
+          border: 3px solid vars.$color-tertiary;
+        }
+    }
+  }
 }
 
 progress {
   margin: 0 auto;
 }
 
-.form-account {
-  margin: 0 auto;
-}
+
+
 
 @media screen and (min-width: 1024px) {
   .card-account {

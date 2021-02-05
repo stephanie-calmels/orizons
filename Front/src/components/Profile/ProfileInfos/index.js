@@ -24,17 +24,17 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       <h4 className="text-center infos-col-title">Statistiques</h4>
         <Container className="stats">
           <Row className="stats-row">
-            <Col lg={6} ><i class="fas fa-book-open mr-2 stats-icons"></i>{trips[0] != null ? trips.length : 0} carnet(s) publié(s)</Col>
-            {/* <Col lg={6}><i class="fas fa-road mr-2 stats-icons"></i>12000km parcourus</Col> */}
+            <Col lg={6} ><i className="fas fa-book-open mr-2 stats-icons"></i>{trips[0] != null ? trips.length : 0} carnet(s) publié(s)</Col>
+            {/* <Col lg={6}><i className="fas fa-road mr-2 stats-icons"></i>12000km parcourus</Col> */}
           </Row>
           <Row className="stats-row">
-            <Col lg={4}><i class="fas fa-flag mr-2 stats-icons"></i>Pays visités</Col>
-            <Col lg={8}>
+            <Col lg={12}><i className="fas fa-flag mr-2 stats-icons"></i>Pays visités : 
+            
             {trips[0] != null ?
               trips.map(trip => (
                 trip.trip_localisation.map(country => (
                   <>
-                    <Flag className="mr-2" key={country.id} code={country.code} height="16" title={country.fr_name} alt={country.fr_name} />
+                    <Flag className="ml-2" key={country.id} code={country.code} height="16" title={country.fr_name} alt={country.fr_name} />
                 </>
                 ))
               ))
@@ -46,12 +46,12 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       </Col>
 
       <Col className="resume-container">
-      <h4 className="text-center">Biographie</h4>
+      <h4 className="text-center infos-col-title">Biographie</h4>
         <p>{member.biography}</p>
       </Col>
     </Row>
     <Row>
-      <Col>
+      <Col className="map-container">
         {/* ICI LA CARTE DES PAYS VISITES */}
       <VectorMap
       map={"world_mill"}

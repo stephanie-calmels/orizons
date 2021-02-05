@@ -49,43 +49,43 @@ const HomeDesktop = ({
 
         <Row>
           <Col>
-            <Card className="card_benefits">
-              <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627217063986/pexels-pixabay-163034.jpg?width=963&height=630" />
-              <Card.Body className="card_benefits-body">
-                <Card.Title className="card_benefits-title">Des carnets de voyage à votre image</Card.Title>
-                <Card.Text className="card_benefits-text">
+            <div className="card_benefits">
+              <img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627217063986/pexels-pixabay-163034.jpg?width=963&height=630" />
+              <div className="card_benefits-body">
+                <h2 className="card_benefits-title">Des carnets de voyage à votre image</h2>
+                <p className="card_benefits-text">
                   Vous êtes du genre à écrire des romans à chaque étape de votre voyage ? Vous préférez laisser vos photos parler pour vous ? Avec O'rizons, vous êtes seul maître à bord et organisez votre carnet comme bon vous semble grâce à des outils faciles d'utilisation qui s'adaptent à vos besoins.
-            </Card.Text>
-              </Card.Body>
-            </Card>
+                </p>
+              </div>
+            </div>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Card className="card_benefits-revert">
-              <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627912925204/pexels-leah-kelley-185933.jpg?width=963&height=630" />
-              <Card.Body className="card_benefits-revert-body">
-                <Card.Title className="card_benefits-title">Une carte interactive, qui évolue au fil de vos pérégrinations</Card.Title>
-                <Card.Text className="card_benefits-text">
+            <div className="card_benefits revert">
+              <img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627912925204/pexels-leah-kelley-185933.jpg?width=963&height=630" />
+              <div className="card_benefits-body">
+                <h2 className="card_benefits-title">Une carte interactive, qui évolue au fil de vos pérégrinations</h2>
+                <p className="card_benefits-text">
                   Que vous partiez pour plusieurs mois ou seulement pour un week-end, gardez une trace de vos aventures grâce à notre carte qui se met à jour à chaque nouvelle étape de votre voyage. Avec notre outil de géolocalisation, tenez à jour votre carnet en temps réel, depuis vote smartphone.
-            </Card.Text>
-              </Card.Body>
-            </Card>
+                </p>
+              </div>
+            </div>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Card className="card_benefits">
-              <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898626403500102/pexels-photo-3280130.jpeg?width=963&height=630" />
-              <Card.Body className="card_benefits-body">
-                <Card.Title className="card_benefits-title">Une communauté de voyageurs qui partagent leurs expériences</Card.Title>
-                <Card.Text className="card_benefits-text">
+            <div className="card_benefits">
+              <img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898626403500102/pexels-photo-3280130.jpeg?width=963&height=630" />
+              <div className="card_benefits-body">
+                <h2 className="card_benefits-title">Une communauté de voyageurs qui partagent leurs expériences</h2>
+                <p className="card_benefits-text">
                   Découvrez les carnets de voyageurs venus d'horizons différents et, qui sait, vous trouverez peut-être une idée pour votre prochain week-end en famille ou pour votre voyages de noces. Suivez les aventures de vos voyageurs favoris et apportez-leur votre soutien en commentant leurs publications !
-            </Card.Text>
-              </Card.Body>
-            </Card>
+            </p>
+              </div>
+            </div>
           </Col>
         </Row>
 

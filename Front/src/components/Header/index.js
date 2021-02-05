@@ -66,7 +66,7 @@ const Header = ({
                   menuAlign="right"
                 >
                   <LinkContainer to={`/profil/${id}`}>
-                    <Nav.Link>Mon profil</Nav.Link>
+                    <Nav.Link>Profil public</Nav.Link>
                   </LinkContainer>
 
                   <LinkContainer to="/compte">
