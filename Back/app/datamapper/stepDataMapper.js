@@ -117,7 +117,7 @@ const stepDataMapper = {
             }
         };
         let oldPictures = await client.query('SELECT * FROM photo WHERE step_id = $1', [stepId]);
-        oldPictures = oldPictures.rows
+        console.log(oldPictures.rows)
         for (const pictures of oldPictures.row) {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
             if (!checkPicture.rows[0].url) {
