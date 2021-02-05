@@ -209,7 +209,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                     <Modal.Footer>
                       <Button variant="danger" onClick={()=>{
                         handleCloseDelete(step.id_step);
-                        deleteStep(step.id_step);
+                        deleteStep(step.id_step, step.trip_id);
                       }}>Oui, supprimer</Button>
                       <Button onClick={()=>handleCloseDelete(step.id_step)}>Annuler</Button>
                     </Modal.Footer>

@@ -30,6 +30,11 @@
   min-height: 86vh;
 }
 
+.loading-spinner {
+  background-color: vars.$color-tertiary !important;
+  border: 3px solid vars.$color-tertiary !important;
+}
+
 @media screen and (min-width: 768px) {
   .form-login {
   width: 60%

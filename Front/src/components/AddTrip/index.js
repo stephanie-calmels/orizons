@@ -40,7 +40,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
   const [submitting, setSubmitting] = useState(false);
 
   return <div>
-    <Title texte="Créer un nouveau carnet" />
+    <Title texte="Créez un nouveau carnet de voyage !" />
     <Container>
       <Form
         className="form-add-trip"

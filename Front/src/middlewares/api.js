@@ -14,7 +14,7 @@ import { getProfileSuccess, updateProfileSuccess, updateProfileFail } from '../a
 import { postNewTripSuccess } from '../actions/addTrip';
 import { postNewStepSuccess } from '../actions/addStep';
 import { getCountriesSuccess } from '../actions/countries';
-import { getTripSuccess, updateTripSuccess, updateStepSuccess, 
+import { getTripSuccess, updateTripSuccess, updateStepSuccess, deleteStepSuccess
 } from '../actions/trip';
 import {
   LOGIN, REGISTER, GET_MEMBER, UPDATE_MEMBER, GET_MORE_RESULTS, GET_TRIP,
@@ -286,7 +286,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response)=>{
           console.log(response.data);
-          store.dispatch(postNewStepSuccess(response.data.data));
+          store.dispatch(postNewStepSuccess(response.data.data[0]));
         })
         .catch((error) =>{
           console.error(error);
@@ -514,12 +514,17 @@ const api = (store) => (next) => (action) => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        data: action.data,
+        data: {
+          trip_id:action.trip_id,
+        }
       };
+      console.log('monactiondelete',action)
       axios(config)
         .then((response) => {
+          console.log('réponse à la suppression étape',response.data)
+          store.dispatch(deleteStepSuccess(response.data.data[0])); // TODO : a vérifier avec Armandine
           toast.success('Suppression de l\'étape réussie !');
-          history.go(0);
+          // history.go(0);
         })
         .catch((error) => {
           const errorMessage = (error.response

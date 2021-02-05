@@ -115,7 +115,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   // START OF ADDSTEP COMPONENT
   return (
     <div>
-            {connectedUserId == authorId && <Button onClick={handleShow}> Ajouter une étape </Button>}
+            {connectedUserId == authorId && <div className="add-step-container"><Button onClick={handleShow} className="add-step-button"> Ajouter une étape </Button></div>}
 
       
       <Modal show={show} onHide={handleClose}>

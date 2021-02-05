@@ -64,7 +64,7 @@ export const DELETE_TRIP = 'DELETE_TRIP';
 export const UPDATE_STEP = 'UPDATE_STEP';
 export const UPDATE_STEP_SUCCESS = 'UPDATE_STEP_SUCCESS';
 export const DELETE_STEP = 'DELETE_STEP';
-
+export const DELETE_STEP_SUCCESS = 'DELETE_STEP_SUCCESS';
 
 // === PROFILE
 export const GET_PROFILE = 'GET_PROFILE';

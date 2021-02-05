@@ -14,11 +14,11 @@
   display: flex;
   flex-wrap: wrap;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 0 0 1rem 0;
   border-radius: 5px;
-  background-color: vars.$color-tertiary;
-  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
-  color: vars.$color-primary;
+  background-color: vars.$color-secondary;
+  color: vars.$color-tertiary;
+  border: 5px solid vars.$color-tertiary;
 
   .stats {
     display: flex;
@@ -30,7 +30,7 @@
       padding-bottom: 1rem;
 
       .stats-icons {
-        color: vars.$color-secondary;
+        color: vars.$color-tertiary;
       }
     }
   }
@@ -40,19 +40,30 @@
 .resume-container {
   font-size: 1.2rem;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 0 0 1rem 0;
   border-radius: 5px;
   background-color: vars.$color-tertiary;
-  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
-  color: vars.$color-primary;
+  background-color: vars.$color-secondary;
+  color: vars.$color-tertiary;
+  border: 5px solid vars.$color-tertiary;
 
   p {
     font-style: italic;
+    padding: 0 1rem;
   }
 }
 
 .infos-col-title {
   margin: 0 auto 0.5rem !important;
+  background-color: vars.$color-tertiary;
+  display: inline-block;
+  color: vars.$color-primary;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.map-container {
+  padding-bottom: 1rem;
 }
 
 @media screen and (min-width: 768px) {

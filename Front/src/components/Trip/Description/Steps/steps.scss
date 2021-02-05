@@ -23,6 +23,17 @@
   margin-bottom: 2rem;
 }
 
+.step-numbers::before {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  left: -20px;
+  height: 2px;
+  content: '';
+  z-index: -1;
+  background-color: vars.$color-tertiary;
+}
+
 .step-numbers {
   text-align: center;
   border-radius: 50%;
@@ -33,23 +44,13 @@
   margin: 0 15px;
   text-decoration: none;
   font-size: 22px;
-  color: vars.$color-tertiary;
-  background-color: vars.$color-secondary;
+  color: vars.$color-secondary;
+  background-color: vars.$color-tertiary;
   position: relative;
+  z-index: 10;
   &:hover {
     background-color: vars.$color-primary;
   }
-}
-
-.step-numbers::before {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  right: -30px;
-  left: -20px;
-  height: 2px;
-  content: '';
-  background-color: vars.$color-secondary;
 }
 
 .step-numbers:first-of-type:before {

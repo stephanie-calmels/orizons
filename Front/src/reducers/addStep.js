@@ -21,17 +21,6 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         [action.name]: action.value,
       };
-    case POST_NEW_STEP_SUCCESS:
-      return {
-        ...oldState,
-        title: action.step.title,
-        localisation: [action.step.latitude, action.step.longitude],
-        date: action.step.step_date,
-        summary: action.step.content,
-        pictures: action.step.pictures,
-        country: action.step.country,
-        country_code: action.step.country_code
-      };
     default:
       return oldState;
   }
