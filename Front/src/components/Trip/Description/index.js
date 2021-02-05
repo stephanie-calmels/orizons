@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Container, Row, Col, Card, Button} from 'react-bootstrap'
-import {MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet'
+import {MapContainer, TileLayer, Marker, Popup, Polyline, useMap} from 'react-leaflet'
+import L from 'leaflet';
 import Flag from 'react-world-flags';
 
 import slugify from 'slugify'
@@ -10,12 +11,16 @@ import Steps from './Steps'
 
 const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   // on crée une constante pour centrer la map sur la première étape, si celle ci existe
-  let mapCenter =[]
-  if (steps.length> 0){
-    mapCenter = [steps[0].latitude, steps[0].longitude];
-  } else{
-    mapCenter= [48.856614,2.3522219]
+  let mapCenter = [];
+  if (steps.length > 0){
+    mapCenter = [steps[0].latitude, steps[0].longitude]
+  } else {
+    mapCenter = [48.8534100, 2.3488000]
   }
+  let mapZoom = 6;
+  
+
+  console.log(mapCenter)
   const distanceCalculatorBetween2points = (lat1, lon1, lat2, lon2)=>{
     var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
@@ -31,10 +36,38 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
     for (let i = 0; i<(allSteps.length - 1); i++){
       travelledDistance += distanceCalculatorBetween2points(allSteps[i].latitude, allSteps[i].longitude, allSteps[i+1].latitude, allSteps[i+1].longitude)
     }
+    if (travelledDistance < 50){
+      mapZoom = 10;
+    }
+    if (travelledDistance < 500){
+      mapZoom = 8
+    }
+    if (travelledDistance > 1000){
+      mapZoom = 4;
+    }
+    if (travelledDistance > 5000){
+      mapZoom = 2;
+    }
     return travelledDistance
   }
 
+  // Drawing a line between steps
+  const polyline = steps.map(step => [step.latitude, step.longitude]);
+  const polylineOptions = {color: 'black'};
 
+  //moving map to the right mapcenter
+  const MovingMap = () => {
+    const map = useMap();
+   useEffect(() => {
+      map.flyTo(mapCenter, mapZoom);
+    }, [mapCenter]);
+    return null;
+  };
+
+
+  
+
+    // -------------------------------- start of the component --------------------------------------- //
   return <div>
   <Container>
     <Row className="infos-container">
@@ -72,16 +105,17 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
     <Row >
     <Col>
     {/*On crée la map et on la centre sur la position de la première étape si elle existe */}
-    <MapContainer center={mapCenter} zoom={6} scrollWheelZoom={false}>
+    <MapContainer center={mapCenter} zoom={6} scrollWheelZoom={false} >
+    <MovingMap />
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  {steps.map(step =>{
+  {steps.map((step, i) =>{
     // Je prépare de quoi faire un lien vers une ancre de la page (format: #id)
     const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
 
-    return <Marker key={step.id_step} position={[step.latitude, step.longitude]}>
+    return <Marker key={step.id_step} position={[step.latitude, step.longitude]} >
       <Popup>
         <Card >
           <Card.Img src={step.photos[0].url} style={{height:'10vh'}}/>
@@ -94,6 +128,7 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
       </Popup>
     </Marker>
   })}
+  <Polyline pathOptions={polylineOptions} positions={polyline} />
   </MapContainer>
     </Col>
     </Row>

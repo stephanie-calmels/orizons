@@ -1,5 +1,5 @@
 import {
-  CHANGE_ADDSTEP_FIELD, POST_NEW_STEP_SUCCESS
+  CHANGE_ADDSTEP_FIELD, POST_NEW_STEP_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
