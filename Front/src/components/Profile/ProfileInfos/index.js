@@ -13,11 +13,13 @@ import ProfileTrips from './ProfileTrips';
 
 const ProfileInfos = ({ member, trips, handleClick }) => {
   // création de mapData, pour alimenter la carte
-  const mapData = {
-    FR: 1,
-    CD: 1,
-    NA: 1
-  }
+  let mapData = {};
+  if (member.trips[0]) { member.trips.forEach(trip => (
+    trip.trip_localisation.forEach(localisation => (
+      mapData[localisation.code_2] = 1
+    ))
+  ))}
+  console.log(mapData);
   return <Container>
     <Row className="infos-container">
       <Col className="stats-container">
