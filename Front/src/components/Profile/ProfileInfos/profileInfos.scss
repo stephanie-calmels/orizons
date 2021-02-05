@@ -55,6 +55,9 @@
   margin: 0 auto 0.5rem !important;
 }
 
+.map{
+  border: .3rem solid vars.$color-tertiary;
+}
 @media screen and (min-width: 768px) {
   .infos-container {
     flex-direction: row;

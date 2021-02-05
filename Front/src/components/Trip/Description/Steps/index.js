@@ -158,11 +158,11 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   <Container>
   <Row>
     <Col className="nav-container">
-      {steps.map(step=> {
+      {steps.map((step, index)=> {
         const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
         return <Nav key={step.id_step}>
           <Nav.Item>
-            <Nav.Link href={sluggedTitleAsAnchor} className="step-numbers">{step.number_step}</Nav.Link>
+            <Nav.Link href={sluggedTitleAsAnchor} className="step-numbers">{index + 1}</Nav.Link>
           </Nav.Item>
         </Nav>
       })} <i className="fas fa-flag-checkered icon-flag" />
