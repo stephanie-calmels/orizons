@@ -145,25 +145,34 @@ const stepDataMapper = {
         // dégader le pays si plus besoin
         //check dans les étapes si le pays est toujours concerné
         // on récupère le tripId
+
         let tripId = await client.query(`SELECT trip_id, country_id FROM step WHERE id = $1`, [stepId]);
         tripId = tripId.rows[0]
+
         // je vérifie dans la table step si il y a une autre étape, donc si le compte est >1 si >1 on fait rien si ==1
+
         const checkSteps = await client.query(`SELECT * FROM step WHERE trip_id = $1 AND country_id = $2`, [tripId.trip_id, tripId.country_id]);
+
         if (checkSteps.rowCount == 1) {
             // si =1 on vérifie que ce n'est pas l'étape du carnet
-            const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, true]);
+            const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2 AND trip = $3`, [tripId.trip_id, tripId.country_id, true]);
             // si ce n'est pas l'étape du carnet on la supprime
-            if (!checkTripCountry) {
-                client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, false])
+
+            if (!checkTripCountry.rows[0]) {
+
+                console.log(client.query("SELECT * FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2 AND trip = $3", [tripId.trip_id, tripId.country_id, false]))
+
+
+                client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2 AND trip = $3`, [tripId.trip_id, tripId.country_id, false])
+
             }
         }
 
-
         await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
-
+        return tripId.trip_Id;
     }
 
 
 };
 
-module.exports = stepDataMapper;
+module.exports = stepDataMapper; {}
