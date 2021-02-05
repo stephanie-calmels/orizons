@@ -116,7 +116,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   return (
     <div>
 
-            {connectedUserId == trip.author[0].id && <div className="add-step-container"><Button onClick={handleShow}> Ajouter une étape </Button></div>}
+            {connectedUserId == trip.author[0].id && <div className="add-step-container"><Button onClick={handleShow} className="add-step-button"> Ajouter une étape </Button></div>}
 
 
       

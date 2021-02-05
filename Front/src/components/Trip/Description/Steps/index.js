@@ -168,7 +168,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
       })} <i className="fas fa-flag-checkered icon-flag" />
     </Col>
   </Row>
-  <Row>
+  <Row className="steps_container">
   <Col>
   {/*Pour chaque step du trip, on crée une nouvelle carte TODO: améliorer le style, dimensions et ajout de bordure */}
   {steps.map(step=>{
@@ -191,10 +191,11 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
             <Card.Title> {step.step_title}</Card.Title>
             <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
-            {trip.author[0].id  === connectedUserId && <>
-            <Button className="edit-step-button" onClick={()=>{handleShow(step)}} ><i className="fas fa-pencil-alt" /> Editer l'étape</Button>
-            <Button variant="danger" className="delete-step-button" onClick={()=>{handleShowDelete(step.id_step)}}><i className="fas fa-trash-alt" /> Supprimer l'étape</Button>
-            </>
+            {
+              trip.author[0].id  === connectedUserId && <div className="step_buttons">
+                <Button className="edit-step-button" onClick={()=>{handleShow(step)}} ><i className="fas fa-pencil-alt" /> Editer l'étape</Button>
+                <Button variant="danger" className="delete-step-button" onClick={()=>{handleShowDelete(step.id_step)}}><i className="fas fa-trash-alt" /> Supprimer l'étape</Button>
+              </div>
             }
           </Card.Body>
 
