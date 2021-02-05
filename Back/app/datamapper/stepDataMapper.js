@@ -128,7 +128,7 @@ const stepDataMapper = {
 
 
         await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId]);
-        for (let index = 0; index < pictures.length; index++) {
+        for (let index = 0; index < stepInfos.pictures.length; index++) {
 
             await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
                 [`${stepInfos.title}_${counter++}`,
