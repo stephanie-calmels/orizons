@@ -68,9 +68,9 @@ const stepController = {
             const {
                 stepId
             } = request.params
-            await stepDataMapper.deleteOneStep(stepId)
-            const trip = await tripStepDataMapper.getTripById(stepTripId);
-            const steps = await stepDataMapper.getStepByTripId(stepTripId);
+            const tripId = await stepDataMapper.deleteOneStep(stepId)
+            const trip = await tripStepDataMapper.getTripById(tripId);
+            const steps = await stepDataMapper.getStepByTripId(tripId);
             response.json({
                 data: [{
                         trip,

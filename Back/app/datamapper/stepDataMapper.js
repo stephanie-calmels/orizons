@@ -160,7 +160,7 @@ const stepDataMapper = {
 
 
         await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
-
+        return tripId.trip_Id;
     }
 
 
