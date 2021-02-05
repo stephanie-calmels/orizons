@@ -69,8 +69,15 @@ const stepController = {
                 stepId
             } = request.params
             await stepDataMapper.deleteOneStep(stepId)
+            const trip = await tripStepDataMapper.getTripById(stepTripId);
+            const steps = await stepDataMapper.getStepByTripId(stepTripId);
             response.json({
-                message: "La suppression s'est bien déroulée"
+                data: [{
+                        trip,
+                        steps
+                    },
+
+                ]
             });
         } catch (error) {
             next(error)

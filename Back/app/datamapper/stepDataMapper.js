@@ -41,7 +41,7 @@ const stepDataMapper = {
         }
 
         // 3 - Insert new step
-        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id, country_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+        const result = await client.query('INSERT INTO step(longitude, latitude, title, number_step, content, trip_id, country_id, step_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
             [
                 newStep.longitude, //OK
                 newStep.latitude, //OK
@@ -53,7 +53,8 @@ const stepDataMapper = {
                 newStep.trip_id,
                 //newStep.step_date --> step_date add date_stamp de l'étape
                 //add country
-                idCountry.rows[0].id //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
+                idCountry.rows[0].id, //3 x A-Z0-9 ajouter s'il n'y est pas encore dans la m2m
+                newStep.step_date
 
 
             ]);
@@ -140,9 +141,26 @@ const stepDataMapper = {
             await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId]);
 
         }
+
+        // dégader le pays si plus besoin
+        //check dans les étapes si le pays est toujours concerné
+        // on récupère le tripId
+        let tripId = await client.query(`SELECT trip_id, country_id FROM step WHERE id = $1`, [stepId]);
+        tripId = tripId.rows[0]
+        // je vérifie dans la table step si il y a une autre étape, donc si le compte est >1 si >1 on fait rien si ==1
+        const checkSteps = await client.query(`SELECT * FROM step WHERE trip_id = $1 AND country_id = $2`, [tripId.trip_id, tripId.country_id]);
+        if (checkSteps.rowCount == 1) {
+            // si =1 on vérifie que ce n'est pas l'étape du carnet
+            const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, true]);
+            // si ce n'est pas l'étape du carnet on la supprime
+            if (!checkTripCountry) {
+                client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, false])
+            }
+        }
+
+
         await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
-        const messages = `Suppression de l'étape terminée`;
-        return messages;
+
     }
 
 
