@@ -9,7 +9,7 @@ const memberDataMapper = {
     },
 
     async getMemberById(memberId) {
-        console.log(memberId);
+
         const result = await client.query("SELECT * FROM member WHERE id = $1", [memberId]);
         if (result.rowCount == 0) {
             return null;
@@ -27,7 +27,7 @@ const memberDataMapper = {
     },
 
     async createMember(newMember) {
-        console.log('2', newMember);
+
         const result = await client.query("INSERT INTO member(first_name, last_name, nickname, email, password) VALUES ($1, $2, $3, $4, $5)", [
             newMember.first_name,
             newMember.last_name,
@@ -59,21 +59,21 @@ const memberDataMapper = {
                 memberInfos.email,
                 memberId
             ]);
-        console.log(result.rows)
+
         return result.rows[0]
     },
-    async updateOneProfile(profileId, profileInfos ){
+    async updateOneProfile(profileId, profileInfos) {
         const result = await client.query(`UPDATE "member" SET "biography" = $1,
                                                                     "localisation" = $2,
                                                                     "cover_photo" = $3
                                                                     WHERE id=$4
                                                                     RETURNING *`,
             [profileInfos.biography,
-            profileInfos.localisation,
-            profileInfos.coverpicture_url,
-            profileId
+                profileInfos.localisation,
+                profileInfos.coverpicture_url,
+                profileId
             ]);
-        console.log(result.rows)
+
         return result.rows[0]
     },
 
