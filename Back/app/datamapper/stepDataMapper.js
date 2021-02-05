@@ -120,7 +120,7 @@ const stepDataMapper = {
         oldPictures = oldPictures.rows
         for (const pictures of oldPictures) {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
-            if (!checkPicture) {
+            if (!checkPicture.rows[0]) {
                 await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
             }
         }
