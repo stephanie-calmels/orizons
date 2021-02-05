@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   Container, Form, Button, Alert, Spinner,
 } from 'react-bootstrap';
@@ -16,7 +17,6 @@ const Register = ({
   passwordRepeat,
   changeField,
   errorMessage,
-  isRegisterSuccessful,
   handleRegister,
   isLoading,
 }) => {
@@ -133,7 +133,8 @@ const Register = ({
             />
             <span className="sr-only">Loading...</span>
           </Button>
-        ) : <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
+        ) : <Button block size="lg" className="mt-3 form-btn" type="submit">Valider</Button>}
+        <p className="text-center m-3">Vous êtes déjà inscrit ? <Link to="/connexion">Connectez-vous !</Link></p>
       </Form>
     </Container>
   );
@@ -148,7 +149,6 @@ Register.propTypes = {
   passwordRepeat: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
-  isRegisterSuccessful: PropTypes.bool.isRequired,
   handleRegister: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

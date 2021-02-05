@@ -24,11 +24,11 @@ const Login = ({
   const handleChange = (e) => changeField([e.target.name], e.target.value);
 
   return (
-    <>
+    <div className="background-image-login">
       <Title texte="Connectez-vous pour partager vos aventures !" />
       <Container className="d-flex justify-content-center align-items-center">
         <Form
-          className="form"
+          className="form-login"
           onSubmit={handleSubmit(handleLogin)}
         >
           {errorMessage && (
@@ -71,11 +71,11 @@ const Login = ({
               />
               <span className="sr-only">Loading...</span>
             </Button>
-          ) : <Button block size="lg" className="mt-3" type="submit">Valider</Button>}
+          ) : <Button block size="lg" className="mt-3 form-login-btn" type="submit">Valider</Button>}
+          <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>
         </Form>
       </Container>
-      <p className="text-center m-3">Vous n'avez pas encore de compte ? <Link to="/inscription">Inscrivez-vous !</Link></p>
-    </>
+    </div>
   );
 };
 

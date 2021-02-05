@@ -253,3 +253,32 @@
 
   }
 }
+
+// ========== ESSAIS KAMIL ===============================================
+
+.background-image-home {
+  background-image: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 92vh;
+  width: 100vw;
+  position: relative;
+}
+
+.home-banner-title {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem !important;
+  text-align: center;
+  font-family: vars.$font-quote;
+  font-style: italic;
+}
+
+.home-testimonials {
+  padding: 0 2rem 2rem 2rem;
+  width: 80%;
+  margin: 0 auto;
+}

@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import Title from '../PageTitle';
 import RegisterForm from './RegisterForm';
 
+import './register.scss';
+
 const Register = (props) => (
-  <>
+  <div className="background-image-register">
     <Title texte="Inscrivez-vous pour créer votre premier carnet !" />
     <RegisterForm
       {...props}
     />
-    <p className="text-center m-3">Vous êtes déjà inscrit ? <Link to="/connexion">Connectez-vous !</Link></p>
-  </>
+  </div>
 );
 
 Register.propTypes = {

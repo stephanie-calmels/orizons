@@ -44,13 +44,14 @@ const Header = ({
         >
           <InputGroup>
             <FormControl 
+              id="search"
               type="text" 
-              placeholder="Recherche" 
+              placeholder="Recherche par mot-clé, pays ou catégorie" 
               value={search}
               onChange={(e) => changeSearchField(e.target.value)}
               />
             <InputGroup.Append>
-              <Button type='submit' variant="primary"><i className="fas fa-search" /></Button>
+              <Button id="searchBtn" type='submit' variant="primary"><i className="fas fa-search" /></Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>
