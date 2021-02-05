@@ -69,7 +69,9 @@ const stepController = {
                 stepId
             } = request.params
             console.log(request.params)
-
+            const {
+                trip_id
+            } = request.body
             console.log(request.body)
             await stepDataMapper.deleteOneStep(stepId)
             console.log(trip_id)
