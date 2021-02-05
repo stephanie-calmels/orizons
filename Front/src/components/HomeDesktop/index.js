@@ -16,8 +16,14 @@ const HomeDesktop = ({
   }, []);
 
   return (
+    <>
+    <div className="background-image-home">
+      <h2 className="home-banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
+            Ibn Battuta</h2>
+    </div>
   <Container fluid>
-    <Row>
+      {/*
+      <Row> 
       <Card className="text-white home_banner">
         <Card.Img src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
@@ -48,8 +54,8 @@ const HomeDesktop = ({
 
           </Card>
         </Card.ImgOverlay>
-      </Card>
-    </Row>
+      </Card> 
+    </Row>*/}
 
     <Row>
       <h4 className="row-title">O'rizons, qu'est-ce que c'est ?</h4>
@@ -58,7 +64,7 @@ const HomeDesktop = ({
     <Row>
       <Col>
         <Card className="card_benefits">
-          <Card.Img className="card_benefits-image" src="https://images.pexels.com/photos/1646981/pexels-photo-1646981.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+          <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627217063986/pexels-pixabay-163034.jpg?width=963&height=630" />
           <Card.Body className="card_benefits-body">
             <Card.Title className="card_benefits-title">Des carnets de voyage à votre image</Card.Title>
             <Card.Text className="card_benefits-text">
@@ -72,7 +78,7 @@ const HomeDesktop = ({
     <Row>
       <Col>
         <Card className="card_benefits-revert">
-          <Card.Img className="card_benefits-image" src="https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+          <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898627912925204/pexels-leah-kelley-185933.jpg?width=963&height=630" />
           <Card.Body className="card_benefits-revert-body">
             <Card.Title className="card_benefits-title">Une carte interactive, qui évolue au fil de vos pérégrinations</Card.Title>
             <Card.Text className="card_benefits-text">
@@ -86,7 +92,7 @@ const HomeDesktop = ({
     <Row>
       <Col>
         <Card className="card_benefits">
-          <Card.Img className="card_benefits-image" src="https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+          <Card.Img className="card_benefits-image" src="https://media.discordapp.net/attachments/356888374092627968/806898626403500102/pexels-photo-3280130.jpeg?width=963&height=630" />
           <Card.Body className="card_benefits-body">
             <Card.Title className="card_benefits-title">Une communauté de voyageurs qui partagent leurs expériences</Card.Title>
             <Card.Text className="card_benefits-text">
@@ -103,8 +109,8 @@ const HomeDesktop = ({
 
     <Row>
       <Col md={6}>
-        <h5 className="col-title">Découvrez notre sélection de carnets publiés par la communauté O'rizons</h5>
-        <CardDeck>
+        <h5 className="col-title">Découvrez notre sélection de carnets publiés par la communauté O'rizons.</h5>
+        <CardDeck className="card_home-container">
           {randomTrips.map((trip) => (
             <Col md={6} key={trip.id}>
               <div onClick={() => handleClick(trip.id)} style={{cursor: 'pointer'}}>
@@ -112,7 +118,7 @@ const HomeDesktop = ({
                   <Card.Img className="card_home-img-top" variant="top" src={trip.cover_trip} />
                   <Card.Body className="card_home-body">
                     <Card.Title className="card_home-title">{trip.title}</Card.Title>
-                    <Card.Text className="card_home-text">
+                    {/* <Card.Text className="card_home-text">
                       {trip.summary}
                     </Card.Text>
                     <Card.Text className="card_home-text">
@@ -122,12 +128,12 @@ const HomeDesktop = ({
                           {category.entitled}
                         </Badge>
                       ))}
-                    </Card.Text>
+                    </Card.Text> */}
                   </Card.Body>
-                  <Card.Footer className="card_home-footer">
+                  {/* <Card.Footer className="card_home-footer">
                     <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />
                     <small className="text-muted">{trip.author[0].nickname}</small>
-                  </Card.Footer>
+                  </Card.Footer> */}
                 </Card>
               </div>
             </Col>
@@ -136,7 +142,7 @@ const HomeDesktop = ({
       </Col>
 
       <Col className="search_box" md={6}>
-        <h5 className="col-title">Vous recherchez quelque chose en particulier ? Parcourez les carnets de voyage publiés sur O'rizons, triés par pays, ville ou catégorie.</h5>
+        <h5 className="col-title">Vous recherchez quelque chose en particulier ?<br />Parcourez les carnets de voyage publiés sur O'rizons, triés par pays ou catégorie.</h5>
         <Container className='form_container'>
           <Form 
             className="form_search" 
@@ -243,7 +249,7 @@ const HomeDesktop = ({
 
     <Row>
       <Col>
-        <Carousel touch>
+        <Carousel className="home-testimonials" controls={false} indicators={false} touch>
 
           <Carousel.Item>
             <CardDeck>
@@ -255,7 +261,7 @@ const HomeDesktop = ({
                   </Card.Header>
                   <Card.Body>
                     <Card.Text>
-                      C'est trop cool !
+                      C'est trop cool ! Mes grand-parents peuvent suivre toutes mes aventures facilement depuis chez eux :)
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -363,8 +369,8 @@ const HomeDesktop = ({
         </Carousel>
       </Col>
     </Row>
-
   </Container>
+  </>
 )};
 
 export default HomeDesktop;

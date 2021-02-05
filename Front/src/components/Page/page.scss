@@ -1,6 +1,7 @@
 @use 'src/styles/vars';
 
 .page {
-  background-color: vars.$color-primary;
-  padding-bottom: 2em;
+  background-color: vars.$color-secondary;
+  // padding-bottom: 2em;
+  min-height: 86vh;
 }

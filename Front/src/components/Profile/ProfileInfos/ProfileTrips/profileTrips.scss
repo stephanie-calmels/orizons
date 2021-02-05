@@ -1,11 +1,17 @@
+@use 'src/styles/vars';
+
 .card_trip {
+  text-align: center;
   height: 400px;
   width: 300px;
   margin: 1rem auto !important;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  font-family: vars.$font-title;
+
 
   &-img-top {
     height: 200px;
-    border: 10px solid white;
+    padding: 1rem !important;
   }
 
   &-body {
@@ -14,6 +20,7 @@
 
   &-title {
     height: 25px;
+    font-weight: bold;
   }
 
   &-text {

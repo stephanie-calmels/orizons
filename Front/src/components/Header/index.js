@@ -21,9 +21,9 @@ const Header = ({
     handleLogout();
   };
   return (
-    <Navbar className="navbar_header" sticky="top" collapseOnSelect expand="lg" variant="light">
+    <Navbar className="navbar_header" sticky="top" collapseOnSelect expand="lg" variant="dark">
       <LinkContainer to="/">
-        <Navbar.Brand className="logo"><i className="fas fa-globe-americas">'rizons</i></Navbar.Brand>
+        <Navbar.Brand className="logo"><i className="fas fa-globe-americas"></i>'rizons</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -44,13 +44,14 @@ const Header = ({
         >
           <InputGroup>
             <FormControl 
+              id="search"
               type="text" 
-              placeholder="Recherche" 
+              placeholder="Recherche par mot-clé, pays ou catégorie" 
               value={search}
               onChange={(e) => changeSearchField(e.target.value)}
               />
             <InputGroup.Append>
-              <Button type='submit' variant="primary"><i className="fas fa-search" /></Button>
+              <Button id="searchBtn" type='submit' variant="primary"><i className="fas fa-search" /></Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>

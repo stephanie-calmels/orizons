@@ -150,9 +150,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
                 type="text"
                 defaultValue={trip.trip.title}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               {errors.title && <div className="text-danger">{errors.title.message}</div>}
             </Form.Group>
@@ -164,9 +162,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
                 rows={5}
                 defaultValue={trip.trip.summary}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
             </Form.Group>
@@ -178,9 +174,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
                     name="country_code"
                     defaultValue={trip.trip.trip_localisation[0].code}
                     onChange={(e) => handleChange(e)}
-                    ref={register({
-                      required: 'Veuillez remplir ce champ !',
-                    })}
+                    ref={register()}
                   >
                     {
                       countries.map((country) => (
@@ -246,9 +240,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
                 type="date"
                 defaultValue={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
+                ref={register()}
               />
               {errors.departure && <div className="text-danger">{errors.departure.message}</div>}
             </Form.Group>
@@ -260,8 +252,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
                 min={dayjs(`${trip.trip.departure_date}`).format('YYYY-MM-DD')}
                 defaultValue={dayjs(`${trip.trip.arrival_date}`).format('YYYY-MM-DD')}
                 onChange={(e) => handleChange(e)}
-                ref={register({
-                })}
+                ref={register()}
               />
               {errors.returndate && <div className="text-danger">{errors.returndate.message}</div>}
             </Form.Group>

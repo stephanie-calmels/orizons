@@ -1,12 +1,13 @@
 @use 'reset';
 @use 'vars';
 
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: vars.$font-body !important;
 }
 
 /* 
