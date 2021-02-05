@@ -103,6 +103,7 @@ const stepDataMapper = {
                     oldStepCountry.rows[0].country_id
                 ])
         }
+        /*
         // update photos
         let counter = 1
         let pictures = stepInfos.pictures;
@@ -123,16 +124,21 @@ const stepDataMapper = {
             if (!checkPicture.rows[0].url) {
                 await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
             }
+        }*/
+
+
+        await client.query(`DELETE FROM photo WHERE step_id = $1`, [step_id]);
+        for (let index = 0; index < pictures.length; index++) {
+
+            await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
+                [`${stepInfos.title}_${counter++}`,
+                    pictures[index],
+                    stepId
+                ])
         }
-        /*
-                let oldPictures = await client.query('SELECT * FROM photo WHERE step_id = $1', [stepId]);
-                oldPictures = oldPictures.rows[0]
-                for (const pictures of oldPictures) {
-                    const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
-                    if (!checkPicture.rows[0].url) {
-                        await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
-                    }
-        */
+
+
+
         return stepInfos.trip_id;
 
 
