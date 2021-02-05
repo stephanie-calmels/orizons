@@ -61,7 +61,7 @@ const Login = ({
             {errors.password && <div className="text-danger">{errors.password.message}</div>}
           </Form.Group>
           {isLoading ? (
-            <Button variant="primary" disabled>
+            <Button className="loading-spinner" disabled>
               <Spinner
                 as="span"
                 animation="border"

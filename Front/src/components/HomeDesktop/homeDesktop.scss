@@ -1,61 +1,62 @@
 @use 'src/styles/vars';
 
-.home_banner {
-  width: 100%;
-  border: none;
-  height: 92vh;
-  overflow: hidden;
-  border-radius: 0 !important;
-  
-  &-title {
-    font-size: 1.5rem !important;
-    text-align: center;
-    font-family: vars.$font-quote;
-    font-style: italic;
-    
-  }
-  
-  &-card {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    width: 60%;
-    border: none;
-    padding: 2rem;
-    text-align: center;
-    font-size: 1.1rem;
+// ====================== HERO SECTION =============================
 
-    &-img-overlay {
-      border-radius: 0 !important;
-    }
-    
-    &-btn {
-    min-width: 35%;
-    max-width: 50%;
-    align-self: center;
-    background-color: vars.$color-tertiary;
-    border-radius: 50px;
-    border: 3px solid vars.$color-tertiary;
-    color: vars.$color-primary;
-    transition-duration: 500ms;
-    padding: 0.5rem 1.5rem;
-
-      &:hover {
-        background-color: vars.$color-secondary;
-        color: vars.$color-tertiary;
-        border: 3px solid vars.$color-tertiary;
-      }
-    }
-  }
-  
-  &-overlay {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    text-shadow: 0px 0px 3px rgb(37, 37, 37);
-  }
-  
+.background-image-home {
+  background-image: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 92vh;
+  position: relative;
 }
 
+.home-banner-body {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: vars.$color-primary;
+}
+
+.home-banner-title {
+  margin: 6rem 0;
+  font-size: 1.3rem !important;
+  font-family: vars.$font-quote;
+  font-style: italic;
+  text-shadow: 0px 0px 3px rgb(37, 37, 37);
+}
+
+.home-banner-overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border: none;
+  padding: 2rem;
+
+  &-text {
+    font-size: 1.2rem !important;
+  }
+
+  &-btn {
+  min-width: 35%;
+  max-width: 50%;
+  align-self: center;
+  background-color: vars.$color-tertiary;
+  border-radius: 50px;
+  border: 3px solid vars.$color-tertiary;
+  color: vars.$color-primary;
+  transition-duration: 500ms;
+  padding: 0.5rem 1.5rem;
+
+    &:hover {
+      background-color: vars.$color-secondary;
+      color: vars.$color-tertiary;
+      border: 3px solid vars.$color-tertiary;
+    }
+  }
+} 
+
+// ====================== BENEFITS SECTION =============================
 .row {
 
   &-title {
@@ -76,65 +77,40 @@
 .card_benefits {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0 2rem 2rem 2rem;
-  position: relative;
-  left: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
   border: none;
   background-color: vars.$color-secondary;
   color: vars.$color-primary;
-
+  margin: 2rem;
 
   &-image {
-    max-width: 35%;
+    max-height: 300px;
+  }
+
+  &-title {
+    font-size: 2rem !important;
   }
 
   &-body {
-    position: absolute;
-    left: 320px;
-    right: 100px;
     background-color: vars.$color-tertiary;
     border-radius: 5px;
-    font-size: 0.8rem !important;
-
+    width: 800px;
+    padding: 2rem;
   }
 
   &-text {
-    font-style: italic;
+    margin-top: 2rem;
+    font-size: 1.1rem !important;
+    line-height: 1.7;
   }
 }
 
-.card_benefits-revert {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0 2rem 2rem 2rem;
-  position: relative;
-  right: 100px;
-  border: none;
+.revert {
   flex-direction: row-reverse;
-  text-align: right;
-  background-color: vars.$color-secondary;
-  color: vars.$color-primary;
-
-
-  &-body {
-    position: absolute;
-    left: 100px;
-    right: 320px;
-    background-color:  vars.$color-tertiary;
-    border-radius: 5px;
-    font-size: 0.8rem !important;
-  }
-
-  &-text {
-    font-style: italic;
-  }
-
-  &-text {
-    font-style: italic;
-  }
 }
+
+// ====================== INSPIRATION SECTION =============================
 
 .card_home {
   margin: 1rem 0 !important;
@@ -152,14 +128,12 @@
   }
 
   &-body {
-    // height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &-title {
-    // height: 20px;
     font-size: 1.2rem;
     font-weight: bold;
     font-style: italic;
@@ -225,60 +199,41 @@
   font-style: italic;
 }
 
-@media screen and (min-width: 1200px) {
-
-  .card_benefits {
-
-    &-image {
-      max-width: 25%;
-    }
-
-    &-body {
-      right: 200px;
-      font-size: 1rem;
-    }
-  }
-
-  .card_benefits-revert {
-
-    &-body {
-      left: 200px;
-      font-size: 1rem;
-    }
-  }
-
-  .card_home {
-    margin: 1rem auto !important;
-    height: 200px;
-
-  }
-}
-
-// ========== ESSAIS KAMIL ===============================================
-
-.background-image-home {
-  background-image: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 92vh;
-  width: 100vw;
-  position: relative;
-}
-
-.home-banner-title {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem !important;
-  text-align: center;
-  font-family: vars.$font-quote;
-  font-style: italic;
-}
+// ====================== TESTIMONIALS SECTION =============================
 
 .home-testimonials {
   padding: 0 2rem 2rem 2rem;
   width: 80%;
   margin: 0 auto;
 }
+
+@media screen and (min-width: 1200px) {
+
+  // .card_benefits {
+  //   width: 40%;
+  //   &-image {
+  //     max-width: 25%;
+  //   }
+
+  //   &-body {
+  //     // right: 200px;
+  //     font-size: 2rem;
+  //   }
+  // }
+
+  // .card_benefits-revert {
+
+  //   &-body {
+  //     // left: 200px;
+  //     font-size: 2rem;
+  //   }
+  // }
+
+  .card_home {
+    margin: 1rem auto !important;
+    height: 200px;
+  }
+
+}
+
+

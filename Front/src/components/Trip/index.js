@@ -68,10 +68,11 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
           picture={trip.trip.cover_trip}
           title={trip.trip.title}
         />
-        {trip.trip.author[0].id === connectedUserId && <>
-        <Button className="edit-trip-button" onClick={handleShow}><i className="fas fa-pencil-alt" /> Editer le carnet</Button>
-        <Button className="delete-trip-button" onClick={handleShowDelete} variant="danger"><i className="fas fa-trash-alt" /> Supprimer le carnet</Button>
-        </>
+        {
+          trip.trip.author[0].id === connectedUserId && <div className="trip_buttons">
+            <Button className="edit-trip-button" onClick={handleShow}><i className="fas fa-pencil-alt" /> Editer le carnet</Button>
+            <Button className="delete-trip-button" onClick={handleShowDelete} variant="danger"><i className="fas fa-trash-alt" /> Supprimer le carnet</Button>
+          </div>
         }
         <Description trip={trip.trip} steps={trip.steps} connectedUserId={connectedUserId} editStep={editStep} deleteStep={deleteStep}/>
         <AddStep connectedUserId={connectedUserId} trip={trip.trip}/> 

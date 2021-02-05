@@ -1,1 +1,52 @@
+@use 'src/styles/vars';
 
+.trip_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.edit-trip-button, 
+.delete-trip-button, 
+.add-step-button {
+    min-width: 50%;
+    max-width: 70%;
+    margin-top: 1rem;
+    background-color: vars.$color-tertiary;
+    border-radius: 50px;
+    border: 3px solid vars.$color-tertiary;
+    color: vars.$color-primary;
+    transition-duration: 500ms;
+    padding: 0.5rem 1.5rem;
+
+    &:hover {
+        background-color: vars.$color-secondary;
+        color: vars.$color-tertiary;
+        border: 3px solid vars.$color-tertiary;
+    }
+  
+}
+
+.add-step-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-step-button {
+    margin-bottom: 2rem;
+}
+ 
+@media screen and (min-width: 1024px) {
+    .trip_buttons {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .edit-trip-button, 
+    .delete-trip-button, 
+    .add-step-button {
+        min-width: 15%;
+        max-width: 35%;
+    }
+}

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Container, Row, Col, Card, Button} from 'react-bootstrap'
+import {Container, Row, Col, Card, Button, Badge} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup, Polyline, useMap} from 'react-leaflet'
 import L from 'leaflet';
 import Flag from 'react-world-flags';
@@ -71,34 +71,41 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   return <div>
   <Container>
     <Row className="infos-container">
-        <Col md={6} className="stats-container">Statistiques
+        <Col className="stats-container">
+        <h4 className="text-center infos-col-title">Statistiques</h4>
         <Container>
-          <Row>
-            <Col xs={4} lg={3}>Durée</Col>
-            <Col xs={4} lg={3}>Distance</Col>
-            <Col xs={4} lg={6}>Pays</Col>
+          <Row className="stats-row">
+            <Col lg={12}><i className="fas fa-clock mr-2 stats-icons"></i>Durée : {trip.duration} jour(s)</Col>
           </Row>
-          <Row>
-            <Col xs={4} lg={3}>{trip.duration} jours</Col>
-            <Col xs={4} lg={3}>{Math.round(calculateDistanceBewteenAllSteps(steps))} km</Col>
-            <Col xs={4} lg={6}>
+          <Row className="stats-row">
+            <Col lg={12}><i className="fas fa-road mr-2 stats-icons"></i>Distance : {Math.round(calculateDistanceBewteenAllSteps(steps))} km</Col>
+          </Row>
+          <Row className="stats-row">
+            <Col lg={12}><i className="fas fa-flag mr-2 stats-icons"></i>Pays visités : 
             {
               trip.trip_localisation.map(country => (
-                  <Flag className="mr-2" key={country.id} code={country.code} height="16" title={country.fr_name} alt={country.fr_name}/>
+                  <Flag className="ml-2" key={country.id} code={country.code} height="16" title={country.fr_name} alt={country.fr_name}/>
               ))
             }
             </Col>
           </Row>
-          <Row>
-            {trip.categories.map(category =>{
-              return <Col key={category.id}>{category.entitled}</Col>
-            })}
+          <Row className="stats-row">
+            <Col xs={12} lg={4}><i className="fas fa-tag mr-2 stats-icons"></i>Catégorie(s)</Col>
+            <Col xs={12} lg={8}>
+            {
+              trip.categories.map(category => (
+                <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
+                  {category.entitled}
+                </Badge>                 
+              ))
+            }
+            </Col>
           </Row>
         </Container> 
         </Col>
 
-        <Col md={6} className="resume-container">
-        Description du voyage
+        <Col className="resume-container">
+        <h4 className="text-center infos-col-title">Description du voyage</h4>
         <p>{trip.summary}</p>
         </Col>
     </Row>

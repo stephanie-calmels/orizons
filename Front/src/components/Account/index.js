@@ -112,7 +112,7 @@ const Account = ({
 
   return (
     <>
-      <Title texte="Mon compte" />
+      <Title texte="Votre compte" />
       {isLoading && (
       <Spinner animation="border" role="status">
         <span className="sr-only">Chargement...</span>
@@ -120,17 +120,17 @@ const Account = ({
       )}
       <Container>
         {/* ==================== CARD ========================================= */}
-        <Card className="card-account">
+        <Card className="card-account mb-2">
           <Card.Img className="card-account__img" src={profilePhoto} />
           {progress > 0 && progress !== 100 && <progress value={progress} max="100" />}
           <form className="form-account">
             <input className="card-account__input" accept="image/*" type="file" onChange={onChangeHandler} />
-            <button type="submit" className="btn btn-primary" onClick={onSubmitHandler}>Valider
+            <button type="submit" className="card-account__input__btn" onClick={onSubmitHandler}>Valider
             </button>
           </form>
-          <LinkContainer to={`/profil/${id}`} className="card-account__link">
-            <Nav.Link>Consulter mon profil</Nav.Link>
-          </LinkContainer>
+          {/* <LinkContainer to={`/profil/${id}`} className="card-account__link">
+            <Nav.Link>Consulter le profil public</Nav.Link>
+          </LinkContainer> */}
           <Card.Body>
             <Card.Title className="card-account__title">Paramètres du compte</Card.Title>
             <Card.Text className="card-account__text">
@@ -151,16 +151,16 @@ const Account = ({
               </ListGroupItem>
             </ListGroup>
           </Card.Body>
-        </Card>
+        
         {/* ==================== BUTTONS ========================================= */}
-        <div className="text-center">
+        <div className="text-center mb-2">
           <Button
             className="m-2"
             onClick={() => {
               handleUpdateModal();
             }}
-            variant="primary"
-          >Modifier mes données{' '}
+            variant="dark"
+          >
             <i className="far fa-edit" />
           </Button>
           <Button
@@ -169,11 +169,11 @@ const Account = ({
               handleDeleteModal();
             }}
             variant="danger"
-          >Supprimer mon compte{' '}
+          >
             <i className="fas fa-trash" />
           </Button>
         </div>
-
+        </Card>
         {/* ================  MODAL Modifier le compte ==================== */}
         <Modal size="xl" show={showUpdate} onHide={() => handleUpdateModal()}>
           <Modal.Header closeButton><h2>Modifier mes données personnelles</h2></Modal.Header>
