@@ -145,20 +145,24 @@ const stepDataMapper = {
         // dégader le pays si plus besoin
         //check dans les étapes si le pays est toujours concerné
         // on récupère le tripId
+        console.log('test1');
         let tripId = await client.query(`SELECT trip_id, country_id FROM step WHERE id = $1`, [stepId]);
         tripId = tripId.rows[0]
+        console.log('test2');
         // je vérifie dans la table step si il y a une autre étape, donc si le compte est >1 si >1 on fait rien si ==1
         const checkSteps = await client.query(`SELECT * FROM step WHERE trip_id = $1 AND country_id = $2`, [tripId.trip_id, tripId.country_id]);
+        console.log('test3');
         if (checkSteps.rowCount == 1) {
             // si =1 on vérifie que ce n'est pas l'étape du carnet
             const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, true]);
             // si ce n'est pas l'étape du carnet on la supprime
+            console.log('test4');
             if (!checkTripCountry) {
                 client.query(`DELETE FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, false])
             }
         }
 
-
+        console.log('test5');
         await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
         return tripId.trip_Id;
     }
@@ -166,4 +170,4 @@ const stepDataMapper = {
 
 };
 
-module.exports = stepDataMapper;
+module.exports = stepDataMapper; {}
