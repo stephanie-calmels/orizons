@@ -20,11 +20,12 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
   }
   return <Container>
     <Row className="infos-container">
-      <Col className="stats-container">Statistiques
+      <Col className="stats-container">
+      <h4 className="text-center infos-col-title">Statistiques</h4>
         <Container className="stats">
           <Row className="stats-row">
             <Col lg={6} ><i class="fas fa-book-open mr-2 stats-icons"></i>{trips[0] != null ? trips.length : 0} carnet(s) publié(s)</Col>
-            <Col lg={6}><i class="fas fa-road mr-2 stats-icons"></i>12000km parcourus</Col>
+            {/* <Col lg={6}><i class="fas fa-road mr-2 stats-icons"></i>12000km parcourus</Col> */}
           </Row>
           <Row className="stats-row">
             <Col lg={4}><i class="fas fa-flag mr-2 stats-icons"></i>Pays visités</Col>
@@ -45,7 +46,7 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       </Col>
 
       <Col className="resume-container">
-        Biographie
+      <h4 className="text-center">Biographie</h4>
         <p>{member.biography}</p>
       </Col>
     </Row>

@@ -1,5 +1,51 @@
+@use 'src/styles/vars';
+
+.form-add-trip {
+  .btn {
+    background-color: vars.$color-tertiary;
+    border-radius: 50px;
+    border: 3px solid vars.$color-tertiary;
+    color: vars.$color-primary;
+    transition-duration: 500ms;
+    padding: 0.5rem 1.5rem;
+
+    &:hover {
+      background-color: vars.$color-secondary;
+      color: vars.$color-tertiary;
+      border: 3px solid vars.$color-tertiary;
+    }
+  }
+}
+
+input[type="file"] {
+  overflow: hidden;
+}
+
+.trip-preview-container {
+  .card_trips {
+    box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+
+    &-img-top {
+      padding: 1rem !important;
+    }
+
+    &.title {
+      padding-bottom: 1rem !important;
+    }
+
+    &-subtitle {
+      padding-bottom: 1rem !important;
+    }
+
+    &-text {
+      padding-bottom: 1rem !important;
+    }
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .trip-preview-container{
     display: none;
+
   }
 }

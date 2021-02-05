@@ -1,28 +1,48 @@
+@use 'src/styles/vars';
+
 .home_banner {
   width: 100%;
   border: none;
+  height: 92vh;
+  overflow: hidden;
+  border-radius: 0 !important;
   
   &-title {
-    font-style: italic;
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     text-align: center;
-    text-shadow: 2px 0px 0px #000000, -2px 0px 0px #000000, 0px 2px 0px #000000, 0px -2px 0px #000000;
+    font-family: vars.$font-quote;
+    font-style: italic;
     
   }
   
   &-card {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4) !important;
     width: 60%;
     border: none;
     padding: 2rem;
     text-align: center;
     font-size: 1.1rem;
+
+    &-img-overlay {
+      border-radius: 0 !important;
+    }
     
     &-btn {
-      min-width: 35%;
-      max-width: 50%;
-      align-self: center;
-      
+    min-width: 35%;
+    max-width: 50%;
+    align-self: center;
+    background-color: vars.$color-tertiary;
+    border-radius: 50px;
+    border: 3px solid vars.$color-tertiary;
+    color: vars.$color-primary;
+    transition-duration: 500ms;
+    padding: 0.5rem 1.5rem;
+
+      &:hover {
+        background-color: vars.$color-secondary;
+        color: vars.$color-tertiary;
+        border: 3px solid vars.$color-tertiary;
+      }
     }
   }
   
@@ -37,12 +57,13 @@
 }
 
 .row {
-  // background-color: #fcf8e8;
 
   &-title {
     text-align: center;
-    margin: 2rem auto !important;
+    margin: 3.5rem auto !important;
     font-style: italic;
+    font-size: 2.7rem;
+    font-family: vars.$font-title !important;
   }
 }
 
@@ -58,8 +79,11 @@
   align-items: center;
   margin: 0 2rem 2rem 2rem;
   position: relative;
+  left: 100px;
   border: none;
-  background-color: #fcf8e8;
+  background-color: vars.$color-secondary;
+  color: vars.$color-primary;
+
 
   &-image {
     max-width: 35%;
@@ -67,13 +91,16 @@
 
   &-body {
     position: absolute;
-    left: 150px;
-    right: 50px;
-    background-color:  rgba(212, 226, 212, 0.8);
-    text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+    left: 320px;
+    right: 100px;
+    background-color: vars.$color-tertiary;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
 
+  }
+
+  &-text {
+    font-style: italic;
   }
 }
 
@@ -83,39 +110,60 @@
   align-items: center;
   margin: 0 2rem 2rem 2rem;
   position: relative;
+  right: 100px;
   border: none;
   flex-direction: row-reverse;
   text-align: right;
-  background-color: #fcf8e8;
+  background-color: vars.$color-secondary;
+  color: vars.$color-primary;
+
 
   &-body {
     position: absolute;
-    left: 50px;
-    right: 150px;
-    background-color:  rgba(212, 226, 212, 0.8);
-    text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+    left: 100px;
+    right: 320px;
+    background-color:  vars.$color-tertiary;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
+  }
 
+  &-text {
+    font-style: italic;
+  }
+
+  &-text {
+    font-style: italic;
   }
 }
 
 .card_home {
   margin: 1rem 0 !important;
   max-width: 260px;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  text-align: center;
 
+  &-container {
+    margin-top: 2.5rem;
+  }
 
   &-img-top {
     height: 150px;
+    padding: 10px;
   }
 
   &-body {
-    height: 220px;
+    // height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &-title {
-    height: 20px;
-    font-size: 1.1rem;
+    // height: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+    font-family: vars.$font-title;
   }
 
   &-text {
@@ -137,24 +185,44 @@
 }
 
 .form_container {
-  margin: 3rem 0;
+  margin: 1.5rem 0;
 }
 
 .form_search {
   text-align: center;
   margin: 2rem 0;
+
+  .btn {
+    background-color:  vars.$color-tertiary;
+    border: none;
+  }
 }
 
 .random_search-button {
   align-self: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  background-color: vars.$color-tertiary;
+  border-radius: 50px;
+  border: 3px solid vars.$color-tertiary;
+  color: vars.$color-primary;
+  transition-duration: 500ms;
+  padding: 0.5rem 1.5rem;
+  
+    &:hover {
+      background-color: vars.$color-secondary;
+      color: vars.$color-tertiary;
+      border: 3px solid vars.$color-tertiary;
+    }
+
 }
  
 .blockquote {
-  font-size: 0.9rem;
-  font-style: italic;
+  font-size: 1rem;
   margin-top: 4rem;
+  padding: 0 4rem !important;
   text-align: center;
+  font-family: vars.$font-quote;
+  font-style: italic;
 }
 
 @media screen and (min-width: 1200px) {
@@ -166,7 +234,7 @@
     }
 
     &-body {
-      right: 100px;
+      right: 200px;
       font-size: 1rem;
     }
   }
@@ -174,12 +242,14 @@
   .card_benefits-revert {
 
     &-body {
-      left: 100px;
+      left: 200px;
       font-size: 1rem;
     }
   }
 
   .card_home {
     margin: 1rem auto !important;
+    height: 200px;
+
   }
 }

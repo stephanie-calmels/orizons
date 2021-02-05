@@ -3,6 +3,7 @@ const tripDataMapper = require('../datamapper/tripDataMapper');
 const stepDataMapper = require('../datamapper/stepDataMapper');
 const localisationDataMapper = require('../datamapper/localisationDataMapper');
 const categoryDataMapper = require('../datamapper/categoryDataMapper');
+const tripStepDataMapper = require('../datamapper/tripStepDataMapper');
 
 
 const tripController = {
@@ -27,7 +28,7 @@ const tripController = {
             } = request.params
 
             // 1 - les informations de 1 vopyage
-            const trip = await tripDataMapper.getTripById(tripId);
+            const trip = await tripStepDataMapper.getTripById(tripId);
 
 
             const steps = await stepDataMapper.getStepByTripId(tripId);
@@ -77,24 +78,37 @@ const tripController = {
         }
     },
     async updateAllTrip(request, response, next) {
-        try {
-            const trips = await tripDataMapper.updateAllTrip();
-            response.json({
-                data: trips
-            })
-        } catch (error) {
-            next(error)
-        }
+
     },
     async updateOneTrip(request, response, next) {
         try {
             const {
                 tripId
             } = request.params
-            const trip = await tripDataMapper.updateOneTrip(tripId);
+            const tripInfos = request.body
+            console.log('trip Infos', tripInfos)
+            const updatedTrip = await tripDataMapper.updateOneTrip(tripId, tripInfos);
+            const trip = await tripStepDataMapper.getTripById(updatedTrip);
+
+
+            const steps = await stepDataMapper.getStepByTripId(updatedTrip);
+
+
+
+
             response.json({
-                data: trip
+                data: [{
+                        trip,
+                        steps
+                    },
+
+                ]
             })
+
+            /*response.json({
+                data: trip
+            })*/
+
         } catch (error) {
             next(error)
         }

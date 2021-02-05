@@ -104,7 +104,7 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
               {errors.summary && <div className="text-danger">{errors.summary.message}</div>}
             </Form.Group>
             <Form.Group size="lg" controlId="localisation">
-              <Form.Label>Localisation</Form.Label>
+              <Form.Label>1er pays visité</Form.Label>
                 <InputGroup>
                   <Form.Control
                     as="select"
@@ -126,9 +126,6 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
             </Form.Group>
             <Form.Group size="lg" controlId="coverpicture">
               <Form.Label>Photo de couverture</Form.Label>
-              {/*<FileBase64 multiple={false} onDone={(data)=>{
-                handleImage(data) 
-              }} /> */}
               <Form.Control
                 name="coverpicture"
                 type="file"
