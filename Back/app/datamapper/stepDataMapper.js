@@ -104,6 +104,7 @@ const stepDataMapper = {
                 ])
         }
         // update photos
+        let counter = 1
         let pictures = stepInfos.pictures;
         for (let index = 0; index < pictures.length; index++) {
             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures[index]]);
