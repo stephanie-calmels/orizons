@@ -8,8 +8,7 @@ import Banner from './Banner';
 import Description from './Description';
 import dayjs from 'dayjs';
 
-const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
-  countries, editTrip, deleteTrip, editStep, deleteStep }) => {
+const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, handleClick, countries, editTrip, deleteTrip, editStep, deleteStep }) => {
   useEffect(() => {
     loadTrip(tripIdFromUrl);
   }, []);
@@ -67,6 +66,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
           author={trip.trip.author[0]}
           picture={trip.trip.cover_trip}
           title={trip.trip.title}
+          handleClick={handleClick}
         />
         {
           trip.trip.author[0].id === connectedUserId && <div className="trip_buttons">
