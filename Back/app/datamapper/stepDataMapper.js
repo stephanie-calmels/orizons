@@ -154,7 +154,7 @@ const stepDataMapper = {
         console.log('test3');
         if (checkSteps.rowCount == 1) {
             // si =1 on vérifie que ce n'est pas l'étape du carnet
-            const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1, country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, true]);
+            const checkTripCountry = await client.query(`SELECT * FROM _m2m_trip_country WHERE trip_id = $1 AND country_id = $2, trip = $3`, [tripId.trip_id, tripId.country_id, true]);
             // si ce n'est pas l'étape du carnet on la supprime
             console.log('test4');
             if (!checkTripCountry) {
