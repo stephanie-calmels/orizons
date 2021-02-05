@@ -150,6 +150,8 @@ const stepDataMapper = {
         tripId = tripId.rows[0]
         console.log('test2');
         // je vérifie dans la table step si il y a une autre étape, donc si le compte est >1 si >1 on fait rien si ==1
+        console.log(tripId.trip_id);
+        console.log(tripId.country_id)
         const checkSteps = await client.query(`SELECT * FROM step WHERE trip_id = $1 AND country_id = $2`, [tripId.trip_id, tripId.country_id]);
         console.log('test3');
         console.log(checkSteps.rowCount)
