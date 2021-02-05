@@ -80,7 +80,7 @@ const stepDataMapper = {
 
         // searching country's id
         const country = await client.query(`SELECT id FROM "country" WHERE "code" = $1`, [stepInfos.country_code])
-
+        console.log(stepI.country_code)
         // searching the old country id of the step
         const oldStepCountry = await client.query(`SELECT "country_id" FROM "step" WHERE "id" = $1`, [stepId])
 
