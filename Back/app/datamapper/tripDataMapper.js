@@ -43,9 +43,9 @@ const tripDataMapper = {
                 //categories // tableau dans m2m
             ]);
 
-        console.log(trip.rows[0].id, '----------------------------------')
+
         const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [newTrip.country_code]);
-        console.log(country.rows[0].id, '????????????????????????')
+
         await client.query(`INSERT INTO "_m2m_trip_country"("trip_id", "country_id") VALUES ($1, $2)`, [trip.rows[0].id, country.rows[0].id]);
 
 
@@ -73,7 +73,6 @@ const tripDataMapper = {
             ]);
 
         const country = await client.query(`SELECT "id" FROM "country" WHERE "code" = $1`, [tripInfos.country_code]);
-        console.log(country.rows[0].id);
 
         const searchedTripCountry = await client.query(`SELECT * FROM "_m2m_trip_country" tc WHERE tc.trip_id = $1 AND tc.country_id = $2`,
             [
@@ -81,7 +80,7 @@ const tripDataMapper = {
                 country.rows[0].id
             ])
         //searchedTripCountry = searchedTripCountry.result.rows[0]
-        console.log('trouvé', searchedTripCountry.rows[0])
+
         if (searchedTripCountry.rows[0]) {
             // if trip = true, we check if the pair is linked to a step.
             if (searchedTripCountry.rows[0].trip == true) {
@@ -116,8 +115,6 @@ const tripDataMapper = {
 
 
         }
-        console.log('triptrunc')
-
 
 
         return tripId;
@@ -157,16 +154,13 @@ const tripDataMapper = {
 
     },
     async deleteOneStep(stepId) {
-        console.log(stepId, 'deleteOneStep')
         const verify = await client.query(`SELECT * FROM photo WHERE step_id = $1`, [stepId]);
-        console.log(verify.rowCount, '-------------');
+
         if (verify.rowCount != 0) {
             await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId]);
 
         }
-        console.log('stepId', stepId)
         await client.query(`DELETE FROM step WHERE id = $1`, [stepId]);
-        console.log('pouet')
         const messages = `Suppression de l'étape terminée`;
         return messages;
     }

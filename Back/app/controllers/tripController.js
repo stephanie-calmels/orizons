@@ -10,9 +10,7 @@ const tripController = {
     async getAllTrip(request, response, next) {
         try {
             const trips = await tripDataMapper.getAllTrips();
-            console.log(trips)
-            //const categories = await categoryDataMapper.getCategoryByTripId(trips.id);
-            //console.log(categories)
+
             response.json({
                 data: trips,
                 //    categories
@@ -69,7 +67,7 @@ const tripController = {
         try {
             const newTrip = request.body;
             const trip = await tripDataMapper.createTrip(newTrip);
-            console.log(trip)
+
             response.json({
                 data: trip
             })
@@ -86,16 +84,10 @@ const tripController = {
                 tripId
             } = request.params
             const tripInfos = request.body
-            console.log('trip Infos', tripInfos)
+
             const updatedTrip = await tripDataMapper.updateOneTrip(tripId, tripInfos);
             const trip = await tripStepDataMapper.getTripById(updatedTrip);
-
-
             const steps = await stepDataMapper.getStepByTripId(updatedTrip);
-
-
-
-
             response.json({
                 data: [{
                         trip,
@@ -104,11 +96,6 @@ const tripController = {
 
                 ]
             })
-
-            /*response.json({
-                data: trip
-            })*/
-
         } catch (error) {
             next(error)
         }
