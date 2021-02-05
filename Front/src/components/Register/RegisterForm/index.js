@@ -123,7 +123,7 @@ const Register = ({
           {errors.passwordRepeat && <div className="text-danger">{errors.passwordRepeat.message}</div>}
         </Form.Group>
         {isLoading ? (
-          <Button variant="primary" disabled>
+          <Button className="loading-spinner" disabled>
             <Spinner
               as="span"
               animation="border"

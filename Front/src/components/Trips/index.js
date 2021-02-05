@@ -15,7 +15,7 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
   return (
     // <div className="background-image-register">
     <Container>
-        <Title texte="Explorer les carnets de voyage de la communauté" />
+        <Title texte="Explorez les carnets de voyage de la communauté" />
 
         <CardDeck> 
           <Row>
@@ -40,7 +40,6 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
                       </Card.Text>
                       <Card.Text className="card_trips-text">
                         {trip.categories.map(category => (
-                          
                             <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
                               {category.entitled}
                             </Badge>                 
