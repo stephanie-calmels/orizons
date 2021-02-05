@@ -1,5 +1,6 @@
 import { GET_TRIP_SUCCESS, UPDATE_TRIP_SUCCESS, UPDATE_STEP_SUCCESS,
   POST_NEW_STEP_SUCCESS,
+  DELETE_STEP_SUCCESS,
 } from '../actions/types';
 
 
@@ -29,6 +30,11 @@ const reducer = (oldState = initialState, action) => {
         ...oldState,
         tripItem: action.step,
       };
+      case DELETE_STEP_SUCCESS:
+      return {
+        ...oldState,
+        tripItem: action.trip
+      }
     default:
       return oldState;
   }
