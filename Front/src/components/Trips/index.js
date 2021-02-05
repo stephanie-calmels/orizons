@@ -13,6 +13,7 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
   },[]);
 
   return (
+    // <div className="background-image-register">
     <Container>
         <Title texte="Explorer les carnets de voyage de la communauté" />
 
@@ -65,6 +66,7 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
         </Row> */}
 
     </Container>
+    // </div>
   );
 };
 

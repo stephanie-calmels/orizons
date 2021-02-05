@@ -92,3 +92,14 @@
     border: 2px solid vars.$color-tertiary;
   }
 }
+
+input#search {
+  width: 100px;
+}
+
+input#search:focus, input#search:active {
+  width: 350px;
+}
+button#searchBtn:hover input#search{
+  width: 300px;
+}

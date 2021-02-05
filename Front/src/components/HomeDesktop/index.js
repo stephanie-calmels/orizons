@@ -16,15 +16,21 @@ const HomeDesktop = ({
   }, []);
 
   return (
+    <>
+    <div className="background-image-home">
+      <h2 className="home-banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
+            Ibn Battuta</h2>
+    </div>
   <Container fluid>
-    <Row>
+      {/*
+      <Row> 
       <Card className="text-white home_banner">
         <Card.Img src="https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg" className="home_banner-image" />
         <Card.ImgOverlay className="home_banner-overlay">
           <Card.Title className="home_banner-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur." <br />
             Ibn Battuta
           </Card.Title>
-          {/*<Card className="home_banner-card">
+          <Card className="home_banner-card">
             <Card.Text>
               O'rizons met à votre disposition tous les outils nécessaires pour raconter votre voyage, comme bon vous semble.
             </Card.Text>
@@ -46,10 +52,10 @@ const HomeDesktop = ({
                   )
               }
 
-          </Card>*/}
+          </Card>
         </Card.ImgOverlay>
-      </Card>
-    </Row>
+      </Card> 
+    </Row>*/}
 
     <Row>
       <h4 className="row-title">O'rizons, qu'est-ce que c'est ?</h4>
@@ -243,7 +249,7 @@ const HomeDesktop = ({
 
     <Row>
       <Col>
-        <Carousel touch>
+        <Carousel className="home-testimonials" controls={false} indicators={false} touch>
 
           <Carousel.Item>
             <CardDeck>
@@ -363,8 +369,8 @@ const HomeDesktop = ({
         </Carousel>
       </Col>
     </Row>
-
   </Container>
+  </>
 )};
 
 export default HomeDesktop;
