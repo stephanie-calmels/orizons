@@ -8,7 +8,6 @@ const Banner = ({ author, picture, title, handleClick }) => {
   const styles = {
     backgroundImage: `url(${picture})`,
     height: '60vh',
-    width: '100vw',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   };
