@@ -84,7 +84,7 @@ const Header = ({
                   <Nav.Link>Se connecter</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/inscription">
-                  <Nav.Link>S'inscrire</Nav.Link>
+                  <Nav.Link id="inscription">S'inscrire</Nav.Link>
                 </LinkContainer>
               </>
             )}

@@ -13,7 +13,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
   useEffect(() => {
     //console.log(profile)
     loadProfile(profileIdFromUrl);
-  }, []);
+  }, [profileIdFromUrl]);
 
   //Gestion modale modification de profil
   const [show, setShow] = useState(false);
@@ -132,7 +132,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                   ref={register()}
                   />
                 </Form.Group>
-                <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+                <Button variant="dark" size="lg" className="mt-3" type="submit" disabled={submitting}>
                 Valider
                 </Button>
               </Form>

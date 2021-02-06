@@ -175,7 +175,7 @@ const Account = ({
         </div>
         </Card>
         {/* ================  MODAL Modifier le compte ==================== */}
-        <Modal size="xl" show={showUpdate} onHide={() => handleUpdateModal()}>
+        <Modal size="lg" show={showUpdate} onHide={() => handleUpdateModal()}>
           <Modal.Header closeButton><h2>Modifier mes données personnelles</h2></Modal.Header>
           <Modal.Body>
             <Form
@@ -245,7 +245,7 @@ const Account = ({
                 {errors.email && <div className="text-danger">{errors.email.message}</div>}
               </Form.Group>
               {isLoading ? (
-                <Button variant="primary" disabled>
+                <Button variant="dark" disabled>
                   <Spinner
                     as="span"
                     animation="border"
@@ -257,8 +257,9 @@ const Account = ({
                 </Button>
               ) : (
                 <Button
+                  variant="dark"
                   size="lg"
-                  className="mt-3"
+                  className="mt-3-auto"
                   type="submit"
                 >
                   Valider

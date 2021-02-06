@@ -1,6 +1,7 @@
 @use 'src/styles/vars';
 
 .form {
+  border: 3px solid vars.$color-tertiary;
   width: 90%;
   background-color: vars.$color-secondary;
   margin: auto;

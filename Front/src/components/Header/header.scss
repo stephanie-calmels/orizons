@@ -7,13 +7,16 @@
 
   a {
     color:vars.$color-primary !important;
+    &.nav-link {
+      margin-left: 1rem;
+    }
     &:hover {
       color:vars.$color-secondary !important;
     }
   }
 
   .input-group {
-    margin-left: 0;
+    margin: 0 1rem 0;
 
     .btn {
       background-color: vars.$color-secondary !important;
@@ -37,6 +40,9 @@
       a {
         color: vars.$color-tertiary !important;
         transition-duration: 500ms;
+        &.nav-link {
+          margin-left: 0rem;
+        }
 
         &:hover {
           color: vars.$color-primary !important;
@@ -65,16 +71,29 @@
 
 .logo {
   font-size: 40px;
+  padding-bottom: 1.1rem;
   background: -webkit-linear-gradient(#EE82EE, #1E90FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: vars.$font-title !important;
+  margin-left: 0px;
 }
+
 
 @media screen and (min-width: 1024px) {
   .profile {
     display: flex;
     align-items: center;
+  }
+
+  #inscription {
+    margin-right: 1rem;
+    border: 1px solid vars.$color-secondary;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    background-color: vars.$color-secondary;
+    color: vars.$color-tertiary !important;
+    display: inline;
   }
 
   .navbar_header {
@@ -92,15 +111,23 @@
     margin-top: 0.5rem !important;
     border: 2px solid vars.$color-tertiary;
   }
+
+  input#search:focus, input#search:active {
+    width: 350px;
+  }
 }
+
+// ============== SEARCH BAR EXPANDING ====================
 
 input#search {
   width: 100px;
 }
 
-input#search:focus, input#search:active {
-  width: 350px;
-}
-button#searchBtn:hover input#search{
-  width: 300px;
-}
+// input#search:focus, input#search:active {
+//   width: 250px;
+// }
+// button#searchBtn:hover input#search{
+//   width: 300px;
+// }
+
+

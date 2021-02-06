@@ -43,6 +43,7 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         filteredTrips: action.trips,
+        search: '',
       };
     case CHANGE_SEARCH_FIELD:
       return {

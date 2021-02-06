@@ -31,8 +31,6 @@
   &__input {
 
     &__btn {
-      // min-width: 35%;
-      // max-width: 50%;
       align-self: center;
       background-color: vars.$color-tertiary;
       border-radius: 50px;
@@ -53,9 +51,6 @@
 progress {
   margin: 0 auto;
 }
-
-
-
 
 @media screen and (min-width: 1024px) {
   .card-account {

@@ -1,12 +1,12 @@
 import React from 'react';
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
+import Title from 'src/components/PageTitle';
 
 const Results = ({ filteredTrips, showMoreResults, handleClick }) => {
  
   return (
     <Container>
-        <h1 className="text-center p4 font-weight-bold">Résultats de votre recherche</h1>
-
+        <Title texte="Résultats de votre recherche" />
         <CardDeck>
           <Container>
             <Row>

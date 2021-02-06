@@ -19,8 +19,6 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   }
   let mapZoom = 6;
   
-
-  console.log(mapCenter)
   const distanceCalculatorBetween2points = (lat1, lon1, lat2, lon2)=>{
     var p = 0.017453292519943295;    // Math.PI / 180
     var c = Math.cos;
