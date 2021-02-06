@@ -19,7 +19,6 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       mapData[localisation.code_2] = 1
     ))
   ))}
-  console.log(mapData);
   return <Container>
     <Row className="infos-container">
       <Col className="stats-container">

@@ -132,7 +132,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                   ref={register()}
                   />
                 </Form.Group>
-                <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+                <Button variant="dark" size="lg" className="mt-3" type="submit" disabled={submitting}>
                 Valider
                 </Button>
               </Form>

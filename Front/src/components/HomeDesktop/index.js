@@ -82,7 +82,7 @@ const HomeDesktop = ({
               <div className="card_benefits-body">
                 <h2 className="card_benefits-title">Une communauté de voyageurs qui partagent leurs expériences</h2>
                 <p className="card_benefits-text">
-                  Découvrez les carnets de voyageurs venus d'horizons différents et, qui sait, vous trouverez peut-être une idée pour votre prochain week-end en famille ou pour votre voyages de noces. Suivez les aventures de vos voyageurs favoris et apportez-leur votre soutien en commentant leurs publications !
+                  Découvrez les carnets de voyageurs venus d'horizons différents et vous trouverez peut-être une idée pour votre prochain week-end en famille ou pour votre voyage de noces. Suivez les aventures de vos voyageurs favoris !
             </p>
               </div>
             </div>

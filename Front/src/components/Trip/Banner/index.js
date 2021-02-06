@@ -5,6 +5,7 @@ import './banner.scss';
 
 const Banner = ({ author, picture, title, handleClick }) => {
   // console.log(picture)
+
   const styles = {
     backgroundImage: `url(${picture})`,
     height: '60vh',
