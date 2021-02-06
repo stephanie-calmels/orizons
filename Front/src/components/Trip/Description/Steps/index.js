@@ -158,17 +158,17 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   <Container>
   <Row>
     <Col className="nav-container">
-      {steps.map(step=> {
+      {steps.map((step, index)=> {
         const sluggedTitleAsAnchor = '#' + slugify(step.step_title, {lower:true});
         return <Nav key={step.id_step}>
           <Nav.Item>
-            <Nav.Link href={sluggedTitleAsAnchor} className="step-numbers">{step.number_step}</Nav.Link>
+            <Nav.Link href={sluggedTitleAsAnchor} className="step-numbers">{index + 1}</Nav.Link>
           </Nav.Item>
         </Nav>
       })} <i className="fas fa-flag-checkered icon-flag" />
     </Col>
   </Row>
-  <Row>
+  <Row className="steps_container">
   <Col>
   {/*Pour chaque step du trip, on crée une nouvelle carte TODO: améliorer le style, dimensions et ajout de bordure */}
   {steps.map(step=>{
@@ -191,33 +191,34 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
             <Card.Title> {step.step_title}</Card.Title>
             <Card.Subtitle>{step.number_step}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
-            {trip.author[0].id  === connectedUserId && <>
-            <Button className="edit-step-button" onClick={()=>{handleShow(step)}} ><i className="fas fa-pencil-alt" /> Editer l'étape</Button>
-            <Button variant="danger" className="delete-step-button" onClick={()=>{handleShowDelete(step.id_step)}}><i className="fas fa-trash-alt" /> Supprimer l'étape</Button>
-            </>
+            {
+              trip.author[0].id  === connectedUserId && <div className="step_buttons">
+                <Button className="edit-step-button" onClick={()=>{handleShow(step)}} ><i className="fas fa-pencil-alt" /> Editer l'étape</Button>
+                <Button variant="danger" className="delete-step-button" onClick={()=>{handleShowDelete(step.id_step)}}><i className="fas fa-trash-alt" /> Supprimer l'étape</Button>
+              </div>
             }
           </Card.Body>
 
       {/* Modale confirmation suppression de l'étape */}
       <Modal show={showDelete[step.id_step]} onHide={()=>{handleCloseDelete(step.id_step)}}>
-              <Modal.Header closeButton>
+              <Modal.Header closeButton className="form-title">
                     <Modal.Title>Suppression de votre étape</Modal.Title>
               </Modal.Header>
                     <Modal.Body>
                       <p> Êtes-vous sûr de vouloir supprimer votre étape ? Toute suppression est irréversible.</p>
                     </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="danger" onClick={()=>{
+                    <Modal.Footer className="form-title">
+                      <Button variant="danger" className="m-2" onClick={()=>{
                         handleCloseDelete(step.id_step);
                         deleteStep(step.id_step, step.trip_id);
-                      }}>Oui, supprimer</Button>
-                      <Button onClick={()=>handleCloseDelete(step.id_step)}>Annuler</Button>
+                      }}>Supprimer</Button>
+                      <Button onClick={()=>handleCloseDelete(step.id_step)} className="m-2" variant="dark">Annuler</Button>
                     </Modal.Footer>
               </Modal>
 
            {/* Modale modification d'une étape */}
    <Modal show={show[step.id_step]} onHide={()=>{handleClose(step.id_step)}} >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="form-title">
               <Modal.Title>Modifier les infos de votre étape</Modal.Title>
             </Modal.Header>
 
@@ -314,9 +315,10 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 {values.localisation.length > 0 && <DraggableMarker />}
               </MapContainer>
 
-              <Button onClick={getUserPosition}>Utiliser ma position</Button>
-              <Button onClick={showLocationInput}>Entrer une adresse</Button>
-
+              <div className="form_buttons">
+                <Button onClick={getUserPosition} className="form-button form-button-gps">Utiliser ma position</Button>
+                <Button onClick={showLocationInput} className="form-button form-button-gps">Entrer une adresse</Button>
+              </div>
               {values.showInput && (
               <InputGroup><Form.Control
                 name="localisationInput"
@@ -357,7 +359,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
               {errors.date && <div className="text-danger">{errors.date.message}</div>}
             </Form.Group>
 
-            <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+            <Button size="lg" className="form-button" type="submit" disabled={submitting}>
               Valider
             </Button>
 

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import history from '../history';
 
 import Trip from 'src/components/Trip';
 import { getTrip, updateTrip, deleteTrip, updateStep, deleteStep } from '../actions/trip';
@@ -27,7 +28,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   deleteStep: (id, tripid) => {
     dispatch(deleteStep(id, tripid));
-  }
+  },
+  handleClick: (id) => {
+    history.push(`/profil/${id}`);
+  },
 });
 // grace au hoc connect, j'enrichis mon composant avec des props liées au state
 const container = connect(mapStateToProps, mapDispatchToProps)(Trip);

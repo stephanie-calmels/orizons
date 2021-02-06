@@ -9,7 +9,8 @@
 
 .edit-trip-button, 
 .delete-trip-button, 
-.add-step-button {
+.add-step-button,
+.form-button {
     min-width: 50%;
     max-width: 70%;
     margin-top: 1rem;
@@ -37,8 +38,18 @@
     margin-bottom: 2rem;
 }
  
+.form-title {
+  background-color: vars.$color-secondary;
+}
+
+.form-button-gps {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
 @media screen and (min-width: 1024px) {
-    .trip_buttons {
+    .trip_buttons,
+    .form_buttons {
         display: flex;
         flex-direction: row;
     }
@@ -48,5 +59,12 @@
     .add-step-button {
         min-width: 15%;
         max-width: 35%;
+    }
+
+    .form-button-gps,
+    .form-button {
+      min-width: 30%;
+      max-width: 60%;
+      margin: 0 0.5rem 0.5em 0.5rem;
     }
 }

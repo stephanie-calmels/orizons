@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, authorId, connectedUserId, realTripId }) => {
+const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, connectedUserId, trip }) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -45,7 +45,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   const MovingMap = () => {
     const map = useMap();
     localisation.length > 0 && useEffect(() => {
-      map.flyTo(localisation);
+      map.flyTo(localisation, 8);
     }, [localisation]);
     return null;
   };
@@ -111,15 +111,17 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   useEffect(() => {
     getCountryFromAPI();
   }, [localisation]);
-
+  console.log('tripAddStep',trip)
   // START OF ADDSTEP COMPONENT
   return (
     <div>
-            {connectedUserId == authorId && <div className="add-step-container"><Button onClick={handleShow} className="add-step-button"> Ajouter une étape </Button></div>}
+
+            {connectedUserId == trip.author[0].id && <div className="add-step-container"><Button onClick={handleShow} className="add-step-button"> Ajouter une étape </Button></div>}
+
 
       
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="form-title">
           <Modal.Title>Ajouter une étape</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -131,7 +133,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               formData.localisation = localisation;
               formData.country = country;
               formData.country_code = country_code;
-              formData.trip_id = realTripId;
+              formData.trip_id = trip.id;
               const fileListToArray = [...formData.pictures];
               const emptyArray = [];
               const promises = [];
@@ -204,9 +206,8 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
             <Form.Group size="lg" controlId="localisation">
               <Form.Label>Localisation</Form.Label>
               <MapContainer
-            // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
-                center={[45, -1]}
-                zoom={13}
+                center={[48.866667, 2.333333]}
+                zoom={2}
                 scrollWheelZoom
                 id="modal-map"
               >
@@ -219,8 +220,10 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
                 {localisation.length > 0 && <DraggableMarker />}
               </MapContainer>
 
-              <Button onClick={getUserPosition}>Utiliser ma position</Button>
-              <Button onClick={showLocationInput}>Entrer une adresse</Button>
+              <div className="form_buttons">
+                <Button onClick={getUserPosition} className="form-button form-button-gps">Utiliser ma position</Button>
+                <Button onClick={showLocationInput} className="form-button form-button-gps">Entrer une adresse</Button>
+              </div>
 
               {showInput && (
               <InputGroup><Form.Control
@@ -259,6 +262,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               <Form.Control
                 name="date"
                 type="date"
+                min={trip.departure_date}
                 defaultValue={date}
                 onChange={(e) => handleChange(e)}
                 ref={register({
@@ -268,7 +272,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               {errors.date && <div className="text-danger">{errors.date.message}</div>}
             </Form.Group>
 
-            <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+            <Button size="lg" className="form-button" type="submit" disabled={submitting}>
               Valider
             </Button>
 

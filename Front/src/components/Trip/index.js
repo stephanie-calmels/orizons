@@ -8,8 +8,7 @@ import Banner from './Banner';
 import Description from './Description';
 import dayjs from 'dayjs';
 
-const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
-  countries, editTrip, deleteTrip, editStep, deleteStep }) => {
+const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, handleClick, countries, editTrip, deleteTrip, editStep, deleteStep }) => {
   useEffect(() => {
     loadTrip(tripIdFromUrl);
   }, []);
@@ -67,6 +66,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
           author={trip.trip.author[0]}
           picture={trip.trip.cover_trip}
           title={trip.trip.title}
+          handleClick={handleClick}
         />
         {
           trip.trip.author[0].id === connectedUserId && <div className="trip_buttons">
@@ -75,30 +75,30 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
           </div>
         }
         <Description trip={trip.trip} steps={trip.steps} connectedUserId={connectedUserId} editStep={editStep} deleteStep={deleteStep}/>
-        <AddStep authorId={trip.trip.author[0].id} connectedUserId={connectedUserId} realTripId={trip.trip.id}/> 
+        <AddStep connectedUserId={connectedUserId} trip={trip.trip}/> 
 
         {/* Modale confirmation suppression de carnet */}
         <Modal show={showDelete} onHide={handleCloseDelete}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="form-title">
               <Modal.Title>Suppression de votre carnet</Modal.Title>
         </Modal.Header>
               <Modal.Body>
                 <p> Êtes-vous sûr de vouloir supprimer votre carnet de voyage ? Toute suppression est irréversible.</p>
               </Modal.Body>
-              <Modal.Footer>
-                <Button variant="danger" onClick={()=>{
+              <Modal.Footer className="form-title">
+                <Button variant="danger" className="m-2" onClick={()=>{
                   handleCloseDelete();
                   deleteTrip();
-                }}>Oui, supprimer</Button>
-                <Button onClick={handleCloseDelete}>Annuler</Button>
+                }}>Supprimer</Button>
+                <Button onClick={handleCloseDelete} className="m-2" variant="dark">Annuler</Button>
               </Modal.Footer>
         </Modal>
 
 
         {/* Modale modification de carnet */}
         <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-              <Modal.Title>Modifier les infos de votre carnet</Modal.Title>
+          <Modal.Header closeButton className="form-title">
+              <Modal.Title >Modifier les infos de votre carnet</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -259,7 +259,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList,
             </Form.Group>
           
           
-                <Button size="lg" className="mt-3" type="submit" disabled={submitting}>
+                <Button size="lg" className="form-button" type="submit" disabled={submitting}>
                 Valider
                 </Button>
               </Form>

@@ -13,7 +13,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 1rem auto;
-  padding: 0 0 1rem 0;
+  padding: 0;
   border-radius: 5px;
   background-color: vars.$color-primary;
   color: vars.$color-tertiary;
@@ -39,7 +39,7 @@
 .resume-container {
   font-size: 1.2rem;
   margin: 1rem auto;
-  padding: 0 0 1rem 0;
+  padding: 0;
   border-radius: 5px;
   background-color: vars.$color-tertiary;
   background-color: vars.$color-primary;
@@ -65,6 +65,9 @@
   padding-bottom: 1rem;
 }
 
+.map{
+  border: .3rem solid vars.$color-tertiary;
+}
 @media screen and (min-width: 768px) {
   .infos-container {
     flex-direction: row;
