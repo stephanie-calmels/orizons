@@ -38,13 +38,13 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
                       <Card.Text className="card_trips-text">
                           {trip.summary}
                       </Card.Text>
-                      <Card.Text className="card_trips-text">
+                      {/* <Card.Text className="card_trips-text">
                         {trip.categories.map(category => (
                             <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
                               {category.entitled}
                             </Badge>                 
                         ))}
-                      </Card.Text>
+                      </Card.Text> */}
                       </Card.Body>
                       <Card.Footer className="card_trips-footer">
                       <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />

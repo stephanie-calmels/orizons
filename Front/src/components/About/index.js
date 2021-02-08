@@ -22,7 +22,7 @@ const About = () => {
       id: 3,
       name: "Stéphanie",
       title: "Git Master",
-      photo: "https://ca.slack-edge.com/T018S94MBUY-U0198NZKVT2-ecfac0f3a55b-512",
+      photo: "https://ca.slack-edge.com/T018S94MBUY-U0198NZKVT2-5e789b566ecb-512",
     },
     {
       id: 4,
