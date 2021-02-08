@@ -11,16 +11,39 @@
   margin: 1rem 0 !important;
   box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
   text-align: center;
-  font-size: 1.2rem;
   font-weight: bold;
   font-style: italic;
   font-family: vars.$font-title;
+  width: 200px;
   
   &-body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 0.3rem !important;
   }
+
+  &-img {
+    height: 140px !important;
+    padding: 10px;
+  }
+
+  &-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-style: italic;
+    font-family: vars.$font-title;
+    margin-bottom: 0;
+  }
+
+  .btn {
+    padding: 0.4rem !important;
+    font-size: 0.8rem;
+
+  }
+
+
 }
 
 .leaflet-popup-content-wrapper{

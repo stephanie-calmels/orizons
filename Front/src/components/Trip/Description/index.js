@@ -124,10 +124,10 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
     return <Marker key={step.id_step} position={[step.latitude, step.longitude]} >
       <Popup>
         <Card className="card-on-map">
-          <Card.Img src={step.photos[0].url} style={{height:'10vh'}}/>
-          <Card.Body>
-            <Card.Title> {step.step_title}</Card.Title>
-            <Card.Subtitle>{dayjs(`${step.step_date}`).format('DD/MM/YYYY')}</Card.Subtitle>
+          <Card.Img className="card-on-map-img" src={step.photos[0].url} style={{height:'10vh'}}/>
+          <Card.Body className="card-on-map-body">
+            <Card.Title className="card-on-map-title"> {step.step_title}</Card.Title>
+            {/* <Card.Subtitle>{dayjs(`${step.step_date}`).format('DD/MM/YYYY')}</Card.Subtitle> */}
             <Button variant="link" href={sluggedTitleAsAnchor}> Voir le détail</Button>
           </Card.Body>
         </Card>

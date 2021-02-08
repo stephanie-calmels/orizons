@@ -20,6 +20,16 @@
     height: 100%;
     width: 100%;
   }
+
+  &-title {
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  &-date {
+    font-style: italic;
+    padding-bottom: 0.5rem;
+  }
 }
 
 .nav-container{
