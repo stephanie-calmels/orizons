@@ -317,7 +317,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
             // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
                 center={[step.latitude, step.longitude]}
                 zoom={9}
-                scrollWheelZoom
+                scrollWheelZoom={false}
                 id="modal-map"
               >
                 <TileLayer
