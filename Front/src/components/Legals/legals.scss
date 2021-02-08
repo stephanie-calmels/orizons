@@ -1,35 +1,22 @@
 @use 'src/styles/vars';
+
 .legals {
   width: 50%;
-  margin: 3rem auto;
-  padding: 2rem 3rem;
-  
-  .container {
-    background-color: #E8F0FE;
-    border-radius: 15px;
-    border: 3px solid vars.$color-tertiary;
-    padding: 2rem;
-    margin-top: 3rem;
-      -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-         -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-              box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-              
+  margin: 0 auto;
+  padding: 2rem;
+  border: 3px solid vars.$color-tertiary;
+  border-radius: 15px;
+  background-color: vars.$color-primary;
+
+  &-title {
+    margin: 1.5rem;
   }
 
-  h1 {
-    margin-top: 0.5% !important;
+  &-list-item {
+    padding: 0.5rem 2rem;
   }
+}
 
-  h2 {
-    padding: 0.2rem 2rem 0.5rem 2rem;
-    text-align: center;
-    font-size: 1.5rem !important ;
-  }
-  
-  p {
-    padding: 0 2rem;
-    text-align: justify;
-    
-  }
-  
+.item {
+  font-weight: bold;
 }

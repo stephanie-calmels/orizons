@@ -1,21 +1,44 @@
 @use 'src/styles/vars';
-.about {
-  border: 3px solid vars.$color-tertiary;
-  width: 90%;
-  background-color: vars.$color-secondary;
-  margin: 3rem auto;
-  padding: 2rem 3rem;
-  border-radius: 15px;
-  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
 
-  h1 {
+.members {
+  padding-top: 20px;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  &-card {
+    border: 1px solid vars.$color-tertiary;
     text-align: center;
-    font-style: vars.$font-title
+
+    &-name {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    &-title {
+      font-size: 1.2rem;
+    }
   }
-  
-  p {
-    text-align: center;
-    margin-top: 0.5% !important;
-    
+}
+
+@media screen and (min-width: 1024px) {
+  .members {
+    &-card {
+      border: 1px solid vars.$color-tertiary;
+      margin: 1rem;
+      text-align: center;
+      min-width: 15%;
+      max-width: 200px;
+
+      &-name {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      &-title {
+        font-size: 1.2rem;
+      }
+    }
   }
 }

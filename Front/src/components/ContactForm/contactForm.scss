@@ -1,20 +1,40 @@
 @use 'src/styles/vars';
 
-.form_contact {
+.form-contact {
+  border: 3px solid vars.$color-tertiary;
+  background-color: vars.$color-secondary;
   display: flex;
-  width: 50%;
   flex-direction: column;
   margin: 3rem auto;
   padding: 2rem 3rem;
   border-radius: 15px;
-  border: 3px solid vars.$color-tertiary;
-
-
-  .button_contact {
-    background-color: vars.$color-tertiary !important;
-    border-radius: 50px !important;
-    border: 3px solid vars.$color-tertiary !important;
+  
+  &-btn {
+    background-color: vars.$color-tertiary;
+    border-radius: 50px;
+    border: 3px solid vars.$color-tertiary;
+    color: vars.$color-primary;
     transition-duration: 500ms;
-    padding: 0.5rem 1.5rem !important;
+    padding: 0.5rem 1.5rem;
+
+    &:hover {
+      background-color: vars.$color-secondary;
+      color: vars.$color-tertiary;
+      border: 3px solid vars.$color-tertiary;
+    }
   }
+}
+
+@media screen and (min-width: 1024px) {
+  .form-contact {
+  width: 40%
+  }
+  .background-image-contact {
+    background-image: url('https://images.unsplash.com/reserve/91JuTaUSKaMh2yjB1C4A_IMG_9284.jpg?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 86vh;
+  }
+  
 }

@@ -18,18 +18,18 @@ const Footer = () => {
 
     <Nav className="justify-content-center">
       <Nav.Item>
-        <LinkContainer to="/mentions-legales">
-          <Nav.Link eventKey="link-1">Mentions légales</Nav.Link>
-        </LinkContainer>
-      </Nav.Item>
-      <Nav.Item>
         <LinkContainer to="/a-propos">
-          <Nav.Link eventKey="link-2">A propos</Nav.Link>
+          <Nav.Link eventKey="link-1">A propos</Nav.Link>
         </LinkContainer>
       </Nav.Item>
       <Nav.Item>
         <LinkContainer to="/contact">
-          <Nav.Link eventKey="link-3">Contact</Nav.Link>
+          <Nav.Link eventKey="link-2">Contact</Nav.Link>
+        </LinkContainer>
+      </Nav.Item>
+      <Nav.Item>
+        <LinkContainer to="/mentions-legales">
+          <Nav.Link eventKey="link-3">Mentions légales</Nav.Link>
         </LinkContainer>
       </Nav.Item>
       <Nav.Item className="flex-row">
