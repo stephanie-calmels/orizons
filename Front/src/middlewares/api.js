@@ -205,6 +205,8 @@ const api = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.error(error);
+          history.replace('/lost404')
+
         });
       break;
     }
@@ -257,11 +259,12 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          // console.log(response.data.data);
+          console.log(response.data.data);
           store.dispatch(getProfileSuccess(response.data.data));
         })
         .catch((error) => {
           console.error(error);
+          history.replace('/lost404')
         });
       break;
     };
