@@ -7,3 +7,22 @@
   border: .3rem solid vars.$color-tertiary;
 }
 
+.card-on-map{
+  margin: 1rem 0 !important;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
+  font-family: vars.$font-title;
+  
+  &-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.leaflet-popup-content-wrapper{
+  background-color: vars.$color-secondary;
+}

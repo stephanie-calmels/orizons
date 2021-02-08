@@ -222,7 +222,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               <MapContainer
                 center={[48.866667, 2.333333]}
                 zoom={2}
-                scrollWheelZoom
+                scrollWheelZoom={false}
                 id="modal-map"
               >
                 <TileLayer
