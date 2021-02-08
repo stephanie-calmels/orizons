@@ -129,7 +129,7 @@ const stepDataMapper = {
          console.log("test6");*/
 
         let counter = 1
-        if (stepInfos.picture.length > 0) {
+        if (stepInfos.pictures.length > 0) {
             await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId])
             for (let index = 0; index < stepInfos.picture.length; index++) {
 
