@@ -19,14 +19,14 @@ const Results = ({ filteredTrips, showMoreResults, handleClick }) => {
                       <Card.Title className="card_trips-title">{trip.title}</Card.Title>
                       <Card.Text className="card_trips-text">
                           {trip.summary}
-                      </Card.Text>
-                      <Card.Text className="card_trips-text">
+                      {/* </Card.Text> */}
+                      {/* <Card.Text className="card_trips-text">
                         {trip.categories.map(category => (
                           
                             <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
                               {category.entitled}
                             </Badge>                 
-                        ))}
+                        ))} */}
                       </Card.Text>
                       </Card.Body>
                       <Card.Footer className="card_trips-footer">
