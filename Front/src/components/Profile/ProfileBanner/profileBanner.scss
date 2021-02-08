@@ -6,7 +6,7 @@
 
 .author-profile {
   position: relative;
-  top: 24vh;
+  top: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +26,10 @@
 @media screen and (min-width: 1024px) {
   .cover-container {
     margin-bottom: 7rem;
+  }
+
+  .author-profile {
+    top: 25vh;
   }
   
 }
