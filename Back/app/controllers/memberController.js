@@ -8,6 +8,7 @@ const memberController = {
         try {
 
             const members = await memberDataMapper.getAllMembers();
+
             response.json({
                 data: members,
             });
@@ -66,6 +67,11 @@ const memberController = {
                 memberId
             } = request.params
             const member = await tripDataMapper.getTripByMember(memberId);
+            if (!member) {
+                response.locals.notFound = "member";
+                next();
+                return
+            }
             response.json({
                 data: member
             })
