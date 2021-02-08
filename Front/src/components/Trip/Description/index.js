@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {Container, Row, Col, Card, Button, Badge} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup, Polyline, useMap} from 'react-leaflet'
-import L from 'leaflet';
+import dayjs from 'dayjs';
+
 import Flag from 'react-world-flags';
 
 import slugify from 'slugify'
@@ -122,11 +123,11 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
 
     return <Marker key={step.id_step} position={[step.latitude, step.longitude]} >
       <Popup>
-        <Card >
-          <Card.Img src={step.photos[0].url} style={{height:'10vh'}}/>
-          <Card.Body>
-            <Card.Title> {step.step_title}</Card.Title>
-            <Card.Subtitle>{step.number_step}</Card.Subtitle>
+        <Card className="card-on-map">
+          <Card.Img className="card-on-map-img" src={step.photos[0].url} style={{height:'10vh'}}/>
+          <Card.Body className="card-on-map-body">
+            <Card.Title className="card-on-map-title"> {step.step_title}</Card.Title>
+            {/* <Card.Subtitle>{dayjs(`${step.step_date}`).format('DD/MM/YYYY')}</Card.Subtitle> */}
             <Button variant="link" href={sluggedTitleAsAnchor}> Voir le détail</Button>
           </Card.Body>
         </Card>

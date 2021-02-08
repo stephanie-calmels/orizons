@@ -86,7 +86,7 @@ const stepDataMapper = {
         await console.log("test2");
         console.log(country.rows[0].id);
         // update datas in step table
-        await client.query(`UPDATE step SET longitude = $1, latitude = $2, title = $3, content = $4, step_date = $5, country_id = $6 WHERE (id= $7)`,
+        const result = await client.query(`UPDATE step SET longitude = $1, latitude = $2, title = $3, content = $4, step_date = $5, country_id = $6 WHERE (id= $7) RETURNING *`,
             [stepInfos.longitude,
                 stepInfos.latitude,
                 stepInfos.title,
@@ -104,29 +104,43 @@ const stepDataMapper = {
                     oldStepCountry.rows[0].country_id
                 ])
         }
-        console.log("test4, essai");
-        // update photos
-        let pictures = stepInfos.pictures;
-        for (let index = 0; index < pictures.length; index++) {
-            const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures[index]]);
-            if (!checkPicture) {
+        /* console.log("test4, essaiins");
+         // update photos
+         let pictures = stepInfos.pictures;
+         for (let index = 0; index < pictures.length; index++) {
+             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures[index]]);
+             if (!checkPicture) {
+                 await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
+                     [`${result.rows[0].title}_${counter++}`,
+                         pictures[index],
+                         result.rows[0].id
+                     ])
+             }
+         };
+         console.log("test5");
+         let oldPictures = await client.query('SELECT * FROM photo WHERE step_id = $1', [stepId]);
+         oldPictures = oldPictures.rows
+         for (const pictures of oldPictures) {
+             const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
+             if (!checkPicture) {
+                 await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
+             }
+         }
+         console.log("test6");*/
+
+        let counter = 1
+        if (stepInfos.pictures.length > 0) {
+            await client.query(`DELETE FROM photo WHERE step_id = $1`, [stepId])
+            for (let index = 0; index < stepInfos.pictures.length; index++) {
+
                 await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
                     [`${result.rows[0].title}_${counter++}`,
-                        pictures[index],
-                        result.rows[0].id
+                        stepInfos.pictures[index],
+                        stepId
                     ])
-            }
-        };
-        console.log("test5");
-        let oldPictures = await client.query('SELECT * FROM photo WHERE step_id = $1', [stepId]);
-        oldPictures = oldPictures.rows
-        for (const pictures of oldPictures) {
-            const checkPicture = await client.query('SELECT * FROM photo WHERE url = $1', [pictures.url]);
-            if (!checkPicture) {
-                await client.query(`DELETE FROM photo WHERE url = $1`, [pictures.url]);
+
             }
         }
-        console.log("test6");
 
         return stepInfos.trip_id;
 

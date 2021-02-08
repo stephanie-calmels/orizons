@@ -118,20 +118,34 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   };
   
   // adding geosearch to the form + using position stack API
+  const [suggestions, setSuggestions] = useState([]);
+  // adding geosearch to the form + using position stack API
+  const [timer, setTimer] = useState(null);
   const useGeocodingApi = (event) => {
-    console.log(event.target.closest('.input-group').querySelector('input').value);
     // On récupère la recherche tapée par l'utilisateur
-    const userQuery = event.target.closest('.input-group').querySelector('input').value;
+    console.log(event.target);
+    
+    const userQuery = event.target.value;
     const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
-
-    axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
+    setTimer(clearTimeout(timer));
+    setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
-        const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
-        setValues({...values,'localisation': newPosition});
-        setValues({...values,'showInput': false});
+        setSuggestions(response.data.data);
+        console.log(suggestions)
+        //const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
+        //changeField('localisation', newPosition);
+        //changeField('showInput', false);
       });
+    }, 1000))
   };
 
+  const locateSuggestion = ()=>{
+    let adressSelected = suggestions.find(suggestion => suggestion.label == values.localisationInput) || suggestions[0];
+    console.log(adressSelected)
+    const newPosition = [adressSelected.latitude, adressSelected.longitude];
+    setValues({...values,'localisation': newPosition, 'showInput': false});
+    console.log('values after locateSuggestion', values)
+  }
   // reverse geocoding in order to get the adress of the marker at the end
   const getCountryFromAPI = () => {
     const APIkey = "3e6337fefe20a03c96bfeb8a7b479717";
@@ -188,8 +202,8 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
         
       </CardColumns>    
           <Card.Body>
-            <Card.Title> {step.step_title}</Card.Title>
-            <Card.Subtitle>{step.number_step}</Card.Subtitle>
+            <Card.Title className="card-step-title"> {step.step_title}</Card.Title>
+            <Card.Subtitle className="card-step-date">{dayjs(`${step.step_date}`).format('DD/MM/YYYY')}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
             {
               trip.author[0].id  === connectedUserId && <div className="step_buttons">
@@ -303,7 +317,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
             // le centre de la carte dépendra de la localisation entrée au moment de la création du carnet
                 center={[step.latitude, step.longitude]}
                 zoom={9}
-                scrollWheelZoom
+                scrollWheelZoom={false}
                 id="modal-map"
               >
                 <TileLayer
@@ -324,10 +338,15 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                 name="localisationInput"
                 type="text"
                 defaultValue={''}
-                onChange={(e) => handleChange(e)}
-
+                onChange={(e) => {handleChange(e)
+                useGeocodingApi(e)}}
+                list="places_suggestions"
                 ref={register()}
-              /> <InputGroup.Append><Button variant="outline-secondary" onClick={useGeocodingApi}>Chercher</Button></InputGroup.Append>
+              />
+              <datalist id="places_suggestions">
+                {suggestions.map(suggestion=> {return <option value={suggestion.label} key={suggestion.latitude}></option>})}
+              </datalist>
+               <InputGroup.Append><Button variant="outline-secondary" onClick={locateSuggestion}>Chercher</Button></InputGroup.Append>
               </InputGroup>
               )}
 
