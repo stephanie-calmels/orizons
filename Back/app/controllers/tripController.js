@@ -34,7 +34,7 @@ const tripController = {
             // 3 - Les informations de localisation du voyage
             const localisation = await localisationDataMapper.getLocalisationByTrip(tripId);
             if (!trip) {
-                response.locals.notFounf = "trip";
+                response.locals.notFound = "trip";
                 next();
                 return
             }
