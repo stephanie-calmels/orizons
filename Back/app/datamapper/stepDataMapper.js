@@ -135,7 +135,7 @@ const stepDataMapper = {
 
                 await client.query(`INSERT INTO "photo"("title", "url", "step_id") VALUES ($1, $2, $3)`,
                     [`${result.rows[0].title}_${counter++}`,
-                        picture[index],
+                        stepInfos.pictures[index],
                         stepId
                     ])
 
