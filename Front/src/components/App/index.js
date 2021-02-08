@@ -107,7 +107,7 @@ const App = ({ isLoggedIn, loadMember, loadTrips, loadCountries, loadCategories 
           </Route>
           <Route exact path="/resultats">
             <Results />
-          </Route>
+          </Route >
           <Route>
             <Lost404 />
           </Route>
