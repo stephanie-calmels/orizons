@@ -1,15 +1,19 @@
+@use 'src/styles/vars';
 .legals {
   width: 50%;
-  margin: auto;
-  background-color: #68d3a1;
-
+  margin: 3rem auto;
+  padding: 2rem 3rem;
+  
   .container {
-    background-color: white;
+    background-color: #E8F0FE;
+    border-radius: 15px;
+    border: 3px solid vars.$color-tertiary;
     padding: 2rem;
     margin-top: 3rem;
       -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
          -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
               box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+              
   }
 
   h1 {

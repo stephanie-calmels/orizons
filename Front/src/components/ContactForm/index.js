@@ -48,7 +48,7 @@ const ContactForm = () => {
                           defaultValue={message}
                           />
                     </Form.Group>
-                    <Button type="submit">Envoyez</Button>
+                    <Button className="button_contact" type="submit">Envoyez</Button>
                   </Form>
               </div>
             

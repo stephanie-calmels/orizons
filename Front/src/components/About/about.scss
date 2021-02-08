@@ -1,8 +1,16 @@
+@use 'src/styles/vars';
 .about {
-  padding: 2%;
+  border: 3px solid vars.$color-tertiary;
+  width: 90%;
+  background-color: vars.$color-secondary;
+  margin: 3rem auto;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px -1px vars.$color-tertiary;
 
   h1 {
     text-align: center;
+    font-style: vars.$font-title
   }
   
   p {
