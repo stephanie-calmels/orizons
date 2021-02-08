@@ -10,6 +10,49 @@ body {
   font-family: vars.$font-body !important;
 }
 
+// Modification des styles en focus
+
+.btn:focus, .btn:active, .btn:visited {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  background-color: none !important;
+  color: vars.$color-primary !important;
+  border: none !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(144, 104, 239, 0.8) !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(144, 104, 239, 0.8) !important;
+  outline: 0 none !important;
+}
+
+textarea:active, 
+textarea:focus, select:focus {
+  outline: 0 none !important;
+  -webkit-appearance:none;
+  border-color: rgba(144, 104, 239, 0.8) !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(144, 104, 239, 0.8) !important;
+}
+
+
 /* 
   // or you can import your own font
   @font-face {
