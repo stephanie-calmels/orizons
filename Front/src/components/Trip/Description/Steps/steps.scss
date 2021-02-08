@@ -22,54 +22,8 @@
   }
 }
 
-
 .nav-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.step-numbers::before {
-  position: absolute;
-  top: 50%;
-  right: -30px;
-  left: -20px;
-  height: 2px;
-  content: '';
-  z-index: -1;
-  background-color: vars.$color-tertiary;
-}
-
-.step-numbers {
-  text-align: center;
-  text-decoration: none;
-  border-radius: 50%;
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-  box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 22px;
-  color: vars.$color-secondary;
-  background-color: vars.$color-tertiary;
-  position: relative;
-  z-index: 10;
-  &:hover {
-    border: 1px solid vars.$color-secondary;
-    background-color: vars.$color-secondary;
-    color: vars.$color-tertiary;
-  }
-}
-
-.step-numbers:first-of-type:before {
-  left: 0;
-}
-
-.icon-flag {
-  font-size: 3em;
-  margin-left: 0.25em;
+  display: none;
 }
 
 .step_buttons {
@@ -97,8 +51,18 @@
         color: vars.$color-tertiary;
         border: 3px solid vars.$color-tertiary;
     }
-  
 }
+
+.icon-flag {
+display: none;
+font-size: 3em;
+margin-left: 0.25em;
+}
+
+.step-numbers {
+  display: none;
+}
+
 
 @media screen and (min-width: 1024px) {
   .step_buttons {
@@ -110,5 +74,50 @@
   .delete-step-button {
       min-width: 15%;
       max-width: 35%;
+  }
+
+  .step-numbers::before {
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    left: -20px;
+    height: 2px;
+    content: '';
+    z-index: -1;
+    background-color: vars.$color-tertiary;
+  }
+  
+  .step-numbers {
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 22px;
+    color: vars.$color-secondary;
+    background-color: vars.$color-tertiary;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .step-numbers:first-of-type:before {
+    left: 0;
+  }
+
+  .icon-flag {
+  display: block;
+  font-size: 3em;
+  margin-left: 0.25em;
+  }
+
+  .nav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 2rem;
   }
 }
