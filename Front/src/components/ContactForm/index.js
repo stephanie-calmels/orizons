@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 
 import {Form, Button, Container} from 'react-bootstrap';
-
+import Title from 'src/components/PageTitle';
 
 import './contactForm.scss';
 
@@ -18,9 +18,11 @@ const ContactForm = () => {
       setValues({...values, [name]: value})
     }
   return (
+      <div className="background-image-contact">
         <Container className="contact_container">
+        <Title texte="Gardons le contact ;)" />
               <div className="contact_form">
-                  <Form className="form_contact" onSubmit={handleSubmit}>
+                  <Form className="form-contact" onSubmit={handleSubmit}>
                     <Form.Group controlId="name">
                       <Form.Label>Nom</Form.Label>
                         <Form.Control
@@ -31,7 +33,7 @@ const ContactForm = () => {
                         </Form.Group>
                     
                     <Form.Group controlId="email">
-                        <Form.Label>Adresse mail</Form.Label>
+                        <Form.Label>Adresse email</Form.Label>
                           <Form.Control 
                             type="text" 
                             placeholder="exemple@email.com"
@@ -43,16 +45,16 @@ const ContactForm = () => {
                       <Form.Label>Message</Form.Label>
                         <Form.Control 
                           type="text"
-                          placeholder="Votre message:"
+                          placeholder="Votre message"
                           onChange={handleInputChange}
                           defaultValue={message}
                           />
                     </Form.Group>
-                    <Button type="submit">Envoyez</Button>
+                    <Button className="form-contact-btn" type="submit">Envoyer</Button>
                   </Form>
               </div>
-            
-        </Container>
+      </Container>
+      </div>
   
   );
 };

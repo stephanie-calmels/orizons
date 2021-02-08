@@ -7,6 +7,7 @@
   margin: 3rem auto;
   padding: 2rem 3rem;
   border-radius: 15px;
+
   &-btn {
     background-color: vars.$color-tertiary;
     border-radius: 50px;
@@ -23,13 +24,7 @@
   }
 }
 
-.background-image-login {
-  background-image: url('https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1400&q=80');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 86vh;
-}
+
 
 .loading-spinner {
   background-color: vars.$color-tertiary !important;
@@ -45,5 +40,13 @@
 @media screen and (min-width: 1024px) {
   .form-login {
   width: 40%
+  }
+  
+  .background-image-login {
+    background-image: url('https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1400&q=80');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 86vh;
   }
 }
