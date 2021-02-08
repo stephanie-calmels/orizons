@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 const AddTripPreview =({title, summary, localisation, categories, departure, returndate, coverpicture, country_code})=>{
   
   return <div>
-    <Card className="card_trips">
+    <Card className="card_trips card_trips_preview">
       <Card.Img className="card_trips-img-top" variant="top" src={coverpicture} />
       <Card.Body className="card_trips-body">
         <Card.Title className="card_trips-title">{title}</Card.Title>
