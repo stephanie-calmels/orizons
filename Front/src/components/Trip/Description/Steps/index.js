@@ -202,8 +202,8 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
         
       </CardColumns>    
           <Card.Body>
-            <Card.Title> {step.step_title}</Card.Title>
-            <Card.Subtitle>{step.number_step}</Card.Subtitle>
+            <Card.Title className="card-step-title"> {step.step_title}</Card.Title>
+            <Card.Subtitle className="card-step-date">{dayjs(`${step.step_date}`).format('DD/MM/YYYY')}</Card.Subtitle>
             <Card.Text>{step.content}</Card.Text>
             {
               trip.author[0].id  === connectedUserId && <div className="step_buttons">
