@@ -77,28 +77,42 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
     );
   };
   
+  const [suggestions, setSuggestions] = useState([]);
   // adding geosearch to the form + using position stack API
+  const [timer, setTimer] = useState(null);
   const useGeocodingApi = (event) => {
-    console.log(event.target.closest('.input-group').querySelector('input').value);
     // On récupère la recherche tapée par l'utilisateur
-    const userQuery = event.target.closest('.input-group').querySelector('input').value;
+    console.log(event.target);
+    
+    const userQuery = event.target.value;
     const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
-
-    axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
+    setTimer(clearTimeout(timer));
+    setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
-        const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
-        changeField('localisation', newPosition);
-        changeField('showInput', false);
+        setSuggestions(response.data.data);
+        console.log(suggestions)
+        //const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
+        //changeField('localisation', newPosition);
+        //changeField('showInput', false);
       });
+    }, 1000))
   };
 
+  const locateSuggestion = ()=>{
+    let adressSelected = suggestions.find(suggestion => suggestion.label == localisationInput) || suggestions[0];
+    console.log(adressSelected)
+    const newPosition = [adressSelected.latitude, adressSelected.longitude];
+    changeField('localisation', newPosition);
+    changeField('showInput', false);
+  }
+ 
   // reverse geocoding in order to get the adress of the marker at the end
   const getCountryFromAPI = () => {
     const APIkey = "3e6337fefe20a03c96bfeb8a7b479717";
     const reverseQuery = localisation.toString();
     axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
     .then((response)=>{
-      const currentCountry = response.data.data[0].country;
+     const currentCountry = response.data.data[0].country;
       const currentCountry_code = response.data.data[0].country_code;
       changeField('country', currentCountry);
       changeField('country_code', currentCountry_code);
@@ -226,16 +240,24 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
               </div>
 
               {showInput && (
-              <InputGroup><Form.Control
+              <InputGroup>
+              <Form.Control
                 name="localisationInput"
                 type="text"
                 defaultValue={localisationInput}
-                onChange={(e) => handleChange(e)}
-
+                onChange={(e) => {
+                  handleChange(e);
+                  useGeocodingApi(e);
+                }}
+                list="places_suggestions"
                 ref={register({
                   required: 'Veuillez remplir ce champ !',
                 })}
-              /> <InputGroup.Append><Button variant="outline-secondary" onClick={useGeocodingApi}>Chercher</Button></InputGroup.Append>
+              />
+              <datalist id="places_suggestions">
+                {suggestions.map(suggestion=> {return <option value={suggestion.label} key={suggestion.latitude}></option>})}
+              </datalist>
+              <InputGroup.Append><Button variant="outline-secondary" onClick={locateSuggestion}>Chercher</Button></InputGroup.Append>
               </InputGroup>
               )}
 
