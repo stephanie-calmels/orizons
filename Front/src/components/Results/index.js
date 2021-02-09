@@ -3,12 +3,13 @@ import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react
 import Title from 'src/components/PageTitle';
 
 const Results = ({ filteredTrips, showMoreResults, handleClick }) => {
- 
+ console.log(filteredTrips)
   return (
     <Container>
         <Title texte="Résultats de votre recherche" />
         <CardDeck>
           <Container>
+          {filteredTrips.length ==0 && <p>Il n'y a rien ici. Pour le moment...</p> }
             <Row>
               {filteredTrips.map(trip => (
                 <Col md={6} lg={4} xl={3} key={trip.id}>

@@ -27,6 +27,8 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
 
         <CardDeck>
           <Container>
+          {filteredTrips.length ==0 && <p style={{marginTop:1+'rem'}}>Il n'y a rien ici. Pour le moment...</p> }
+
             <Row>
               {filteredTrips.map(trip => (
                 <Col md={6} lg={4} xl={3} key={trip.id}>
