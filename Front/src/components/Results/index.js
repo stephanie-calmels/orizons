@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
 import Title from 'src/components/PageTitle';
 
 const Results = ({ filteredTrips, showMoreResults, handleClick }) => {
- console.log(filteredTrips)
+//  console.log(filteredTrips)
   return (
     <Container>
         <Title texte="Résultats de votre recherche" />
@@ -52,5 +54,10 @@ const Results = ({ filteredTrips, showMoreResults, handleClick }) => {
   );
 };
 
+Results.propTypes = {
+  filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  showMoreResults: PropTypes.func, 
+  handleClick: PropTypes.func.isRequired 
+};
 
 export default Results;

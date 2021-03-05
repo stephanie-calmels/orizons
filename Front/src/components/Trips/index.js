@@ -1,12 +1,22 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
+import { propTypes } from 'react-bootstrap/esm/Image';
 import Tag from 'src/containers/Tag';
 import Title from '../PageTitle';
 
 import './trips.scss';
 
 
-const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCategories, handleClick }) => {
+const Trips = ({ 
+  filteredTrips, 
+  categories, 
+  showMoreResults, 
+  loadTrips, 
+  loadCategories, 
+  handleClick 
+}) => {
   useEffect(() => {
     loadTrips();
     loadCategories();
@@ -71,5 +81,13 @@ const Trips = ({ filteredTrips, categories, showMoreResults, loadTrips, loadCate
   );
 };
 
+Trips.propTypes = { 
+  filteredTrips: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  showMoreResults: PropTypes.func, 
+  loadTrips: PropTypes.func.isRequired, 
+  loadCategories: PropTypes.func.isRequired, 
+  handleClick: PropTypes.func.isRequired 
+}
 
 export default Trips;

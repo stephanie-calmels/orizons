@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   CardDeck, Card, Nav, Col, Row, Container, Badge
 } from 'react-bootstrap';
@@ -6,7 +8,7 @@ import {
 import './profileTrips.scss';
 
 const ProfileTrips = ({ trips, handleClick }) => {
-  console.log(trips);
+  // console.log(trips);
   return (
     <CardDeck>
       <Container>
@@ -39,6 +41,11 @@ const ProfileTrips = ({ trips, handleClick }) => {
       </Container>
     </CardDeck>
   );
+};
+
+ProfileTrips.propTypes = {
+  trips: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  handleClick: PropTypes.func.isRequired 
 };
 
 export default ProfileTrips;

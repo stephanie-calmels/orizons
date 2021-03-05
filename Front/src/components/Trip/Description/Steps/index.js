@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
+
 import { useForm } from 'react-hook-form';
 
 import { Card, Form, Container, Row, Col, Nav, CardColumns, Modal, Button, InputGroup } from 'react-bootstrap';
@@ -123,7 +125,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   const [timer, setTimer] = useState(null);
   const useGeocodingApi = (event) => {
     // On récupère la recherche tapée par l'utilisateur
-    console.log(event.target);
+    // console.log(event.target);
     
     const userQuery = event.target.value;
     const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
@@ -131,7 +133,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
     setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
         setSuggestions(response.data.data);
-        console.log(suggestions)
+        // console.log(suggestions)
         //const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
         //changeField('localisation', newPosition);
         //changeField('showInput', false);
@@ -141,10 +143,10 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
 
   const locateSuggestion = ()=>{
     let adressSelected = suggestions.find(suggestion => suggestion.label == values.localisationInput) || suggestions[0];
-    console.log(adressSelected)
+    // console.log(adressSelected)
     const newPosition = [adressSelected.latitude, adressSelected.longitude];
     setValues({...values,'localisation': newPosition, 'showInput': false});
-    console.log('values after locateSuggestion', values)
+    // console.log('values after locateSuggestion', values)
   }
   // reverse geocoding in order to get the adress of the marker at the end
   const getCountryFromAPI = () => {
@@ -273,12 +275,12 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
                   },
                 );
               });
-              console.log('promises outside before PROMISE', promises);
+              // console.log('promises outside before PROMISE', promises);
               Promise.all(promises)
                 .then(() => {
                 // formData.pictures = fileListToArray;
                 formData.pictures = emptyArray;
-                console.log('formData',formData)
+                // console.log('formData',formData)
                 setTimeout(()=>editStep(formData, step.id_step), 500);
                 setSubmitting(false);
               })
@@ -397,5 +399,12 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   </div>
 }
 
+Steps.propTypes ={
+  trip: PropTypes.object,
+  steps: PropTypes.arrayOf(PropTypes.object), 
+  connectedUserId: PropTypes.number, 
+  editStep: PropTypes.func.isRequired, 
+  deleteStep: PropTypes.func.isRequired, 
+};
 
 export default Steps

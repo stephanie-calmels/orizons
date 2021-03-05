@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Card, Col } from 'react-bootstrap';
 
 import './tag.scss';
@@ -16,5 +18,10 @@ const Tag = ({ category, handleClick }) => {
       </div>
     </Col>
 )};
+
+Tag.propTypes = {
+  category: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired
+};
 
 export default Tag;

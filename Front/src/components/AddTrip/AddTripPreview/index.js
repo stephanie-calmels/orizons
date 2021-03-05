@@ -1,9 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Card, Badge} from 'react-bootstrap';
 import Flag from 'react-world-flags';
 import dayjs from 'dayjs';
 
-const AddTripPreview =({title, summary, localisation, categories, departure, returndate, coverpicture, country_code})=>{
+const AddTripPreview =({
+  title, 
+  summary, 
+  localisation, 
+  categories, 
+  departure, 
+  returndate, 
+  coverpicture, 
+  country_code
+})=>{
   
   return <div>
     <Card className="card_trips card_trips_preview">
@@ -26,5 +37,16 @@ const AddTripPreview =({title, summary, localisation, categories, departure, ret
     </Card>
   </div>
 }
+
+AddTripPreview.propTypes = {
+  title: PropTypes.string, 
+  summary: PropTypes.string, 
+  localisation: PropTypes.string, 
+  categories: PropTypes.array, 
+  departure: PropTypes.string, 
+  returndate: PropTypes.string, 
+  coverpicture: PropTypes.string, 
+  country_code: PropTypes.string, 
+};
 
 export default AddTripPreview

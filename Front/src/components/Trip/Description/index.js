@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
+
 import {Container, Row, Col, Card, Button, Badge} from 'react-bootstrap'
 import {MapContainer, TileLayer, Marker, Popup, Polyline, useMap} from 'react-leaflet'
 import dayjs from 'dayjs';
@@ -145,5 +147,12 @@ const Description = ({trip, steps, connectedUserId, editStep, deleteStep})=>{
   </div>
 };
 
+Description.propTypes ={
+  trip: PropTypes.object,
+  steps: PropTypes.arrayOf(PropTypes.object), 
+  connectedUserId: PropTypes.number, 
+  editStep: PropTypes.func.isRequired, 
+  deleteStep: PropTypes.func.isRequired, 
+};
 
 export default Description

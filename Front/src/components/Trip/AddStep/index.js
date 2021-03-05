@@ -1,6 +1,8 @@
 import React, {
   useState, useRef, useMemo, useEffect,
 } from 'react';
+import PropTypes from 'prop-types';
+
 import { storage } from 'src/firebase';
 
 import {
@@ -15,7 +17,21 @@ import { useForm } from 'react-hook-form';
 
 import axios from 'axios';
 
-const AddStep = ({title, summary, date, localisation, pictures, localisationInput, showInput, postStep, changeField, country, country_code, connectedUserId, trip }) => {
+const AddStep = ({
+  title, 
+  summary, 
+  date, 
+  localisation, 
+  pictures, 
+  localisationInput, 
+  showInput, 
+  postStep, 
+  changeField, 
+  country, 
+  country_code, 
+  connectedUserId, 
+  trip 
+}) => {
   // Hooks and functions linked to Modal components
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -57,7 +73,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
       () => ({
         dragend(e) {
           // We are using the endpoint of the marker drag to update our input position
-          console.log(e.target);
+          // console.log(e.target);
           const newPosition = [e.target._latlng.lat, e.target._latlng.lng];
           setPosition(newPosition);
           changeField('localisation', newPosition);
@@ -82,7 +98,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   const [timer, setTimer] = useState(null);
   const useGeocodingApi = (event) => {
     // On récupère la recherche tapée par l'utilisateur
-    console.log(event.target);
+    // console.log(event.target);
     
     const userQuery = event.target.value;
     const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
@@ -90,7 +106,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
     setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
         setSuggestions(response.data.data);
-        console.log(suggestions)
+        // console.log(suggestions)
         //const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
         //changeField('localisation', newPosition);
         //changeField('showInput', false);
@@ -100,7 +116,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
 
   const locateSuggestion = ()=>{
     let adressSelected = suggestions.find(suggestion => suggestion.label == localisationInput) || suggestions[0];
-    console.log(adressSelected)
+    // console.log(adressSelected)
     const newPosition = [adressSelected.latitude, adressSelected.longitude];
     changeField('localisation', newPosition);
     changeField('showInput', false);
@@ -125,7 +141,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
   useEffect(() => {
     getCountryFromAPI();
   }, [localisation]);
-  console.log('tripAddStep',trip)
+  // console.log('tripAddStep',trip)
   // START OF ADDSTEP COMPONENT
   return (
     <div>
@@ -155,7 +171,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
 
                 const uploadTask = storage.ref(`photos/trips/steps/${picture.name}`).put(picture);
                 promises.push(uploadTask);
-                console.log('promises inside', promises);
+                // console.log('promises inside', promises);
                 uploadTask.on(
                   'state_changed',
                   (snapshot) => {},
@@ -175,7 +191,7 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
                   },
                 );
               });
-              console.log('promises outside before PROMISE', promises);
+              // console.log('promises outside before PROMISE', promises);
               Promise.all(promises)
                 .then(() => {
                 // formData.pictures = fileListToArray;
@@ -304,6 +320,22 @@ const AddStep = ({title, summary, date, localisation, pictures, localisationInpu
       </Modal>
     </div>
   );
+};
+
+AddStep.propTypes = {
+  title: PropTypes.string, 
+  summary: PropTypes.string, 
+  date: PropTypes.string, 
+  localisation: PropTypes.array, 
+  pictures: PropTypes.array, 
+  localisationInput: PropTypes.string, 
+  showInput: PropTypes.bool.isRequired, 
+  postStep: PropTypes.func.isRequired, 
+  changeField: PropTypes.func.isRequired, 
+  country: PropTypes.string, 
+  country_code: PropTypes.string, 
+  connectedUserId: PropTypes.number, 
+  trip: PropTypes.object 
 };
 
 export default AddStep;

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Image} from 'react-bootstrap';
 
 import './profileBanner.scss'
@@ -21,6 +23,10 @@ const ProfileBanner = ({member})=>{
         <i className="fas fa-map-marker-alt mr-2 stats-icons"></i>{member.localisation}</p>
       </div>
     </div>
+};
+
+ProfileBanner.propTypes = {
+  member: PropTypes.object.isRequired
 };
 
 export default ProfileBanner;
