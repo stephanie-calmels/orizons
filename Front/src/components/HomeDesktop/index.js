@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Container, Row, Col, Card, Button, Carousel, Badge, CardDeck, Image, Form, InputGroup
 } from 'react-bootstrap';
@@ -9,7 +11,18 @@ import anonyme from 'src/assets/user-icon-2098873_640.png';
 import './homeDesktop.scss';
 
 const HomeDesktop = ({
-  isLoggedIn, randomTrips, categories, randomSearch, handleClick, changeCategoryField, searchByCategory, category_search, countries, country_search, changeCountryField, searchByCountry
+  isLoggedIn, 
+  randomTrips, 
+  categories, 
+  randomSearch, 
+  handleClick, 
+  changeCategoryField, 
+  searchByCategory, 
+  category_search, 
+  countries, 
+  country_search, 
+  changeCountryField, 
+  searchByCountry
 }) => {
   useEffect(() => {
 
@@ -358,6 +371,21 @@ const HomeDesktop = ({
       </Container>
     </>
   )
+};
+
+HomeDesktop.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired, 
+  randomTrips: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  randomSearch: PropTypes.func.isRequired, 
+  handleClick: PropTypes.func.isRequired, 
+  changeCategoryField: PropTypes.func.isRequired, 
+  searchByCategory: PropTypes.func.isRequired, 
+  category_search: PropTypes.number, 
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  country_search: PropTypes.string, 
+  changeCountryField: PropTypes.func.isRequired, 
+  searchByCountry: PropTypes.func.isRequired
 };
 
 export default HomeDesktop;

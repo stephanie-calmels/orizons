@@ -100,6 +100,9 @@ Header.propTypes = {
   nickname: PropTypes.string.isRequired,
   profilePhoto: PropTypes.string,
   id: PropTypes.number.isRequired,
+  search: PropTypes.string,
+  changeSearchField: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {

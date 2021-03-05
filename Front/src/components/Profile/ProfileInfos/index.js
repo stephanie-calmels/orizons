@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Container, Col, Row } from 'react-bootstrap';
 import {
   VectorMap
@@ -93,6 +95,12 @@ const ProfileInfos = ({ member, trips, handleClick }) => {
       </Row>
     )}
   </Container>
+};
+
+ProfileInfos.propTypes = { 
+  member: PropTypes.object.isRequired, 
+  trips: PropTypes.array, 
+  handleClick: PropTypes.func.isRequired 
 };
 
 export default ProfileInfos;

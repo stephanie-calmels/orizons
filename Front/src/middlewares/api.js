@@ -200,7 +200,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log('réponse get_trip', response.data)
+          // console.log('réponse get_trip', response.data)
           store.dispatch(getTripSuccess(response.data.data[0]));
         })
         .catch((error) => {
@@ -259,7 +259,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           store.dispatch(getProfileSuccess(response.data.data));
         })
         .catch((error) => {
@@ -288,7 +288,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response)=>{
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(postNewStepSuccess(response.data.data[0]));
         })
         .catch((error) =>{
@@ -319,7 +319,7 @@ const api = (store) => (next) => (action) => {
       axios(config)
         .then((response)=>{
           const { id } = response.data.data;
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(postNewTripSuccess(response.data.data));
           toast.success('Votre carnet a bien été créé !');
           history.push(`/exploration/${id}`);
@@ -397,7 +397,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           store.dispatch(updateProfileSuccess(response.data.data));
           toast.success('Modification des données réussie !');
           history.push(`/profil/${id}`);
@@ -428,7 +428,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log('réponseArmandine',response.data);
+          // console.log('réponseArmandine',response.data);
           store.dispatch(updateTripSuccess(response.data.data[0])); //modif
           toast.success('Modification des données réussie !');
         })
@@ -456,7 +456,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           toast.success('Suppression du carnet réussie !');
           history.push(`/exploration`);
         })
@@ -493,7 +493,7 @@ const api = (store) => (next) => (action) => {
       };
       axios(config)
         .then((response) => {
-          console.log('réponse updateStep',response.data);
+          // console.log('réponse updateStep',response.data);
           store.dispatch(updateStepSuccess(response.data.data[0])); //modif ici
           toast.success('Modification des données réussie !');
           // history.go(0);
@@ -524,7 +524,7 @@ const api = (store) => (next) => (action) => {
       console.log('monactiondelete',action)
       axios(config)
         .then((response) => {
-          console.log('réponse à la suppression étape',response.data)
+          // console.log('réponse à la suppression étape',response.data)
           store.dispatch(deleteStepSuccess(response.data.data[0])); // TODO : a vérifier avec Armandine
           toast.success('Suppression de l\'étape réussie !');
           // history.go(0);

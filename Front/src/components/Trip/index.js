@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {Modal, Button, Form, InputGroup} from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import { storage } from 'src/firebase';
 import './trip.scss';
 import AddStep from 'src/containers/AddStep';
@@ -8,7 +10,19 @@ import Banner from './Banner';
 import Description from './Description';
 import dayjs from 'dayjs';
 
-const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, handleClick, countries, editTrip, deleteTrip, editStep, deleteStep }) => {
+const Trip = ({ 
+  trip, 
+  loadTrip, 
+  tripIdFromUrl, 
+  connectedUserId, 
+  categoriesList, 
+  handleClick, 
+  countries, 
+  editTrip, 
+  deleteTrip, 
+  editStep, 
+  deleteStep 
+}) => {
   useEffect(() => {
     loadTrip(tripIdFromUrl);
   }, []);
@@ -107,7 +121,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, 
                 onSubmit={handleSubmit((formData) => {
                   handleClose();
                   setSubmitting(true);
-                  console.log('formData', formData);
+                  // console.log('formData', formData);
                   if (formData.coverpicture.length > 0) {
                   const uploadTask = storage.ref(`photos/trips/cover/${formData.coverpicture[0].name}`).put(formData.coverpicture[0]);
                   uploadTask.on(
@@ -123,9 +137,9 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, 
                         .child(formData.coverpicture[0].name)
                         .getDownloadURL()
                         .then((url) => {
-                          console.log('url', url);
+                          // console.log('url', url);
                           formData.cover = url;
-                          console.log('formData2', formData);
+                          // console.log('formData2', formData);
                           editTrip(formData);
                           setSubmitting(false);
                         });
@@ -134,7 +148,7 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, 
                   }
                   else {
                   formData.cover = trip.trip.cover_trip;
-                  console.log('formData3', formData);
+                  // console.log('formData3', formData);
 
                   editTrip(formData);
                   setSubmitting(false);
@@ -269,6 +283,20 @@ const Trip = ({ trip, loadTrip, tripIdFromUrl, connectedUserId, categoriesList, 
       )}
     </div>
   );
+};
+
+Trip.propTypes = { 
+  trip: PropTypes.object, 
+  loadTrip: PropTypes.func.isRequired, 
+  tripIdFromUrl: PropTypes.string, 
+  connectedUserId: PropTypes.number, 
+  categoriesList: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  handleClick: PropTypes.func.isRequired, 
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  editTrip: PropTypes.func.isRequired, 
+  deleteTrip: PropTypes.func.isRequired, 
+  editStep: PropTypes.func.isRequired, 
+  deleteStep: PropTypes.func.isRequired 
 };
 
 export default Trip;

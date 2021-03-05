@@ -122,6 +122,8 @@ App.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   loadMember: PropTypes.func.isRequired,
   loadTrips: PropTypes.func.isRequired,
+  loadCountries: PropTypes.func.isRequired,
+  loadCategories: PropTypes.func.isRequired
 };
 // == Export
 export default App;

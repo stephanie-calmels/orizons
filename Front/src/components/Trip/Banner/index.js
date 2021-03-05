@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Image } from 'react-bootstrap';
 
 import './banner.scss';
@@ -21,6 +23,13 @@ const Banner = ({ author, picture, title, handleClick }) => {
       </div>
     </div>
   );
+};
+
+Banner.propTypes = { 
+  author: PropTypes.object.isRequired, 
+  picture: PropTypes.string.isRequired, 
+  title: PropTypes.string.isRequired, 
+  handleClick: PropTypes.func.isRequired 
 };
 
 export default Banner;

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Container, Row, Card, Button, Carousel, Image,
 } from 'react-bootstrap';
@@ -170,5 +172,11 @@ const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
 
   </Container>
 );
+
+HomeMobile.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired, 
+  randomTrips: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  handleClick: PropTypes.func.isRequired, 
+};
 
 export default HomeMobile;

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {Button, Form, Modal} from 'react-bootstrap';
 import { storage } from 'src/firebase';
 
@@ -9,7 +11,14 @@ import { useForm } from 'react-hook-form';
 import './profile.scss'
 import { register } from '../../actions/member';
 
-const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , editProfile, handleClick}) => {
+const Profile = ({ 
+  profile, 
+  loadProfile, 
+  profileIdFromUrl, 
+  connectedUserId , 
+  editProfile, 
+  handleClick
+}) => {
   useEffect(() => {
     //console.log(profile)
     loadProfile(profileIdFromUrl);
@@ -61,7 +70,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                 onSubmit={handleSubmit((formData) => {
                   handleClose();
                   setSubmitting(true);
-                  console.log('formData', formData);
+                  // console.log('formData', formData);
                   if (formData.cover.length > 0) {
                   const uploadTask = storage.ref(`photos/profile/cover/${formData.cover[0].name}`).put(formData.cover[0]);
                   uploadTask.on(
@@ -77,9 +86,9 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                         .child(formData.cover[0].name)
                         .getDownloadURL()
                         .then((url) => {
-                          console.log('url', url);
+                          // console.log('url', url);
                           formData.cover = url;
-                          console.log('formData2', formData);
+                          // console.log('formData2', formData);
                           editProfile(formData);
                           setSubmitting(false);
                         });
@@ -88,7 +97,7 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
                   }
                   else {
                   formData.cover = profile.cover_member;
-                  console.log('formData3', formData);
+                  // console.log('formData3', formData);
 
                   editProfile(formData);
                   setSubmitting(false);
@@ -144,6 +153,16 @@ const Profile = ({ profile, loadProfile, profileIdFromUrl, connectedUserId , edi
       
     </div>
   );
+};
+
+
+Profile.propTypes = { 
+  profile: PropTypes.object, 
+  loadProfile: PropTypes.func.isRequired, 
+  profileIdFromUrl: PropTypes.string, 
+  connectedUserId: PropTypes.number, 
+  editProfile: PropTypes.func.isRequired, 
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Profile;

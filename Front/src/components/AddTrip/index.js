@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Container, Form, Button, Row, Col, InputGroup
 } from 'react-bootstrap';
@@ -9,7 +11,20 @@ import Title from '../PageTitle';
 import AddTripPreview from './AddTripPreview'
 import './addtrip.scss'
 
-const AddTrip = ({title, summary, localisation, categories, departure, returndate, coverpicture, categoriesList, changeField, postTrip, country_code, countries}) => {
+const AddTrip = ({
+  title, 
+  summary, 
+  localisation, 
+  categories, 
+  departure, 
+  returndate, 
+  coverpicture, 
+  categoriesList, 
+  changeField, 
+  postTrip, 
+  country_code, 
+  countries
+}) => {
 
   const handleChange = (e) => changeField([e.target.name], e.target.value );
   const handleCheckbox = (e) => {
@@ -207,5 +222,20 @@ const AddTrip = ({title, summary, localisation, categories, departure, returndat
     </Container>
   </div>
 }
+
+AddTrip.propTypes = {
+  title: PropTypes.string, 
+  summary: PropTypes.string, 
+  localisation: PropTypes.string, 
+  categories: PropTypes.array, 
+  departure: PropTypes.string, 
+  returndate: PropTypes.string, 
+  coverpicture: PropTypes.string, 
+  categoriesList: PropTypes.array.isRequired, 
+  changeField: PropTypes.func, 
+  postTrip: PropTypes.func.isRequired, 
+  country_code: PropTypes.string, 
+  countries: PropTypes.array.isRequired
+};
 
 export default AddTrip;
