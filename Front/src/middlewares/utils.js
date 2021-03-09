@@ -1,6 +1,6 @@
 import slugify from 'slugify';
 
-import { getRandomTripsSuccess, getTripsByCategoriesSuccess, getTripsByCountrySuccess } from '../actions/trips';
+import { getRandomTripsSuccess, getTripsByCategoriesSuccess, getTripsByCountrySuccess, getSearchSuccess } from '../actions/trips';
 
 import history from '../history';
 
@@ -95,7 +95,7 @@ const utils = (store) => (next) => (action) => {
         }
       });
 
-      store.dispatch(getTripsByCountrySuccess(results));
+      store.dispatch(getSearchSuccess(results));
       break;
     }; 
     default:

@@ -38,18 +38,22 @@ const HomeDesktop = ({
             <p className="home-banner-overlay-text">O'rizons met à votre disposition tous les outils nécessaires pour raconter votre voyage, comme bon vous semble.</p>
             <p className="home-banner-overlay-text">Vous souhaitez partager votre expérience avec vos proches, inspirer d'autres voyageurs à marcher dans vos pas ou simplement conserver une trace de votre dernière aventure ?</p>
             {
-                isLoggedIn
-                  ? (
-                    <LinkContainer to="/ajouter-carnet">
-                      <Button className="home-banner-overlay-btn">Créez votre carnet de voyage</Button>
-                    </LinkContainer>
-                  )
-                  : (
-                    <LinkContainer to="/inscription">
-                      <Button className="home-banner-overlay-btn">Créez votre carnet de voyage</Button>
-                    </LinkContainer>
-                  )
-              }
+              isLoggedIn
+                ? (
+                  <LinkContainer to="/ajouter-carnet">
+                    <Button className="home-banner-overlay-btn">
+                      Créez votre carnet de voyage
+                    </Button>
+                  </LinkContainer>
+                )
+                : (
+                  <LinkContainer to="/inscription">
+                    <Button className="home-banner-overlay-btn">
+                      Créez votre carnet de voyage
+                    </Button>
+                  </LinkContainer>
+                )
+            }
           </div>
 
         </div>
@@ -117,22 +121,7 @@ const HomeDesktop = ({
                       <Card.Img className="card_home-img-top" variant="top" src={trip.cover_trip} />
                       <Card.Body className="card_home-body">
                         <Card.Title className="card_home-title">{trip.title}</Card.Title>
-                        {/* <Card.Text className="card_home-text">
-                      {trip.summary}
-                    </Card.Text>
-                    <Card.Text className="card_home-text">
-                      {trip.categories.map((category) => (
-
-                        <Badge pill key={category.id} className="tag" style={{ backgroundColor: `${category.color}` }}>
-                          {category.entitled}
-                        </Badge>
-                      ))}
-                    </Card.Text> */}
                       </Card.Body>
-                      {/* <Card.Footer className="card_home-footer">
-                    <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />
-                    <small className="text-muted">{trip.author[0].nickname}</small>
-                  </Card.Footer> */}
                     </Card>
                   </div>
                 </Col>
@@ -178,23 +167,6 @@ const HomeDesktop = ({
                 </Form.Group>
               </Form>
 
-              {/* <Form className="form_search">
-            <Form.Group as={Row} controlId="formGroupCity">
-              <Form.Label column sm={4}>Ville</Form.Label>
-              <Col sm={6}>
-                <InputGroup>
-                  <Form.Control 
-                    type="city" 
-                    placeholder="Rechercher par ville" 
-                  />
-                  <InputGroup.Append>
-                    <Button variant="primary"><i className="fas fa-search" /></Button>
-                  </InputGroup.Append>
-                </InputGroup>
-              </Col>
-            </Form.Group>
-          </Form>
- */}
               <Form
                 className="form_search"
                 onSubmit={(e) => {

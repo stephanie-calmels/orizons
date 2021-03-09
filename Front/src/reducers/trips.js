@@ -1,4 +1,4 @@
-import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD, GET_TRIPS_BY_COUNTRY_SUCCESS, CHANGE_SEARCH_FIELD
+import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD, GET_TRIPS_BY_COUNTRY_SUCCESS, CHANGE_SEARCH_FIELD, GET_SEARCH_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -43,13 +43,18 @@ const reducer = (oldState = initialState, action) => {
       return {
         ...oldState,
         filteredTrips: action.trips,
-        search: '',
       };
     case CHANGE_SEARCH_FIELD:
       return {
         ...oldState,
         search: action.value,
       };
+    case GET_SEARCH_SUCCESS:
+    return {
+      ...oldState,
+      filteredTrips: action.trips,
+      search: '',
+    };
     default:
       return oldState;
   }
