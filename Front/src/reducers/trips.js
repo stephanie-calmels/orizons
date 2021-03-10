@@ -1,7 +1,7 @@
 import { GET_TRIPS_SUCCESS, GET_CATEGORIES_SUCCESS, GET_RANDOM_TRIPS_SUCCESS, GET_TRIPS_BY_CATEGORIES_SUCCESS, CHANGE_CATEGORY_FIELD, GET_TRIPS_BY_COUNTRY_SUCCESS, CHANGE_SEARCH_FIELD, GET_SEARCH_SUCCESS
 } from '../actions/types';
 
-const initialState = {
+export const initialState = {
   trips: [],
   categories: [],
   randomTrips: [],
@@ -10,7 +10,7 @@ const initialState = {
   search: ''
 };
 
-const reducer = (oldState = initialState, action) => {
+const reducer = (oldState = initialState, action = {}) => {
   switch (action.type) {
 
     case GET_TRIPS_SUCCESS:
