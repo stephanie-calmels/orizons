@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { CardDeck, Card, Container, Badge, Image, Button, Row, Col } from 'react-bootstrap';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import { CardDeck, Card, Container, Image, Button, Row, Col } from 'react-bootstrap';
 import Tag from 'src/containers/Tag';
 import Title from '../PageTitle';
 
@@ -23,7 +22,6 @@ const Trips = ({
   },[]);
 
   return (
-    // <div className="background-image-register">
     <Container>
         <Title texte="Explorez les carnets de voyage de la communauté" />
 
@@ -37,8 +35,6 @@ const Trips = ({
 
         <CardDeck>
           <Container>
-          {filteredTrips.length ==0 && <p style={{marginTop:1+'rem'}}>Il n'y a rien ici. Pour le moment...</p> }
-
             <Row>
               {filteredTrips.map(trip => (
                 <Col md={6} lg={4} xl={3} key={trip.id}>
@@ -50,13 +46,6 @@ const Trips = ({
                       <Card.Text className="card_trips-text">
                           {trip.summary}
                       </Card.Text>
-                      {/* <Card.Text className="card_trips-text">
-                        {trip.categories.map(category => (
-                            <Badge pill key={category.id} className="tag" style={{backgroundColor: `${category.color}`}}>
-                              {category.entitled}
-                            </Badge>                 
-                        ))}
-                      </Card.Text> */}
                       </Card.Body>
                       <Card.Footer className="card_trips-footer">
                       <Image className="profile_photo m-2" src={trip.author[0].profile_photo} roundedCircle />
@@ -77,7 +66,6 @@ const Trips = ({
         </Row> */}
 
     </Container>
-    // </div>
   );
 };
 

@@ -50,11 +50,11 @@ const reducer = (oldState = initialState, action) => {
         search: action.value,
       };
     case GET_SEARCH_SUCCESS:
-    return {
-      ...oldState,
-      filteredTrips: action.trips,
-      search: '',
-    };
+      return {
+        ...oldState,
+        filteredTrips: action.trips,
+        search: '',
+      };
     default:
       return oldState;
   }

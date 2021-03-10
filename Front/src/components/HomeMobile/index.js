@@ -19,21 +19,27 @@ const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
           <Card.Title className="home_banner-mobile-title">"Voyager vous laisse d'abord sans voix, avant de vous transformer en conteur" - Ibn Battuta
           </Card.Title>
           <LinkContainer to="/exploration">
-            <Button className="home_banner-mobile-card-btn">Découvrez les carnets d'autres voyageurs</Button>
+            <Button className="home_banner-mobile-card-btn">
+              Découvrez les carnets d'autres voyageurs
+            </Button>
           </LinkContainer>
           {
-                isLoggedIn
-                  ? (
-                    <LinkContainer to="/ajouter-carnet">
-                      <Button className="home_banner-mobile-card-btn">Créez votre carnet de voyage</Button>
-                    </LinkContainer>
-                  )
-                  : (
-                    <LinkContainer to="/inscription">
-                      <Button className="home_banner-mobile-card-btn">Créez votre carnet de voyage</Button>
-                    </LinkContainer>
-                  )
-              }
+            isLoggedIn
+              ? (
+                <LinkContainer to="/ajouter-carnet">
+                  <Button className="home_banner-mobile-card-btn">
+                    Créez votre carnet de voyage
+                  </Button>
+                </LinkContainer>
+              )
+              : (
+                <LinkContainer to="/inscription">
+                  <Button className="home_banner-mobile-card-btn">
+                    Créez votre carnet de voyage
+                  </Button>
+                </LinkContainer>
+              )
+          }
         </Card.ImgOverlay>
 
       </Card>

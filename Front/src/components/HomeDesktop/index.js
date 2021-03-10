@@ -205,7 +205,9 @@ const HomeDesktop = ({
 
 
             <h5 className="col-title">Vous préférez vous faire surprendre ?</h5>
-            <Button className="random_search-button" onClick={randomSearch}>Voir un carnet de voyage au hasard</Button>
+            <Button className="random_search-button" onClick={randomSearch}>
+              Voir un carnet de voyage au hasard
+            </Button>
 
             <blockquote className="blockquote">"Le plus beau moment de la vie humaine est un départ vers des terres inconnues." <br />
           Sir Richard Burton

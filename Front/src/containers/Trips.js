@@ -10,9 +10,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  showMoreResults: () => {
-    dispatch(getMoreResults());
-  },
   loadTrips: () => {
     dispatch(getTrips());
   },

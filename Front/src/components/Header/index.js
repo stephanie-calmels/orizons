@@ -51,7 +51,9 @@ const Header = ({
               onChange={(e) => changeSearchField(e.target.value)}
               />
             <InputGroup.Append>
-              <Button id="searchBtn" type='submit' variant="primary"><i className="fas fa-search" /></Button>
+              <Button id="searchBtn" type='submit' variant="primary">
+                <i className="fas fa-search" />
+              </Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>

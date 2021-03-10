@@ -60,7 +60,7 @@ const utils = (store) => (next) => (action) => {
       break;
     }; 
     case SEARCH: {
-      console.log('get search : ' + action.value);
+      // console.log('get search : ' + action.value);
       const { trips: { trips } } = store.getState();
       const results = [];
       trips.forEach((trip) => {
