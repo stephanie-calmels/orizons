@@ -1,4 +1,4 @@
-const jwt = require('express-jwt');
+qconst jwt = require('express-jwt');
 
 const authorizationMiddleware = jwt({
     secret: process.env.SECRET,
