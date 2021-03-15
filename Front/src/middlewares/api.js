@@ -32,7 +32,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { email, password } } = store.getState();
       const config = {
         method: 'post',
-        url: 'https://orizons.herokuapp.com/members/login',
+        url: 'https://orizons-sc.herokuapp.com/members/login',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -71,7 +71,7 @@ const api = (store) => (next) => (action) => {
       const id = jwtDecode(token).memberId;
       const config = {
         method: 'get',
-        url: `https://orizons.herokuapp.com/members/${id}`,
+        url: `https://orizons-sc.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -102,7 +102,7 @@ const api = (store) => (next) => (action) => {
       } = store.getState();
       const config = {
         method: 'post',
-        url: 'https://orizons.herokuapp.com/members',
+        url: 'https://orizons-sc.herokuapp.com/members',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -136,7 +136,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'patch',
-        url: `https://orizons.herokuapp.com/members/${id}`,
+        url: `https://orizons-sc.herokuapp.com/members/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -171,7 +171,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'delete',
-        url: `https://orizons.herokuapp.com/members/${id}`,
+        url: `https://orizons-sc.herokuapp.com/members/${id}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -193,7 +193,7 @@ const api = (store) => (next) => (action) => {
     case GET_TRIP: {
       const config = {
         method: 'get',
-        url: `https://orizons.herokuapp.com/trips/${action.id}`,
+        url: `https://orizons-sc.herokuapp.com/trips/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -213,7 +213,7 @@ const api = (store) => (next) => (action) => {
     case GET_TRIPS: {
       const config = {
         method: 'get',
-        url: 'https://orizons.herokuapp.com/trips',
+        url: 'https://orizons-sc.herokuapp.com/trips',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -235,7 +235,7 @@ const api = (store) => (next) => (action) => {
     case GET_CATEGORIES: {
       const config = {
         method: 'get',
-        url: 'https://orizons.herokuapp.com/categories',
+        url: 'https://orizons-sc.herokuapp.com/categories',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -252,7 +252,7 @@ const api = (store) => (next) => (action) => {
     case GET_PROFILE: {
       const config = {
         method: 'get',
-        url: `https://orizons.herokuapp.com/members/${action.id}`,
+        url: `https://orizons-sc.herokuapp.com/members/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -271,7 +271,7 @@ const api = (store) => (next) => (action) => {
     case POST_NEW_STEP:{
       const config = {
         method: 'post',
-        url: `https://orizons.herokuapp.com/steps`,
+        url: `https://orizons-sc.herokuapp.com/steps`,
         headers:{
           'Content-Type': 'application/json',
         },
@@ -301,7 +301,7 @@ const api = (store) => (next) => (action) => {
 
       const config = {
         method: 'post',
-        url: `https://orizons.herokuapp.com/trips`,
+        url: `https://orizons-sc.herokuapp.com/trips`,
         headers:{
           'Content-Type': 'application/json',
         },
@@ -332,7 +332,7 @@ const api = (store) => (next) => (action) => {
     case GET_COUNTRIES:{
       const config = {
         method: 'get',
-        url: `https://orizons.herokuapp.com/countries`,
+        url: `https://orizons-sc.herokuapp.com/countries`,
         headers:{
           'Content-Type': 'application/json',
         },
@@ -352,7 +352,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'patch',
-        url: `https://orizons.herokuapp.com/members/profile_photo/${id}`,
+        url: `https://orizons-sc.herokuapp.com/members/profile_photo/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -384,7 +384,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token }, member: { id } } = store.getState();
       const config = {
         method: 'patch',
-        url: `https://orizons.herokuapp.com/members/profile_infos/${id}`,
+        url: `https://orizons-sc.herokuapp.com/members/profile_infos/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -419,7 +419,7 @@ const api = (store) => (next) => (action) => {
       console.log('id',id);
       const config = {
         method: 'patch',
-        url: `https://orizons.herokuapp.com/trips/${id}`,
+        url: `https://orizons-sc.herokuapp.com/trips/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -448,7 +448,7 @@ const api = (store) => (next) => (action) => {
       const { id } = store.getState().trip.tripItem.trip;
       const config = {
         method: 'delete',
-        url: `https://orizons.herokuapp.com/trips/${id}`,
+        url: `https://orizons-sc.herokuapp.com/trips/${id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -475,7 +475,7 @@ const api = (store) => (next) => (action) => {
       const { id: tripId} = store.getState().trip.tripItem.trip;
       const config = {
         method: 'patch',
-        url: `https://orizons.herokuapp.com/steps/${action.id}`,
+        url: `https://orizons-sc.herokuapp.com/steps/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -512,7 +512,7 @@ const api = (store) => (next) => (action) => {
       const { auth: { token } } = store.getState();
       const config = {
         method: 'delete',
-        url: `https://orizons.herokuapp.com/steps/${action.id}`,
+        url: `https://orizons-sc.herokuapp.com/steps/${action.id}`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
