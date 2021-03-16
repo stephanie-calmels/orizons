@@ -1,16 +1,19 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
+// import "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBSOI3IK4t83xYGJZaNa6efFcJf5LP21tk',
-  authDomain: 'orizons-f3800',
-  projectId: 'orizons-f3800',
-  storageBucket: 'orizons-f3800.appspot.com',
-  messagingSenderId: '756612582145',
-  appId: '1:756612582145:web:55f41795357b07a2c76900',
+  apiKey: "AIzaSyAE9TxI6aEKBCAPHbX02NdYJ0wY_kjDWXU",
+  authDomain: "orizons-sc.firebaseapp.com",
+  projectId: "orizons-sc",
+  storageBucket: "orizons-sc.appspot.com",
+  messagingSenderId: "162268669281",
+  appId: "1:162268669281:web:c218d20e1b13180b395120",
+  // measurementId: "G-3HKD2138S9"
 };
 
 firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
 
 const storage = firebase.storage();
 
