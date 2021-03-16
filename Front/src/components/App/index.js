@@ -63,54 +63,28 @@ const App = ({ isLoggedIn, loadMember, loadTrips, loadCountries, loadCategories 
   return (
     <div>
       <Header />
-      <ToastContainer
-        position="bottom-right"
-      />
+      <ToastContainer position="bottom-right"/>
       <Page>
         <Switch>
           <Route exact path="/">
-            {
-              width > 769
-                ? <HomeDesktop />
-                : <HomeMobile />
-            }
+            { width > 769 ? <HomeDesktop /> : <HomeMobile /> }
           </Route>
-          <Route exact path="/inscription">
-            <Register />
-          </Route>
-          <Route exact path="/connexion">
-            <Login />
-          </Route>
-          <Route exact path="/contact">
-            <ContactForm />
-          </Route>
-          <Route exact path="/a-propos">
-            <About />
-          </Route>
-          <Route exact path="/mentions-legales">
-            <Legals />
-          </Route>
-          <Route exact path="/exploration">
-            <Trips />
-          </Route>
-          <Route exact path="/exploration/:id">
-            <Trip />
-          </Route>
-          <Route exact path="/profil/:id">
-            <Profile />
-          </Route>
+          <Route exact path="/inscription"><Register /></Route>
+          <Route exact path="/connexion"><Login /></Route>
+          <Route exact path="/contact"><ContactForm /></Route>
+          <Route exact path="/a-propos"><About /></Route>
+          <Route exact path="/mentions-legales"><Legals /></Route>
+          <Route exact path="/exploration"><Trips /></Route>
+          <Route exact path="/exploration/:id"><Trip /></Route>
+          <Route exact path="/profil/:id"><Profile /></Route>
           <Route exact path="/ajouter-carnet">
             { isLoggedIn ? <AddTrip /> : <Redirect to="/connexion" />}
           </Route>
           <Route exact path="/compte">
             { isLoggedIn ? <Account /> : <Redirect to="/connexion" />}
           </Route>
-          <Route exact path="/resultats">
-            <Results />
-          </Route >
-          <Route>
-            <Lost404 />
-          </Route>
+          <Route exact path="/resultats"><Results /></Route>
+          <Route><Lost404 /></Route>
         </Switch>
       </Page>
       <Footer />

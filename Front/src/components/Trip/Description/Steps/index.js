@@ -128,7 +128,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
     // console.log(event.target);
     
     const userQuery = event.target.value;
-    const APIkey = '3e6337fefe20a03c96bfeb8a7b479717';
+    const APIkey = '2c49cacd86be35f2ab3ca742f4632e45';
     setTimer(clearTimeout(timer));
     setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
@@ -150,7 +150,7 @@ const Steps = ({ steps, trip, connectedUserId, editStep, deleteStep })=>{
   }
   // reverse geocoding in order to get the adress of the marker at the end
   const getCountryFromAPI = () => {
-    const APIkey = "3e6337fefe20a03c96bfeb8a7b479717";
+    const APIkey = "2c49cacd86be35f2ab3ca742f4632e45";
     const reverseQuery = values.localisation.toString();
     axios.get(`http://api.positionstack.com/v1/reverse?access_key=${APIkey}&query=${reverseQuery}`)
     .then((response)=>{
