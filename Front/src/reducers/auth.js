@@ -23,6 +23,7 @@ const reducer = (oldState = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...oldState,
+        password: "",
         token: action.member.token,
         isLoggedIn: true,
         isLoading: false,
