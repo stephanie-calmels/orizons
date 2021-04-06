@@ -38,7 +38,10 @@ const AddStep = ({
   const handleShow = () => setShow(true);
 
   // Hooks and functions linked to state
-  const handleChange = (e) => changeField([e.target.name], e.target.value);
+  const handleChange = (e) => {
+    changeField([e.target.name], e.target.value);
+
+  };
   const handlePictures = (e) => changeField([e.target.name], e.target.files);
   const {
     register, handleSubmit, errors,
@@ -97,30 +100,23 @@ const AddStep = ({
   // adding geosearch to the form + using position stack API
   const [timer, setTimer] = useState(null);
   const useGeocodingApi = (event) => {
-    // On récupère la recherche tapée par l'utilisateur
-    // console.log(event.target);
-    
+    // On récupère la recherche tapée par l'utilisateur   
     const userQuery = event.target.value;
     const APIkey = '2c49cacd86be35f2ab3ca742f4632e45';
     setTimer(clearTimeout(timer));
     setTimer(window.setTimeout(()=>{axios.get(`http://api.positionstack.com/v1/forward?access_key=${APIkey}&query=${userQuery}`)
       .then((response) => {
         setSuggestions(response.data.data);
-        // console.log(suggestions)
-        //const newPosition = [response.data.data[0].latitude, response.data.data[0].longitude];
-        //changeField('localisation', newPosition);
-        //changeField('showInput', false);
+        let options = document.getElementById('places_suggestions').options;
+        if (options.length > 0) {
+          console.log(options);
+          changeField('country', options[0].dataset.country);
+          changeField('country_code', options[0].dataset.country_code);
+          changeField('localisation', [options[0].dataset.latitude, options[0].dataset.longitude]);
+        }
       });
     }, 1000))
   };
-
-  const locateSuggestion = ()=>{
-    let adressSelected = suggestions.find(suggestion => suggestion.label == localisationInput) || suggestions[0];
-    // console.log(adressSelected)
-    const newPosition = [adressSelected.latitude, adressSelected.longitude];
-    changeField('localisation', newPosition);
-    changeField('showInput', false);
-  }
  
   // reverse geocoding in order to get the adress of the marker at the end
   const getCountryFromAPI = () => {
@@ -141,7 +137,7 @@ const AddStep = ({
   useEffect(() => {
     getCountryFromAPI();
   }, [localisation]);
-  // console.log('tripAddStep',trip)
+
   // START OF ADDSTEP COMPONENT
   return (
     <div>
@@ -191,13 +187,12 @@ const AddStep = ({
                   },
                 );
               });
-              // console.log('promises outside before PROMISE', promises);
               Promise.all(promises)
                 .then(() => {
                 // formData.pictures = fileListToArray;
                 formData.pictures = emptyArray;
                 console.log('formDataPictures',formData)
-                setTimeout(()=>postStep(formData), 500);
+                setTimeout(() => postStep(formData), 500);
                 setSubmitting(false);
               })
             })}
@@ -257,23 +252,37 @@ const AddStep = ({
 
               {showInput && (
               <InputGroup>
-              <Form.Control
-                name="localisationInput"
-                type="text"
-                defaultValue={localisationInput}
-                onChange={(e) => {
-                  handleChange(e);
-                  useGeocodingApi(e);
-                }}
-                list="places_suggestions"
-                ref={register({
-                  required: 'Veuillez remplir ce champ !',
-                })}
-              />
-              <datalist id="places_suggestions">
-                {suggestions.map(suggestion=> {return <option value={suggestion.label} key={suggestion.latitude}></option>})}
-              </datalist>
-              <InputGroup.Append><Button variant="outline-secondary" onClick={locateSuggestion}>Chercher</Button></InputGroup.Append>
+                <Form.Control
+                  name="localisationInput"
+                  type="text"
+                  defaultValue={localisationInput}
+                  onChange={(e) => {
+                    handleChange(e);
+                    if (e.target.value.length > 2) {
+                      useGeocodingApi(e);
+                    }
+                  }}
+                  list="places_suggestions"
+                  ref={register({
+                    required: 'Veuillez remplir ce champ !',
+                  })}
+                />
+                <datalist id="places_suggestions">
+                  {
+                    suggestions.map(suggestion => {
+                      return (
+                        <option 
+                          value={suggestion.label} 
+                          key={suggestion.latitude} 
+                          data-country={suggestion.country}
+                          data-country_code={suggestion.country_code}
+                          data-latitude={suggestion.latitude}
+                          data-longitude={suggestion.longitude}>
+                        </option>
+                      )
+                    })
+                  }
+                </datalist>
               </InputGroup>
               )}
 
