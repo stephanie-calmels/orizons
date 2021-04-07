@@ -23,6 +23,7 @@ const ContactForm = () => {
         <Title texte="Gardons le contact ;)" />
               <div className="contact_form">
                   <Form className="form-contact" onSubmit={handleSubmit}>
+                  <p className='font-italic'>Ce formulaire n'est relié à aucun compte mail.</p>
                     <Form.Group controlId="name">
                       <Form.Label>Nom</Form.Label>
                         <Form.Control
