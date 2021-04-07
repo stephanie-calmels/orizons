@@ -31,6 +31,7 @@ const Register = ({
         className="form"
         onSubmit={handleSubmit(handleRegister)}
       >
+      <p className='font-italic'>Les informations saisies peuvent être fictives, l'adresse mail ne sera jamais utilisée.</p>
         {errorMessage && (
           <Alert variant="danger">{errorMessage}</Alert>)}
         <Form.Group size="lg" controlId="nickname">
