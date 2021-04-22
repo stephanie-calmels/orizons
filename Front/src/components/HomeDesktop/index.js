@@ -37,23 +37,11 @@ const HomeDesktop = ({
           <div className="home-banner-overlay">
             <p className="home-banner-overlay-text">O'rizons met à votre disposition tous les outils nécessaires pour raconter votre voyage, comme bon vous semble.</p>
             <p className="home-banner-overlay-text">Vous souhaitez partager votre expérience avec vos proches, inspirer d'autres voyageurs à marcher dans vos pas ou simplement conserver une trace de votre dernière aventure ?</p>
-            {
-              isLoggedIn
-                ? (
-                  <LinkContainer to="/ajouter-carnet">
-                    <Button className="home-banner-overlay-btn">
-                      Créez votre carnet de voyage
-                    </Button>
-                  </LinkContainer>
-                )
-                : (
-                  <LinkContainer to="/inscription">
-                    <Button className="home-banner-overlay-btn">
-                      Créez votre carnet de voyage
-                    </Button>
-                  </LinkContainer>
-                )
-            }
+            <LinkContainer to="/ajouter-carnet">
+              <Button className="home-banner-overlay-btn">
+                Créez votre carnet de voyage
+              </Button>
+            </LinkContainer>
           </div>
 
         </div>
@@ -228,12 +216,12 @@ const HomeDesktop = ({
                 <CardDeck>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Kamil</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           C'est trop cool ! Mes grand-parents peuvent suivre toutes mes aventures facilement depuis chez eux :)
                     </Card.Text>
                       </Card.Body>
@@ -241,12 +229,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Paul</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           J'adore partager mes voyages, et O'rizons est le meilleur site que je connaisse pour le faire !
                     </Card.Text>
                       </Card.Body>
@@ -254,12 +242,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Juliette</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           Super design, pratique à utiliser. C'est top !
                     </Card.Text>
                       </Card.Body>
@@ -267,12 +255,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Armandine</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           La version mobile est super pratique pour partager ses aventures au jour le jour.
                     </Card.Text>
                       </Card.Body>
@@ -286,12 +274,12 @@ const HomeDesktop = ({
                 <CardDeck>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Charles</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           J'adore !
                     </Card.Text>
                       </Card.Body>
@@ -299,12 +287,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Chris</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           Le meilleur site de carnet de voyage que je connaisse !
                     </Card.Text>
                       </Card.Body>
@@ -312,12 +300,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">Nono</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           Ca donne envie de voyager xD
                     </Card.Text>
                       </Card.Body>
@@ -325,12 +313,12 @@ const HomeDesktop = ({
                   </Col>
                   <Col md={3}>
                     <Card>
-                      <Card.Header>
+                      <Card.Header className="card_testimonials-header">
                         <Image className="profile_photo m-2" src={anonyme} roundedCircle />
                         <small className="text-muted">JD</small>
                       </Card.Header>
                       <Card.Body>
-                        <Card.Text>
+                        <Card.Text className="card_testimonials-text">
                           Super site !
                     </Card.Text>
                       </Card.Body>

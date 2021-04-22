@@ -23,23 +23,11 @@ const HomeMobile = ({ isLoggedIn, randomTrips, handleClick }) => (
               Découvrez les carnets d'autres voyageurs
             </Button>
           </LinkContainer>
-          {
-            isLoggedIn
-              ? (
-                <LinkContainer to="/ajouter-carnet">
-                  <Button className="home_banner-mobile-card-btn">
-                    Créez votre carnet de voyage
-                  </Button>
-                </LinkContainer>
-              )
-              : (
-                <LinkContainer to="/inscription">
-                  <Button className="home_banner-mobile-card-btn">
-                    Créez votre carnet de voyage
-                  </Button>
-                </LinkContainer>
-              )
-          }
+          <LinkContainer to="/ajouter-carnet">
+            <Button className="home_banner-mobile-card-btn">
+              Créez votre carnet de voyage
+            </Button>
+          </LinkContainer>
         </Card.ImgOverlay>
 
       </Card>

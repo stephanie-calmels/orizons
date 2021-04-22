@@ -7,8 +7,8 @@ const initialState = {
   // on va chercher dans le localStorage = PERSISTANCE même après fermeture de la page
   token: localStorage.getItem('token') || null,
   isLoggedIn: !!localStorage.getItem('token'),
-  email: '',
-  password: '',
+  email: 'test@test.fr',
+  password: 'Test123*',
   errorMessage: '',
   isLoading: false,
 };

@@ -31,6 +31,7 @@ const Login = ({
           className="form-login"
           onSubmit={handleSubmit(handleLogin)}
         >
+        <p className='font-italic text-center'>Vous pouvez utiliser ce compte de test pour tester toutes les fonctionnalités du site.</p>
           {errorMessage && (
           <Alert variant="danger">{errorMessage}</Alert>)}
           <Form.Group size="lg" controlId="email">
