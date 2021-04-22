@@ -50,7 +50,7 @@ const api = (store) => (next) => (action) => {
           // on le stocke aussi dans le localStorage
           localStorage.setItem('token', token);
           toast.success('Connexion réussie !');
-          history.replace('/ajouter-carnet');
+          history.goBack();
         })
         .catch((error) => {
           const errorMessage = (error.response

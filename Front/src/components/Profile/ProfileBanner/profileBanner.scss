@@ -6,12 +6,21 @@
 
 .author-profile {
   position: relative;
-  top: 20vh;
+  top: 22vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  
+  & h2 {
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+
+  & p {
+    margin-bottom: 0.5rem;
+  }
 
   &-img {
     width: 150px;
